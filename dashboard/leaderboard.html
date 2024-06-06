@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Dojo</title>
+    <link rel="stylesheet" href="style_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="images/logo-no-background.png ">
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="course.html">
+                        <i class="fa fa-server"></i>
+                        <span>
+                            Course
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="record.html">
+                        <i class="fa fa-users"></i>
+                        <span>
+                            Records
+                        </span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <i class="fa fa-trophy"></i>
+                        <span>
+                            Leaderboards
+                        </span>
+                    </a>
+                </li>
+                <li class="logout">
+                    <a href="Login.html">
+                        <i class="fa fa-sign-out"></i>
+                        <span>
+                            Logout
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main_body">
+            <div class="content_header">
+                <span>Leaderboards</span> 
+            </div>
+            <div class="main_container">
+                <div class="container2">
+                    <div class="card2">
+                        <div class="league-header">
+                            <img src="images/rbronze.png"  alt="">
+                            <span>Bronze</span>
+                        </div>
+                        <table class="table_leaderboard" id="bronze">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="card2">
+                        <div class="league-header">
+                            <img src="images/rsilver.png"  alt="">
+                            <span>Silver</span>
+                        </div>
+                        <table class="table_leaderboard" id="silver">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="card2">
+                        <div class="league-header">
+                            <img src="images/rgold.png"  alt="">
+                            <span>Gold</span>
+                        </div>
+                        <table class="table_leaderboard" id="gold">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="card2">
+                        <div class="league-header">
+                            <img src="images/rcrystal.png"  alt="">
+                            <span>Crystal</span>
+                        </div>
+                        <table class="table_leaderboard" id="crystal">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script type="module">
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+    import { getDatabase, ref, query, orderByChild, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
+      authDomain: "code-dojo-4e4e5.firebaseapp.com",
+      databaseURL: "https://code-dojo-4e4e5-default-rtdb.firebaseio.com",
+      projectId: "code-dojo-4e4e5",
+      storageBucket: "code-dojo-4e4e5.appspot.com",
+      messagingSenderId: "116382053512",
+      appId: "1:116382053512:web:9df203d93ab781d9e09b3d",
+      measurementId: "G-KR3DL2EF19"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database = getDatabase(app);
+
+    function displayBronzeRank() {
+        const dbRef = ref(database, "users");
+        const orderedQuery = query(dbRef, orderByChild("exp"));
+
+        onValue(orderedQuery, (snapshot) => {
+            const userList = [];
+            snapshot.forEach((childSnapshot) => {
+                const childData = childSnapshot.val();
+                if (childData.exp >= 0 && childData.exp <= 3000) {
+                    userList.push(childData);
+                }
+            });
+
+            userList.sort((a, b) => b.exp - a.exp);
+            const top20Users = userList.slice(0, 20);
+
+            const tableBody = document.getElementById("bronze").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = "";  // Clear existing rows
+
+            top20Users.forEach((user, index) => {
+                const newRow = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${user.username}</td>
+                        <td>${user.exp}</td>
+                    </tr>`;
+                tableBody.innerHTML += newRow;
+            });
+        });
+    }
+
+function displaySilverRank() {
+    const dbRef = ref(database, "users");
+    const orderedQuery = query(dbRef, orderByChild("exp"));
+
+    onValue(orderedQuery, (snapshot) => {
+        const userList = [];
+        snapshot.forEach((childSnapshot) => {
+            const childData = childSnapshot.val();
+            if (childData.exp >= 3001 && childData.exp <= 7000) {
+                userList.push(childData);
+            }
+        });
+
+        userList.sort((a, b) => b.exp - a.exp);
+        const top20Users = userList.slice(0, 20);
+
+        const tableBody = document.getElementById("silver").getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = "";  // Clear existing rows
+
+        top20Users.forEach((user, index) => {
+            const newRow = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.exp}</td>
+                </tr>`;
+            tableBody.innerHTML += newRow;
+        });
+    });
+}
+
+function displayGoldRank() {
+    const dbRef = ref(database, "users");
+    const orderedQuery = query(dbRef, orderByChild("exp"));
+
+    onValue(orderedQuery, (snapshot) => {
+        const userList = [];
+        snapshot.forEach((childSnapshot) => {
+            const childData = childSnapshot.val();
+            if (childData.exp >= 7001 && childData.exp <= 12000) {
+                userList.push(childData);
+            }
+        });
+
+        userList.sort((a, b) => b.exp - a.exp);
+        const top20Users = userList.slice(0, 20);
+
+        const tableBody = document.getElementById("gold").getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = "";  // Clear existing rows
+
+        top20Users.forEach((user, index) => {
+            const newRow = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.exp}</td>
+                </tr>`;
+            tableBody.innerHTML += newRow;
+        });
+    });
+}
+
+function displayCrystalRank() {
+    const dbRef = ref(database, "users");
+    const orderedQuery = query(dbRef, orderByChild("exp"));
+
+    onValue(orderedQuery, (snapshot) => {
+        const userList = [];
+        snapshot.forEach((childSnapshot) => {
+            const childData = childSnapshot.val();
+            if (childData.exp >= 12001) {
+                userList.push(childData);
+            }
+        });
+
+        userList.sort((a, b) => b.exp - a.exp);
+        const top20Users = userList.slice(0, 20);
+
+        const tableBody = document.getElementById("crystal").getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = "";  // Clear existing rows
+
+        top20Users.forEach((user, index) => {
+            const newRow = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.exp}</td>
+                </tr>`;
+            tableBody.innerHTML += newRow;
+        });
+    });
+}
+
+    document.addEventListener("DOMContentLoaded", function () {
+        displayBronzeRank();
+        displaySilverRank();
+        displayGoldRank();
+        displayCrystalRank();
+    });
+</script>
