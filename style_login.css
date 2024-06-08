@@ -46,7 +46,7 @@ body {
     background: transparent;
     margin: 30px 0;
     background-color: #f2f2f2;
-    border-radius: 40px; 
+    border-radius: 10px; 
     
 }
 
@@ -57,10 +57,10 @@ body {
     border: none;
     outline: none;
     border: 2px solid rgba(0, 0, 0, .2);
-    border-radius: 40px;
+    border-radius: 10px;
     font-size: 16px;
     color: black;
-    padding: 25px 45px; 
+    padding: 25px 20px; 
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -69,12 +69,13 @@ body {
 }
 
 .input-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    cursor: pointer; 
+    position: absolute; 
+    right: 20px; 
+    top: 50%; 
+    color: #7c7c7c;
     font-size: 20px;
-    color: black;
+    transform: translateY(-50%);
 }
 
 .wrapper .remember-forgot {

@@ -172,11 +172,6 @@ nav{
     width: 2.5;
     height: 2rem;
 }
-.table_leaderboard{
-    border-collapse: collapse;
-    width: 80%;
-    border: 1px solid #ffffff;
-}
 .table_leaderboard td{
     padding: 8px 16px;
 }
@@ -190,18 +185,6 @@ nav{
     border-radius: 5px;
     border-color: #dedede;
     box-shadow: 2px 2px 2px #d1d1d1;
-}
-.card2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-    height: 50vh;
-    padding: 1rem;
-    border: 1px  solid;
-    border-radius: 5px;
-    border-color: #dedede;
-    box-shadow: 2px 2px 4px #c7c7c7;
 }
 
 

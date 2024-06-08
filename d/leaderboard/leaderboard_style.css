@@ -1,0 +1,19 @@
+
+.card2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 50vh;
+    padding: 1rem;
+    border: 1px  solid;
+    border-radius: 5px;
+    border-color: #dedede;
+    box-shadow: 2px 2px 4px #c7c7c7;
+}
+
+.table_leaderboard{
+    border-collapse: collapse;
+    width: 80%;
+    border: 1px solid #ffffff;
+}

@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Dojo</title>
-    <link rel="stylesheet" href="style_dashboard.css">
+    <link rel="stylesheet" href="/d/style_dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <script src="/d/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="images/logo-no-background.png ">
+                <img src="/d/images/logo-no-background.png">
             </div>
             <ul class="menu">
                 <li>
-                    <a href="course.html">
+                    <a href="/d/course/course.php">
                         <i class="fa fa-server"></i>
                         <span>
                             Course
@@ -23,7 +24,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="record.php">
                         <i class="fa fa-users"></i>
                         <span>
                             Records
@@ -31,15 +32,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="leaderboard.html">
+                    <a href="/d/leaderboard/leaderboard.php">
                         <i class="fa fa-trophy"></i>
                         <span>
                             Leaderboards
                         </span>
                     </a>
                 </li>
-                <li class="logout">
-                    <a href="Login.html">
+                <li id="btnlogout" class="logout">
+                    <a >
                         <i class="fa fa-sign-out"></i>
                         <span>
                             Logout
@@ -79,7 +80,6 @@
 
 
 <script type="module">
-    
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
     import { getDatabase, ref, push, child, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";

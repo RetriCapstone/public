@@ -1,21 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Dojo - Learn Coding</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_index.css">
 </head>
 <body>
     <div class="main-container">
-        <nav id="navbar" >
+        <nav id="navbar">
             <div class="header-container">
                 <div class="container-navigation">
                     <div class="logo-container">
-                        <img src="dashboard/images/logo1.png" alt="landing-logo">
+                        <img src="/d/images/logo1.png" alt="landing-logo">
                     </div>
                 </div>
-                <a id="btn-login" href="dashboard/Login.html" class="login-button">Sign In</a>
+                    <a id="btn-login" href="Login.php" class="login-button">Sign In</a>
             </div>
         </nav>
         <div class="first-content">
@@ -30,7 +31,7 @@
                 </p>
                 <div class="container-btn">
                     <div id="btn-playstore" class="btn-playstore">
-                        <img src="dashboard/images/playstore-button.png" alt="">
+                        <img src="/d/images/playstore-button.png" alt="">
                     </div>
                 </div>
             </div>
@@ -53,7 +54,6 @@
             </div>
         </div>
         <div class="third-content">
-            <!-- <h1 class="text-features-style">Features</h1> -->
             <div class="features-contents">
                 <div class="card1">
                     <div class="features-text-style">
@@ -110,16 +110,6 @@
         </section>
         
     </div>
-
+    <script src="index.js"></script>
 </body>
 </html>
-<script>
-    window.addEventListener("scroll", function() {
-        var navbar = document.getElementById("navbar");
-        if (window.scrollY > 0) {
-            navbar.classList.add("scroll");
-        } else {
-            navbar.classList.remove("scroll");
-        }
-    });
-</script>
