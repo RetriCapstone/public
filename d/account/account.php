@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Dojo</title>
     <link rel="stylesheet" href="/d/style_dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <script src="/d/dashboard.js" type="module"></script>
@@ -15,27 +15,27 @@
                 <img src="/d/images/logo-no-background.png">
             </div>
             <ul class="menu">
+                <li class="active">
+                    <a href="account.php">
+                    <i class="fa-solid fa-user"></i>
+                        <span>
+                            Account
+                        </span>
+                    </a>
+                </li>
                 <li>
                     <a href="/d/course/course.php">
-                        <i class="fa fa-server"></i>
+                    <i class="fa-solid fa-table"></i>
                         <span>
                             Course
                         </span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="record.php">
-                        <i class="fa fa-users"></i>
-                        <span>
-                            Records
-                        </span>
-                    </a>
-                </li>
                 <li>
-                    <a href="/d/leaderboard/leaderboard.php">
-                        <i class="fa fa-trophy"></i>
+                <a href="/d/classroom/classroom.php">
+                    <i class="fa fa-chalkboard"></i>
                         <span>
-                            Leaderboards
+                            Classroom
                         </span>
                     </a>
                 </li>
@@ -50,28 +50,7 @@
             </ul>
         </nav>
         <div class="main_body">
-            <div class="content_header">
-                <span>Records</span>
-                <div class="search_box">
-                    <i class="fa fa-search"></i>
-                    <input type="text" placeholder="Search..">
-                </div>
-            </div>
             <div class="main_container">
-                <div class="container1">
-                    <table id="recordTable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>EXP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
