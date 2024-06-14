@@ -30,10 +30,10 @@
     display: flex;
     justify-content: flex-end;
 }
+#form-change-password{
+    display: none;
+}
+
 .style-btn-blue{
-    padding: .8rem 2rem;
-    background-color: #1e78ff;
-    border-radius: 20px;
-    font-size: .8rem;
-    color: white;
+    margin-top: 12px;
 }

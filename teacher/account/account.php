@@ -10,6 +10,7 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
+    <script src="account.js" type="module" ></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -52,7 +53,7 @@
         </nav>
         <div class="main_body">
             <div class="main_container">
-                <div class="style-card-1">
+                <div class="style-container-1">
                     <h1 class="style-title-1">Account Information</h1>
                     <div class="input-style">
                         <span>Firstname</span>
@@ -71,17 +72,17 @@
                         <label class="label-checkbox" for="change-pass">CHANGE  PASSWORD</label>
                     </div>
                     <form id="form-change-password" action="">
-                        <div id="input-old-pass" class="input-style">
+                        <div class="input-style">
                             <span>Old Password*</span>
-                            <input id="firstname">
+                            <input id="input-old-pass"  required>
                         </div>
-                        <div id="input-new-pass" class="input-style">
+                        <div class="input-style">
                             <span>New Password*</span>
-                            <input id="firstname">
+                            <input id="input-new-pass" required>
                         </div>
-                        <div id="input-conf-new-pass" class="input-style">
+                        <div class="input-style">
                             <span>Confirm New Password*</span>
-                            <input id="firstname">
+                            <input id="input-conf-new-pass" required>
                         </div>
                     </form>
                     <div class="style-btn-container">
