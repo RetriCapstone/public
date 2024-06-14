@@ -78,32 +78,18 @@ body {
     transform: translateY(-50%);
 }
 
-.wrapper .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
-}
 
-.remember-forgot label input {
-    accent-color: black;
-    margin-right: 3px;
-    margin-top: 5px; 
-    margin-bottom: 5px;
-}
-
-
-.button {
+.login-button{
     width: 100%;
     height: 45px; 
-    background: #55e2e9;
+    background: #1e78ff;
     outline: none;
-    border-radius: 40px;
+    border-radius: 10px;
     border: 1px white;
     box-shadow: 0 0 50px rgba(0, 0, 0, .1);
     cursor: pointer;
-    font-size: 24px;
-    color: black;
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
     font-weight: 600;
     margin-top: 10px; 
     margin-bottom: 20px; 
@@ -114,6 +100,9 @@ body {
     left: 20px;
     display: flex;
     align-items: center;
+}
+.logo-container a{
+    text-decoration: none;
 }
 .logo {
     width: 100px; 

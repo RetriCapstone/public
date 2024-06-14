@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Dojo</title>
-    <link rel="stylesheet" href="/d/style_dashboard.css">
+    <title>Account</title>
+    <link rel="stylesheet" href="/teacher/style_dashboard.css">
+    <link rel="stylesheet" href="/teacher/account/account.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <script src="/d/dashboard.js" type="module"></script>
+    <script src="/teacher/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/d/images/logo-no-background.png">
+                <img src="/teacher/images/logo-no-background.png">
             </div>
             <ul class="menu">
                 <li class="active">
@@ -24,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/d/course/course.php">
+                    <a href="/teacher/course/course.php">
                     <i class="fa-solid fa-table"></i>
                         <span>
                             Course
@@ -32,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                <a href="/d/classroom/classroom.php">
+                <a href="/teacher/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
@@ -51,6 +52,44 @@
         </nav>
         <div class="main_body">
             <div class="main_container">
+                <div class="style-card-1">
+                    <h1 class="style-title-1">Account Information</h1>
+                    <div class="input-style">
+                        <span>Firstname</span>
+                        <input id="firstname">
+                    </div>
+                    <div class="input-style">
+                        <span>Lastname</span>
+                        <input id="firstname">
+                    </div>
+                    <div class="input-style">
+                        <span>Email</span>
+                        <input id="firstname">
+                    </div>
+                    <div class="style-checkbox">
+                        <input class="checkbox" id="change-pass" type="checkbox" >
+                        <label class="label-checkbox" for="change-pass">CHANGE  PASSWORD</label>
+                    </div>
+                    <form id="form-change-password" action="">
+                        <div id="input-old-pass" class="input-style">
+                            <span>Old Password*</span>
+                            <input id="firstname">
+                        </div>
+                        <div id="input-new-pass" class="input-style">
+                            <span>New Password*</span>
+                            <input id="firstname">
+                        </div>
+                        <div id="input-conf-new-pass" class="input-style">
+                            <span>Confirm New Password*</span>
+                            <input id="firstname">
+                        </div>
+                    </form>
+                    <div class="style-btn-container">
+                        <button id="acc-btn-update" class="style-btn-blue">
+                            Update
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

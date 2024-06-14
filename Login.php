@@ -28,7 +28,7 @@
 				<input id="password" type="password" placeholder="Password" required>
 				<i id="togglePassword" class='bx bxs-show'></i>
 			</div>
-			<button type="submit" class="button">Login</button>
+			<button type="submit" class="login-button">Login</button>
 		</form>
 	</div>
 </body>

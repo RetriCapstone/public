@@ -34,7 +34,7 @@ import { getFirestore, collection, query, where, getDocs } from "https://www.gst
 							if (userData.password === password) {
 								userFound = true;
 								localStorage.setItem("isLoggedIn", "true");
-								window.location.href = "d/course/course.php";
+								window.location.href = "teacher/course/course.php";
 							}
 						});
 						if (!userFound) {
@@ -65,6 +65,6 @@ import { getFirestore, collection, query, where, getDocs } from "https://www.gst
 		// Check if the user is already logged in
 		window.onload = () => {
 			if (localStorage.getItem("isLoggedIn") === "true") {
-				window.location.href = "d/course/course.php";
+				window.location.href = "teacher/course/course.php";
 			}
 		};

@@ -13,7 +13,7 @@
             <div class="header-container">
                 <div class="container-navigation">
                     <div class="logo-container">
-                        <img src="/d/images/logo1.png" alt="landing-logo">
+                        <img src="/teacher/images/logo1.png" alt="landing-logo">
                     </div>
                 </div>
                     <a id="btn-login" href="Login.php" class="login-button">Sign In</a>
@@ -31,7 +31,7 @@
                 </p>
                 <div class="container-btn">
                     <div id="btn-playstore" class="btn-playstore">
-                        <img src="/d/images/playstore-button.png" alt="">
+                        <img src="/teacher/images/playstore-button.png" alt="">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="text-why-second">
                             <span>App Image</span>
-                            <img src="dashboard/images/logo-no-background.png" alt="">
+                            <img src="/teacher/images/logo-no-background.png" alt="">
                         </div>
                 </div>
             </div>

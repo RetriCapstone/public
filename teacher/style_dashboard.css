@@ -16,7 +16,7 @@
     align-items: center;
 }
 .logo img{
-    width: 60%;
+    width: 80%;
 }
 
 nav{
@@ -29,7 +29,7 @@ nav{
     border-right: 1px solid #1f2e63;
     overflow: hidden;
     padding: 0;
-    background-color: #181e36;
+    background-color: #161f47;
 }
 .menu{
     height: 85%;
@@ -47,7 +47,7 @@ nav{
 .menu a {
     padding: .8rem;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -72,15 +72,41 @@ nav{
     position: relative;
     width: 100%;
     padding: 1rem;
-    background-color: #0a112d;
+    background-color: #0a1339;
 }
 
 .main_container{
     display: flex;
-    gap: 1rem;
+    padding: 1rem;
     height: 100%;
-    background: #1f2e63;
+    background-color: #0a1339;
+    justify-content: center;
+}
+.style-card-1{
+    padding: 2rem;
+    border: 1px solid #1f2e63;
+    background-color: #161f47;
+    color: white;
+    border-radius: 20px;
+}
+.input-style{
+    border: 2px  solid #1f2e63;
+    border-bottom: 6px solid #1f2e63;
+    display: flex;
+    padding-top: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    flex-direction: column;
+    border-radius: 15px 15px ;
 }
 
+.input-style input{ 
+    background: transparent;
+    border: none;
+    outline: none;
+    height: 2rem;
+    font-size: 1.2rem;
+    color: white;
+}
 
 
