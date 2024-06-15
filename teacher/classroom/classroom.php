@@ -29,7 +29,7 @@
                     <a href="/teacher/course/course.php">
                     <i class="fa-solid fa-table"></i>
                         <span>
-                            Course
+                            Courses
                         </span>
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                 <div class="style-container-1">
                     <div class="style-header">
                         <h2>Active Classroom</h2>
-                        <button class="style-btn-create-1" >Create Class</button>
+                        <button class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
                     </div>
                     <hr class="divider-solid">
                     <div class="class-list-container">

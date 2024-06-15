@@ -55,14 +55,52 @@
         <div class="main_body">
             <div class="main_container">
                 <div class="style-container-1">
-                    <div class="style-header">
-                        <h2>Courses</h2>
-                        <button class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Course</button>
+                    <div class="style-header-1">
+                        <div class="header-pos-1">
+                            <h3>Course Name</h3>
+                            <h4>Sample name</h4>
+                        </div>
+                        <div class="header-pos-2" >
+                            <h3>Classroom Published</h3>
+
+                            <div class="item-class-style" >
+                                <p id="class1">Sample class 1</p>
+                                <label class="switch">
+                                <input type="checkbox" >
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="item-class-style" >
+                                <p id="class2">Sample class 2</p>
+                                <label class="switch">
+                                <input type="checkbox" >
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <hr class="divider-solid">
-                    <div class="class-list-container">
-                        <div id="created-course" class="style-card-1">
-                            <h2>Course Name</h2>
+                    <div class="btn-header--style">
+                        <button class="style-btn-create-1" >
+                            <i class="fa-solid fa-plus"></i>
+                            Create Module
+                        </button>
+                        <button class="style-btn-add-1" >
+                            Save
+                        </button>
+                    </div>
+                    <div class="style-list-container" >
+                        <div class="course-modules-container" style="width: 80%;" >
+                            <div class="style-card-2">
+                                <div class="style-display">
+                                    <p>Module 1</p>
+                                    <h2>Module Name</h2>
+                                </div>
+                            <div class="module-list-content"  >
+
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>

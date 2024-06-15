@@ -29,7 +29,7 @@
                     <a href="/teacher/course/course.php">
                     <i class="fa-solid fa-table"></i>
                         <span>
-                            Course
+                            Courses
                         </span>
                     </a>
                 </li>
