@@ -63,8 +63,7 @@
                     </div>
                     <div class="style-header-1">
                         <div class="header-pos-1">
-                            <h3>Course Name</h3>
-                            <h4>Sample name</h4>
+                            <h3>Course Name:</h3>
                         </div>
                         <div class="header-pos-2" >
                             <h3>Classroom Published</h3>
@@ -88,20 +87,38 @@
                     </div>
                     <hr class="divider-solid">
                     <div class="btn-header--style">
-                        <button class="style-btn-create-1" >
-                            <i class="fa-solid fa-plus"></i>
+                        <button id="btn-create-module" class="style-btn-create-1" > <i class="fa-solid fa-plus"></i>
                             Create Module
                         </button>
-                        <button class="style-btn-add-1" >
-                            Save
-                        </button>
+                        <div id="modal-create-module" class="style-modal">
+                            <div class="style-modal-content">
+                                <span class="close-modal">&times;</span>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                            </div>
+                        </div>
+
+                        <div style=" display: flex; gap: .8rem;" >
+                            <button class="style-btn-del" >
+                                Delete Course
+                            </button>
+                            <button class="style-btn-add-1" >
+                                Save
+                            </button>
+                        </div>
                     </div>
                     <div class="style-list-container" >
                         <div class="course-modules-container" style="width: 80%;" >
                             <div class="style-card-2">
                                 <div class="style-display">
                                     <p>Module 1</p>
-                                    <h2>Module Name</h2>
+                                    <h3>Module Name</h2>
                                 </div>
                             <div class="module-list-content"  >
 

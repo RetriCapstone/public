@@ -56,7 +56,21 @@
                 <div class="style-container-1">
                     <div class="style-header">
                         <h2>Active Classroom</h2>
-                        <button class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
+                        <button id="btn-create-classroom" class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
+                        
+                        <div id="modal-create-classroom" class="style-modal">
+                            <div class="style-modal-content">
+                                <span class="close-modal">&times;</span>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                                <p>Some text in the Modal..</p>
+                            </div>
+                        </div>
                     </div>
                     <hr class="divider-solid">
                     <div class="class-list-container">
