@@ -55,6 +55,12 @@
         <div class="main_body">
             <div class="main_container">
                 <div class="style-container-1">
+                    <div class="style-back-header">
+                        <a href="course.php">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Back</span>
+                        </a>
+                    </div>
                     <div class="style-header-1">
                         <div class="header-pos-1">
                             <h3>Course Name</h3>

@@ -138,6 +138,7 @@ nav{
     font-size: 1.2rem;
     color: white;
 }
+
 .style-btn-blue{
     padding: .8rem 2rem;
     background-color: #1e78ff;
@@ -152,9 +153,18 @@ nav{
     font-size: 1rem;
     color: white;
 }
-.style-btn-create-1:hover{
-    background-color: #04b2aa;
+.style-btn-del:hover{
+    background-color: #be2121;
 }
+
+.style-btn-del{
+    padding: .6rem .8rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: white;
+    background: none;
+}
+
 .style-display{
     display: flex;
     flex-direction: column;
@@ -169,6 +179,9 @@ nav{
     display: flex;
     gap: .6rem;
     align-items: baseline;
+}
+.style-btn-create-1:hover{
+    background-color: #04b2aa;
 }
 
 

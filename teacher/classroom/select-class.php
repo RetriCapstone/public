@@ -54,19 +54,23 @@
         <div class="main_body">
             <div class="main_container">
                 <div class="style-container-1">
-                    <div class="style-header">
-                        <h2>Active Classroom</h2>
-                        <button class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
+                    <div class="style-back-header">
+                        <a href="classroom.php">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Back</span>
+                        </a>
                     </div>
-                    <hr class="divider-solid">
-                    <div class="class-list-container">
-                        <div id="created-class" class="style-card-1">
-                            <div class="style-display" >
-                                <h2>Classroom Name</h2>
-                                <p>Code:</p>
-                            </div>
+                    <div class="style-header-1">
+                        <div class="header-pos-1">
+                            <h3>Class name: sample</h3>
+                            <p>Code: sample</p>
+                        </div>
+                        <div class="header-pos-2" >
+                            <button class="style-btn-del" >Delete Class</button>
+                            <button class="style-btn-add-1" >Save</button>
                         </div>
                     </div>
+                    <hr class="divider-solid">
                 </div>
             </div>
         </div>

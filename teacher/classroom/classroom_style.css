@@ -6,9 +6,26 @@
     margin: 14px 0;
     border-top: 3px solid #1f2e63;
 }
-.style-header{
+.style-back-header{
+  margin: 14px 4px;
+}
+.style-back-header a{
+  width: fit-content;
+  display: flex;
+  gap: .6rem;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+}
+.style-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: 0 4px;
+}
+.style-header-1{
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     margin: 0 4px;
 }
@@ -17,4 +34,17 @@
     gap: 1.5rem;
     flex-wrap: wrap;
     padding: 14px 0;
+}
+.item-class-style{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    gap: 1rem;
+    width: fit-content;
+}
+
+.header-pos-2{
+  display: flex;
+  gap: .8rem;
 }
