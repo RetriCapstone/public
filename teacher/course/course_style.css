@@ -111,21 +111,25 @@
     border-radius: 50%;
   }
 
-  .style-list-container{
-    display: flex;
-    padding: 2rem;
-  }
-  .style-display{
-    margin: .8rem 2rem;
-  }
-.style-list-container{ 
+
+
+.style-list-container{
+  display: flex;
+  padding: 1rem;
   justify-content: center;
 }
+.style-display{
+  margin: .8rem 2rem;
+}
+
 .module-list-content{
   background-color: #0a1339; 
   height: 50px; 
   width: 100%; 
   border-radius: 0 0 10px 10px;
+}
+.course-modules-container{
+  margin: 1rem 0;
 }
 
 

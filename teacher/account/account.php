@@ -10,7 +10,7 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script src="account.js" type="module" ></script>
+    <script src="scipt/account.js" type="module" ></script>
     <div class="container">
         <nav>
             <div class="logo">

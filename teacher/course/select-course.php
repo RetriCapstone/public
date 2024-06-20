@@ -11,7 +11,7 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script src="course.js" type="module"></script>
+    <script src="script/course.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -114,17 +114,70 @@
                         </div>
                     </div>
                     <div class="style-list-container" >
-                        <div class="course-modules-container" style="width: 80%;" >
-                            <div class="style-card-2">
-                                <div class="style-display">
-                                    <p>Module 1</p>
-                                    <h3>Module Name</h2>
-                                </div>
-                            <div class="module-list-content"  >
+                        <table style="width: 85%;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="course-modules-container"  >
+                                            <div class="style-card-2">
+                                                <div class="style-display">
+                                                    <p>Module 1</p>
+                                                    <h3>Module Name</h2>
+                                                </div>
+                                            <div class="module-list-content"  >
 
-                            </div>
-                            </div>
-                        </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="course-modules-container"  >
+                                            <div class="style-card-2">
+                                                <div class="style-display">
+                                                    <p>Module 1</p>
+                                                    <h3>Module Name</h2>
+                                                </div>
+                                            <div class="module-list-content"  >
+
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="course-modules-container"  >
+                                            <div class="style-card-2">
+                                                <div class="style-display">
+                                                    <p>Module 1</p>
+                                                    <h3>Module Name</h2>
+                                                </div>
+                                            <div class="module-list-content"  >
+
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="course-modules-container"  >
+                                            <div class="style-card-2">
+                                                <div class="style-display">
+                                                    <p>Module 1</p>
+                                                    <h3>Module Name</h2>
+                                                </div>
+                                            <div class="module-list-content"  >
+
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table>
                     </div>
                 </div>
             </div>

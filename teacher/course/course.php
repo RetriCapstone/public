@@ -11,7 +11,7 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script src="course.js" type="module"></script>
+    <script src="script/course.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">

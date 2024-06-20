@@ -10,8 +10,8 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script type="module" src="scripts/classroom.js"></script>
-    <script type="module" src="scripts/select-class.js"></script>
+    <script type="module" src="script/classroom.js"></script>
+    <script type="module" src="script/select-class.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
