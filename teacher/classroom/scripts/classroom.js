@@ -56,6 +56,8 @@
         window.location.href = "select-class.php";
     });
 
+
+    
 var modal = document.getElementById("modal-create-classroom");
 
 // Get the button that opens the modal

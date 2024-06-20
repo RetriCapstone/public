@@ -10,7 +10,8 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script type="module" src="classroom.js"></script>
+    <script type="module" src="scripts/classroom.js"></script>
+    <script type="module" src="scripts/select-class.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -71,6 +72,20 @@
                         </div>
                     </div>
                     <hr class="divider-solid">
+                    <div class="style-container">
+                        <div class="style-container-2">
+                            <div class="style-nav-btn">
+                                <button  id="nav-btn-student" class="btn-nav active-btn" >Students</button>
+                                <button id="nav-btn-request" class="btn-nav" >Request</button>
+                            </div>
+                            <div class="container-students" >
+                                    <h1>students</h1>
+                            </div>
+                            <div class="container-request" >
+                                <h1>Request</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
