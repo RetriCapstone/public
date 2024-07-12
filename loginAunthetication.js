@@ -24,7 +24,7 @@ import { getFirestore, collection, query, where, getDocs } from "https://www.gst
 
 			if (username && password) {
 				try {
-					const q = query(collection(db, "admin"), where("username", "==", username));
+					const q = query(collection(db, "teacher"), where("email", "==", username));
 					const querySnapshot = await getDocs(q);
 
 					if (!querySnapshot.empty) {
@@ -34,14 +34,14 @@ import { getFirestore, collection, query, where, getDocs } from "https://www.gst
 							if (userData.password === password) {
 								userFound = true;
 								localStorage.setItem("isLoggedIn", "true");
-								window.location.href = "teacher/course/course.php";
+								window.location.href = "teacher/classroom/classroom.php";
 							}
 						});
 						if (!userFound) {
-							alert("username, email, or password is invalid");
+							alert("Email, or password is invalid");
 						}
 					} else {
-						alert("username, email, or password is invalid");
+						alert("Email, or password is invalid");
 					}
 				} catch (error) {
 					console.error("Error fetching user data:", error);
@@ -65,6 +65,6 @@ import { getFirestore, collection, query, where, getDocs } from "https://www.gst
 		// Check if the user is already logged in
 		window.onload = () => {
 			if (localStorage.getItem("isLoggedIn") === "true") {
-				window.location.href = "teacher/course/course.php";
+				window.location.href = "teacher/classroom/classroom.php";
 			}
 		};

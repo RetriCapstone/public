@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (selectCourse) {
       selectCourse.addEventListener('click', () => {
-          window.location.href = "select-course.php";
+          window.location.href = "module.php";
       });
   }
 

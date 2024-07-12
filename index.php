@@ -16,7 +16,7 @@
                         <img src="/teacher/images/logo1.png" alt="landing-logo">
                     </div>
                 </div>
-                    <a id="btn-login" href="Login.php" class="login-button">Sign In</a>
+                    <a id="btn-login" href="Login.php" target="_blank" class="login-button">Sign In</a>
             </div>
         </nav>
         <div class="first-content">

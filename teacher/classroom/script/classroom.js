@@ -53,7 +53,7 @@
     const select_class = document.getElementById('created-class');
 
     select_class.addEventListener('click', () => {
-        window.location.href = "select-class.php";
+        window.location.href = "course.php";
     });
 
 

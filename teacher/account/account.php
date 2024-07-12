@@ -10,7 +10,7 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script src="scipt/account.js" type="module" ></script>
+    <script src="script/account.js" type="module" ></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -25,19 +25,27 @@
                         </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="/teacher/course/course.php">
                     <i class="fa-solid fa-table"></i>
                         <span>
                             Courses
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                 <a href="/teacher/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
+                        </span>
+                    </a>
+                </li>
+                <li>
+                <a href="">
+                    <i class="fa-regular fa-circle-question"></i>
+                        <span>
+                            Help
                         </span>
                     </a>
                 </li>
@@ -52,6 +60,7 @@
             </ul>
         </nav>
         <div class="main_body">
+            
             <div class="main_container">
                 <div class="style-container-1">
                     <h1 class="style-title-1">Account Information</h1>
@@ -71,7 +80,7 @@
                         <input class="checkbox" id="change-pass" type="checkbox" >
                         <label class="label-checkbox" for="change-pass">CHANGE  PASSWORD</label>
                     </div>
-                    <form id="form-change-password" action="">
+                    <form id="form-change-password" >
                         <div class="input-style">
                             <span>Old Password*</span>
                             <input id="input-old-pass"  required>

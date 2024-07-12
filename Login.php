@@ -21,7 +21,7 @@
 		<form id="loginForm">
 			<h1>Welcome!</h1>
 			<div class="input-box">
-				<input id="username" placeholder="Username/Email" required>
+				<input id="username" placeholder="Email" required>
 				<i class='bx bxs-user'></i>
 			</div>
 			<div class="input-box">
