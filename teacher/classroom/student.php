@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students</title>
     <link rel="stylesheet" href="/teacher/style_dashboard.css">
-    <link rel="stylesheet" href="classroom_style.css">
+    <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/teacher/classroom/style/student-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -26,14 +27,6 @@
                         </span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="/teacher/course/course.php">
-                    <i class="fa-solid fa-table"></i>
-                        <span>
-                            Courses
-                        </span>
-                    </a>
-                </li> -->
                 <li class="active">
                     <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -60,14 +53,14 @@
                 </li>
             </ul>
         </nav>
+        <div class="style-container-1 con-2" >
+            <ul class="list-tab" >
+                <li class="list-view "><a href="course.php">Courses</a></li>
+                <li class="list-view list-active" ><a href="student.php">Students</a></li>
+            </ul>
+        </div>
         <div class="main_body">
             <div class="main_container">
-                <div class="style-container-1 con-2" >
-                    <ul class="list-tab" >
-                        <li class="list-view "><a href="course.php">Courses</a></li>
-                        <li class="list-view list-active" ><a href="student.php">Students</a></li>
-                    </ul>
-                </div>
                 <div class="con-1">
                     <div class="style-header">
                         <div>
@@ -89,55 +82,127 @@
                     <div class="style-container">
                         <div class="style-container-2">
                             <div class="style-nav-btn">
-                                <button  id="nav-btn-student" class="btn-nav active-btn" >Students</button>
-                                <button id="nav-btn-request" class="btn-nav" >Request</button>
+                                <button  id="nav-btn-student" class="btn-nav student-btn active-btn" >Students</button>
+                                <button id="nav-btn-request" class="btn-nav req-btn" >Request</button>
                             </div>
                             <div class="container-students" >
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 50px; height: 50px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 50px; height: 50px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 40px; height: 40px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 50px; height: 50px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 50px; height: 50px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 50px; height: 50px ; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
                                         <p class="style-text" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                             </div>
                             <div class="container-request" >
-                                <h1>Request</h1>
+                                <div class="style-student-list" >
+                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
+                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
+                                        <p class="style-text" >Student Name</p>
+                                    </div>
+                                    <div style="gap: .8rem; display:flex; flex-direction:row;">
+                                        <button class="style-btn-add-1" >Accept</button>
+                                        <button class="style-btn-del-1" >Reject</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

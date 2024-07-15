@@ -5,11 +5,15 @@
     outline: none;
     box-sizing: border-box;
     font-family: sans-serif;
-    scrollbar-width: none;
-    transition: ease-in-out;
+    transition: .2s ease-in-out;
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #0a1339;
 }
 .container{
     display: flex;
+    height: 100vh;
 }
 .logo{
     height: 100px;
@@ -28,6 +32,7 @@ nav{
     height: 100vh;
     left: 0;
     width: min-content;
+    min-width: 80px;
     border-right: 1px solid #1f2e63;
     overflow: hidden;
     padding: 0;
@@ -67,18 +72,16 @@ nav{
     width: 100%;
 }
 
-
-
 .main_body{
-    position: relative;
     width: 100%;
-    padding: .6rem;
+    padding: 1rem;
     color: white;
     background-color: #0a1339;
+    overflow: auto;
+    position: sticky;
 }
 .main_container{
     display: flex;
-    height: 100%;
     background-color: #0a1339;
     justify-content: center;
 }
@@ -92,8 +95,6 @@ nav{
     color: white;
     border-radius: 20px;
     height: fit-content;
-    overflow: auto;
-    scrollbar-width: none;
 }
 .style-card-1{
     padding: 1.2rem;
@@ -146,6 +147,7 @@ nav{
     border-radius: 20px;
     font-size: 1rem;
     color: white;
+    cursor: pointer;
 }
 .style-btn-add-1{
     padding: .6rem 1rem;
@@ -153,6 +155,7 @@ nav{
     border-radius: 5px;
     font-size: 1rem;
     color: white;
+    cursor: pointer;
 }
 .style-btn-del:hover{
     background-color: #be2121;
@@ -164,6 +167,17 @@ nav{
     font-size: 1rem;
     color: white;
     background: none;
+    cursor: pointer;
+}
+
+.style-btn-del-1{
+    padding: .6rem .8rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: white;
+    background: none;
+    background-color: #be2121;
+    cursor: pointer;
 }
 
 .style-display{
@@ -180,6 +194,7 @@ nav{
     display: flex;
     gap: .6rem;
     align-items: baseline;
+    cursor: pointer;
 }
 .style-btn-create-1:hover{
     background-color: #04b2aa;

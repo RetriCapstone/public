@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="/teacher/style_dashboard.css">
     <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -11,6 +11,7 @@
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
     <script type="module" src="script/classroom.js"></script>
+    <script type="module" src="script/course.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -26,7 +27,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="classroom.php">
+                    <a href="/teacher/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
@@ -55,31 +56,33 @@
             <div class="main_container">
                 <div class="con-1">
                     <div class="style-header">
-                        <h2>Classroom</h2>
-                        <button id="btn-create-classroom" class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
-                        
-                        <div id="modal-create-classroom" class="style-modal modal-classroom">
-                            <div class="create-classroom-modal">
-                                <span class="close-modal">&times;</span>
-                                <h1>Create classsroom</h1>
-                                <hr class="divider-solid" > 
-                                <form action="" id="create-class-form" class="form-create-class" >
-                                    <h3>Classroom name:</h3>
-                                    <input type="text" id="classname" class="input-style input-create-class" placeholder="Input name">
-                                    <p>! hints .........</p>
-                                    <h3>Classroom code:</h3>
-                                    <input type="text" id="classcode" class="input-style input-create-class" placeholder="Input code" >
-                                    <p>! hints .........</p>
-                                    <div class="create-class-btn" >
-                                        <input type="submit" value="Cancel" class="style-btn-del" >
-                                        <input type="submit" value="Create" class="style-btn-add-1" >
-                                    </div>
-                                </form>
-                            </div>
+                        <div >
+                            <h3>Lecture Name: </h3>
+                            <h3>Available: </h3>
+                            
+                        </div>
+                        <div style="display: flex; gap:.4rem " >
+                            <h3>Publish to classroom</h3>
+                                <label class="switch">
+                                <input type="checkbox" >
+                                <span class="slider round"></span>
+                                </label>
                         </div>
                     </div>
                     <hr class="divider-solid">
-                    <div class="class-list-container">
+                    <div class="btn-header--style" style=" justify-content: flex-end ; " >
+
+                        <div style=" display: flex; gap: .8rem;" >
+                            <button class="style-btn-del" >
+                                Delete Lecture
+                            </button>
+                            <button class="style-btn-add-1" >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="style-list-container" >
+                        
                     </div>
                 </div>
             </div>

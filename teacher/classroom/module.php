@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Modules</title>
     <link rel="stylesheet" href="/teacher/style_dashboard.css">
-    <link rel="stylesheet" href="classroom_style.css">
+    <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -26,14 +26,6 @@
                         </span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="/teacher/course/course.php">
-                    <i class="fa-solid fa-table"></i>
-                        <span>
-                            Courses
-                        </span>
-                    </a>
-                </li> -->
                 <li class="active">
                     <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -60,14 +52,14 @@
                 </li>
             </ul>
         </nav>
+        <div class="style-container-1 con-2" >
+            <ul class="list-tab" >
+                <li class="list-view list-active"><a href="course.php">Courses</a></li>
+                <li class="list-view" ><a href="student.php">Students</a></li>
+            </ul>
+        </div>
         <div class="main_body">
             <div class="main_container">
-                <div class="style-container-1 con-2" >
-                    <ul class="list-tab" >
-                        <li class="list-view list-active"><a href="course.php">Courses</a></li>
-                        <li class="list-view" ><a href="student.php">Students</a></li>
-                    </ul>
-                </div>
                 <div class="con-1">
                     <div class="style-header">
                         <div >
@@ -109,92 +101,38 @@
                             </button>
                         </div>
                     </div>
-                    <div class="style-list-container" >
-                        <table class="module-table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="course-modules-container"  >
-                                            <div class="style-card-2">
-                                                <div class="style-header">
-                                                    <div class="style-display">
-                                                        <p class="style-text" >Module 1</p>
-                                                        <h4 class="style-text" >Module Name</h4>
-                                                    </div>
-                                                    <div class="style-display">
-                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="module-list-content">
-                                                    <div class="module-item" >
-                                                        <a href="module/lecture.php" target="_blank" >
-                                                            <p class="style-text" >Lecture :</p>
-                                                        </a>
-                                                    </div>
-                                                    <div class="module-item" >
-                                                        <p class="style-text" >quiz :</p>
-                                                    </div>
-                                                    <div class="module-item" >
-                                                        <p class="style-text" >coding Challenge :</p>
-                                                    </div>
-                                                    <div class="module-item add-module" >
-                                                    <p class="style-text" >
-                                                        <i class="fa-solid fa-plus"></i>add
-                                                    </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="course-modules-container"  >
-                                            <div class="style-card-2">
-                                                <div class="style-display">
-                                                    <p>Module 1</p>
-                                                    <h3>Module Name</h2>
-                                                </div>
-                                            <div class="module-list-content"  >
-
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="course-modules-container"  >
-                                            <div class="style-card-2">
-                                                <div class="style-display">
-                                                    <p>Module 1</p>
-                                                    <h3>Module Name</h2>
-                                                </div>
-                                            <div class="module-list-content"  >
-
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="course-modules-container"  >
-                                            <div class="style-card-2">
-                                                <div class="style-display">
-                                                    <p>Module 1</p>
-                                                    <h3>Module Name</h2>
-                                                </div>
-                                            <div class="module-list-content"  >
-
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody> 
-                        </table>
-                    </div>
+                        <div class="modules-container"  >
+                            <div class="style-card-2">
+                                <div class="style-header">
+                                    <div class="style-display">
+                                        <p class="style-text" >Module 1</p>
+                                        <h4 class="style-text" >Module Name</h4>
+                                    </div>
+                                    <div class="style-display">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+                                </div>
+                                <div class="module-list-content">
+                                    <div class="module-item" >
+                                        <a href="module/lecture.php" target="_blank"  >
+                                            <p class="style-text" >Lecture :</p></a>
+                                    </div>
+                                    <div class="module-item" >
+                                        <a href="module/quiz.php" target="_blank"  >
+                                            <p class="style-text" >quiz :</p></a>
+                                    </div>
+                                    <div class="module-item" >
+                                        <a href="module/coding.php" target="_blank" >
+                                            <p class="style-text" >coding activity :</p></a>
+                                    </div>
+                                    <div class="module-item add-module" >
+                                        <p class="style-text" >
+                                            <i class="fa-solid fa-plus"></i>add
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
