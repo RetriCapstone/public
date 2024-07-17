@@ -3,3 +3,15 @@
 }.req-btn{
     border-top-right-radius: 20px;
 }
+.edit-icon-style{
+    padding: 4px;
+    border-radius: 2px;
+}
+.edit-icon-style:hover{
+    background-color: #161f47;
+    cursor: pointer;
+}
+.student-image{
+    height: 40px;
+    width: 40px;
+}

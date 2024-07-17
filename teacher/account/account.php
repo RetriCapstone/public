@@ -70,11 +70,11 @@
                     </div>
                     <div class="input-style">
                         <span>Lastname</span>
-                        <input id="firstname">
+                        <input type="text" id="lastname" autocomplete="off" >
                     </div>
                     <div class="input-style">
                         <span>Email</span>
-                        <input id="firstname">
+                        <input type="email" id="email" autocomplete="off" >
                     </div>
                     <div class="style-checkbox">
                         <input class="checkbox" id="change-pass" type="checkbox" >
@@ -83,15 +83,15 @@
                     <form id="form-change-password" >
                         <div class="input-style">
                             <span>Old Password*</span>
-                            <input id="input-old-pass"  required>
+                            <input type="password" id="input-old-pass"  required>
                         </div>
                         <div class="input-style">
                             <span>New Password*</span>
-                            <input id="input-new-pass" required>
+                            <input type="password" id="input-new-pass" required>
                         </div>
                         <div class="input-style">
                             <span>Confirm New Password*</span>
-                            <input id="input-conf-new-pass" required>
+                            <input type="password" id="input-conf-new-pass" required>
                         </div>
                     </form>
                     <div class="style-btn-container">

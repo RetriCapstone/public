@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -45,12 +45,32 @@ async function getCourses() {
     }
 }
 
+// Create course
+async function createCourse(event) {
+    event.preventDefault(); // Prevent form submission
+    const selectedClassroomId = localStorage.getItem("selectedClassroomId");
+    const teacherId = localStorage.getItem("teacherId");
+    const courseName = document.getElementById("classname").value;
+    if (!selectedClassroomId || !teacherId || !courseName) return;
+
+    try {
+        const courseDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'course', courseName);
+        await setDoc(courseDocRef, {});
+        alert('Course created successfully!');
+        document.getElementById("create-course-form").reset();
+        getCourses(); // Refresh the course list
+    } catch (error) {
+        console.error("Error creating course:", error);
+    }
+}
+
 // Modal management class
 class Modal {
     constructor(modalId, triggerId, closeClass) {
         this.modal = document.getElementById(modalId);
         this.btn = document.getElementById(triggerId);
         this.span = document.getElementsByClassName(closeClass)[0];
+        this.cancelBtn = document.getElementById("cancel-modal");
 
         if (this.btn && this.span && this.modal) {
             this.openModal = this.openModal.bind(this);
@@ -59,6 +79,7 @@ class Modal {
 
             this.btn.addEventListener('click', this.openModal);
             this.span.addEventListener('click', this.closeModal);
+            this.cancelBtn.addEventListener('click', this.closeModal);
             window.addEventListener('click', this.outsideClick);
         } else {
             console.error(`Elements not found for modal: ${modalId}, trigger: ${triggerId}, close: ${closeClass}`);
@@ -83,5 +104,5 @@ class Modal {
 document.addEventListener('DOMContentLoaded', () => {
     getCourses();
     new Modal("modal-create-course", "btn-create-course", "close-modal");
-    new Modal("modal-create-module", "btn-create-module", "close-modal");
+    document.getElementById("create-course-form").addEventListener("submit", createCourse);
 });

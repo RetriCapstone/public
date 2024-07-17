@@ -157,9 +157,6 @@ nav{
     color: white;
     cursor: pointer;
 }
-.style-btn-del:hover{
-    background-color: #be2121;
-}
 
 .style-btn-del{
     padding: .6rem .8rem;
@@ -169,6 +166,10 @@ nav{
     background: none;
     cursor: pointer;
 }
+.style-btn-del:hover{
+    background-color: #be2121;
+}
+
 
 .style-btn-del-1{
     padding: .6rem .8rem;
@@ -179,6 +180,8 @@ nav{
     background-color: #be2121;
     cursor: pointer;
 }
+
+
 
 .style-display{
     display: flex;

@@ -6,6 +6,7 @@
     <title>Courses</title>
     <link rel="stylesheet" href="/teacher/style_dashboard.css">
     <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/teacher/classroom/style/course.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -66,16 +67,20 @@
                         <button id="btn-create-course" class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Course</button>
                         
                         <div id="modal-create-course" class="style-modal">
-                            <div class="style-modal-content">
+                            <div class="style-modal-content create-course-modal">
                                 <span class="close-modal">&times;</span>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
-                                <p>Some text in the Modal..</p>
+                                <h1>Create course</h1>
+                                <hr class="divider-solid" > 
+                                <form action="" id="create-course-form" class="form-create-course" >
+                                    <div class="style-divider" >
+                                    <label>&nbsp;Course name:</label>
+                                        <input type="text" id="classname" class="input-style input-create-class" placeholder="Input name" required autocomplete="off" >
+                                    </div>
+                                    <div class="create-class-btn" >
+                                        <input type="button" value="Cancel" class="style-btn-del" id="cancel-modal">
+                                        <input type="submit" value="Create" class="style-btn-add-1" >
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

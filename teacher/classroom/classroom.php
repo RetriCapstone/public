@@ -64,14 +64,20 @@
                                 <h1>Create classsroom</h1>
                                 <hr class="divider-solid" > 
                                 <form action="" id="create-class-form" class="form-create-class" >
-                                    <h3>Classroom name:</h3>
-                                    <input type="text" id="classname" class="input-style input-create-class" placeholder="Input name">
-                                    <p>! hints .........</p>
-                                    <h3>Classroom code:</h3>
-                                    <input type="text" id="classcode" class="input-style input-create-class" placeholder="Input code" >
-                                    <p>! hints .........</p>
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom name:</label>
+                                        <input type="text" id="classname" class="input-style input-create-class" placeholder="Input name" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT-SECTION</p>
+                                    </div>
+
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom code:</label>
+                                        <input type="text" id="classcode" class="input-style input-create-class" placeholder="Input code" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: STRAND-YEAR LEVEL-SECTION</p>
+                                    </div>
+                                    
                                     <div class="create-class-btn" >
-                                        <input type="submit" value="Cancel" class="style-btn-del" >
+                                        <input type="button" value="Cancel" class="style-btn-del" id="cancel-modal">
                                         <input type="submit" value="Create" class="style-btn-add-1" >
                                     </div>
                                 </form>

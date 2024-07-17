@@ -66,16 +66,14 @@
                         <div>
                         <h2>Students</h2>
                             <div class="style-room-details" >
-                                <p>Classroom name: &nbsp;</p><p>sample</p>
+                                <p>Classroom name:</p><label id="classroomName" ></label><i class="fa-solid fa-pencil edit-icon-style"></i>
                             </div>
                             <div class="style-room-details" >
-                                <p>Classroom code: &nbsp;</p><p>sample</p>
+                                <p>Classroom code:</p><label id="classroomCode" ></label><i class="fa-solid fa-pencil edit-icon-style"></i>
                             </div>
-                            
                         </div>
                         <div class="header-pos-2" >
                             <button class="style-btn-del" >Delete Class</button>
-                            <button class="style-btn-add-1" >Save</button>
                         </div>
                     </div>
                     <hr class="divider-solid">
@@ -88,106 +86,8 @@
                             <div class="container-students" >
                                 <div class="style-student-list" >
                                     <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
+                                        <img src="" alt="" class="student-image" id="profile-image-student" >
+                                        <p class="style-text" id="profile-name-student" >Student Name</p>
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
