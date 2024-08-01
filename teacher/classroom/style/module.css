@@ -1,0 +1,35 @@
+.create-module-modal{
+    height: 50%;
+}
+.create-module-modal{
+    height: 50%;
+}
+.style-select{
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 200px;
+    color: white;
+    background-color: #0a1339;
+
+    
+    padding-top: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 8px;
+    flex-direction: column;
+    
+    border: 2px solid #1f2e63;
+}
+.form-create-module-item{
+    gap: 4px;
+}
+.style-label-modal{
+    font-size:medium;
+}
+.style-divider2{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin: 8px 0;
+    align-items: center;
+}

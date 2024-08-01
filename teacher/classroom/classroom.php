@@ -61,19 +61,19 @@
                         <div id="modal-create-classroom" class="style-modal modal-classroom">
                             <div class="create-classroom-modal">
                                 <span class="close-modal">&times;</span>
-                                <h1>Create classsroom</h1>
+                                <h1>Create Classsroom</h1>
                                 <hr class="divider-solid" > 
                                 <form action="" id="create-class-form" class="form-create-class" >
                                     <div class="style-divider" >
                                         <label>&nbsp;Classroom name:</label>
-                                        <input type="text" id="classname" class="input-style input-create-class" placeholder="Input name" required autocomplete="off" >
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT-SECTION</p>
+                                        <input type="text"style="text-transform:uppercase" id="classname" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
                                     </div>
 
                                     <div class="style-divider" >
                                         <label>&nbsp;Classroom code:</label>
-                                        <input type="text" id="classcode" class="input-style input-create-class" placeholder="Input code" required autocomplete="off" >
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: STRAND-YEAR LEVEL-SECTION</p>
+                                        <input type="text" id="classcode" class="input-style input-create-class" placeholder="Class code" required autocomplete="off">
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT - RANDOM NUMBER</p>
                                     </div>
                                     
                                     <div class="create-class-btn" >
@@ -86,6 +86,9 @@
                     </div>
                     <hr class="divider-solid">
                     <div class="class-list-container">
+                    </div>
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
                     </div>
                 </div>
             </div>

@@ -55,26 +55,15 @@
         </nav>
         <div class="style-container-1 con-2" >
             <ul class="list-tab" >
-                <li class="list-view "><a href="course.php">Courses</a></li>
-                <li class="list-view list-active" ><a href="student.php">Students</a></li>
+                <li class="list-view "><a href="module.php">Modules</a></li>
+                <li class="list-view list-active" ><a href="student.php">People</a></li>
             </ul>
         </div>
         <div class="main_body">
             <div class="main_container">
                 <div class="con-1">
                     <div class="style-header">
-                        <div>
-                        <h2>Students</h2>
-                            <div class="style-room-details" >
-                                <p>Classroom name:</p><label id="classroomName" ></label><i class="fa-solid fa-pencil edit-icon-style"></i>
-                            </div>
-                            <div class="style-room-details" >
-                                <p>Classroom code:</p><label id="classroomCode" ></label><i class="fa-solid fa-pencil edit-icon-style"></i>
-                            </div>
-                        </div>
-                        <div class="header-pos-2" >
-                            <button class="style-btn-del" >Delete Class</button>
-                        </div>
+                        <h3 id="classroom-name" ></h3>
                     </div>
                     <hr class="divider-solid">
                     <div class="style-container">
@@ -83,25 +72,14 @@
                                 <button  id="nav-btn-student" class="btn-nav student-btn active-btn" >Students</button>
                                 <button id="nav-btn-request" class="btn-nav req-btn" >Request</button>
                             </div>
-                            <div class="container-students" >
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" class="student-image" id="profile-image-student" >
-                                        <p class="style-text" id="profile-name-student" >Student Name</p>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                            <div class="container-students" >    
+                                <div class="loading-indicator">
+                                    <div class="spinner"></div>
                                 </div>
                             </div>
                             <div class="container-request" >
-                                <div class="style-student-list" >
-                                    <div style="display: flex; flex-direction: row; gap: 14px; align-items: center; " >
-                                        <img src="" alt="" style="width: 45px; height: 45px ; " >
-                                        <p class="style-text" >Student Name</p>
-                                    </div>
-                                    <div style="gap: .8rem; display:flex; flex-direction:row;">
-                                        <button class="style-btn-add-1" >Accept</button>
-                                        <button class="style-btn-del-1" >Reject</button>
-                                    </div>
+                                <div class="loading-indicator">
+                                    <div class="spinner"></div>
                                 </div>
                             </div>
                         </div>

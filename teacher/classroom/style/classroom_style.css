@@ -66,6 +66,7 @@
 }
 .style-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 0 4px;
     padding: 4px 0;
@@ -105,7 +106,7 @@
 .style-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 10; /* Sit on top */
   padding-top: 8%; /* Location of the box */
   left: 0;
   top: 0;
@@ -118,7 +119,7 @@
 .modal-classroom {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 100; /* Sit on top */
   padding-top: 10%; /* Location of the box */
   left: 0;
   top: 0;
@@ -136,7 +137,7 @@
   padding: 20px;
   border: 2px solid #1f2e63;
   border-radius: 30px;
-  width: 65%;
+  width: 45%;
   height: 65%;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -156,7 +157,7 @@
   animation-name: animatetop;
   animation-duration: 0.4s
 }
-.form-create-class,.form-create-course{
+.form-create-class,.form-create-course, .form-create-module{
   display: flex;
   flex-direction: column;
   width: -webkit-fill-available;
@@ -187,7 +188,7 @@
 .style-divider{
   display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     margin: 8px 0;
 }
 
@@ -300,7 +301,6 @@ input:checked + .slider:before {
 
 
 .btn-header--style{
-  display: flex;
   justify-content: space-between;
 }
 

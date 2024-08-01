@@ -38,10 +38,22 @@ async function getClassrooms() {
     if (!loggedInUserEmail) return;
 
     try {
+        const loadingIndicator = document.querySelector('.loading-indicator');
+        loadingIndicator.style.display = 'block';  // Show loading indicator
+
         const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+            console.log("No Classroom found");
+            loadingIndicator.style.display = 'none';  // Hide loading indicator if no classrooms
+            return;
+        }
+
         const classListContainer = document.querySelector('.class-list-container');
         classListContainer.innerHTML = ''; // Clear any existing classrooms
+
+        const classrooms = [];
 
         for (const doc of querySnapshot.docs) {
             const classroomCollection = collection(db, 'teacher', doc.id, 'classroom');
@@ -52,27 +64,34 @@ async function getClassrooms() {
                 const classData = classroomDoc.data();
                 const classCode = classData.code;
 
-                const classCard = document.createElement('div');
-                classCard.className = 'style-card-1';
-                classCard.innerHTML = `
-                    <div class="style-display">
-                        <h3 class="class-name">Classroom: ${className}</h3>
-                        <span class="class-code">Code: ${classCode}</span>
-                    </div>
-                `;
-
-                classCard.addEventListener('click', () => {
-                    localStorage.setItem("selectedClassroomId", classroomDoc.id);
-                    localStorage.setItem("selectedClassroomCode", classData.code);
-                    localStorage.setItem("teacherId", doc.id);
-                    window.location.href = "student.php";
-                });
-
-                classListContainer.appendChild(classCard);
+                classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classroomDoc.id });
             });
         }
+
+        classrooms.forEach(classroom => {
+            const classCard = document.createElement('div');
+            classCard.className = 'style-card-1';
+            classCard.innerHTML = `
+                <div class="style-display">
+                    <h3 class="class-name">Classroom: ${classroom.className}</h3>
+                    <span class="class-code">Code: ${classroom.classCode}</span>
+                </div>
+            `;
+
+            classCard.addEventListener('click', () => {
+                localStorage.setItem("selectedClassroomId", classroom.classroomDocId);
+                localStorage.setItem("selectedClassroomCode", classroom.classCode);
+                localStorage.setItem("teacherId", classroom.docId);
+                window.location.href = "module.php";
+            });
+
+            classListContainer.appendChild(classCard);
+        });
+
+        loadingIndicator.style.display = 'none';  // Hide loading indicator after all classrooms are loaded
     } catch (error) {
         console.error("Error getting classrooms:", error);
+        document.querySelector('.loading-indicator').style.display = 'none';  // Hide loading indicator in case of error
     }
 }
 
