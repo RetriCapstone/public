@@ -62,7 +62,7 @@ async function getClassrooms() {
             classroomSnapshot.forEach((classroomDoc) => {
                 const className = classroomDoc.id;
                 const classData = classroomDoc.data();
-                const classCode = classData.code;
+                const classCode = classData.name;
 
                 classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classroomDoc.id });
             });
@@ -73,14 +73,14 @@ async function getClassrooms() {
             classCard.className = 'style-card-1';
             classCard.innerHTML = `
                 <div class="style-display">
-                    <h3 class="class-name">Classroom: ${classroom.className}</h3>
-                    <span class="class-code">Code: ${classroom.classCode}</span>
+                    <h3 class="class-name">Classroom: ${classroom.classCode}</h3>
+                    <span class="class-code">Code: ${classroom.className}</span>
                 </div>
             `;
 
             classCard.addEventListener('click', () => {
                 localStorage.setItem("selectedClassroomId", classroom.classroomDocId);
-                localStorage.setItem("selectedClassroomCode", classroom.classCode);
+                localStorage.setItem("selectedClassroomName", classroom.classCode);
                 localStorage.setItem("teacherId", classroom.docId);
                 window.location.href = "module.php";
             });
@@ -113,8 +113,8 @@ async function createClassroom(event) {
             const teacherDoc = querySnapshot.docs[0];
             const teacherId = teacherDoc.id;
 
-            const newClassroomRef = doc(db, 'teacher', teacherId, 'classroom', className);
-            await setDoc(newClassroomRef, { code: classCode });
+            const newClassroomRef = doc(db, 'teacher', teacherId, 'classroom', classCode);
+            await setDoc(newClassroomRef, { name: className });
 
             // Refresh the classroom list
             getClassrooms();

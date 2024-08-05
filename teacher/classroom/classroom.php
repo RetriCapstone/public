@@ -66,7 +66,7 @@
                                 <form action="" id="create-class-form" class="form-create-class" >
                                     <div class="style-divider" >
                                         <label>&nbsp;Classroom name:</label>
-                                        <input type="text"style="text-transform:uppercase" id="classname" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
+                                        <input type="text" style="text-transform:uppercase" id="classname" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
                                         <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
                                     </div>
 

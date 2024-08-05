@@ -17,7 +17,6 @@
   margin-block-end: 1em;
   font-size: 1rem;
   line-height: 1.5;
-  padding-inline-end: 20px;
 }
 .list-tab li, .list-tab a{  
   padding: .4rem .4rem;
@@ -308,6 +307,9 @@ input:checked + .slider:before {
 margin: .6rem 1rem;
 justify-content: center;
 }
+.style-display i{
+  font-size: 1.4rem;
+}
 
 .modules-container{
   display: flex;
@@ -330,8 +332,9 @@ justify-content: center;
   text-decoration: none;
 }
 .module-item p{
-  padding: 14px ;
+  padding: 12px ;
   color: white;
+  font-size: 1.2rem;
 }
 .module-item:hover{
   background-color: #161f47 ;

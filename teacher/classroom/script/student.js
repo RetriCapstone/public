@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, query, where, getDocs, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -15,13 +15,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
 const teacherId = localStorage.getItem("teacherId");
 const selectedClassroomId = localStorage.getItem("selectedClassroomId");
+const selectedClassroomName = localStorage.getItem("selectedClassroomName");
 
 const loadingIndicator = document.querySelector('.loading-indicator');
 
-// Fetch and display active students
 async function getActiveStudents() {
     if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");
@@ -29,7 +28,7 @@ async function getActiveStudents() {
     }
 
     try {
-        loadingIndicator.style.display = 'block';  // Show loading indicator
+        loadingIndicator.style.display = 'block';
 
         const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
         const studentSnapshot = await getDocs(studentCollectionRef);
@@ -55,14 +54,13 @@ async function getActiveStudents() {
 
             activeStudentsContainer.appendChild(studentElement);
         }
-        loadingIndicator.style.display = 'none';  // Hide loading indicator after students are loaded
+        loadingIndicator.style.display = 'none';
     } catch (error) {
         console.error("Error getting active students:", error);
-        loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
+        loadingIndicator.style.display = 'none';
     }
 }
 
-// Fetch and display request students
 async function getRequestStudents() {
     if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");
@@ -70,7 +68,7 @@ async function getRequestStudents() {
     }
 
     try {
-        loadingIndicator.style.display = 'block';  // Show loading indicator
+        loadingIndicator.style.display = 'block';
 
         const requestCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request');
         const requestSnapshot = await getDocs(requestCollectionRef);
@@ -92,36 +90,73 @@ async function getRequestStudents() {
                     <p class="style-text" id="request-student-name">${userData.lastname}, ${userData.firstname}</p>
                 </div>
                 <div style="gap: .8rem; display:flex; flex-direction:row;">
-                    <button class="style-btn-add-1" id="btn-accept-student">Accept</button>
-                    <button class="style-btn-del-1" id="btn-remove-student">Remove</button>
+                    <button class="style-btn-add-1" id="btn-accept-student-${studentId}">Accept</button>
+                    <button class="style-btn-del-1" id="btn-remove-student-${studentId}">Remove</button>
                 </div>
             `;
 
             requestStudentsContainer.appendChild(requestElement);
+
+            document.getElementById(`btn-accept-student-${studentId}`).addEventListener('click', () => acceptStudent(studentId));
+            document.getElementById(`btn-remove-student-${studentId}`).addEventListener('click', () => removeStudent(studentId));
         }
-        loadingIndicator.style.display = 'none';  // Hide loading indicator after requests are loaded
+        loadingIndicator.style.display = 'none';
     } catch (error) {
         console.error("Error getting request students:", error);
-        loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
+        loadingIndicator.style.display = 'none';
     }
 }
 
+async function acceptStudent(studentId) {
+    try {
+        const studentDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student', studentId);
+        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
+
+        // Move the student from 'request' to 'student'
+        await setDoc(studentDocRef, {});
+
+        // Delete the student from 'request'
+        await deleteDoc(requestDocRef);
+
+        // Add classroom info to the user's document
+        const classroomDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
+        await setDoc(classroomDocRef, { teacher: teacherId });
+
+        getRequestStudents();  // Refresh the request list
+        getActiveStudents();   // Refresh the active students list
+    } catch (error) {
+        console.error('Error accepting student:', error);
+        alert('Error accepting student. Please try again.');
+    }
+}
+
+async function removeStudent(studentId) {
+    try {
+        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
+        
+        // Delete the student from 'request'
+        await deleteDoc(requestDocRef);
+        getRequestStudents();  // Refresh the request list
+    } catch (error) {
+        console.error('Error removing student:', error);
+        alert('Error removing student. Please try again.');
+    }
+}
 
 async function getClassroomName() {
-    if (!selectedClassroomId || !teacherId) {
+    if (!selectedClassroomName || !teacherId) {
         console.error("Missing required identifiers");
         return;
     }
 
     try {
-        document.getElementById('classroom-name').innerText = selectedClassroomId;
+        document.getElementById('classroom-name').innerText = selectedClassroomName;
     } catch (error) {
         console.error("Error getting course name:", error);
     }
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    
     getClassroomName(); 
     getActiveStudents();
     getRequestStudents();

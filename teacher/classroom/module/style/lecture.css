@@ -1,0 +1,28 @@
+.main_body{
+    padding: 1rem 0;
+}
+
+.guide-container{
+    max-width: 160px;
+    padding: .8rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    height: fit-content;
+}
+
+.lect-tools-con{
+    max-width: 260px;
+    padding: .8rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    height: fit-content;
+}
+
+.lect-text-guide{
+    font-size: .8rem;
+    color: white;
+    line-height: 1.4rem;
+}

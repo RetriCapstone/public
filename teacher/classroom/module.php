@@ -80,6 +80,19 @@
                                     <label>&nbsp;Module name:</label>
                                         <input type="text" id="module-name" class="input-style input-create-class" placeholder="Module name" required autocomplete="off" style="text-transform: uppercase;" >
                                     </div>
+                                    <div class="style-divider2" >
+                                        <input class="module-pos-option" type="radio" id="end" value="end" name="position" checked >
+                                        <label for="end"  class="radio-label" >At the End</label> 
+
+                                        <input class="module-pos-option" type="radio" id="begin" value="begin" name="position"> 
+                                        <label for="begin" class="radio-label" >At the Beginning</label>
+
+                                        <input class="module-pos-option" type="radio" id="after" value="after" name="position"> 
+                                        <label for="after"  class="radio-label" >After</label>
+                                        <select name="select-after" id="position-after" class="style-select">
+                                            
+                                        </select>
+                                    </div>
                                     <div class="create-class-btn" >
                                         <input type="button" value="Cancel" class="style-btn-del" id="cancel-modal">
                                         <input type="submit" value="Create" class="style-btn-add-1" >
@@ -99,7 +112,7 @@
                             <form action="" id="create-module-item-form" class="form-create-module form-create-module-item">
                                 <div class="style-divider">
                                     <label class="style-label-modal">&nbsp;Item Name:</label>
-                                    <input type="text" id="module-item-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" style="text-transform: uppercase;">
+                                    <input type="text" style="text-transform: uppercase;" id="module-item-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
                                 </div>
                                 <div class="style-divider2">
                                     <label class="style-label-modal" for="item-type">&nbsp;Select:&nbsp;</label>
@@ -112,6 +125,29 @@
                                 <div class="create-class-btn">
                                     <input type="button" value="Cancel" class="style-btn-del" id="cancel-module-item-modal">
                                     <input type="submit" value="Create" class="style-btn-add-1">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Modal for Editing Module  -->
+                    <div id="modal-Edit-module" class="style-modal">
+                        <div class="style-modal-content create-module-item-modal">
+                            <span class="close-modal close-module-item">&times;</span>
+                            <h2 id="edit-module-name" >Edit Module</h2>
+                            <hr class="divider-solid"> 
+                            <form action="" id="create-module-item-form" class="form-create-module form-create-module-item">
+                                <div class="style-divider">
+                                    <label class="style-label-modal">&nbsp;Module Name:</label>
+                                    <input type="text" style="text-transform: uppercase;" id="module-item-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
+                                </div>
+                                <div class="edit-module-btn">
+                                    <div>
+                                        <input type="button" value="Delete Module" class="style-btn-del" id="delete-module">
+                                    </div>
+                                    <div style="display: flex; gap: .8rem;" >
+                                        <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-module-modal">
+                                        <input type="submit" value="Save" class="style-btn-add-1">
+                                    </div>
                                 </div>
                             </form>
                         </div>
