@@ -10,8 +10,6 @@
 </head>
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
-    <script type="module" src="script/classroom.js"></script>
-    <script type="module" src="script/course.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -52,40 +50,38 @@
                 </li>
             </ul>
         </nav>
+        <div class="style-container-1 con-2">
+            <ul class="list-tab">
+                <li class="list-view list-active"><a href="/teacher/classroom/module.php">Modules</a></li>
+                <li class="list-view"><a href="/teacher/classroom/student.php">People</a></li>
+            </ul>
+        </div>
+        <div class="guide-container">
+            <p class="lect-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
         <div class="main_body">
             <div class="main_container">
                 <div class="con-1">
                     <div class="style-header">
-                        <div >
-                            <h3>Lecture Name: </h3>
-                            <h3>Available: </h3>
-                            
-                        </div>
-                        <div style="display: flex; gap:.4rem " >
+                            <h3 id="lecture-name" ></h3>
+                        <!-- <div style="display: flex; gap: .4rem;">
                             <h3>Publish to classroom</h3>
-                                <label class="switch">
-                                <input type="checkbox" >
+                            <label class="switch">
+                                <input type="checkbox">
                                 <span class="slider round"></span>
-                                </label>
-                        </div>
+                            </label>
+                        </div> -->
                     </div>
                     <hr class="divider-solid">
-                    <div class="btn-header--style" style=" justify-content: flex-end ; " >
-
-                        <div style=" display: flex; gap: .8rem;" >
-                            <button class="style-btn-del" >
-                                Delete Lecture
-                            </button>
-                            <button class="style-btn-add-1" >
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                    <div class="style-list-container" >
-                        
+                    <!-- Modal for Creating Module Item -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="lect-tools-con">
+            <p class="lect-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         </div>
     </div>
 </body>
