@@ -28,6 +28,7 @@
 }
 .quiz-containers{
     padding: 1rem 0;
+    transition: 0.4s;
 }
 
 .quiz-text-guide{
@@ -46,12 +47,13 @@
     font-size: 1.2rem;
 }
 .quiz-btn-nav{
+    border-radius: 10px 10px 0 0;
     cursor: pointer;
     padding: .4rem 1rem;
+    transition: 0.2s;
 }
 .quiz-active-nav{
     background-color: #111b48;
-    border-radius: 10px 10px 0 0;
     border-bottom: 4px solid rgb(29, 74, 145);
 }
 
