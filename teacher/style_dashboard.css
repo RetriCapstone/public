@@ -227,3 +227,20 @@ nav{
     100% { transform: rotate(360deg); }
 }
 
+
+.style-select{
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 200px;
+    color: white;
+    background-color: #0a1339;
+
+    
+    padding-top: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 8px;
+    flex-direction: column;
+    
+    border: 2px solid #1f2e63;
+}

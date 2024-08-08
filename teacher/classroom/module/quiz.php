@@ -80,49 +80,127 @@
                     <hr class="divider-solid">
                 </div>
                 <div class="quiz-containers quiz-questions-container" >
-                <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          
+
+                    <!-- Quiz container of dirction/Description -->
+                    <div class="style-container-1 quiz-direction-container" >
+                        <textarea rows="2"  class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
+                    </div>
+
+                    <!-- Quiz question w/ style -->
+                    <!-- <div class="style-container-1 quiz-question-container">
+                        <div class="question-body-con" >
+                            <select class="style-select" name="question-type">
+                                <option value="identification">Identification</option>
+                                <option value="choice">Multiple choice</option>
+                                <option value="check">CheckBoxes</option>
+                            </select>
+                            
+                            <div class="quiz-identify-con">
+                                <textarea rows="2"  class="quiz-question-input auto-height-text-question" placeholder="Question" ></textarea>
+                                <div class="identify-body-1" >
+                                    <input class="quiz-identify-answer" type="text" required autocomplete="false" placeholder="Answer">
+                                    
+                                </div>
+                                <div class="identify-body-2" >
+                                    <div class="identify-radio-con" >
+                                        <input type="radio" id="indentify-exact" name="answer-case" value="exact" checked >
+                                        <label for="indentify-exact">Exact Case</label>
+                                    </div>
+                                    <div class="identify-radio-con" >
+                                        <input type="radio" id="indentify-all-caps" name="answer-case" value="all-caps" >
+                                        <label for="indentify-all-caps">All Caps</label>
+                                    </div>
+                                    <div class="identify-radio-con" >
+                                        <input type="radio" id="indentify-small-caps" name="answer-case" value="small-caps" >
+                                        <label for="indentify-small-caps">Small Caps</label>
+                                    </div>
+                                </div>
+                                <hr class="divider-solid">
+                            </div>
+
+                            <div class="quiz-choice-con">
+                                <textarea rows="2" onInput="auto_height(this)" id="auto-height-text"  class="quiz-question-input" placeholder="Question" ></textarea>
+                                <div class="choice-body-1" >
+                                    <div class="choice-option-con" >
+                                        <i class="fa-regular fa-circle"></i>
+                                        <input type="text" required class="quiz-identify-answer" autocomplete="false" placeholder="Option" >
+                                        <i class="fa-solid fa-xmark delete-option"></i>
+                                    </div>
+                                    <div class="choice-body-2">
+                                        <div class="choice-add-btn" >
+                                            <i class="fa-regular fa-circle"></i><span>&nbsp;Add option</span> 
+                                        </div>
+                                        <div class="choice-answer-select" >
+                                            <span>Answer:</span>
+                                            <select class="style-select" ></select>
+                                        </div>
+                                    </div>
+                                    <hr class="divider-solid">
+                                </div>
+                            </div>
+
+                            <div class="delete-question-con" id="question-delete-button">
+                                <i class="fa-regular fa-trash-can"></i><span>Delete</span>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
                 <div class="quiz-containers quiz-responses-container" >
                     <p>Responses</p>
                 </div>
                 <div class="quiz-containers quiz-settings-container" >
-                    <p>Settings</p>
+                    <div class="style-container-1 settings-container" >
+                        <p class="settings-text" >Settings</p>
+                        <hr class="divider-solid setting-divider">
+                        <div class="settings-card" >
+                            <input class="quiz-identify-answer quiz-name-input" type="text" required autocomplete="false" placeholder="Quiz name">
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Randomize Question
+                                </span>
+                                <p class="settings-label-body" >
+                                    Make this quiz questions in random
+                                </p>
+                            </div>
+                            <div class="settings-card-1" >
+                                <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div>
+                                <div class="settings-card-1" >
+                                    <span class="settings-label-title" >
+                                        Quiz Publish Status
+                                    </span>
+                                </div>
+                                <div class="settings-card-1" >
+                                    <select class="style-select" >
+                                        <option value="locked">Locked</option>
+                                        <option value="open">Open</option>
+                                        <option value="set">Set Date and Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                     
             </div>
         </div>
         <div class="quiz-tool-container">
-            <div>
-                <p class="quiz-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>          
+            <div class="quiz-question-tool-container style-container-1" >
+                <div class="quiz-question-tool-item add-question-btn" >
+                    <span class="quiz-add-icon add-icon" >+</span>
+                    <span>Add Question</span> 
+                </div>
             </div>
         </div>
     </div>

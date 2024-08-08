@@ -88,7 +88,7 @@
                                         <label for="begin" class="radio-label" >At the Beginning</label>
 
                                         <input class="module-pos-option" type="radio" id="after" value="after" name="position"> 
-                                        <label for="after"  class="radio-label" >After</label>
+                                        <label for="after"  class="radio-label" >After:</label>
                                         <select name="select-after" id="position-after" class="style-select">
                                             
                                         </select>
@@ -121,6 +121,12 @@
                                         <option value="quiz">Quiz</option>
                                         <option value="activity">Coding Activity</option>
                                     </select>
+
+                                    <!-- <label class="style-label-modal" for="item-type">&nbsp;&nbsp;&nbsp;Position:&nbsp;</label>
+                                    <select class="style-select" name="item-postition" id="module-item-position">
+                                        <option value="item-end">End of Lectures</option>
+                                        <option value="item-begin">Beginning of Lectures</option>
+                                    </select> -->
                                 </div>
                                 <div class="create-class-btn">
                                     <input type="button" value="Cancel" class="style-btn-del" id="cancel-module-item-modal">

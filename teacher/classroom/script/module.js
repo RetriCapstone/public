@@ -21,13 +21,15 @@ const selectedClassroomName = localStorage.getItem("selectedClassroomName");
 
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
-    const itemSnapshot = await getDocs(itemCollectionRef);
+    const itemQuery = query(itemCollectionRef, orderBy('number'));
+    const itemSnapshot = await getDocs(itemQuery);
     const items = [];
     itemSnapshot.forEach((itemDoc) => {
         items.push(itemDoc.id);
     });
     return items;
 }
+
 
 async function getClassroomName() {
     if (!selectedClassroomName || !teacherId) {
@@ -141,7 +143,6 @@ async function getModules() {
             });
         });
 
-        
         // Initialize ModuleItemModal after modules are loaded
         const addModuleButtons = document.querySelectorAll('.add-module');
         addModuleButtons.forEach(button => {
@@ -153,6 +154,7 @@ async function getModules() {
         document.querySelector('.loading-indicator').style.display = 'none';  // Hide loading indicator in case of error
     }
 }
+
 
 
 function handleAddModuleClick(event) {
@@ -322,24 +324,27 @@ class ModuleItemModal {
             return;
         }
 
+        const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType);
+        const itemSnapshot = await getDocs(itemCollectionRef);
+        const existingItemsCount = itemSnapshot.size;
+        const itemNumber = existingItemsCount + 1;
+
         const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType, moduleItemName);
 
         try {
-            await setDoc(itemDocRef, {});
+            await setDoc(itemDocRef, { number: itemNumber });
             moduleItemNameInput.value = '';  // Clear the input field
             alert('Created successfully.');
             this.closeModal();  // Close the modal
-            localStorage.setItem("selectedModuleId",this.moduleId);
+            localStorage.setItem("selectedModuleId", this.moduleId);
             localStorage.setItem("selectedItemType", moduleItemType);
             localStorage.setItem("selectedItemId", moduleItemName);
             getModules();
-            if (moduleItemType === "lecture" ) {
+            if (moduleItemType === "lecture") {
                 window.location.href = "module/lecture.php";
-            }
-            else if (moduleItemType === "quiz") {
+            } else if (moduleItemType === "quiz") {
                 window.location.href = "module/quiz.php";
-            } 
-            else if (moduleItemType === "activity") {
+            } else if (moduleItemType === "activity") {
                 window.location.href = "module/coding.php";
             }
         } catch (error) {
@@ -348,6 +353,7 @@ class ModuleItemModal {
         }
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     getModules();
