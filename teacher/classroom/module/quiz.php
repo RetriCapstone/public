@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/teacher/classroom/module/style/quiz.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
     <script type="module" src="script/quiz.js"></script>
@@ -65,6 +66,9 @@
                 <div class="quiz-fixed-header">
                     <div class="style-header">
                         <h3 id="quiz-name" ></h3>
+                        <div>
+                            <button class="style-btn-add-1" >Save</button>
+                        </div>
                     </div>
                     <div class="quiz-navbar" >
                         <div id="quiz-question-btn" class="quiz-btn-nav btn-question quiz-active-nav" >
@@ -83,77 +87,83 @@
 
                     <!-- Quiz container of dirction/Description -->
                     <div class="style-container-1 quiz-direction-container" >
-                        <textarea rows="2"  class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
+                        <textarea rows="2" required  class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
                     </div>
 
-                    <!-- Quiz question w/ style -->
-                    <!-- <div class="style-container-1 quiz-question-container">
-                        <div class="question-body-con" >
-                            <select class="style-select" name="question-type">
-                                <option value="identification">Identification</option>
-                                <option value="choice">Multiple choice</option>
-                                <option value="check">CheckBoxes</option>
-                            </select>
-                            
-                            <div class="quiz-identify-con">
-                                <textarea rows="2"  class="quiz-question-input auto-height-text-question" placeholder="Question" ></textarea>
-                                <div class="identify-body-1" >
-                                    <input class="quiz-identify-answer" type="text" required autocomplete="false" placeholder="Answer">
-                                    
-                                </div>
-                                <div class="identify-body-2" >
-                                    <div class="identify-radio-con" >
-                                        <input type="radio" id="indentify-exact" name="answer-case" value="exact" checked >
-                                        <label for="indentify-exact">Exact Case</label>
-                                    </div>
-                                    <div class="identify-radio-con" >
-                                        <input type="radio" id="indentify-all-caps" name="answer-case" value="all-caps" >
-                                        <label for="indentify-all-caps">All Caps</label>
-                                    </div>
-                                    <div class="identify-radio-con" >
-                                        <input type="radio" id="indentify-small-caps" name="answer-case" value="small-caps" >
-                                        <label for="indentify-small-caps">Small Caps</label>
-                                    </div>
-                                </div>
-                                <hr class="divider-solid">
+                </div>
+                <!-- Responses view container -->
+                <div class="quiz-containers quiz-responses-container" >
+                    <div class="style-container-1 response-style-con">
+                        <span class="respones-text-header" >0</span>
+                        <span class="respones-text-header" >responses</span>
+                    </div>
+                    <div class="style-container-1 response-style-con response-student-list">
+                        <div class="response-header-details" >
+                            <span>Time</span>
+                            <span>Score</span>
+                        </div>
+                        <div class="response-students">
+                            <div class="response-student-con-1" >
+                                <img class="response-student-image"  src="" alt="">
+                                <span class="respose-student-name" >Sample student name</span>
                             </div>
-
-                            <div class="quiz-choice-con">
-                                <textarea rows="2" onInput="auto_height(this)" id="auto-height-text"  class="quiz-question-input" placeholder="Question" ></textarea>
-                                <div class="choice-body-1" >
-                                    <div class="choice-option-con" >
-                                        <i class="fa-regular fa-circle"></i>
-                                        <input type="text" required class="quiz-identify-answer" autocomplete="false" placeholder="Option" >
-                                        <i class="fa-solid fa-xmark delete-option"></i>
-                                    </div>
-                                    <div class="choice-body-2">
-                                        <div class="choice-add-btn" >
-                                            <i class="fa-regular fa-circle"></i><span>&nbsp;Add option</span> 
-                                        </div>
-                                        <div class="choice-answer-select" >
-                                            <span>Answer:</span>
-                                            <select class="style-select" ></select>
-                                        </div>
-                                    </div>
-                                    <hr class="divider-solid">
-                                </div>
-                            </div>
-
-                            <div class="delete-question-con" id="question-delete-button">
-                                <i class="fa-regular fa-trash-can"></i><span>Delete</span>
+                            <div class="response-student-con-1">
+                                <span class="response-student-time" >0</span>
+                                <span class="response-student-score" >0</span>
                             </div>
                         </div>
-                    </div> -->
+                        <div class="response-students">
+                            <div class="response-student-con-1" >
+                                <img class="response-student-image"  src="" alt="">
+                                <span class="respose-student-name" >Sample student name</span>
+                            </div>
+                            <div class="response-student-con-1">
+                                <span class="response-student-time" >0</span>
+                                <span class="response-student-score" >0</span>
+                            </div>
+                        </div>
+                        <div class="response-students">
+                            <div class="response-student-con-1" >
+                                <img class="response-student-image"  src="" alt="">
+                                <span class="respose-student-name" >Sample student name</span>
+                            </div>
+                            <div class="response-student-con-1">
+                                <span class="response-student-time" >0</span>
+                                <span class="response-student-score" >0</span>
+                            </div>
+                        </div>
+                        <div class="response-students">
+                            <div class="response-student-con-1" >
+                                <img class="response-student-image"  src="" alt="">
+                                <span class="respose-student-name" >Sample student name</span>
+                            </div>
+                            <div class="response-student-con-1">
+                                <span class="response-student-time" >0</span>
+                                <span class="response-student-score" >0</span>
+                            </div>
+                        </div>
+                        <div class="response-students">
+                            <div class="response-student-con-1" >
+                                <img class="response-student-image"  src="" alt="">
+                                <span class="respose-student-name" >Sample student name</span>
+                            </div>
+                            <div class="response-student-con-1">
+                                <span class="response-student-time" >0</span>
+                                <span class="response-student-score" >0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="quiz-containers quiz-responses-container" >
-                    <p>Responses</p>
-                </div>
+                <!-- Settings view container -->
                 <div class="quiz-containers quiz-settings-container" >
                     <div class="style-container-1 settings-container" >
                         <p class="settings-text" >Settings</p>
                         <hr class="divider-solid setting-divider">
-                        <div class="settings-card" >
-                            <input class="quiz-identify-answer quiz-name-input" type="text" required autocomplete="false" placeholder="Quiz name">
+                        <div class="settings-card-col" >
+                            <span class="settings-label-title" >
+                                Quiz name
+                            </span>
+                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="false" placeholder="Quiz name">
                         </div>
                         <div class="settings-card" >
                             <div class="settings-card-1" >
@@ -161,7 +171,7 @@
                                     Randomize Question
                                 </span>
                                 <p class="settings-label-body" >
-                                    Make this quiz questions in random
+                                    Make the quiz questions in random
                                 </p>
                             </div>
                             <div class="settings-card-1" >
@@ -171,24 +181,64 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="settings-card" >
-                            <div>
+                        <div class="settings-card-col" >
+                            <div class="settings-card-2" >
                                 <div class="settings-card-1" >
                                     <span class="settings-label-title" >
                                         Quiz Publish Status
                                     </span>
                                 </div>
                                 <div class="settings-card-1" >
-                                    <select class="style-select" >
-                                        <option value="locked">Locked</option>
+                                    <select class="style-select settings-select-status" >
+                                        <option value="close">Closed</option>
                                         <option value="open">Open</option>
                                         <option value="set">Set Date and Time</option>
                                     </select>
                                 </div>
                             </div>
-                            <div>
-
+                            <div class="settings-datetime-con" >
+                                <div>
+                                    <span >Starting date:</span>
+                                    <input class="settings-datetime" type="datetime-local" name="quiz-datetime-start" id="">
+                                    <p class="settings-label-body" >
+                                        Set the date and time for the quiz to be open
+                                    </p>
+                                </div>
+                                <div>
+                                    <span >Due date:</span>
+                                    <input class="settings-datetime" type="datetime-local" name="quiz-datetime-end" id="">
+                                    <p class="settings-label-body" >
+                                        Set the date and time for the quiz to be closed
+                                    </p>
+                                </div>
                             </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Duration
+                                </span>
+                                <p class="settings-label-body" >
+                                    Set the duration time for taking this quiz
+                                </p>
+                            </div>
+                            <div class="settings-card-1 settings-time-con" >
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-hour" type="number" max="24" min="0" value="0" >
+                                    <span>hours</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-minute" type="number" max="59" min="0" value="0" >
+                                    <span>minutes</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-second" type="number" max="59" min="0" value="0" >
+                                    <span>seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-card-bottom" >
+                            <button class="style-btn-del" >Delete quiz</button>
                         </div>
                     </div>
                 </div>
@@ -204,6 +254,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/html-duration-picker@latest/dist/html-duration-picker.min.js"></script>
 </body>
 </html>
 

@@ -20,6 +20,9 @@ const selectedClassroomId = localStorage.getItem("selectedClassroomId");
 const selectedModuleId = localStorage.getItem("selectedModuleId");
 const selectedQuizId = localStorage.getItem("selectedItemId");
 
+let lastQuestionNumber = 0;
+let lastOptionNumber = 0;
+
 async function getQuizName() {
     if (!selectedQuizId) {
         console.error("Missing required identifiers");
@@ -28,6 +31,7 @@ async function getQuizName() {
 
     try {
         document.getElementById('quiz-name').innerText = selectedQuizId;
+        document.getElementById('quiz-settings-name-input').value = selectedQuizId;
     } catch (error) {
         console.error("Error getting course name:", error);
     }
@@ -78,53 +82,56 @@ function updateChoiceOptions(selectElement, optionsContainer) {
 
 function addQuestion() {
     const questionContainer = document.createElement('div');
+    lastQuestionNumber += 1;
+    const questionNumber = lastQuestionNumber;
     questionContainer.classList.add('style-container-1', 'quiz-question-container');
+    questionContainer.id = `question-${questionNumber}`;
 
     questionContainer.innerHTML = `
-        <div class="question-body-con">
-            <select class="style-select question-type-select" name="question-type">
+        <div class="question-body-con" id="question-body-${questionNumber}">
+            <select class="style-select question-type-select" name="question-type" id="question-type-${questionNumber}">
                 <option value="identification">Identification</option>
                 <option value="choice">Multiple choice</option>
             </select>
             
-            <div class="quiz-identify-con">
-                <textarea rows="2" class="quiz-question-input auto-height-text-question" placeholder="Question"></textarea>
+            <div class="quiz-identify-con" id="identify-con-${questionNumber}">
+                <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
                 <div class="identify-body-1">
-                    <input class="quiz-identify-answer" type="text" required autocomplete="false" placeholder="Answer">
+                    <input class="quiz-identify-answer" type="text" required autocomplete="false" placeholder="Answer" id="question-${questionNumber}-identify-answer">
                 </div>
                 <div class="identify-body-2">
                     <div class="identify-radio-con">
-                        <input type="radio" id="identify-exact" name="answer-case" value="exact" checked>
-                        <label for="identify-exact">Exact Case</label>
+                        <input type="radio" id="identify-exact-${questionNumber}" name="answer-case-${questionNumber}" value="exact" checked>
+                        <label for="identify-exact-${questionNumber}">Exact Case</label>
                     </div>
                     <div class="identify-radio-con">
-                        <input type="radio" id="identify-all-caps" name="answer-case" value="all-caps">
-                        <label for="identify-all-caps">All Caps</label>
+                        <input type="radio" id="identify-all-caps-${questionNumber}" name="answer-case-${questionNumber}" value="all-caps">
+                        <label for="identify-all-caps-${questionNumber}">All Caps</label>
                     </div>
                     <div class="identify-radio-con">
-                        <input type="radio" id="identify-small-caps" name="answer-case" value="small-caps">
-                        <label for="identify-small-caps">Small Caps</label>
+                        <input type="radio" id="identify-small-caps-${questionNumber}" name="answer-case-${questionNumber}" value="small-caps">
+                        <label for="identify-small-caps-${questionNumber}">Small Caps</label>
                     </div>
                 </div>
                 <hr class="divider-solid">
             </div>
 
-            <div class="quiz-choice-con" style="display: none;">
-                <textarea rows="2" class="quiz-question-input auto-height-text-question" placeholder="Question"></textarea>
-                <div class="choice-body-1">
-                    <div class="choice-option-con">
+            <div class="quiz-choice-con" id="choice-con-${questionNumber}" style="display: none;">
+                <textarea rows="2" class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-choice-question"></textarea>
+                <div class="choice-body-1" id="choice-body-${questionNumber}">
+                    <div class="choice-option-con" id="choice-option-${questionNumber}-1">
                         <i class="fa-regular fa-circle"></i>
-                        <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option">
-                        <i class="fa-solid fa-xmark delete-option"></i>
+                        <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option" id="question-${questionNumber}-choice-option-1">
+                        <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-1"></i>
                     </div>
                 </div>
                 <div class="choice-body-2">
-                    <div class="choice-add-btn">
+                    <div class="choice-add-btn" id="add-option-${questionNumber}">
                         <i class="fa-regular fa-circle"></i><span>&nbsp;Add option</span>
                     </div>
                     <div class="choice-answer-select">
                         <span>Answer:</span>
-                        <select class="style-select">
+                        <select class="style-select" id="question-${questionNumber}-choice-select-answer">
                             <option disabled selected>Select an answer</option>
                         </select>
                     </div>
@@ -132,7 +139,7 @@ function addQuestion() {
                 <hr class="divider-solid">
             </div>
 
-            <div class="delete-question-con" id="question-delete-button">
+            <div class="delete-question-con" id="question-delete-button-${questionNumber}">
                 <i class="fa-regular fa-trash-can"></i><span>Delete</span>
             </div>
         </div>
@@ -142,9 +149,9 @@ function addQuestion() {
     questionContainer.querySelectorAll('.auto-height-text-question').forEach(auto_height);
 
     // Add event listener for the question type select
-    questionContainer.querySelector('.question-type-select').addEventListener('change', function () {
-        const identificationDiv = this.parentElement.querySelector('.quiz-identify-con');
-        const choiceDiv = this.parentElement.querySelector('.quiz-choice-con');
+    questionContainer.querySelector(`#question-type-${questionNumber}`).addEventListener('change', function () {
+        const identificationDiv = this.parentElement.querySelector(`#identify-con-${questionNumber}`);
+        const choiceDiv = this.parentElement.querySelector(`#choice-con-${questionNumber}`);
         if (this.value === 'choice') {
             identificationDiv.style.display = 'none';
             choiceDiv.style.display = 'block';
@@ -154,18 +161,21 @@ function addQuestion() {
         }
     });
 
-    const choiceAddBtn = questionContainer.querySelector('.choice-add-btn');
-    const choiceBody1 = questionContainer.querySelector('.choice-body-1');
-    const choiceSelect = questionContainer.querySelector('.choice-answer-select select');
+    const choiceAddBtn = questionContainer.querySelector(`#add-option-${questionNumber}`);
+    const choiceBody1 = questionContainer.querySelector(`#choice-body-${questionNumber}`);
+    const choiceSelect = questionContainer.querySelector(`#question-${questionNumber}-choice-select-answer`);
 
     // Add event listener for the add option button
     choiceAddBtn.addEventListener('click', function () {
+        lastOptionNumber += 1;
+        const optionNumber = lastOptionNumber;
         const optionContainer = document.createElement('div');
         optionContainer.classList.add('choice-option-con');
+        optionContainer.id = `choice-option-${questionNumber}-${optionNumber}`;
         optionContainer.innerHTML = `
             <i class="fa-regular fa-circle"></i>
-            <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option">
-            <i class="fa-solid fa-xmark delete-option"></i>
+            <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option" id="question-${questionNumber}-choice-option-${optionNumber}">
+            <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-${optionNumber}"></i>
         `;
         choiceBody1.appendChild(optionContainer);
 
@@ -176,7 +186,11 @@ function addQuestion() {
         optionContainer.querySelector('input').addEventListener('input', function () {
             updateChoiceOptions(choiceSelect, choiceBody1);
         });
-
+        
+        // Add event listener to update options when select is focused
+        choiceSelect.addEventListener('focus', function () {
+            updateChoiceOptions(choiceSelect, choiceBody1);
+        });
         // Add event listener to remove the option when delete icon is clicked
         optionContainer.querySelector('.delete-option').addEventListener('click', function () {
             optionContainer.remove();
@@ -184,14 +198,13 @@ function addQuestion() {
         });
     });
 
-    // Add event listener to update options when select is focused
-    choiceSelect.addEventListener('focus', function () {
-        updateChoiceOptions(choiceSelect, choiceBody1);
+    // Add event listener for the delete question button
+    questionContainer.querySelector(`#question-delete-button-${questionNumber}`).addEventListener('click', function () {
+        questionContainer.remove();
     });
-
-    // Initialize the select options based on existing inputs
-    updateChoiceOptions(choiceSelect, choiceBody1);
 }
+
+        
 
 document.addEventListener('DOMContentLoaded', () => {
     getQuizName();
@@ -224,6 +237,17 @@ document.addEventListener('DOMContentLoaded', () => {
         activeContainer(settingsContainer, responseContainer, questionContainer);
         questionToolContainer.style.display = 'none';
     });
+    // settings quiz publish status
+    const settingsStatusContainer = document.querySelector('.settings-datetime-con');
+    const settingsStatusSelect = document.querySelector('.settings-select-status');
+    settingsStatusSelect.addEventListener('change', function () {
+        if (this.value === 'set') {
+            settingsStatusContainer.style.display = 'flex';
+        }else {
+            settingsStatusContainer.style.display = 'none';
+        }
+    });
+
 
     // Add event listener for the add question button
     document.querySelector('.add-question-btn').addEventListener('click', addQuestion);
