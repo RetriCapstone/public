@@ -25,7 +25,11 @@ async function getItems(moduleId, itemType) {
     const itemSnapshot = await getDocs(itemQuery);
     const items = [];
     itemSnapshot.forEach((itemDoc) => {
-        items.push(itemDoc.id);
+        const itemData = itemDoc.data();
+        items.push({
+            id: itemDoc.id,
+            name: itemData.name
+        });
     });
     return items;
 }
@@ -74,26 +78,26 @@ async function getModules() {
                 getItems(moduleId, 'activity')
             ]);
 
-            const lecturesHTML = lectures.map(lectureName => `
+            const lecturesHTML = lectures.map(lecture => `
                 <div class="module-item">
-                    <a href="module/lecture.php" data-module-id="${moduleId}" data-item-name="${lectureName}">
-                        <p class="style-text" id="lecture-name"><i class="fa-regular fa-file-lines"></i>&nbsp;&nbsp;${lectureName}</p>
+                    <a href="module/lecture.php" data-module-id="${moduleId}" data-item-id="${lecture.id}">
+                        <p class="style-text" id="lecture-name"><i class="fa-regular fa-file-lines"></i>&nbsp;&nbsp;${lecture.name}</p>
                     </a>
                 </div>
             `).join('');
 
-            const quizzesHTML = quizzes.map(quizName => `
+            const quizzesHTML = quizzes.map(quiz => `
                 <div class="module-item">
-                    <a href="module/quiz.php" data-module-id="${moduleId}" data-item-name="${quizName}">
-                        <p class="style-text" id="quiz-name"><i class="fa-solid fa-file-pen"></i>&nbsp;&nbsp;${quizName}</p>
+                    <a href="module/quiz.php" data-module-id="${moduleId}" data-item-id="${quiz.id}">
+                        <p class="style-text" id="quiz-name"><i class="fa-solid fa-file-pen"></i>&nbsp;&nbsp;${quiz.name}</p>
                     </a>
                 </div>
             `).join('');
 
-            const activitiesHTML = activities.map(activityName => `
+            const activitiesHTML = activities.map(activity => `
                 <div class="module-item">
-                    <a href="module/coding.php" data-module-id="${moduleId}" data-item-name="${activityName}">
-                        <p class="style-text" id="activity-name"><i class="fa-regular fa-file-code"></i>&nbsp;&nbsp;${activityName}</p>
+                    <a href="module/coding.php" data-module-id="${moduleId}" data-item-id="${activity.id}">
+                        <p class="style-text" id="activity-name"><i class="fa-regular fa-file-code"></i>&nbsp;&nbsp;${activity.name}</p>
                     </a>
                 </div>
             `).join('');
@@ -133,11 +137,11 @@ async function getModules() {
         moduleItems.forEach(item => {
             item.addEventListener('click', (event) => {
                 const moduleId = item.getAttribute('data-module-id');
-                const itemName = item.getAttribute('data-item-name');
+                const itemId = item.getAttribute('data-item-id');
 
                 // Store details in localStorage
                 localStorage.setItem('selectedModuleId', moduleId);
-                localStorage.setItem('selectedItemId', itemName);
+                localStorage.setItem('selectedItemId', itemId);
 
                 // Allow the default link behavior to navigate
             });
@@ -328,17 +332,19 @@ class ModuleItemModal {
         const itemSnapshot = await getDocs(itemCollectionRef);
         const existingItemsCount = itemSnapshot.size;
         const itemNumber = existingItemsCount + 1;
+        const moduleItemID = moduleItemName + itemNumber;
 
-        const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType, moduleItemName);
+        const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType, moduleItemID);
 
         try {
-            await setDoc(itemDocRef, { number: itemNumber });
+            await setDoc(itemDocRef, { number: itemNumber , status: 'close', name: moduleItemName });
             moduleItemNameInput.value = '';  // Clear the input field
             alert('Created successfully.');
             this.closeModal();  // Close the modal
             localStorage.setItem("selectedModuleId", this.moduleId);
             localStorage.setItem("selectedItemType", moduleItemType);
-            localStorage.setItem("selectedItemId", moduleItemName);
+            localStorage.setItem("selectedItemId", moduleItemID);
+            localStorage.setItem("selectedItemName", moduleItemName);
             getModules();
             if (moduleItemType === "lecture") {
                 window.location.href = "module/lecture.php";

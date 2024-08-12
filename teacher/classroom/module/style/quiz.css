@@ -1,10 +1,6 @@
-*{
-    transition: none;
-    letter-spacing: .2px;
-    line-height: 20px;
-}
+
 .main_body{
-    width: 50%;
+    width: 1000px;
     padding: 1rem 0;
     display: flex;
     justify-content: center;
@@ -20,7 +16,7 @@
 }
 
 .quiz-tool-container{
-    width: 15%;
+    width: 220px;
     padding: .8rem;
     padding-top: 160px;
     display: flex;
@@ -78,7 +74,7 @@
 
 }
 .quiz-question-tool-item{
-    gap: 8px;
+    gap: 4px;
     display: flex;
     align-items: baseline;
     padding: 8px 8px;
@@ -106,7 +102,7 @@
 .quiz-direction-input{
     width: 100%;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     background-color: transparent;
     padding: 8px ;
     margin: 8px 0; 
@@ -162,12 +158,13 @@
 }
 .quiz-identify-answer,
 .quiz-option-answer{
-    width: 50%;
+    width: 42%;
     color: white;
     font-size: 1rem;
     background-color: transparent;
     padding: 8px;
     border-bottom: 2px solid rgb(30, 54, 95);
+    margin-right: 18px;
 }
 
 .quiz-identify-answer::placeholder{
@@ -239,6 +236,11 @@
 }
 .delete-option {
     cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 15px;
+}
+.delete-option:hover{
+    background-color: #152d5a;
 }
 
 
@@ -307,6 +309,7 @@
     background-color: #173469;
     padding: 8px;
     border-bottom: 2px solid #075098;
+    text-transform: uppercase;
 }
 .settings-datetime-con{
     display: none;

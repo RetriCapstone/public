@@ -63,12 +63,13 @@
         </div>
         <div class="main_body">
             <div class="con-1">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                    </div>
                 <div class="quiz-fixed-header">
                     <div class="style-header">
                         <h3 id="quiz-name" ></h3>
-                        <div>
-                            <button class="style-btn-add-1" >Save</button>
-                        </div>
+                        <button class="style-btn-add-1" id="quiz-save-btn" >Save</button>
                     </div>
                     <div class="quiz-navbar" >
                         <div id="quiz-question-btn" class="quiz-btn-nav btn-question quiz-active-nav" >
@@ -87,7 +88,7 @@
 
                     <!-- Quiz container of dirction/Description -->
                     <div class="style-container-1 quiz-direction-container" >
-                        <textarea rows="2" required  class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
+                        <textarea rows="2" required autocomplete="off" class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
                     </div>
 
                 </div>
@@ -163,7 +164,7 @@
                             <span class="settings-label-title" >
                                 Quiz name
                             </span>
-                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="false" placeholder="Quiz name">
+                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="Quiz name">
                         </div>
                         <div class="settings-card" >
                             <div class="settings-card-1" >
@@ -176,9 +177,33 @@
                             </div>
                             <div class="settings-card-1" >
                                 <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" id="quiz-random-checkbox" >
                                 <span class="slider round"></span>
                                 </label>
+                            </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Duration
+                                </span>
+                                <p class="settings-label-body" >
+                                    Set the duration time for taking this quiz
+                                </p>
+                            </div>
+                            <div class="settings-card-1 settings-time-con" >
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-hour" type="number" max="24" min="0" value="0" >
+                                    <span>hours</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-minute" type="number" max="59" min="0" value="0" >
+                                    <span>minutes</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-second" type="number" max="59" min="0" value="0" >
+                                    <span>seconds</span>
+                                </div>
                             </div>
                         </div>
                         <div class="settings-card-col" >
@@ -213,30 +238,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="settings-card" >
-                            <div class="settings-card-1" >
-                                <span class="settings-label-title" >
-                                    Duration
-                                </span>
-                                <p class="settings-label-body" >
-                                    Set the duration time for taking this quiz
-                                </p>
-                            </div>
-                            <div class="settings-card-1 settings-time-con" >
-                                <div class="settings-time-input-con" >
-                                    <input id="quiz-duration-hour" type="number" max="24" min="0" value="0" >
-                                    <span>hours</span>
-                                </div>
-                                <div class="settings-time-input-con" >
-                                    <input id="quiz-duration-minute" type="number" max="59" min="0" value="0" >
-                                    <span>minutes</span>
-                                </div>
-                                <div class="settings-time-input-con" >
-                                    <input id="quiz-duration-second" type="number" max="59" min="0" value="0" >
-                                    <span>seconds</span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="settings-card-bottom" >
                             <button class="style-btn-del" >Delete quiz</button>
                         </div>
@@ -254,7 +255,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/html-duration-picker@latest/dist/html-duration-picker.min.js"></script>
 </body>
 </html>
 

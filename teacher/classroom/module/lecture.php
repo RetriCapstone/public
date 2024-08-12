@@ -51,33 +51,68 @@
                 <li class="list-view"><a href="/teacher/classroom/student.php">People</a></li>
             </ul>
         </div>
-        <div class="guide-container">
-            <p class="lect-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        </div>
-        <div class="main_body">
-            <div class="main_container">
-                <div class="con-1">
-                    <div class="style-header">
-                        
-                            <h3 id="lecture-name" ></h3>
-                        <!-- <div style="display: flex; gap: .4rem;">
-                            <h3>Publish to classroom</h3>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div> -->
+        <div class="lect-body" >
+            <div class="lect-header-container" >
+                <div class="style-header">
+                    <h3 class="lecture-name">Lect name</h3>
+                    <button class="style-btn-add-1" id="lect-save-btn" >Save</button>
+                </div>
+                <div class="lect-navbar">
+                    <div  class="lect-btn-nav lect-btn-lecture lect-active-btn-nav" >
+                        <span class="btn-nav-text"> Lecture</span>
                     </div>
-                    <hr class="divider-solid">
-                    <!-- Modal for Creating Module Item -->
-                    <div class="loading-indicator">
-                        <div class="spinner"></div>
+                    <div  class="lect-btn-nav lect-btn-settings " >
+                        <span class="btn-nav-text">Settings</span>
                     </div>
                 </div>
+
+                <hr class="divider-solid" >
+
             </div>
-        </div>
-        <div class="lect-tools-con">
-            <p class="lect-text-guide" ><i class="fa-solid fa-circle-exclamation"></i>  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <div class="lect-body-container" >
+                <div class="lecture-container">
+                    <section class="lect-con-list-section style-container-1" >
+                        <div class="lect-list-container" >
+
+                            <!-- header 1 container -->
+                            <!-- <div class="lect-header-style lect-header-1-con" id="lect-item" >
+                                    <input class="lect-header-1-input" type="text" autocomplete="off" placeholder="Header 1" required  >
+                                    <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
+                            </div> -->
+
+                            <!-- header 2 container -->
+                            <!-- <div class="lect-header-style lect-header-2-con" id="lect-item" >
+                                <input class="lect-header-2-input" type="text" autocomplete="off" placeholder="Header 2" required  >
+                                <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
+                            </div> -->
+
+                            <!-- paragraph container -->
+                            <!-- <div class="lect-paragraph-style lect-paragraph-con" id="lect-item" >
+                                <textarea rows="3" required class="lect-paragraph-input auto-height-text" placeholder="type here..." id=""></textarea>
+                                <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
+                            </div> -->
+
+                        </div>
+                    </section>
+                    <section class="lect-con-tool-section" >
+                        <div class="lect-tool-container " >
+                            <span >Text Fields</span>
+                            <button class="lect-tool-style lect-add-header-1" id="lect-add-btn-header-1" >
+                                Add Header 1
+                            </button>
+                            <button class="lect-tool-style lect-add-header-2" id="lect-add-btn-header-2" >
+                                Add Header 2
+                            </button>
+                            <button class="lect-tool-style lect-add-paragraph" id="lect-add-btn-paragraph" >
+                                Add Paragraph
+                            </b>
+                        </div>
+                    </section>
+                </div>
+                <div class="settings-container">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </body>

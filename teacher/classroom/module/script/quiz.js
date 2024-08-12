@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection,deleteDoc,getDoc, getDocs, doc, setDoc,updateDoc  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -19,23 +19,11 @@ const teacherId = localStorage.getItem("teacherId");
 const selectedClassroomId = localStorage.getItem("selectedClassroomId");
 const selectedModuleId = localStorage.getItem("selectedModuleId");
 const selectedQuizId = localStorage.getItem("selectedItemId");
+const selectedQuizName = localStorage.getItem("selectedItemName");
 
 let lastQuestionNumber = 0;
 let lastOptionNumber = 0;
 
-async function getQuizName() {
-    if (!selectedQuizId) {
-        console.error("Missing required identifiers");
-        return;
-    }
-
-    try {
-        document.getElementById('quiz-name').innerText = selectedQuizId;
-        document.getElementById('quiz-settings-name-input').value = selectedQuizId;
-    } catch (error) {
-        console.error("Error getting course name:", error);
-    }
-}
 
 async function activeButton(activeBtn, notActiveBtn1, notActiveBtn2) {
     activeBtn.classList.add('quiz-active-nav');
@@ -80,6 +68,41 @@ function updateChoiceOptions(selectElement, optionsContainer) {
     });
 }
 
+function addOption(questionNumber) {
+    lastOptionNumber += 2;
+    const optionNumber = lastOptionNumber;
+    const choiceBody1 = document.querySelector(`#choice-body-${questionNumber}`);
+    const choiceSelect = document.querySelector(`#question-${questionNumber}-choice-select-answer`);
+    const optionContainer = document.createElement('div');
+    optionContainer.classList.add('choice-option-con');
+    optionContainer.id = `choice-option-${questionNumber}-${optionNumber}`;
+    optionContainer.innerHTML = `
+        <i class="fa-regular fa-circle"></i>
+        <input type="text" required class="quiz-option-answer" autocomplete="off" placeholder="Option" id="question-${questionNumber}-choice-option-${optionNumber}">
+        <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-${optionNumber}"></i>
+    `;
+    choiceBody1.appendChild(optionContainer);
+
+    // Update the options in the select element
+    updateChoiceOptions(choiceSelect, choiceBody1);
+
+    // Add event listener to update select options when input value changes
+    optionContainer.querySelector('input').addEventListener('input', function () {
+        updateChoiceOptions(choiceSelect, choiceBody1);
+    });
+
+    // Add event listener to update options when select is focused
+    choiceSelect.addEventListener('focus', function () {
+        updateChoiceOptions(choiceSelect, choiceBody1);
+    });
+
+    // Add event listener to remove the option when delete icon is clicked
+    optionContainer.querySelector('.delete-option').addEventListener('click', function () {
+        optionContainer.remove();
+        updateChoiceOptions(choiceSelect, choiceBody1);
+    });
+}
+
 function addQuestion() {
     const questionContainer = document.createElement('div');
     lastQuestionNumber += 1;
@@ -97,7 +120,8 @@ function addQuestion() {
             <div class="quiz-identify-con" id="identify-con-${questionNumber}">
                 <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
                 <div class="identify-body-1">
-                    <input class="quiz-identify-answer" type="text" required autocomplete="false" placeholder="Answer" id="question-${questionNumber}-identify-answer">
+                    <input class="quiz-identify-answer" type="text" required autocomplete="off" placeholder="Answer" id="question-${questionNumber}-identify-answer">
+                    <input class="quiz-identify-answer" type="text" autocomplete="off" placeholder="Alternate Answer" id="question-${questionNumber}-identify-alternate">
                 </div>
                 <div class="identify-body-2">
                     <div class="identify-radio-con">
@@ -121,7 +145,7 @@ function addQuestion() {
                 <div class="choice-body-1" id="choice-body-${questionNumber}">
                     <div class="choice-option-con" id="choice-option-${questionNumber}-1">
                         <i class="fa-regular fa-circle"></i>
-                        <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option" id="question-${questionNumber}-choice-option-1">
+                        <input type="text" required class="quiz-option-answer" autocomplete="off" placeholder="Option" id="question-${questionNumber}-choice-option-1">
                         <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-1"></i>
                     </div>
                 </div>
@@ -174,7 +198,7 @@ function addQuestion() {
         optionContainer.id = `choice-option-${questionNumber}-${optionNumber}`;
         optionContainer.innerHTML = `
             <i class="fa-regular fa-circle"></i>
-            <input type="text" required class="quiz-option-answer" autocomplete="false" placeholder="Option" id="question-${questionNumber}-choice-option-${optionNumber}">
+            <input type="text" required class="quiz-option-answer" autocomplete="off" placeholder="Option" id="question-${questionNumber}-choice-option-${optionNumber}">
             <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-${optionNumber}"></i>
         `;
         choiceBody1.appendChild(optionContainer);
@@ -197,17 +221,231 @@ function addQuestion() {
             updateChoiceOptions(choiceSelect, choiceBody1);
         });
     });
-
     // Add event listener for the delete question button
     questionContainer.querySelector(`#question-delete-button-${questionNumber}`).addEventListener('click', function () {
         questionContainer.remove();
     });
 }
 
-        
+async function saveQuestions() {
+    const questionContainers = document.querySelectorAll('.quiz-question-container');
+    const sectionDirection = document.querySelector('.quiz-direction-input').value;
+
+    // Define section and questions path
+    const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+    const questionsCollectionRef = collection(sectionDocRef, 'question');
+
+    // Delete existing questions
+    const existingQuestionsSnapshot = await getDocs(questionsCollectionRef);
+    const deletePromises = [];
+    existingQuestionsSnapshot.forEach((doc) => {
+        deletePromises.push(deleteDoc(doc.ref));
+    });
+    await Promise.all(deletePromises);
+
+    // Save section direction
+    await setDoc(sectionDocRef, { direction: sectionDirection });
+
+    // Save each question
+    const savePromises = [];
+    questionContainers.forEach((container, index) => {
+        const questionType = container.querySelector(`#question-type-${index + 1}`).value;
+        let questionData = {
+            type: questionType
+        };
+
+        if (questionType === 'identification') {
+            questionData.question = container.querySelector(`#question-${index + 1}-identify-question`).value;
+            questionData.answer = container.querySelector(`#question-${index + 1}-identify-answer`).value;
+            questionData.alternate = container.querySelector(`#question-${index + 1}-identify-alternate`).value;
+            questionData.case = container.querySelector(`input[name="answer-case-${index + 1}"]:checked`).value;
+        } else if (questionType === 'choice') {
+            questionData.question = container.querySelector(`#question-${index + 1}-choice-question`).value;
+            const options = {};
+            container.querySelectorAll(`.choice-option-con input`).forEach((input, optionIndex) => {
+                options[`option-${optionIndex + 1}`] = input.value;
+            });
+            questionData.options = options;
+            questionData.answer = container.querySelector(`#question-${index + 1}-choice-select-answer`).value;
+        }
+
+        savePromises.push(setDoc(doc(questionsCollectionRef, `question-${index + 1}`), questionData));
+    });
+
+    await Promise.all(savePromises);
+
+    alert('Questions and section direction saved successfully.');
+    console.log('Questions and section direction saved successfully.');
+}
+
+async function fetchQuestionsAndDirection() {
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    const directionContainer = document.querySelector('.quiz-direction-container');
+    loadingIndicator.style.display = 'block'; // Show loading indicator
+    directionContainer.style.display = 'none'; // Show loading indicator
+
+    try {
+        const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+        const questionsCollectionRef = collection(sectionDocRef, 'question');
+
+        const sectionDoc = await getDoc(sectionDocRef);
+        if (sectionDoc.exists()) {
+            const sectionData = sectionDoc.data();
+            document.querySelector('.quiz-direction-input').value = sectionData.direction || '';
+        }
+
+        const questionsSnapshot = await getDocs(questionsCollectionRef);
+        const questionDataList = [];
+
+        questionsSnapshot.forEach((doc) => {
+            questionDataList.push({ id: doc.id, ...doc.data() });
+        });
+
+        document.querySelectorAll('.quiz-question-container').forEach(container => container.remove());
+
+        questionDataList.forEach((questionData, index) => {
+            addQuestion();
+            const questionNumber = index + 1;
+            const questionContainer = document.querySelector(`#question-${questionNumber}`);
+
+            if (!questionContainer) {
+                console.error(`Question container #question-${questionNumber} not found.`);
+                return;
+            }
+
+            const quizContainerIdentify = document.getElementById(`identify-con-${questionNumber}`);
+            const quizContainerChoice = document.getElementById(`choice-con-${questionNumber}`);
+            const questionType = questionData.type;
+            if (questionType === 'identification') {
+                quizContainerIdentify.style.display = 'block';
+                quizContainerChoice.style.display = 'none';
+
+                questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'identification';
+                questionContainer.querySelector(`#question-${questionNumber}-identify-question`).value = questionData.question || '';
+                questionContainer.querySelector(`#question-${questionNumber}-identify-answer`).value = questionData.answer || '';
+                questionContainer.querySelector(`#question-${questionNumber}-identify-alternate`).value = questionData.alternate || '';
+                questionContainer.querySelector(`input[name="answer-case-${questionNumber}"][value="${questionData.case}"]`).checked = true;
+            } else if (questionType === 'choice') {
+                quizContainerIdentify.style.display = 'none';
+                quizContainerChoice.style.display = 'block';
+
+                questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'choice';
+                questionContainer.querySelector(`#question-${questionNumber}-choice-question`).value = questionData.question || '';
+
+                const choiceBody1 = questionContainer.querySelector(`#choice-body-${questionNumber}`);
+                const choiceSelect = questionContainer.querySelector(`#question-${questionNumber}-choice-select-answer`);
+                Object.keys(questionData.options).forEach((key, optionIndex) => {
+                    if (optionIndex > 0) {
+                        addOption(questionNumber);
+                    }
+                    const optionContainer = choiceBody1.querySelector(`#choice-option-${questionNumber}-${optionIndex + 1}`);
+                    if (optionContainer) {
+                        optionContainer.querySelector('input').value = questionData.options[key];
+                    } else {
+                        console.error(`Option container #choice-option-${questionNumber}-${optionIndex + 1} not found.`);
+                    }
+                });
+
+                choiceSelect.value = questionData.answer || '';
+            }
+        });
+
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
+        directionContainer.style.display = 'block'; // Show loading indicator
+    } catch (error) {
+        console.error("Error fetching questions and direction:", error);
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
+        directionContainer.style.display = 'block'; // Show loading indicator
+    }
+}
+
+async function saveQuizDetails() {
+    const quizName = document.getElementById('quiz-settings-name-input').value.trim().toUpperCase();
+    const randomizeQuestions = document.getElementById('quiz-random-checkbox').checked;
+    const durationHours = parseInt(document.getElementById('quiz-duration-hour').value) || 0;
+    const durationMinutes = parseInt(document.getElementById('quiz-duration-minute').value) || 0;
+    const durationSeconds = parseInt(document.getElementById('quiz-duration-second').value) || 0;
+    const publishStatus = document.querySelector('.settings-select-status').value;
+    const startDate = document.querySelector('input[name="quiz-datetime-start"]').value;
+    const endDate = document.querySelector('input[name="quiz-datetime-end"]').value;
+
+    try {
+        // Define the path to the quiz document
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+
+        // Prepare the data to be saved
+        const quizData = {
+            name: quizName,
+            randomize: randomizeQuestions,
+            duration: {
+                hours: durationHours,
+                minutes: durationMinutes,
+                seconds: durationSeconds
+            },
+            status: publishStatus,
+            startDate: publishStatus === 'set' ? new Date(startDate) : null,
+            endDate: publishStatus === 'set' ? new Date(endDate) : null
+        };
+
+        // Save the quiz details to Firestore using updateDoc to avoid affecting other fields
+        await updateDoc(quizDocRef, quizData);
+        fetchQuizDetails();
+        console.log('Quiz details updated successfully.');
+    } catch (error) {
+        console.error('Error updating quiz details:', error);
+    }
+}
+
+
+async function fetchQuizDetails() {
+    try {
+        // Define the path to the quiz document
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+
+        // Fetch the quiz document
+        const quizDoc = await getDoc(quizDocRef);
+
+        if (quizDoc.exists()) {
+            const quizData = quizDoc.data();
+
+            // Populate the quiz settings
+            document.getElementById('quiz-name').innerText = quizData.name || '';
+            document.getElementById('quiz-settings-name-input').value = quizData.name || '';
+            document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
+
+            if (quizData.duration) {
+                document.getElementById('quiz-duration-hour').value = quizData.duration.hours || 0;
+                document.getElementById('quiz-duration-minute').value = quizData.duration.minutes || 0;
+                document.getElementById('quiz-duration-second').value = quizData.duration.seconds || 0;
+            } else {
+                document.getElementById('quiz-duration-hour').value = 0;
+                document.getElementById('quiz-duration-minute').value = 0;
+                document.getElementById('quiz-duration-second').value = 0;
+            }
+
+            const statusSelect = document.querySelector('.settings-select-status');
+            statusSelect.value = quizData.status || 'close';
+
+            const settingsStatusContainer = document.querySelector('.settings-datetime-con');
+            if (quizData.status === 'set') {
+                settingsStatusContainer.style.display = 'flex';
+                document.querySelector('input[name="quiz-datetime-start"]').value = quizData.startDate ? new Date(quizData.startDate.seconds * 1000).toISOString().slice(0,16) : '';
+                document.querySelector('input[name="quiz-datetime-end"]').value = quizData.endDate ? new Date(quizData.endDate.seconds * 1000).toISOString().slice(0,16) : '';
+            } else {
+                settingsStatusContainer.style.display = 'none';
+            }
+        } else {
+            console.log('No quiz details found.');
+        }
+
+    } catch (error) {
+        console.error('Error fetching quiz details:', error);
+    }
+}
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    getQuizName();
     auto_height(document.querySelector('.auto-height-text-dir'));
     
     // nav bar function
@@ -247,8 +485,18 @@ document.addEventListener('DOMContentLoaded', () => {
             settingsStatusContainer.style.display = 'none';
         }
     });
-
-
     // Add event listener for the add question button
     document.querySelector('.add-question-btn').addEventListener('click', addQuestion);
+
+
+    // Add event listener for the save button
+    document.getElementById('quiz-save-btn').addEventListener('click', () => {
+        saveQuestions(); // Save questions
+        saveQuizDetails(); // Save quiz details
+    });
+
+
+    // Fetch questions and direction on page load
+    fetchQuestionsAndDirection();
+    fetchQuizDetails();
 });
