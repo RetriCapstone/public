@@ -58,10 +58,10 @@
                     <button class="style-btn-add-1" id="lect-save-btn" >Save</button>
                 </div>
                 <div class="lect-navbar">
-                    <div  class="lect-btn-nav lect-btn-lecture lect-active-btn-nav" >
+                    <div  class="lect-btn-nav lect-btn-lecture lect-active-btn-nav" id="lect-btn-nav-lecture" >
                         <span class="btn-nav-text"> Lecture</span>
                     </div>
-                    <div  class="lect-btn-nav lect-btn-settings " >
+                    <div  class="lect-btn-nav lect-btn-settings " id="lect-btn-nav-settings" >
                         <span class="btn-nav-text">Settings</span>
                     </div>
                 </div>
@@ -110,7 +110,28 @@
                     </section>
                 </div>
                 <div class="settings-container">
-                    
+                    <section class="style-container-1 settings-body-con" >
+                        <span class="settings-text" >Settings</span>
+                        <hr class="settings-divider" >
+
+                        <div class="settings-card-out-col">
+                            <span class="settings-label-title" >Lecture name</span>
+                            <input type="text">
+                        </div>
+
+                        <div class="settings-card-out-row">
+                            <span class="settings-label-title" >Lecture Publish Status</span>
+                            <select class="style-select" name="" id="settings-select-status">
+                                <option value="close">Closed</option>
+                                <option value="open">Open</option>
+                            </select>
+                        </div>
+
+                        <div class="settings-card-bottom">
+                            <button class="style-btn-del" >Delete lecture</button>
+                        </div>
+
+                    </section>
                 </div>
             </div>
         </div>

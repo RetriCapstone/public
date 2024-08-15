@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, updateDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -26,7 +26,13 @@ let lastLectureItem = 0;
 
 // navigation function
 async function switchNavView(activeView, hideView) {
-    
+    activeView.style.display = 'flex';
+    hideView.style.display = 'none';
+}
+
+async function switchNavViewBtn(activeBtn, hideBtn) {
+    activeBtn.classList.add('lect-active-btn-nav');
+    hideBtn.classList.remove('lect-active-btn-nav');
 }
 
 
@@ -125,7 +131,53 @@ function addParagraph() {
     });
 
 
+}
 
+async function fetchLectureDetails() {
+    try {
+        // Define the path to the quiz document
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedLectureId);
+
+        // Fetch the quiz document
+        const quizDoc = await getDoc(quizDocRef);
+
+        if (quizDoc.exists()) {
+            const quizData = quizDoc.data();
+
+            // Populate the quiz settings
+            document.getElementById('quiz-name').innerText = quizData.name || '';
+            document.getElementById('quiz-settings-name-input').value = quizData.name || '';
+            document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
+
+            if (quizData.duration) {
+                document.getElementById('quiz-duration-hour').value = quizData.duration.hours || 0;
+                document.getElementById('quiz-duration-minute').value = quizData.duration.minutes || 0;
+                document.getElementById('quiz-duration-second').value = quizData.duration.seconds || 0;
+            } else {
+                document.getElementById('quiz-duration-hour').value = 0;
+                document.getElementById('quiz-duration-minute').value = 0;
+                document.getElementById('quiz-duration-second').value = 0;
+            }
+
+            const statusSelect = document.querySelector('.settings-select-status');
+            statusSelect.value = quizData.status || 'close';
+
+            const settingsStatusContainer = document.querySelector('.settings-datetime-con');
+            if (quizData.status === 'set') {
+                settingsStatusContainer.style.display = 'flex';
+                document.querySelector('input[name="quiz-datetime-start"]').value = quizData.startDate ? new Date(quizData.startDate.seconds * 1000).toISOString().slice(0,16) : '';
+                document.querySelector('input[name="quiz-datetime-end"]').value = quizData.endDate ? new Date(quizData.endDate.seconds * 1000).toISOString().slice(0,16) : '';
+            } else {
+                settingsStatusContainer.style.display = 'none';
+            }
+        } else {
+            console.log('No quiz details found.');
+        }
+
+    } catch (error) {
+        console.error('Error fetching quiz details:', error);
+    }
+    
 }
 
 
@@ -137,5 +189,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#lect-add-btn-header-2').addEventListener('click', addHeader2);
     document.querySelector('#lect-add-btn-paragraph').addEventListener('click', addParagraph);
 
+
+    const lectureButton = document.getElementById('lect-btn-nav-lecture');
+    const lectureContainer = document.querySelector('.lecture-container');
+
+    const settingsButton = document.getElementById('lect-btn-nav-settings');
+    const settingsContainer = document.querySelector('.settings-container');
+
+    lectureButton.addEventListener('click', () => {
+        switchNavView(lectureContainer, settingsContainer);
+        switchNavViewBtn(lectureButton, settingsButton);
+    });
+    
+    settingsButton.addEventListener('click', () => {
+        switchNavView(settingsContainer, lectureContainer);
+        switchNavViewBtn(settingsButton, lectureButton);
+    });
 
 });
