@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, getDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -17,7 +17,6 @@ const db = getFirestore(app);
 
 const teacherId = localStorage.getItem("teacherId");
 const selectedClassroomId = localStorage.getItem("selectedClassroomId");
-const selectedClassroomName = localStorage.getItem("selectedClassroomName");
 
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
@@ -36,17 +35,44 @@ async function getItems(moduleId, itemType) {
 
 
 async function getClassroomName() {
-    if (!selectedClassroomName || !teacherId) {
+    if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");
         return;
     }
 
     try {
-        document.getElementById('classroom-name').innerText = selectedClassroomName;
+        // Define the path to the classroom document
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+
+        if (classroomDoc.exists()) {
+            const classroomData = classroomDoc.data();
+
+            // Display the name and code in the respective HTML elements
+            const headerContainer = document.querySelector('.header-pos-2');
+            headerContainer.innerHTML = `
+                <div class="header-pos-1" >
+                    <h3 id="classroom-name" >${classroomData.name}</h3>
+                </div>
+                <div class="style-display btn-edit-classroom" id="btn-edit-classroom" >
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span class="edit-class-tooltip" >Edit classroom</span>
+                </div>
+            `;
+
+            editClassModal("modal-edit-classroom", "btn-edit-classroom", "close-edit-classroom", "cancel-edit-class-modal");
+            document.getElementById('edit-classroom-name').value = classroomData.name || '';
+            document.getElementById('edit-classroom-code').value = classroomData.code || '';
+        } else {
+            console.error("Classroom document not found");
+        }
     } catch (error) {
-        console.error("Error getting course name:", error);
+        console.error("Error getting classroom name and code:", error);
     }
 }
+
 
 async function getModules() {
     if (!selectedClassroomId || !teacherId) {
@@ -71,6 +97,8 @@ async function getModules() {
         modulesContainer.innerHTML = '';  // Clear the container before adding new content
 
         const modules = await Promise.all(moduleSnapshot.docs.map(async (moduleDoc) => {
+            const moduleData = moduleDoc.data();
+            const moduleName = moduleData.name;
             const moduleId = moduleDoc.id;
             const [lectures, quizzes, activities] = await Promise.all([
                 getItems(moduleId, 'lecture'),
@@ -107,9 +135,9 @@ async function getModules() {
                     <div class="style-header">
                         <div class="style-display">
                             <p class="style-text"><i class="fa-solid fa-book-bookmark"></i>&nbsp;Module</p>
-                            <h4 class="style-text" id="module-name">${moduleId}</h4>
+                            <h4 class="style-text"  id="module-name">${moduleName}</h4>
                         </div>
-                        <div class="style-display edit-module">
+                        <div class="style-display edit-module" data-module-id="${moduleId}" data-module-name="${moduleName}">
                             <i class="fa-regular fa-pen-to-square"></i><span>EDIT</span>
                         </div>
                     </div>
@@ -153,22 +181,24 @@ async function getModules() {
             button.removeEventListener('click', handleAddModuleClick);  // Remove previous listeners to avoid duplication
             button.addEventListener('click', handleAddModuleClick);
         });
+
+        
+        // edit module 
+        const editModuleButtons = document.querySelectorAll('.edit-module');
+        editModuleButtons.forEach(button => {
+            button.removeEventListener('click', handleEditModuleClick);  // Remove previous listeners to avoid duplication
+            button.addEventListener('click', handleEditModuleClick);
+        });
+
+
+
+
+
     } catch (error) {
         console.error("Error getting modules:", error);
         document.querySelector('.loading-indicator').style.display = 'none';  // Hide loading indicator in case of error
     }
 }
-
-
-
-function handleAddModuleClick(event) {
-    const moduleId = event.currentTarget.getAttribute('data-module-id');
-    new ModuleItemModal("modal-create-module-item", moduleId, "close-module-item", "cancel-module-item-modal");
-}
-
-
-
-
 
 async function populateModuleSelect() {
     const selectElement = document.getElementById('position-after');
@@ -182,8 +212,10 @@ async function populateModuleSelect() {
         if (!moduleSnapshot.empty) {
             moduleSnapshot.forEach((moduleDoc) => {
                 const option = document.createElement('option');
+                const moduleData = moduleDoc.data();
+                const moduleName = moduleData.name;
                 option.value = moduleDoc.id;
-                option.text = moduleDoc.id;
+                option.text = moduleName;
                 selectElement.appendChild(option);
             });
         }
@@ -191,6 +223,128 @@ async function populateModuleSelect() {
         console.error('Error populating module select:', error);
     }
 }
+
+
+// add module onclick
+function handleAddModuleClick(event) {
+    const moduleId = event.currentTarget.getAttribute('data-module-id');
+    new ModuleItemModal("modal-create-module-item", moduleId, "close-module-item", "cancel-module-item-modal");
+}
+
+// edit module onclick
+function handleEditModuleClick(event) {
+    const moduleId = event.currentTarget.getAttribute('data-module-id');
+    const moduleName = event.currentTarget.getAttribute('data-module-name');
+    new editModuleModal(moduleId, moduleName, "modal-edit-module", "close-module", "cancel-edit-module-modal");
+}
+
+
+
+
+class editModuleModal {
+    constructor(moduleId, moduleName, modalId, closeClass, cancelId) {
+        this.moduleId = moduleId;
+        this.moduleName = moduleName;
+        this.modal = document.getElementById(modalId);
+        this.span = document.getElementsByClassName(closeClass)[0];
+        this.cancelBtn = document.getElementById(cancelId);
+
+        if (this.span && this.modal) {
+            this.openModal = this.openModal.bind(this);
+            this.closeModal = this.closeModal.bind(this);
+            this.outsideClick = this.outsideClick.bind(this);
+            this.editModule = this.editModule.bind(this);
+
+            this.span.addEventListener('click', this.closeModal);
+            this.cancelBtn.addEventListener('click', this.closeModal);
+            window.addEventListener('click', this.outsideClick);
+
+            this.modal.style.display = "block";  // Open modal when created
+            this.initializeEditModuleForm();
+
+            // Display the module name in the modal's input field
+            const moduleNameInput = document.getElementById('selected-module-name');
+            if (moduleNameInput) {
+                moduleNameInput.value = this.moduleName;
+            } else {
+                console.error('Module name input field not found');
+            }
+
+        } else {
+            console.error(`Elements not found for modal: ${modalId}, ${closeClass}`);
+        }
+    }
+
+    openModal() {
+        this.modal.style.display = "block";
+    }
+
+    closeModal() {
+        this.modal.style.display = "none";
+    }
+
+    outsideClick(event) {
+        if (event.target === this.modal) {
+            this.modal.style.display = "none";
+        }
+    }
+
+    initializeEditModuleForm() {
+        const createModuleItemForm = document.getElementById('edit-module-form');
+        createModuleItemForm.removeEventListener('submit', this.editModule);
+        createModuleItemForm.addEventListener('submit', this.editModule);
+    }
+
+    async editModule(event) {
+        event.preventDefault();
+
+        const moduleNameInput = document.getElementById('selected-module-name').value.trim().toUpperCase();
+
+        if (!moduleNameInput) {
+            alert('Please enter a module name.');
+            return;
+        }
+
+        try {
+            // Path to the selected module document
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
+
+            // Update the module's name field
+            await updateDoc(moduleRef, {
+                name: moduleNameInput
+            });
+
+            alert('Module name updated successfully.');
+            location.reload();
+            this.closeModal();  // Close the modal after successful update
+
+        } catch (error) {
+            console.error('Error updating module name:', error);
+            alert('An error occurred while updating the module name. Please try again.');
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function createModule(event) {
     event.preventDefault();
@@ -209,6 +363,7 @@ async function createModule(event) {
         const moduleCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module');
         const moduleSnapshot = await getDocs(moduleCollectionRef);
         const existingModulesCount = moduleSnapshot.size;
+        const newModuleId = moduleName + existingModulesCount;
 
         let moduleNumber;
         if (position === 'end') {
@@ -224,9 +379,9 @@ async function createModule(event) {
             moduleNumber = selectedModuleNumber + 0.1;
         }
 
-        const moduleDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleName);
+        const moduleDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', newModuleId);
 
-        await setDoc(moduleDocRef, { number: moduleNumber });
+        await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
         alert('Module created successfully');
         getModules();  // Refresh the module list
         moduleNameInput.value = '';  // Clear the input field
@@ -361,11 +516,98 @@ class ModuleItemModal {
 }
 
 
+// Edit classroom
+async function editClassroom(event) {
+    event.preventDefault();
+
+    const newclassName = document.getElementById("edit-classroom-name").value.trim().toUpperCase();
+    const newclassCode = document.getElementById("edit-classroom-code").value.trim();
+
+    if (!newclassName || !newclassCode) {
+        alert("Please provide both classroom name and code.");
+        return;
+    }
+    try {
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+            await updateDoc(classroomRef, { name: newclassName, code:newclassCode }); 
+
+            getClassroomName();
+            document.getElementById("modal-edit-classroom").style.display = "none";
+            alert("Classroom updated successfully.");
+            
+        
+    } catch (error) {
+        console.error("Error updating classroom:", error);
+        alert("An error occurred while updating the classroom. Please try again.");
+    }
+}
+
+
+function editClassModal(modalId, btnId, closeClass, btnCancel) {
+    const modal = document.getElementById(modalId);
+    const btn = document.getElementById(btnId);
+    const span = document.getElementsByClassName(closeClass)[0];
+    const cancel = document.getElementById(btnCancel);
+
+    btn.onclick = () => modal.style.display = "block";
+    span.onclick = () => modal.style.display = "none";
+    cancel.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+// Function to delete the classroom
+async function deleteClassroom() {
+    const confirmation = confirm("Are you sure you want to delete this classroom?");
+    if (confirmation) {
+        try {
+            // Get the students collection reference
+            const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
+
+            // Fetch all student documents under the classroom
+            const studentDocsSnapshot = await getDocs(studentCollectionRef);
+
+            // Delete the classroom document for each student
+            const deletePromises = studentDocsSnapshot.docs.map(async (studentDoc) => {
+                const studentId = studentDoc.id;
+                const studentClassroomRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
+                await deleteDoc(studentClassroomRef);
+            });
+
+            // Wait for all deletions to complete
+            await Promise.all(deletePromises);
+
+            // Now, delete the classroom document from the teacher's collection
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+            await deleteDoc(classroomRef);
+
+            alert("Classroom deleted successfully.");
+
+            // Close the modal after deletion and redirect
+            document.getElementById("modal-edit-classroom").style.display = "none";
+            window.location.href = "classroom.php";
+
+        } catch (error) {
+            console.error("Error deleting classroom:", error);
+            alert("An error occurred while deleting the classroom. Please try again.");
+        }
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     getModules();
     getClassroomName();
     populateModuleSelect();
     new Modal("modal-create-module", "btn-create-module", "close-modal", "cancel-modal");
+
+
+    document.getElementById("edit-classroom-form").addEventListener("submit", editClassroom);
+    document.getElementById("delete-classroom").addEventListener("click", deleteClassroom);
 
     const createModuleForm = document.getElementById('create-module-form');
     createModuleForm.addEventListener('submit', createModule);

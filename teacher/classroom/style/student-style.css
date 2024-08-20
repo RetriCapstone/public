@@ -24,3 +24,28 @@
     width: 40px;
     height: 40px;
 }
+
+.edit-classroom{
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+}
+  
+.edit-classroom .edit-class-tooltip{
+    visibility: hidden;
+    width: 120px;
+    background-color: #1f2e63;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin: 4px;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+    
+.edit-classroom:hover .edit-class-tooltip{
+    visibility: visible;
+}

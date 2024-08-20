@@ -55,7 +55,32 @@
     height: -webkit-fill-available;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 1.6rem 0;
+    margin: 1rem 0;
     gap: 1rem;
-    cursor: pointer;
 }
+
+
+.btn-edit-classroom{
+  position: relative;
+  display: inline-block;
+  margin: .6rem;
+}
+
+.btn-edit-classroom .edit-class-tooltip{
+    visibility: hidden;
+    width: 120px;
+    background-color: #1f2e63;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin: 4px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+.btn-edit-classroom:hover .edit-class-tooltip{
+    visibility: visible;
+  }

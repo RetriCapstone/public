@@ -54,14 +54,13 @@
         <div class="main_body">
             <div class="main_container">
                 <div class="con-1">
-                    <div class="style-header">
+                    <div class="header-pos-2">
+                        <!-- <div class="header-pos-1" >
                             <h3 id="classroom-name" ></h3>
-                        <!-- <div style="display: flex; gap: .4rem;">
-                            <h3>Publish to classroom</h3>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
+                        </div>
+                        <div class="style-display btn-edit-classroom" id="btn-edit-classroom" >
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            <span class="edit-class-tooltip" >Edit classroom</span>
                         </div> -->
                     </div>
                     <hr class="divider-solid">
@@ -103,6 +102,7 @@
                     <div class="modules-container">
                         <!-- Modules will be appended here -->
                     </div>
+
                     <!-- Modal for Creating Module Item -->
                     <div id="modal-create-module-item" class="style-modal">
                         <div class="style-modal-content create-module-item-modal">
@@ -135,16 +135,17 @@
                             </form>
                         </div>
                     </div>
+
                     <!-- Modal for Editing Module  -->
-                    <div id="modal-Edit-module" class="style-modal">
-                        <div class="style-modal-content create-module-item-modal">
-                            <span class="close-modal close-module-item">&times;</span>
+                    <div id="modal-edit-module" class="style-modal">
+                        <div class="style-modal-content edit-module-modal">
+                            <span class="close-modal close-module">&times;</span>
                             <h2 id="edit-module-name" >Edit Module</h2>
                             <hr class="divider-solid"> 
-                            <form action="" id="create-module-item-form" class="form-create-module form-create-module-item">
+                            <form action="" id="edit-module-form" class="form-create-module form-create-module-item">
                                 <div class="style-divider">
                                     <label class="style-label-modal">&nbsp;Module Name:</label>
-                                    <input type="text" style="text-transform: uppercase;" id="module-item-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
+                                    <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
                                 </div>
                                 <div class="edit-module-btn">
                                     <div>
@@ -152,6 +153,39 @@
                                     </div>
                                     <div style="display: flex; gap: .8rem;" >
                                         <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-module-modal">
+                                        <input type="submit" value="Save" class="style-btn-add-1">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Modal for Editing classroom  -->
+                    <div id="modal-edit-classroom" class="style-modal">
+                        <div class="style-modal-content edit-classroom-modal">
+                            <span class="close-modal close-edit-classroom">&times;</span>
+                            <h2 >Edit Classroom</h2>
+                            <hr class="divider-solid"> 
+                            <form action="" id="edit-classroom-form" class="form-create-module ">
+                                
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom name:</label>
+                                        <input type="text" style="text-transform:uppercase" id="edit-classroom-name" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
+                                    </div>
+
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom code:</label>
+                                        <input type="text"  id="edit-classroom-code" class="input-style input-create-class" placeholder="Class code" required autocomplete="off">
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT - RANDOM NUMBER</p>
+                                    </div>
+
+                                <div class="edit-module-btn">
+                                    <div>
+                                        <input type="button" value="Delete classroom" class="style-btn-del" id="delete-classroom">
+                                    </div>
+                                    <div style="display: flex; gap: .8rem;" >
+                                        <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-class-modal">
                                         <input type="submit" value="Save" class="style-btn-add-1">
                                     </div>
                                 </div>

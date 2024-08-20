@@ -21,6 +21,46 @@ const selectedClassroomName = localStorage.getItem("selectedClassroomName");
 
 const loadingIndicator = document.querySelector('.loading-indicator');
 
+async function getClassroomName() {
+    if (!selectedClassroomId || !teacherId) {
+        console.error("Missing required identifiers");
+        return;
+    }
+
+    try {
+        // Define the path to the classroom document
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+
+        if (classroomDoc.exists()) {
+            const classroomData = classroomDoc.data();
+
+            // Display the name and code in the respective HTML elements
+            const headerContainer = document.querySelector('.header-pos-2');
+            headerContainer.innerHTML = `
+                <div class="header-pos-1" >
+                    <h3 id="classroom-name" >${classroomData.name}</h3>
+                </div>
+                <div class="style-display btn-edit-classroom" id="btn-edit-classroom" >
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span class="edit-class-tooltip" >Edit classroom</span>
+                </div>
+            `;
+
+            editClassModal("modal-edit-classroom", "btn-edit-classroom", "close-edit-classroom", "cancel-edit-class-modal");
+            document.getElementById('edit-classroom-name').value = classroomData.name || '';
+            document.getElementById('edit-classroom-code').value = classroomData.code || '';
+        } else {
+            console.error("Classroom document not found");
+        }
+    } catch (error) {
+        console.error("Error getting classroom name and code:", error);
+    }
+}
+
+
 async function getActiveStudents() {
     if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");
@@ -60,6 +100,89 @@ async function getActiveStudents() {
         loadingIndicator.style.display = 'none';
     }
 }
+
+// Edit classroom
+async function editClassroom(event) {
+    event.preventDefault();
+
+    const newclassName = document.getElementById("edit-classroom-name").value.trim().toUpperCase();
+    const newclassCode = document.getElementById("edit-classroom-code").value.trim();
+
+    if (!newclassName || !newclassCode) {
+        alert("Please provide both classroom name and code.");
+        return;
+    }
+    try {
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+            await updateDoc(classroomRef, { name: newclassName, code:newclassCode }); 
+
+            getClassroomName();
+            document.getElementById("modal-edit-classroom").style.display = "none";
+            alert("Classroom updated successfully.");
+            
+        
+    } catch (error) {
+        console.error("Error updating classroom:", error);
+        alert("An error occurred while updating the classroom. Please try again.");
+    }
+}
+
+
+function editClassModal(modalId, btnId, closeClass, btnCancel) {
+    const modal = document.getElementById(modalId);
+    const btn = document.getElementById(btnId);
+    const span = document.getElementsByClassName(closeClass)[0];
+    const cancel = document.getElementById(btnCancel);
+
+    btn.onclick = () => modal.style.display = "block";
+    span.onclick = () => modal.style.display = "none";
+    cancel.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+// Function to delete the classroom
+async function deleteClassroom() {
+    const confirmation = confirm("Are you sure you want to delete this classroom?");
+    if (confirmation) {
+        try {
+            // Get the students collection reference
+            const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
+
+            // Fetch all student documents under the classroom
+            const studentDocsSnapshot = await getDocs(studentCollectionRef);
+
+            // Delete the classroom document for each student
+            const deletePromises = studentDocsSnapshot.docs.map(async (studentDoc) => {
+                const studentId = studentDoc.id;
+                const studentClassroomRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
+                await deleteDoc(studentClassroomRef);
+            });
+
+            // Wait for all deletions to complete
+            await Promise.all(deletePromises);
+
+            // Now, delete the classroom document from the teacher's collection
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+            await deleteDoc(classroomRef);
+
+            alert("Classroom deleted successfully.");
+
+            // Close the modal after deletion and redirect
+            document.getElementById("modal-edit-classroom").style.display = "none";
+            window.location.href = "classroom.php";
+
+        } catch (error) {
+            console.error("Error deleting classroom:", error);
+            alert("An error occurred while deleting the classroom. Please try again.");
+        }
+    }
+}
+
+
 
 async function getRequestStudents() {
     if (!selectedClassroomId || !teacherId) {
@@ -120,7 +243,7 @@ async function acceptStudent(studentId) {
 
         // Add classroom info to the user's document
         const classroomDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
-        await setDoc(classroomDocRef, { teacher: teacherId });
+        await setDoc(classroomDocRef, { teacher: teacherId, name: selectedClassroomName });
 
         getRequestStudents();  // Refresh the request list
         getActiveStudents();   // Refresh the active students list
@@ -143,23 +266,15 @@ async function removeStudent(studentId) {
     }
 }
 
-async function getClassroomName() {
-    if (!selectedClassroomName || !teacherId) {
-        console.error("Missing required identifiers");
-        return;
-    }
-
-    try {
-        document.getElementById('classroom-name').innerText = selectedClassroomName;
-    } catch (error) {
-        console.error("Error getting course name:", error);
-    }
-}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     getClassroomName(); 
     getActiveStudents();
     getRequestStudents();
+
+    document.getElementById("edit-classroom-form").addEventListener("submit", editClassroom);
+    document.getElementById("delete-classroom").addEventListener("click", deleteClassroom);
+
 
     const studentBtn = document.getElementById('nav-btn-student');
     const requestBtn = document.getElementById('nav-btn-request');

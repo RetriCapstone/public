@@ -60,9 +60,10 @@ async function getClassrooms() {
             const classroomSnapshot = await getDocs(classroomCollection);
 
             classroomSnapshot.forEach((classroomDoc) => {
-                const className = classroomDoc.id;
+                const classId = classroomDoc.id;
                 const classData = classroomDoc.data();
-                const classCode = classData.name;
+                const className = classData.name;
+                const classCode = classData.code;
 
                 classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classroomDoc.id });
             });
@@ -73,14 +74,13 @@ async function getClassrooms() {
             classCard.className = 'style-card-1';
             classCard.innerHTML = `
                 <div class="style-display">
-                    <h3 class="class-name">Classroom: ${classroom.classCode}</h3>
-                    <span class="class-code">Code: ${classroom.className}</span>
+                    <h3 class="class-name">Classroom: ${classroom.className}</h3>
+                    <span class="class-code">Code: ${classroom.classCode}</span>
                 </div>
             `;
 
             classCard.addEventListener('click', () => {
                 localStorage.setItem("selectedClassroomId", classroom.classroomDocId);
-                localStorage.setItem("selectedClassroomName", classroom.classCode);
                 localStorage.setItem("teacherId", classroom.docId);
                 window.location.href = "module.php";
             });
@@ -102,8 +102,8 @@ async function createClassroom(event) {
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
-    const className = document.getElementById("classname").value;
-    const classCode = document.getElementById("classcode").value;
+    const className = document.getElementById("classname").value.trim().toUpperCase();
+    const classCode = document.getElementById("classcode").value.trim();
 
     try {
         const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
@@ -114,11 +114,11 @@ async function createClassroom(event) {
             const teacherId = teacherDoc.id;
 
             const newClassroomRef = doc(db, 'teacher', teacherId, 'classroom', classCode);
-            await setDoc(newClassroomRef, { name: className });
+            await setDoc(newClassroomRef, { name: className, code: classCode });
 
             // Refresh the classroom list
+            alert('Classroom created successfully');
             getClassrooms();
-
             // Close the modal
             document.getElementById("modal-create-classroom").style.display = "none";
         }
