@@ -248,15 +248,18 @@ class editModuleModal {
         this.modal = document.getElementById(modalId);
         this.span = document.getElementsByClassName(closeClass)[0];
         this.cancelBtn = document.getElementById(cancelId);
+        this.deleteBtn = document.getElementById('delete-module');
 
         if (this.span && this.modal) {
             this.openModal = this.openModal.bind(this);
             this.closeModal = this.closeModal.bind(this);
             this.outsideClick = this.outsideClick.bind(this);
             this.editModule = this.editModule.bind(this);
+            this.deleteModule = this.deleteModule.bind(this);
 
             this.span.addEventListener('click', this.closeModal);
             this.cancelBtn.addEventListener('click', this.closeModal);
+            this.deleteBtn.addEventListener('click', this.deleteModule);
             window.addEventListener('click', this.outsideClick);
 
             this.modal.style.display = "block";  // Open modal when created
@@ -323,26 +326,31 @@ class editModuleModal {
             alert('An error occurred while updating the module name. Please try again.');
         }
     }
+
+
+    async deleteModule() {
+        const confirmed = confirm('Are you sure you want to delete this module? This action cannot be undone.');
+
+        if (confirmed) {
+            try {
+                // Path to the selected module document
+                const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
+
+                // Delete the module document
+                await deleteDoc(moduleRef);
+
+                alert('Module deleted successfully.');
+                location.reload();
+                this.closeModal();  // Close the modal after successful deletion
+
+            } catch (error) {
+                console.error('Error deleting module:', error);
+                alert('An error occurred while deleting the module. Please try again.');
+            }
+        }
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

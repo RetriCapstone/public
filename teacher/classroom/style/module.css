@@ -61,10 +61,10 @@
 
 
 .btn-edit-classroom{
-  position: relative;
-  display: inline-block;
-  margin: .6rem;
-}
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+  }
 
 .btn-edit-classroom .edit-class-tooltip{
     visibility: hidden;

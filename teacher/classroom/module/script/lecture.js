@@ -48,6 +48,8 @@ async function auto_height(textarea) {
     textarea.style.height = (textarea.scrollHeight) + 'px';
 }
 
+
+
 function addHeader1() {
     const header1Container = document.createElement('div');
     lastLectureItem += 1;
@@ -56,8 +58,8 @@ function addHeader1() {
     header1Container.id = `lecture-item-${lectureNumber}`;
 
     header1Container.innerHTML = `
-        <input class="lect-header-1-input" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
-        <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
+        <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+        <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
     `;
     
     document.querySelector('.lect-list-container').appendChild(header1Container);
@@ -66,12 +68,17 @@ function addHeader1() {
     inputs.forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.style.border = '2px solid #1d4a91';
-            this.parentElement.style.padding = '12px 0';
+            // this.parentElement.style.padding = '12px 0';
         });
 
         input.addEventListener('blur', function() {
             this.parentElement.style.border = 'none'; // or reset to initial border style if any
         });
+    });
+    
+    // Add event listener for the delete question button
+    header1Container.querySelector(`#delete-item-container-${lectureNumber}`).addEventListener('click', function () {
+        header1Container.remove();
     });
 
 }
@@ -84,7 +91,7 @@ function addHeader2() {
     header2Container.id = `lecture-item-${lectureNumber}`;
 
     header2Container.innerHTML = `
-        <input class="lect-header-2-input" type="text" autocomplete="off" placeholder="Header 2" required id="lect-header-2-text-${lectureNumber}" >
+        <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Header 2" required id="lect-header-2-text-${lectureNumber}" >
         <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
     `;
     
@@ -94,7 +101,7 @@ function addHeader2() {
     inputs.forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.style.border = '2px solid #1d4a91';
-            this.parentElement.style.padding = '12px 0';
+            // this.parentElement.style.padding = '12px 0';
         });
 
         input.addEventListener('blur', function() {
@@ -111,8 +118,8 @@ function addParagraph() {
     paragraphContainer.id = `lecture-item-${lectureNumber}`;
 
     paragraphContainer.innerHTML = `
-        <textarea rows="3" required class="lect-paragraph-input auto-height-text" placeholder="type here..." id="lect-paragraph-text-${lectureNumber}"></textarea>
-        <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
+        <textarea rows="3" required data-content-type="paragraph" class="lect-paragraph-input auto-height-text" placeholder="type here..." id="lect-paragraph-text-${lectureNumber}"></textarea>
+        <i class="fa-solid fa-xmark delete-option" id="delete-option-${lectureNumber}"></i>
     `;
     
     document.querySelector('.lect-list-container').appendChild(paragraphContainer);
@@ -122,7 +129,7 @@ function addParagraph() {
     textarea.forEach(textarea => {
         textarea.addEventListener('focus', function() {
             this.parentElement.style.border = '2px solid #1d4a91';
-            this.parentElement.style.padding = '12px 0';
+            // this.parentElement.style.padding = '12px 0';
         });
 
         textarea.addEventListener('blur', function() {
@@ -130,52 +137,145 @@ function addParagraph() {
         });
     });
 
-
 }
 
+
+
+
+// saving ------------------------------------- saving ----------------------
+
+//func: save lecture created contents (header 1, header 2, text paragraph)
+async function saveLectureItems() {
+    try {
+        const items = document.querySelectorAll('.lect-list-container > div');
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const lectureNumber = i + 1;
+            const contentType = item.querySelector('input, textarea').dataset.contentType;
+            const textContent = item.querySelector('input, textarea').value.trim();
+
+            if (!textContent) continue; // Skip saving if there's no content
+
+            // Path to the item document within the lecture
+            const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item', `item-${lectureNumber}`);
+
+            // Save the item to Firestore
+            await setDoc(itemDocRef, {
+                type: contentType,
+                text: textContent
+            });
+        }
+
+        alert('Lecture saved successfully.');
+
+    } catch (error) {
+        console.error('Error saving lecture items:', error);
+        alert('An error occurred while saving the lecture items. Please try again.');
+    }
+}
+
+
+
+//func: save lecture details (name and status)
+async function saveLectureDetails() {
+    try {
+        const lectureName = document.getElementById('settings-lect-name-input').value.trim();
+        const lectureStatus = document.getElementById('settings-select-status').value;
+
+        if (!lectureName) {
+            alert('Lecture name is required.');
+            return;
+        }
+
+        // Path to the selected lecture document
+        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+
+        // Update the lecture document with name and status
+        await updateDoc(lectureDocRef, {
+            name: lectureName,
+            status: lectureStatus
+        });
+
+    } catch (error) {
+        console.error('Error saving lecture details:', error);
+        alert('An error occurred while saving the lecture details. Please try again.');
+    }
+}
+
+
+
+
+
+
+// fetching  -----------------------------------  fetching ----------------------------------
+
+// fetch lecture contents
+async function fetchLectureItems() {
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    
+    loadingIndicator.style.display = 'block'; // Show loading indicator
+    try {
+        // Path to the item collection within the lecture
+        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsSnapshot = await getDocs(itemsCollectionRef);
+
+        if (itemsSnapshot.empty) {
+            loadingIndicator.style.display = 'none'; // Show loading indicator
+            console.log('No lecture items found.');
+            return;
+        }
+
+        itemsSnapshot.forEach(doc => {
+            const itemData = doc.data();
+            const contentType = itemData.type;
+            const textContent = itemData.text;
+
+            if (contentType === 'header-1') {
+                addHeader1();
+                document.getElementById(`lect-header-1-text-${lastLectureItem}`).value = textContent;
+            } else if (contentType === 'header-2') {
+                addHeader2();
+                document.getElementById(`lect-header-2-text-${lastLectureItem}`).value = textContent;
+            } else if (contentType === 'paragraph') {
+                addParagraph();
+                document.getElementById(`lect-paragraph-text-${lastLectureItem}`).value = textContent;
+            }
+        });
+        loadingIndicator.style.display = 'none'; // Show loading indicator
+
+    } catch (error) {
+        loadingIndicator.style.display = 'none'; // Show loading indicator
+        console.error('Error fetching lecture items:', error);
+    }
+}
+
+
+//fetch lecture details
 async function fetchLectureDetails() {
     try {
-        // Define the path to the quiz document
-        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedLectureId);
+        // Define the path to the lecture document
+        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Fetch the quiz document
-        const quizDoc = await getDoc(quizDocRef);
+        const lectureDoc = await getDoc(lectureDocRef);
 
-        if (quizDoc.exists()) {
-            const quizData = quizDoc.data();
+        if (lectureDoc.exists()) {
+            const lectureData = lectureDoc.data();
 
             // Populate the quiz settings
-            document.getElementById('quiz-name').innerText = quizData.name || '';
-            document.getElementById('quiz-settings-name-input').value = quizData.name || '';
-            document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
+            document.getElementById('lecture-name').innerText = lectureData.name || '';
+            document.getElementById('settings-lect-name-input').value = lectureData.name || '';
 
-            if (quizData.duration) {
-                document.getElementById('quiz-duration-hour').value = quizData.duration.hours || 0;
-                document.getElementById('quiz-duration-minute').value = quizData.duration.minutes || 0;
-                document.getElementById('quiz-duration-second').value = quizData.duration.seconds || 0;
-            } else {
-                document.getElementById('quiz-duration-hour').value = 0;
-                document.getElementById('quiz-duration-minute').value = 0;
-                document.getElementById('quiz-duration-second').value = 0;
-            }
-
-            const statusSelect = document.querySelector('.settings-select-status');
-            statusSelect.value = quizData.status || 'close';
-
-            const settingsStatusContainer = document.querySelector('.settings-datetime-con');
-            if (quizData.status === 'set') {
-                settingsStatusContainer.style.display = 'flex';
-                document.querySelector('input[name="quiz-datetime-start"]').value = quizData.startDate ? new Date(quizData.startDate.seconds * 1000).toISOString().slice(0,16) : '';
-                document.querySelector('input[name="quiz-datetime-end"]').value = quizData.endDate ? new Date(quizData.endDate.seconds * 1000).toISOString().slice(0,16) : '';
-            } else {
-                settingsStatusContainer.style.display = 'none';
-            }
+            const statusSelect = document.querySelector('#settings-select-status');
+            statusSelect.value = lectureData.status || 'close';
+            
         } else {
-            console.log('No quiz details found.');
+            console.log('No lecture details found.');
         }
 
     } catch (error) {
-        console.error('Error fetching quiz details:', error);
+        console.error('Error fetching lecture details:', error);
     }
     
 }
@@ -184,6 +284,10 @@ async function fetchLectureDetails() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    fetchLectureDetails();
+    fetchLectureItems();
+
 
     document.querySelector('#lect-add-btn-header-1').addEventListener('click', addHeader1);
     document.querySelector('#lect-add-btn-header-2').addEventListener('click', addHeader2);
@@ -205,5 +309,14 @@ document.addEventListener('DOMContentLoaded', () => {
         switchNavView(settingsContainer, lectureContainer);
         switchNavViewBtn(settingsButton, lectureButton);
     });
+
+
+    // Add event listener for the save button
+    document.getElementById('lect-save-btn').addEventListener('click', () => {
+        saveLectureItems(); // Save questions
+        saveLectureDetails(); // Save quiz details
+    });
+
+
 
 });

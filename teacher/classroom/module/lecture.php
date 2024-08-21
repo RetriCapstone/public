@@ -54,7 +54,7 @@
         <div class="lect-body" >
             <div class="lect-header-container" >
                 <div class="style-header">
-                    <h3 class="lecture-name">Lect name</h3>
+                    <h3 class="lecture-name" id="lecture-name" ></h3>
                     <button class="style-btn-add-1" id="lect-save-btn" >Save</button>
                 </div>
                 <div class="lect-navbar">
@@ -73,25 +73,11 @@
                 <div class="lecture-container">
                     <section class="lect-con-list-section style-container-1" >
                         <div class="lect-list-container" >
-
-                            <!-- header 1 container -->
-                            <!-- <div class="lect-header-style lect-header-1-con" id="lect-item" >
-                                    <input class="lect-header-1-input" type="text" autocomplete="off" placeholder="Header 1" required  >
-                                    <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
-                            </div> -->
-
-                            <!-- header 2 container -->
-                            <!-- <div class="lect-header-style lect-header-2-con" id="lect-item" >
-                                <input class="lect-header-2-input" type="text" autocomplete="off" placeholder="Header 2" required  >
-                                <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
-                            </div> -->
-
-                            <!-- paragraph container -->
-                            <!-- <div class="lect-paragraph-style lect-paragraph-con" id="lect-item" >
-                                <textarea rows="3" required class="lect-paragraph-input auto-height-text" placeholder="type here..." id=""></textarea>
-                                <i class="fa-solid fa-xmark delete-option" id="delete-option"></i>
-                            </div> -->
-
+                            
+                            <div class="loading-indicator">
+                                <div class="spinner"></div>
+                            </div>
+                            
                         </div>
                     </section>
                     <section class="lect-con-tool-section" >
@@ -116,7 +102,7 @@
 
                         <div class="settings-card-out-col">
                             <span class="settings-label-title" >Lecture name</span>
-                            <input type="text">
+                            <input type="text" id="settings-lect-name-input" >
                         </div>
 
                         <div class="settings-card-out-row">

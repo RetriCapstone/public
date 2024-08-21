@@ -25,13 +25,29 @@
     height: 40px;
 }
 
+
+.edit-module-btn{
+    display: flex;
+    height: -webkit-fill-available;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+.btn-edit-classroom{
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+  }
+
 .edit-classroom{
     position: relative;
     display: inline-block;
     margin: .6rem;
 }
   
-.edit-classroom .edit-class-tooltip{
+.btn-edit-classroom .edit-class-tooltip{
     visibility: hidden;
     width: 120px;
     background-color: #1f2e63;
@@ -46,6 +62,6 @@
     z-index: 1;
 }
     
-.edit-classroom:hover .edit-class-tooltip{
+.btn-edit-classroom:hover .edit-class-tooltip{
     visibility: visible;
 }

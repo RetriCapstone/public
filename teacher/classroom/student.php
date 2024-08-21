@@ -89,6 +89,40 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Modal for Editing classroom  -->
+                    <div id="modal-edit-classroom" class="style-modal">
+                        <div class="style-modal-content edit-classroom-modal">
+                            <span class="close-modal close-edit-classroom">&times;</span>
+                            <h2 >Edit Classroom</h2>
+                            <hr class="divider-solid"> 
+                            <form action="" id="edit-classroom-form" class="form-create-module ">
+                                
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom name:</label>
+                                        <input type="text" style="text-transform:uppercase" id="edit-classroom-name" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
+                                    </div>
+
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Classroom code:</label>
+                                        <input type="text"  id="edit-classroom-code" class="input-style input-create-class" placeholder="Class code" required autocomplete="off">
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT - RANDOM NUMBER</p>
+                                    </div>
+
+                                <div class="edit-module-btn">
+                                    <div>
+                                        <input type="button" value="Delete classroom" class="style-btn-del" id="delete-classroom">
+                                    </div>
+                                    <div style="display: flex; gap: .8rem;" >
+                                        <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-class-modal">
+                                        <input type="submit" value="Save" class="style-btn-add-1">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

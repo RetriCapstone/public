@@ -7,12 +7,12 @@
     padding: 1rem 0;
 }
 .lect-header-container{
-    width: 72%;
+    width: 82%;
     max-width: 1100px;
 }
 .lect-body-container{
     max-width: 1100px;
-    width: 74%;
+    width: 84%;
     overflow: auto;
 }
 .lect-navbar{
@@ -45,7 +45,7 @@
 .lecture-container{
     display: flex;
     flex-direction: row;
-    height: 84vh;
+    height: 80vh;
     /* overflow: auto;
     scrollbar-width: thin; */
 }
@@ -54,7 +54,7 @@
     border-radius: 15px;
     padding: 8px;
     margin: 22px;
-    min-height: 740px;
+    min-height: 540px;
 }
 .lect-con-tool-section{
     width: 20%;
@@ -101,27 +101,26 @@
     background-color: #223478;
 }
 .lect-add-header-1{
-    font-size: 24px;
-}
-.lect-add-header-2{
     font-size: 20px;
 }
+.lect-add-header-2{
+    font-size: 16px;
+}
+
 .lect-header-style,.lect-paragraph-style{
     padding: 4px;
     display: flex;
     align-items: center;
-    margin: 6px 0;
-    /* border: 2px solid #1d4a91; */
+    margin: 0px 6px;
 }
 
 .lect-header-style input{
-    width: 90%;
-    margin: 4px;    
-    padding: 8px;
+    width: 94%;
+    padding: 4px;
+    margin: 4px;
     color: white;
     border-radius: 2px;
-    background-color: transparent;
-    border-bottom: 2px solid #1f2e63;
+    background-color: #18224e;
     text-transform: capitalize;
     
 }
@@ -129,7 +128,8 @@
 .lect-header-style input:focus{
     background-color: #182554;
     border-bottom:2px solid #223478;
-    
+    margin: 12px 8px;  
+    padding: 8px;  
     
 }
 
@@ -143,18 +143,18 @@
     color: rgb(22, 97, 151);
 }
 .lect-paragraph-style textarea{
-    width: 90%;
+    width: 94%;
     margin: 4px;    
     padding: 8px;
     color: white;
     border-radius: 2px;
-    background-color: transparent;
+    background-color: #18224e;
     font-size: 1rem;
-    border: 1px solid #1f2e63;
 }
 
 .lect-paragraph-style textarea:focus{
     background-color: #182554;
+    margin: 12px 8px;  
 }
 
 
@@ -199,14 +199,13 @@
 /* settings */
 .settings-container{
     display: none;
-    height: 84vh;
     overflow: auto;
     justify-content: center;
 }
 .settings-body-con{
     width: 94%;
     margin: 22px 0;
-    height: 560px;
+    height: 520px;
     padding: 1.6rem;
 }
 .settings-text{

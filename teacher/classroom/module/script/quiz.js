@@ -278,6 +278,8 @@ async function saveQuestions() {
     console.log('Questions and section direction saved successfully.');
 }
 
+
+
 async function fetchQuestionsAndDirection() {
     const loadingIndicator = document.querySelector('.loading-indicator');
     const directionContainer = document.querySelector('.quiz-direction-container');
