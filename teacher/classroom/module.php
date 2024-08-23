@@ -54,7 +54,7 @@
         <div class="main_body">
             <div class="main_container">
                 <div class="con-1">
-                    <div class="header-pos-2">
+                    <div class="header-pos-2" >
                         <!-- <div class="header-pos-1" >
                             <h3 id="classroom-name" ></h3>
                         </div>

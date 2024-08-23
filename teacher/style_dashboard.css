@@ -4,7 +4,7 @@
     border: none;
     outline: none;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: "Poppins" ,sans-serif;
     scroll-behavior: smooth;
     letter-spacing: .2px;
     line-height: 20px;

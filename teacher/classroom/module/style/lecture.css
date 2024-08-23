@@ -7,7 +7,7 @@
     padding: 1rem 0;
 }
 .lect-header-container{
-    width: 82%;
+    width: 84%;
     max-width: 1100px;
 }
 .lect-body-container{
@@ -112,6 +112,7 @@
     display: flex;
     align-items: center;
     margin: 0px 6px;
+    flex-direction: column;
 }
 
 .lect-header-style input{
@@ -188,7 +189,7 @@
 }
 
 .lect-header-1-input{
-    font-size: 24px;
+    font-size: 26px;
 }
 .lect-header-2-input{
     font-size: 20px;

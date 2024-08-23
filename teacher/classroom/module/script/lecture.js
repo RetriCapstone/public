@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, getDoc, updateDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getDoc, deleteDoc, updateDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -58,8 +58,14 @@ function addHeader1() {
     header1Container.id = `lecture-item-${lectureNumber}`;
 
     header1Container.innerHTML = `
+    <div style="width: 100%; display: flex;" >
         <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
         <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+    </div>
+    <div style="width: 100%; display: flex;"  >
+        <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+        <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+    </div>
     `;
     
     document.querySelector('.lect-list-container').appendChild(header1Container);
@@ -68,11 +74,13 @@ function addHeader1() {
     inputs.forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.style.border = '2px solid #1d4a91';
+            this.parentElement.style.margin = '6px 6px';
             // this.parentElement.style.padding = '12px 0';
         });
 
         input.addEventListener('blur', function() {
             this.parentElement.style.border = 'none'; // or reset to initial border style if any
+            this.parentElement.style.margin = '0px 6px';
         });
     });
     
@@ -108,6 +116,13 @@ function addHeader2() {
             this.parentElement.style.border = 'none'; // or reset to initial border style if any
         });
     });
+
+    
+    // Add event listener for the delete question button
+    header2Container.querySelector(`#delete-item-container-${lectureNumber}`).addEventListener('click', function () {
+        header2Container.remove();
+    });
+    
 }
 
 function addParagraph() {
@@ -119,7 +134,7 @@ function addParagraph() {
 
     paragraphContainer.innerHTML = `
         <textarea rows="3" required data-content-type="paragraph" class="lect-paragraph-input auto-height-text" placeholder="type here..." id="lect-paragraph-text-${lectureNumber}"></textarea>
-        <i class="fa-solid fa-xmark delete-option" id="delete-option-${lectureNumber}"></i>
+        <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
     `;
     
     document.querySelector('.lect-list-container').appendChild(paragraphContainer);
@@ -137,6 +152,11 @@ function addParagraph() {
         });
     });
 
+    // Add event listener for the delete question button
+    paragraphContainer.querySelector(`#delete-item-container-${lectureNumber}`).addEventListener('click', function () {
+        paragraphContainer.remove();
+    });
+    
 }
 
 
@@ -147,18 +167,32 @@ function addParagraph() {
 //func: save lecture created contents (header 1, header 2, text paragraph)
 async function saveLectureItems() {
     try {
+        // Path to the 'item' collection within the lecture
+        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+
+        // Fetch all existing items and delete them
+        const existingItemsSnapshot = await getDocs(itemsCollectionRef);
+        const deletePromises = existingItemsSnapshot.docs.map(doc => deleteDoc(doc.ref));
+        await Promise.all(deletePromises);
+
+        // Now save the new items
         const items = document.querySelectorAll('.lect-list-container > div');
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
             const lectureNumber = i + 1;
-            const contentType = item.querySelector('input, textarea').dataset.contentType;
-            const textContent = item.querySelector('input, textarea').value.trim();
+
+            // Safely retrieve the input/textarea element
+            const inputOrTextarea = item.querySelector('input, textarea');
+            if (!inputOrTextarea) continue; // Skip if no input/textarea found
+
+            const contentType = inputOrTextarea.dataset.contentType;
+            const textContent = inputOrTextarea.value.trim();
 
             if (!textContent) continue; // Skip saving if there's no content
 
             // Path to the item document within the lecture
-            const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item', `item-${lectureNumber}`);
+            const itemDocRef = doc(itemsCollectionRef, `item-${lectureNumber}`);
 
             // Save the item to Firestore
             await setDoc(itemDocRef, {
@@ -167,13 +201,15 @@ async function saveLectureItems() {
             });
         }
 
-        alert('Lecture saved successfully.');
+        alert('Lecture items saved successfully.');
 
     } catch (error) {
         console.error('Error saving lecture items:', error);
         alert('An error occurred while saving the lecture items. Please try again.');
     }
 }
+
+
 
 
 

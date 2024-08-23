@@ -77,6 +77,17 @@
                             <div class="loading-indicator">
                                 <div class="spinner"></div>
                             </div>
+
+                            <div class="lect-header-style lect-header-1-con">
+                                <div style="width: 100%; display: flex;" >
+                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+                                    <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+                                </div>
+                                <div style="width: 100%; display: flex;"  >
+                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+                                    <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+                                </div>
+                            </div>
                             
                         </div>
                     </section>
