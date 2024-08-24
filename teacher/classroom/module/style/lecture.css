@@ -122,15 +122,13 @@
     color: white;
     border-radius: 2px;
     background-color: #18224e;
-    text-transform: capitalize;
+    border-bottom:2px solid #18224e;
     
 }
 
 .lect-header-style input:focus{
     background-color: #182554;
     border-bottom:2px solid #223478;
-    margin: 12px 8px;  
-    padding: 8px;  
     
 }
 
@@ -248,7 +246,50 @@
     gap: 12px;
     align-items: center;
 }
+
 .settings-card-bottom{
     padding: 30px 30px 15px 0;
     margin-left: 30px;
+}
+
+
+
+/* text format */
+.text-format-option-con{
+    width: 100%; 
+    display: flex; 
+    align-items: center;
+}
+.text-format-card-container{
+    display: none;
+}
+
+.text-format-card{
+    margin: 4px 8px;
+}
+.btn-text-format{
+    color: white;
+    font-size: 1rem;
+    background-color: #161f47;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.btn-text-format:hover{
+    background-color: #152d5a;
+}
+.btn-active-format{
+    background-color: #193e79;
+    color: #7494bb;
+}
+
+.alignment-option input[type="radio"] {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.alignment-option input[type="radio"]:checked + .btn-text-align{
+    background-color: #193e79;
+    color: #7494bb;
 }

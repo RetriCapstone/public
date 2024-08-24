@@ -77,17 +77,47 @@
                             <div class="loading-indicator">
                                 <div class="spinner"></div>
                             </div>
-
+<!-- 
                             <div class="lect-header-style lect-header-1-con">
-                                <div style="width: 100%; display: flex;" >
+                                <div class="text-format-option-con">
                                     <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
                                     <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
                                 </div>
-                                <div style="width: 100%; display: flex;"  >
-                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
-                                    <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+                                <div class="text-format-option-con text-format-card-container">
+                                    <div class="text-format-card format-option" >
+                                        <button id="header-1-bold" class="btn-text-format btn-active-format">
+                                            <i class="fa-solid fa-bold"></i>
+                                        </button>
+                                        <button id="header-1-italic" class="btn-text-format">
+                                            <i class="fa-solid fa-italic"></i>
+                                        </button>
+                                        <button id="header-1-underline" class="btn-text-format" >
+                                            <i class="fa-solid fa-underline"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-format-card alignment-option" >
+                                        <input type="radio" name="options" id="text-align-left" checked>
+                                            <label class="btn-text-format" for="text-align-left" >
+                                                <i class="fa-solid fa-align-left"></i>
+                                            </label>
+
+                                        <input type="radio" name="options" id="text-align-center" >
+                                            <label class="btn-text-format" for="text-align-center" >
+                                            <i class="fa-solid fa-align-center"></i>
+                                            </label>
+
+                                        <input type="radio" name="options" id="text-align-right" >
+                                            <label class="btn-text-format" for="text-align-right" >
+                                                <i class="fa-solid fa-align-right"></i>
+                                            </label>
+                                            
+                                        <input type="radio" name="options" id="text-align-justify" >
+                                            <label class="btn-text-format" for="text-align-justify" >
+                                            <i class="fa-solid fa-align-justify"></i>
+                                            </label>
+                                    </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                         </div>
                     </section>
