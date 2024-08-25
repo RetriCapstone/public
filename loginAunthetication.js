@@ -19,12 +19,12 @@ const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('input-email').value;
+    const password = document.getElementById('input-password').value;
 
-    if (username && password) {
+    if (email && password) {
         try {
-            const q = query(collection(db, "teacher"), where("email", "==", username));
+            const q = query(collection(db, "teacher"), where("email", "==", email));
             const querySnapshot = await getDocs(q);
 
             if (!querySnapshot.empty) {
@@ -34,7 +34,7 @@ loginForm.addEventListener('submit', async (e) => {
                     if (userData.password === password) {
                         userFound = true;
                         localStorage.setItem("isLoggedIn", "true");
-                        localStorage.setItem("loggedInUserEmail", username); // Store the logged-in user's email
+                        localStorage.setItem("loggedInUserEmail", email); // Store the logged-in user's email
                         window.location.href = "teacher/classroom/classroom.php";
                     }
                 });

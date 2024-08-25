@@ -21,11 +21,11 @@
 		<form id="loginForm">
 			<h1>Welcome!</h1>
 			<div class="input-box">
-				<input id="username" placeholder="Email" required>
+				<input id="input-email" placeholder="Email" required>
 				<i class='bx bxs-user'></i>
 			</div>
 			<div class="input-box">
-				<input id="password" type="password" placeholder="Password" required>
+				<input id="input-password" type="password" placeholder="Password" required>
 				<i id="togglePassword" class='bx bxs-show'></i>
 			</div>
 			<button type="submit" class="login-button">Login</button>

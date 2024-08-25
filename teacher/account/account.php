@@ -66,15 +66,15 @@
                     <h1 class="style-title-1">Account Information</h1>
                     <div class="input-style">
                         <span>Firstname</span>
-                        <input id="firstname">
+                        <input type="text" required autocomplete="off" id="teacher-firstname">
                     </div>
                     <div class="input-style">
                         <span>Lastname</span>
-                        <input type="text" id="lastname" autocomplete="off" >
+                        <input type="text" required autocomplete="off" id="teacher-lastname" >
                     </div>
                     <div class="input-style">
                         <span>Email</span>
-                        <input type="email" id="email" autocomplete="off" >
+                        <input type="email" id="teacher-email" autocomplete="off" required  >
                     </div>
                     <div class="style-checkbox">
                         <input class="checkbox" id="change-pass" type="checkbox" >
@@ -91,7 +91,7 @@
                         </div>
                         <div class="input-style">
                             <span>Confirm New Password*</span>
-                            <input type="password" id="input-conf-new-pass" required>
+                            <input type="password" id="input-confirm-new-pass" required>
                         </div>
                     </form>
                     <div class="style-btn-container">
@@ -106,48 +106,3 @@
 </body>
 </html>
 
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
-    import { getDatabase, ref, push, child, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
-      authDomain: "code-dojo-4e4e5.firebaseapp.com",
-      databaseURL: "https://code-dojo-4e4e5-default-rtdb.firebaseio.com",
-      projectId: "code-dojo-4e4e5",
-      storageBucket: "code-dojo-4e4e5.appspot.com",
-      messagingSenderId: "116382053512",
-      appId: "1:116382053512:web:9df203d93ab781d9e09b3d",
-      measurementId: "G-KR3DL2EF19"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const database = getDatabase(app);
-    const user_id = push(child(ref(database), "users")).key;
-
-    function readUserData() {
-            const dbRef = ref(database, "users");
-            const tableBody = document.getElementById("recordTable").getElementsByTagName("tbody")[0];
-            onValue(dbRef, (snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    const childData = childSnapshot.val();
-                    const newRow = `
-                        <tr>
-                            <td>${childData.username}</td>
-                            <td>${childData.email}</td>
-                            <td>${childData.exp}</td>
-                        </tr>`;
-                    tableBody.innerHTML += newRow;
-                });
-            });
-        }
-
-        // Call readUserData() function when the DOM content is loaded
-        document.addEventListener("DOMContentLoaded", function () {
-            readUserData();
-        });
-    </script>
