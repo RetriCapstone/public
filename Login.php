@@ -7,6 +7,7 @@
 	<title>Login Form</title>
 	<link rel="stylesheet" href="style_login.css">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="teacher/images/logo-icon.png" type="image/x-icon">
 </head>
 <body>
 	<script src="loginAunthetication.js" type="module">

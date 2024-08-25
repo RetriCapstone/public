@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Dojo - Learn Coding</title>
     <link rel="stylesheet" href="styles_index.css">
+    <link rel="icon" href="teacher/images/logo-icon.png" type="image/x-icon">
 </head>
 <body>
     <div class="main-container">

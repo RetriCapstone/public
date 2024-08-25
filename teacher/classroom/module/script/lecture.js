@@ -566,6 +566,7 @@ async function fetchLectureItems() {
                 const paragraphTextAlignment = document.querySelector(`#paragraph-text-align-${textAlignment}-${lastLectureItem}`);
                 
                 paragraphInput.value = textContent;
+                auto_height(paragraphInput);
                 boldText(paragraphInput, paragraphBoldButton);
                 italicText(paragraphInput, paragraphItalicButton);
                 underlineText(paragraphInput, paragraphUnderlineButton);

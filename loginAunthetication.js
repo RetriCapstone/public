@@ -54,7 +54,7 @@ loginForm.addEventListener('submit', async (e) => {
 });
 
 const togglePassword = document.getElementById('togglePassword');
-const passwordField = document.getElementById('password');
+const passwordField = document.getElementById('input-password');
 
 togglePassword.addEventListener('click', () => {
     const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
