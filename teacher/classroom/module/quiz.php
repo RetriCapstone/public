@@ -56,8 +56,8 @@
         </nav>
         <div class="style-container-1 con-2">
             <ul class="list-tab">
-                <li class="list-view list-active"><a href="/teacher/classroom/module.php">Modules</a></li>
-                <li class="list-view"><a href="/teacher/classroom/student.php">People</a></li>
+                <li class="list-view list-active" id="module-link">Modules</li>
+                <li class="list-view" id="student-link">People</li>
             </ul>
         </div>
         <div class="quiz-tool-container">

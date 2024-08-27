@@ -7,3 +7,10 @@
             navbar.classList.remove("scroll");
         }
     });
+    
+    window.onload = () => {
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            window.location.href = "teacher/classroom/classroom.php";
+        }
+    };
+    

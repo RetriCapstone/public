@@ -80,9 +80,8 @@ async function getClassrooms() {
             `;
 
             classCard.addEventListener('click', () => {
-                localStorage.setItem("selectedClassroomId", classroom.classroomDocId);
-                localStorage.setItem("teacherId", classroom.docId);
-                window.location.href = "module.php";
+                const url = `module.php?selectedClassroomId=${encodeURIComponent(classroom.classroomDocId)}&teacherId=${encodeURIComponent(classroom.docId)}&selectedClassroomName=${encodeURIComponent(classroom.className)}`;
+                window.location.href = url;
             });
 
             classListContainer.appendChild(classCard);

@@ -63,9 +63,3 @@ togglePassword.addEventListener('click', () => {
     togglePassword.classList.toggle('bxs-hide');
 });
 
-// Check if the user is already logged in
-window.onload = () => {
-    if (localStorage.getItem("isLoggedIn") === "true") {
-        window.location.href = "teacher/classroom/classroom.php";
-    }
-};

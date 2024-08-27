@@ -15,8 +15,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const teacherId = localStorage.getItem("teacherId");
-const selectedClassroomId = localStorage.getItem("selectedClassroomId");
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+const selectedClassroomId = getQueryParam('selectedClassroomId');
+const teacherId = getQueryParam('teacherId');
 
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
@@ -108,7 +113,7 @@ async function getModules() {
 
             const lecturesHTML = lectures.map(lecture => `
                 <div class="module-item">
-                    <a href="module/lecture.php" data-module-id="${moduleId}" data-item-id="${lecture.id}">
+                    <a href="module/lecture.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(lecture.id)}" data-module-id="${moduleId}" data-item-id="${lecture.id}">
                         <p class="style-text" id="lecture-name"><i class="fa-regular fa-file-lines"></i>&nbsp;&nbsp;${lecture.name}</p>
                     </a>
                 </div>
@@ -116,7 +121,7 @@ async function getModules() {
 
             const quizzesHTML = quizzes.map(quiz => `
                 <div class="module-item">
-                    <a href="module/quiz.php" data-module-id="${moduleId}" data-item-id="${quiz.id}">
+                    <a href="module/quiz.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(quiz.id)}" data-module-id="${moduleId}" data-item-id="${quiz.id}">
                         <p class="style-text" id="quiz-name"><i class="fa-solid fa-file-pen"></i>&nbsp;&nbsp;${quiz.name}</p>
                     </a>
                 </div>
@@ -124,7 +129,7 @@ async function getModules() {
 
             const activitiesHTML = activities.map(activity => `
                 <div class="module-item">
-                    <a href="module/coding.php" data-module-id="${moduleId}" data-item-id="${activity.id}">
+                    <a href="module/coding.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(activity.id)}" data-module-id="${moduleId}" data-item-id="${activity.id}">
                         <p class="style-text" id="activity-name"><i class="fa-regular fa-file-code"></i>&nbsp;&nbsp;${activity.name}</p>
                     </a>
                 </div>
@@ -167,9 +172,12 @@ async function getModules() {
                 const moduleId = item.getAttribute('data-module-id');
                 const itemId = item.getAttribute('data-item-id');
 
-                // Store details in localStorage
-                localStorage.setItem('selectedModuleId', moduleId);
-                localStorage.setItem('selectedItemId', itemId);
+                // // Store details in localStorage
+                // localStorage.setItem('selectedModuleId', moduleId);
+                // localStorage.setItem('selectedItemId', itemId);
+
+                // const url = `newPage.html?selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(itemId)}`;
+                // window.location.href = url;
 
                 // Allow the default link behavior to navigate
             });
@@ -504,17 +512,14 @@ class ModuleItemModal {
             moduleItemNameInput.value = '';  // Clear the input field
             alert('Created successfully.');
             this.closeModal();  // Close the modal
-            localStorage.setItem("selectedModuleId", this.moduleId);
-            localStorage.setItem("selectedItemType", moduleItemType);
-            localStorage.setItem("selectedItemId", moduleItemID);
-            localStorage.setItem("selectedItemName", moduleItemName);
+            
             getModules();
             if (moduleItemType === "lecture") {
-                window.location.href = "module/lecture.php";
+                window.location.href = `module/lecture.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
             } else if (moduleItemType === "quiz") {
-                window.location.href = "module/quiz.php";
+                window.location.href = `module/quiz.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
             } else if (moduleItemType === "activity") {
-                window.location.href = "module/coding.php";
+                window.location.href = `module/coding.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
             }
         } catch (error) {
             console.error('Error creating module item:', error);
@@ -605,7 +610,18 @@ async function deleteClassroom() {
     }
 }
 
+function navigateToPage(page) {
+    const currentParams = new URLSearchParams(window.location.search);
+    const selectedClassroomId = getQueryParam('selectedClassroomId');
+    const teacherId = getQueryParam('teacherId');
 
+    // Add the parameters to the URL
+    currentParams.set('selectedClassroomId', selectedClassroomId);
+    currentParams.set('teacherId', teacherId);
+
+    // Navigate to the desired page with the parameters
+    window.location.href = `${page}?${currentParams.toString()}`;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     getModules();
@@ -619,4 +635,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createModuleForm = document.getElementById('create-module-form');
     createModuleForm.addEventListener('submit', createModule);
+
+    document.querySelector('#student-link').addEventListener('click', () => {
+        navigateToPage('student.php');
+    });
+    document.querySelector('#module-link').addEventListener('click', () => {
+        navigateToPage('module.php');
+    });
 });

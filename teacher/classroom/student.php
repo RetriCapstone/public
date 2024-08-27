@@ -55,8 +55,8 @@
         </nav>
         <div class="style-container-1 con-2" >
             <ul class="list-tab" >
-                <li class="list-view "><a href="module.php">Modules</a></li>
-                <li class="list-view list-active" ><a href="student.php">People</a></li>
+                <li class="list-view " id="module-link" >Modules</li>
+                <li class="list-view list-active" id="student-link" >People</li>
             </ul>
         </div>
         <div class="main_body">

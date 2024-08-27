@@ -14,12 +14,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-const teacherId = localStorage.getItem("teacherId");
-const selectedClassroomId = localStorage.getItem("selectedClassroomId");
-const selectedModuleId = localStorage.getItem("selectedModuleId");
-const selectedQuizId = localStorage.getItem("selectedItemId");
-const selectedQuizName = localStorage.getItem("selectedItemName");
+const teacherId = getQueryParam('teacherId');
+const selectedClassroomId = getQueryParam('selectedClassroomId');
+const selectedModuleId = getQueryParam('selectedModuleId');
+const selectedQuizId = getQueryParam('selectedItemId');
 
 let lastQuestionNumber = 0;
 let lastOptionNumber = 0;
@@ -446,8 +449,28 @@ async function fetchQuizDetails() {
 }
 
 
+function navigateToPage(page) {
+    const currentParams = new URLSearchParams(window.location.search);
+    const selectedClassroomId = getQueryParam('selectedClassroomId');
+    const teacherId = getQueryParam('teacherId');
+
+    // Add the parameters to the URL
+    currentParams.set('selectedClassroomId', selectedClassroomId);
+    currentParams.set('teacherId', teacherId);
+
+    // Navigate to the desired page with the parameters
+    window.location.href = `${page}?${currentParams.toString()}`;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    document.querySelector('#student-link').addEventListener('click', () => {
+        navigateToPage('/teacher/classroom/student.php');
+    });
+    document.querySelector('#module-link').addEventListener('click', () => {
+        navigateToPage('/teacher/classroom/module.php');
+    });
+
     auto_height(document.querySelector('.auto-height-text-dir'));
     
     // nav bar function

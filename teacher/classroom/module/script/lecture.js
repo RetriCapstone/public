@@ -15,10 +15,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const teacherId = localStorage.getItem("teacherId");
-const selectedClassroomId = localStorage.getItem("selectedClassroomId");
-const selectedModuleId = localStorage.getItem("selectedModuleId");
-const selectedLectureId = localStorage.getItem("selectedItemId");
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+const teacherId = getQueryParam('teacherId');
+const selectedClassroomId = getQueryParam('selectedClassroomId');
+const selectedModuleId = getQueryParam('selectedModuleId');
+const selectedLectureId = getQueryParam('selectedItemId');
 
 let lastLectureItem = 0;
 
@@ -431,7 +436,7 @@ async function saveLectureItems() {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const lectureNumber = i + 1;
+            const lectureNumber = i ;
 
             // Safely retrieve the input/textarea element
             const inputOrTextarea = item.querySelector('input, textarea');
@@ -612,6 +617,19 @@ async function fetchLectureDetails() {
 }
 
 
+function navigateToPage(page) {
+    const currentParams = new URLSearchParams(window.location.search);
+    const selectedClassroomId = getQueryParam('selectedClassroomId');
+    const teacherId = getQueryParam('teacherId');
+
+    // Add the parameters to the URL
+    currentParams.set('selectedClassroomId', selectedClassroomId);
+    currentParams.set('teacherId', teacherId);
+
+    // Navigate to the desired page with the parameters
+    window.location.href = `${page}?${currentParams.toString()}`;
+}
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -642,5 +660,12 @@ document.addEventListener('DOMContentLoaded', () => {
         saveLectureDetails(); // Save quiz details
     });
 
+
+    document.querySelector('#student-link').addEventListener('click', () => {
+        navigateToPage('/teacher/classroom/student.php');
+    });
+    document.querySelector('#module-link').addEventListener('click', () => {
+        navigateToPage('/teacher/classroom/module.php');
+    });
 
 });
