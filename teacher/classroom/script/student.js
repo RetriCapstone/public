@@ -20,9 +20,8 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-const selectedClassroomId = getQueryParam('selectedClassroomId');
-const teacherId = getQueryParam('teacherId');
-const selectedClassroomName = getQueryParam('selectedClassroomName');
+const selectedClassroomId = getQueryParam('Cid');
+const teacherId = getQueryParam('tid');
 
 const loadingIndicator = document.querySelector('.loading-indicator');
 
@@ -237,6 +236,13 @@ async function getRequestStudents() {
 
 async function acceptStudent(studentId) {
     try {
+        // Define the path to the classroom document
+        const classRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classDoc = await getDoc(classRef);
+        const classroomData = classDoc.data();
+
         const studentDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student', studentId);
         const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
 
@@ -248,7 +254,7 @@ async function acceptStudent(studentId) {
 
         // Add classroom info to the user's document
         const classroomDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
-        await setDoc(classroomDocRef, { teacher: teacherId, name: selectedClassroomName });
+        await setDoc(classroomDocRef, { teacher: teacherId, name: classroomData.name, code: classroomData.code });
 
         getRequestStudents();  // Refresh the request list
         getActiveStudents();   // Refresh the active students list
@@ -273,12 +279,12 @@ async function removeStudent(studentId) {
 
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
-    const selectedClassroomId = getQueryParam('selectedClassroomId');
-    const teacherId = getQueryParam('teacherId');
+    const selectedClassroomId = getQueryParam('Cid');
+    const teacherId = getQueryParam('tid');
 
     // Add the parameters to the URL
-    currentParams.set('selectedClassroomId', selectedClassroomId);
-    currentParams.set('teacherId', teacherId);
+    currentParams.set('Cid', selectedClassroomId);
+    currentParams.set('tid', teacherId);
 
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;

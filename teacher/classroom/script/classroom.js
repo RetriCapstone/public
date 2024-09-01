@@ -80,7 +80,7 @@ async function getClassrooms() {
             `;
 
             classCard.addEventListener('click', () => {
-                const url = `module.php?selectedClassroomId=${encodeURIComponent(classroom.classroomDocId)}&teacherId=${encodeURIComponent(classroom.docId)}&selectedClassroomName=${encodeURIComponent(classroom.className)}`;
+                const url = `module.php?Cid=${encodeURIComponent(classroom.classroomDocId)}&tid=${encodeURIComponent(classroom.docId)}`;
                 window.location.href = url;
             });
 
@@ -112,7 +112,8 @@ async function createClassroom(event) {
             const teacherDoc = querySnapshot.docs[0];
             const teacherId = teacherDoc.id;
 
-            const newClassroomRef = doc(db, 'teacher', teacherId, 'classroom', classCode);
+            // Create a new document with a random ID in the "classroom" subcollection
+            const newClassroomRef = doc(collection(db, 'teacher', teacherId, 'classroom'));
             await setDoc(newClassroomRef, { name: className, code: classCode });
 
             // Refresh the classroom list
@@ -125,6 +126,7 @@ async function createClassroom(event) {
         console.error("Error creating classroom:", error);
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     setupModal("modal-create-classroom", "btn-create-classroom", "close-modal", "cancel-modal");

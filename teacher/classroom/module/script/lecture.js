@@ -20,10 +20,10 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-const teacherId = getQueryParam('teacherId');
-const selectedClassroomId = getQueryParam('selectedClassroomId');
-const selectedModuleId = getQueryParam('selectedModuleId');
-const selectedLectureId = getQueryParam('selectedItemId');
+const teacherId = getQueryParam('tid');
+const selectedClassroomId = getQueryParam('Cid');
+const selectedModuleId = getQueryParam('Mid');
+const selectedLectureId = getQueryParam('ItemId');
 
 let lastLectureItem = 0;
 
@@ -619,12 +619,12 @@ async function fetchLectureDetails() {
 
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
-    const selectedClassroomId = getQueryParam('selectedClassroomId');
-    const teacherId = getQueryParam('teacherId');
+    const selectedClassroomId = getQueryParam('Cid');
+    const teacherId = getQueryParam('tid');
 
     // Add the parameters to the URL
-    currentParams.set('selectedClassroomId', selectedClassroomId);
-    currentParams.set('teacherId', teacherId);
+    currentParams.set('Cid', selectedClassroomId);
+    currentParams.set('tid', teacherId);
 
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;

@@ -20,8 +20,8 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-const selectedClassroomId = getQueryParam('selectedClassroomId');
-const teacherId = getQueryParam('teacherId');
+const selectedClassroomId = getQueryParam('Cid');
+const teacherId = getQueryParam('tid');
 
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
@@ -113,7 +113,7 @@ async function getModules() {
 
             const lecturesHTML = lectures.map(lecture => `
                 <div class="module-item">
-                    <a href="module/lecture.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(lecture.id)}" data-module-id="${moduleId}" data-item-id="${lecture.id}">
+                    <a href="module/lecture.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(moduleId)}&ItemId=${encodeURIComponent(lecture.id)}" data-module-id="${moduleId}" data-item-id="${lecture.id}">
                         <p class="style-text" id="lecture-name"><i class="fa-regular fa-file-lines"></i>&nbsp;&nbsp;${lecture.name}</p>
                     </a>
                 </div>
@@ -121,7 +121,7 @@ async function getModules() {
 
             const quizzesHTML = quizzes.map(quiz => `
                 <div class="module-item">
-                    <a href="module/quiz.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(quiz.id)}" data-module-id="${moduleId}" data-item-id="${quiz.id}">
+                    <a href="module/quiz.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(moduleId)}&ItemId=${encodeURIComponent(quiz.id)}" data-module-id="${moduleId}" data-item-id="${quiz.id}">
                         <p class="style-text" id="quiz-name"><i class="fa-solid fa-file-pen"></i>&nbsp;&nbsp;${quiz.name}</p>
                     </a>
                 </div>
@@ -129,7 +129,7 @@ async function getModules() {
 
             const activitiesHTML = activities.map(activity => `
                 <div class="module-item">
-                    <a href="module/coding.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(activity.id)}" data-module-id="${moduleId}" data-item-id="${activity.id}">
+                    <a href="module/coding.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(moduleId)}&ItemId=${encodeURIComponent(activity.id)}" data-module-id="${moduleId}" data-item-id="${activity.id}">
                         <p class="style-text" id="activity-name"><i class="fa-regular fa-file-code"></i>&nbsp;&nbsp;${activity.name}</p>
                     </a>
                 </div>
@@ -515,11 +515,11 @@ class ModuleItemModal {
             
             getModules();
             if (moduleItemType === "lecture") {
-                window.location.href = `module/lecture.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
+                window.location.href = `module/lecture.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(this.moduleId)}&ItemId=${encodeURIComponent(moduleItemID)}`;
             } else if (moduleItemType === "quiz") {
-                window.location.href = `module/quiz.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
+                window.location.href = `module/quiz.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(this.moduleId)}&ItemId=${encodeURIComponent(moduleItemID)}`;
             } else if (moduleItemType === "activity") {
-                window.location.href = `module/coding.php?selectedClassroomId=${encodeURIComponent(selectedClassroomId)}&teacherId=${encodeURIComponent(teacherId)}&selectedModuleId=${encodeURIComponent(this.moduleId)}&selectedItemId=${encodeURIComponent(moduleItemID)}`;
+                window.location.href = `module/coding.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(this.moduleId)}&ItemId=${encodeURIComponent(moduleItemID)}`;
             }
         } catch (error) {
             console.error('Error creating module item:', error);
@@ -612,12 +612,12 @@ async function deleteClassroom() {
 
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
-    const selectedClassroomId = getQueryParam('selectedClassroomId');
-    const teacherId = getQueryParam('teacherId');
+    const selectedClassroomId = getQueryParam('Cid');
+    const teacherId = getQueryParam('tid');
 
     // Add the parameters to the URL
-    currentParams.set('selectedClassroomId', selectedClassroomId);
-    currentParams.set('teacherId', teacherId);
+    currentParams.set('Cid', selectedClassroomId);
+    currentParams.set('tid', teacherId);
 
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
