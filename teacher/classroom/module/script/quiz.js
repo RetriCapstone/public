@@ -22,7 +22,7 @@ function getQueryParam(param) {
 const teacherId = getQueryParam('tid');
 const selectedClassroomId = getQueryParam('Cid');
 const selectedModuleId = getQueryParam('Mid');
-const selectedLectureId = getQueryParam('ItemId');
+const selectedQuizId = getQueryParam('ItemId');
 
 let lastQuestionNumber = 0;
 let lastOptionNumber = 0;
