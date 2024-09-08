@@ -71,6 +71,7 @@ function updateChoiceOptions(selectElement, optionsContainer) {
     });
 }
 
+//func: add option (for fetching)
 function addOption(questionNumber) {
     lastOptionNumber += 2;
     const optionNumber = lastOptionNumber;
@@ -106,6 +107,7 @@ function addOption(questionNumber) {
     });
 }
 
+//func: add question (onlclick)
 function addQuestion() {
     const questionContainer = document.createElement('div');
     lastQuestionNumber += 1;
@@ -230,6 +232,8 @@ function addQuestion() {
     });
 }
 
+// -----------------------------------------saving---------------------------------------
+//func: save quiz questions
 async function saveQuestions() {
     const questionContainers = document.querySelectorAll('.quiz-question-container');
     const sectionDirection = document.querySelector('.quiz-direction-input').value;
@@ -281,8 +285,46 @@ async function saveQuestions() {
     console.log('Questions and section direction saved successfully.');
 }
 
+//func: save quiz settings
+async function saveQuizDetails() {
+    const quizName = document.getElementById('quiz-settings-name-input').value.trim().toUpperCase();
+    const randomizeQuestions = document.getElementById('quiz-random-checkbox').checked;
+    const durationHours = parseInt(document.getElementById('quiz-duration-hour').value) || 0;
+    const durationMinutes = parseInt(document.getElementById('quiz-duration-minute').value) || 0;
+    const durationSeconds = parseInt(document.getElementById('quiz-duration-second').value) || 0;
+    const publishStatus = document.querySelector('.settings-select-status').value;
+    const startDate = document.querySelector('input[name="quiz-datetime-start"]').value;
+    const endDate = document.querySelector('input[name="quiz-datetime-end"]').value;
 
+    try {
+        // Define the path to the quiz document
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
 
+        // Prepare the data to be saved
+        const quizData = {
+            name: quizName,
+            randomize: randomizeQuestions,
+            duration: {
+                hours: durationHours,
+                minutes: durationMinutes,
+                seconds: durationSeconds
+            },
+            status: publishStatus,
+            startDate: publishStatus === 'set' ? new Date(startDate) : null,
+            endDate: publishStatus === 'set' ? new Date(endDate) : null
+        };
+
+        // Save the quiz details to Firestore using updateDoc to avoid affecting other fields
+        await updateDoc(quizDocRef, quizData);
+        fetchQuizDetails();
+        console.log('Quiz details updated successfully.');
+    } catch (error) {
+        console.error('Error updating quiz details:', error);
+    }
+}
+
+// -----------------------------------------fetching---------------------------------------
+//func: fecth quiz questions
 async function fetchQuestionsAndDirection() {
     const loadingIndicator = document.querySelector('.loading-indicator');
     const directionContainer = document.querySelector('.quiz-direction-container');
@@ -364,44 +406,7 @@ async function fetchQuestionsAndDirection() {
     }
 }
 
-async function saveQuizDetails() {
-    const quizName = document.getElementById('quiz-settings-name-input').value.trim().toUpperCase();
-    const randomizeQuestions = document.getElementById('quiz-random-checkbox').checked;
-    const durationHours = parseInt(document.getElementById('quiz-duration-hour').value) || 0;
-    const durationMinutes = parseInt(document.getElementById('quiz-duration-minute').value) || 0;
-    const durationSeconds = parseInt(document.getElementById('quiz-duration-second').value) || 0;
-    const publishStatus = document.querySelector('.settings-select-status').value;
-    const startDate = document.querySelector('input[name="quiz-datetime-start"]').value;
-    const endDate = document.querySelector('input[name="quiz-datetime-end"]').value;
-
-    try {
-        // Define the path to the quiz document
-        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
-
-        // Prepare the data to be saved
-        const quizData = {
-            name: quizName,
-            randomize: randomizeQuestions,
-            duration: {
-                hours: durationHours,
-                minutes: durationMinutes,
-                seconds: durationSeconds
-            },
-            status: publishStatus,
-            startDate: publishStatus === 'set' ? new Date(startDate) : null,
-            endDate: publishStatus === 'set' ? new Date(endDate) : null
-        };
-
-        // Save the quiz details to Firestore using updateDoc to avoid affecting other fields
-        await updateDoc(quizDocRef, quizData);
-        fetchQuizDetails();
-        console.log('Quiz details updated successfully.');
-    } catch (error) {
-        console.error('Error updating quiz details:', error);
-    }
-}
-
-
+//func: fecth quiz settings
 async function fetchQuizDetails() {
     try {
         // Define the path to the quiz document
@@ -448,7 +453,7 @@ async function fetchQuizDetails() {
     }
 }
 
-
+//func: navigation param
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
     const selectedClassroomId = getQueryParam('Cid');
