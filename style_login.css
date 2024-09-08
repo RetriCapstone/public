@@ -17,27 +17,10 @@ body {
 }
 
 .wrapper {
-    width: 420px;
-    background: white; 
-    color: black;
-    padding: 30px 40px;
-    backdrop-filter: blur(5px);
-    border-top: 3px solid grey; 
-    border-right: none;
-    border-left: none;
-    border-bottom: none;
 }
 
-.wrapper h1 {
-    font-size: 36px;
-    text-align: center;
-    margin-top: -90px;
-    
-}
 
 .input-box {
-    position: relative;
-    
 }
 
 .wrapper .input-box { 
@@ -104,11 +87,7 @@ body {
 .logo-container a{
     text-decoration: none;
 }
-.logo {
-    width: 100px; 
-    height: auto;
-    margin-right: 10px; 
-}
+
 .logo-text {
     font-size: 28px;
     font-weight: bold;

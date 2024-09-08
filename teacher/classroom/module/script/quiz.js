@@ -25,7 +25,7 @@ const selectedModuleId = getQueryParam('Mid');
 const selectedQuizId = getQueryParam('ItemId');
 
 let lastQuestionNumber = 0;
-let lastOptionNumber = 0;
+let lastOptionNumber = 1;
 
 
 async function activeButton(activeBtn, notActiveBtn1, notActiveBtn2) {
@@ -73,7 +73,7 @@ function updateChoiceOptions(selectElement, optionsContainer) {
 
 //func: add option (for fetching)
 function addOption(questionNumber) {
-    lastOptionNumber += 2;
+    lastOptionNumber += 1;
     const optionNumber = lastOptionNumber;
     const choiceBody1 = document.querySelector(`#choice-body-${questionNumber}`);
     const choiceSelect = document.querySelector(`#question-${questionNumber}-choice-select-answer`);
@@ -352,6 +352,7 @@ async function fetchQuestionsAndDirection() {
 
         questionDataList.forEach((questionData, index) => {
             addQuestion();
+            lastOptionNumber = 1;
             const questionNumber = index + 1;
             const questionContainer = document.querySelector(`#question-${questionNumber}`);
 
@@ -385,11 +386,12 @@ async function fetchQuestionsAndDirection() {
                     if (optionIndex > 0) {
                         addOption(questionNumber);
                     }
-                    const optionContainer = choiceBody1.querySelector(`#choice-option-${questionNumber}-${optionIndex + 1}`);
+                    const optionNumber = optionIndex + 1;
+                    const optionContainer = choiceBody1.querySelector(`#choice-option-${questionNumber}-${optionNumber}`);
                     if (optionContainer) {
                         optionContainer.querySelector('input').value = questionData.options[key];
                     } else {
-                        console.error(`Option container #choice-option-${questionNumber}-${optionIndex + 1} not found.`);
+                        console.error(`Option container #choice-option-${questionNumber}-${optionNumber} not found.`);
                     }
                 });
 
