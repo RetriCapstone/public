@@ -22,7 +22,6 @@
 		<form id="loginForm">
 			<div class="input-box">
 				<input id="input-email" type="email"  placeholder="Email" required>
-				<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 				<i class="fa-solid fa-envelope"></i>
 			</div>
 			<div class="input-box">
