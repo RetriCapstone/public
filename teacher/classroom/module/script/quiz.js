@@ -117,10 +117,18 @@ function addQuestion() {
 
     questionContainer.innerHTML = `
         <div class="question-body-con" id="question-body-${questionNumber}">
-            <select class="style-select question-type-select" name="question-type" id="question-type-${questionNumber}">
-                <option value="identification">Identification</option>
-                <option value="choice">Multiple choice</option>
-            </select>
+            <div class="question-header-con" id="question-header-con-${questionNumber}" >
+                <div class="question-point-container">
+                    <input type="number" value="1" id="question-point-${questionNumber}">
+                    <span>points</span>
+                </div>
+                <select class="style-select question-type-select" name="question-type" id="question-type-${questionNumber}">
+                    <option value="identification">Identification</option>
+                    <option value="choice">Multiple choice</option>
+                    <option value="paragraph">Paragraph</option>
+                    
+                </select>
+            </div>
             
             <div class="quiz-identify-con" id="identify-con-${questionNumber}">
                 <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
@@ -145,7 +153,7 @@ function addQuestion() {
                 <hr class="divider-solid">
             </div>
 
-            <div class="quiz-choice-con" id="choice-con-${questionNumber}" style="display: none;">
+            <div class="quiz-choice-con" id="choice-con-${questionNumber}">
                 <textarea rows="2" class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-choice-question"></textarea>
                 <div class="choice-body-1" id="choice-body-${questionNumber}">
                     <div class="choice-option-con" id="choice-option-${questionNumber}-1">
@@ -168,6 +176,17 @@ function addQuestion() {
                 <hr class="divider-solid">
             </div>
 
+            <div class="quiz-paragraph-con" id="paragraph-con-${questionNumber}">
+                <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-paragraph-question"></textarea>
+
+                <div class="paragraph-body-1">
+                    <div class="paragraph-text-card">
+                        <span>Long answer text </span>
+                    </div>
+                </div>
+
+                <hr class="divider-solid">
+            </div>
             <div class="delete-question-con" id="question-delete-button-${questionNumber}">
                 <i class="fa-regular fa-trash-can"></i><span>Delete</span>
             </div>
@@ -178,16 +197,29 @@ function addQuestion() {
     questionContainer.querySelectorAll('.auto-height-text-question').forEach(auto_height);
 
     // Add event listener for the question type select
-    questionContainer.querySelector(`#question-type-${questionNumber}`).addEventListener('change', function () {
-        const identificationDiv = this.parentElement.querySelector(`#identify-con-${questionNumber}`);
-        const choiceDiv = this.parentElement.querySelector(`#choice-con-${questionNumber}`);
+    const questionHeadercontainer = questionContainer.querySelector(`#question-header-con-${questionNumber}`);
+    questionHeadercontainer.querySelector(`#question-type-${questionNumber}`).addEventListener('change', function () {
+        const identificationDiv = questionContainer.querySelector(`#identify-con-${questionNumber}`);
+        const choiceDiv = questionContainer.querySelector(`#choice-con-${questionNumber}`);
+        const paragraphDiv = questionContainer.querySelector(`#paragraph-con-${questionNumber}`);
         if (this.value === 'choice') {
             identificationDiv.style.display = 'none';
             choiceDiv.style.display = 'block';
-        } else {
+            paragraphDiv.style.display = 'none';
+        } 
+        else if(this.value === 'identification'){
             identificationDiv.style.display = 'block';
             choiceDiv.style.display = 'none';
+            paragraphDiv.style.display = 'none';
+            
         }
+        else if(this.value === 'paragraph'){
+            identificationDiv.style.display = 'none';
+            choiceDiv.style.display = 'none';
+            paragraphDiv.style.display = 'block';
+            
+        }
+        
     });
 
     const choiceAddBtn = questionContainer.querySelector(`#add-option-${questionNumber}`);
@@ -256,8 +288,10 @@ async function saveQuestions() {
     // Save each question
     const savePromises = [];
     questionContainers.forEach((container, index) => {
+        const quizPoints = container.querySelector(`#question-point-${index + 1}`).value || 1;
         const questionType = container.querySelector(`#question-type-${index + 1}`).value;
         let questionData = {
+            point: quizPoints,
             type: questionType
         };
 
@@ -266,7 +300,8 @@ async function saveQuestions() {
             questionData.answer = container.querySelector(`#question-${index + 1}-identify-answer`).value;
             questionData.alternate = container.querySelector(`#question-${index + 1}-identify-alternate`).value;
             questionData.case = container.querySelector(`input[name="answer-case-${index + 1}"]:checked`).value;
-        } else if (questionType === 'choice') {
+        } 
+        else if (questionType === 'choice') {
             questionData.question = container.querySelector(`#question-${index + 1}-choice-question`).value;
             const options = {};
             container.querySelectorAll(`.choice-option-con input`).forEach((input, optionIndex) => {
@@ -274,6 +309,9 @@ async function saveQuestions() {
             });
             questionData.options = options;
             questionData.answer = container.querySelector(`#question-${index + 1}-choice-select-answer`).value;
+        } 
+        else if (questionType === 'paragraph') {
+            questionData.question = container.querySelector(`#question-${index + 1}-paragraph-question`).value;
         }
 
         savePromises.push(setDoc(doc(questionsCollectionRef, `question-${index + 1}`), questionData));
@@ -363,10 +401,14 @@ async function fetchQuestionsAndDirection() {
 
             const quizContainerIdentify = document.getElementById(`identify-con-${questionNumber}`);
             const quizContainerChoice = document.getElementById(`choice-con-${questionNumber}`);
+            const quizContainerParagraph = document.getElementById(`paragraph-con-${questionNumber}`);
+
+            questionContainer.querySelector(`#question-point-${questionNumber}`).value = questionData.point || 1;
             const questionType = questionData.type;
             if (questionType === 'identification') {
                 quizContainerIdentify.style.display = 'block';
                 quizContainerChoice.style.display = 'none';
+                quizContainerParagraph.style.display = 'none';
 
                 questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'identification';
                 questionContainer.querySelector(`#question-${questionNumber}-identify-question`).value = questionData.question || '';
@@ -376,6 +418,7 @@ async function fetchQuestionsAndDirection() {
             } else if (questionType === 'choice') {
                 quizContainerIdentify.style.display = 'none';
                 quizContainerChoice.style.display = 'block';
+                quizContainerParagraph.style.display = 'none';
 
                 questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'choice';
                 questionContainer.querySelector(`#question-${questionNumber}-choice-question`).value = questionData.question || '';
@@ -396,6 +439,14 @@ async function fetchQuestionsAndDirection() {
                 });
 
                 choiceSelect.value = questionData.answer || '';
+            } else if (questionType === 'paragraph') {
+                quizContainerIdentify.style.display = 'none';
+                quizContainerChoice.style.display = 'none';
+                quizContainerParagraph.style.display = 'block';
+
+                questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'paragraph';
+                questionContainer.querySelector(`#question-${questionNumber}-paragraph-question`).value = questionData.question || '';
+                
             }
         });
 
