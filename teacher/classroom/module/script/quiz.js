@@ -264,6 +264,7 @@ function addQuestion() {
     });
 }
 
+
 // -----------------------------------------saving---------------------------------------
 //func: save quiz questions
 async function saveQuestions() {
@@ -360,6 +361,7 @@ async function saveQuizDetails() {
         console.error('Error updating quiz details:', error);
     }
 }
+
 
 // -----------------------------------------fetching---------------------------------------
 //func: fecth quiz questions
