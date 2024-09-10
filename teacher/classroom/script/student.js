@@ -64,7 +64,7 @@ async function getClassroomName() {
     }
 }
 
-
+// func: fetch active students
 async function getActiveStudents() {
     if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");

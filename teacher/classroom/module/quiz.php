@@ -14,6 +14,7 @@
 <body>
     <script src="/teacher/dashboard.js" type="module"></script>
     <script type="module" src="script/quiz.js"></script>
+    <script type="module" src="script/quiz-responses.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -104,7 +105,7 @@
                             <span>Time</span>
                             <span>Score</span>
                         </div>
-                        <div class="response-students">
+                        <!-- <div class="response-students">
                             <div class="response-student-con-1" >
                                 <img class="response-student-image"  src="" alt="">
                                 <span class="respose-student-name" >Sample student name</span>
@@ -113,47 +114,8 @@
                                 <span class="response-student-time" >0</span>
                                 <span class="response-student-score" >0</span>
                             </div>
-                        </div>
-                        <div class="response-students">
-                            <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
-                                <span class="respose-student-name" >Sample student name</span>
-                            </div>
-                            <div class="response-student-con-1">
-                                <span class="response-student-time" >0</span>
-                                <span class="response-student-score" >0</span>
-                            </div>
-                        </div>
-                        <div class="response-students">
-                            <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
-                                <span class="respose-student-name" >Sample student name</span>
-                            </div>
-                            <div class="response-student-con-1">
-                                <span class="response-student-time" >0</span>
-                                <span class="response-student-score" >0</span>
-                            </div>
-                        </div>
-                        <div class="response-students">
-                            <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
-                                <span class="respose-student-name" >Sample student name</span>
-                            </div>
-                            <div class="response-student-con-1">
-                                <span class="response-student-time" >0</span>
-                                <span class="response-student-score" >0</span>
-                            </div>
-                        </div>
-                        <div class="response-students">
-                            <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
-                                <span class="respose-student-name" >Sample student name</span>
-                            </div>
-                            <div class="response-student-con-1">
-                                <span class="response-student-time" >0</span>
-                                <span class="response-student-score" >0</span>
-                            </div>
-                        </div>
+                        </div> -->
+                        
                     </div>
                 </div>
                 <!-- Settings view container -->
