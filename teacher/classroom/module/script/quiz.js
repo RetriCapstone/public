@@ -46,6 +46,11 @@ function auto_height(textarea) {
         this.style.height = (this.scrollHeight) + 'px';
     });
 
+    textarea.addEventListener('focusin', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
     // Initialize the textarea height
     textarea.style.height = 'auto';
     textarea.style.height = (textarea.scrollHeight) + 'px';
