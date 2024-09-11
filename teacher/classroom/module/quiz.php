@@ -209,7 +209,7 @@
                     
             </div>
         </div>
-        <div class="quiz-tool-container">
+        <div class="quiz-tool-container quiz-item-container">
             <div class="quiz-question-tool-container style-container-1" >
                 <div class="quiz-question-tool-item add-question-btn" >
                     <span class="quiz-add-icon add-icon" >+</span>

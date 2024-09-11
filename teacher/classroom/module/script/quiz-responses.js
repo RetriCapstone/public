@@ -45,11 +45,13 @@ async function getActiveStudents() {
             const userDoc = await getDoc(userDocRef);
             const userData = userDoc.data();
 
+            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png" ;
+
             const studentElement = document.createElement('div');
             studentElement.className = 'response-students';
             studentElement.innerHTML = `
                             <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
+                                <img class="response-student-image"  src="${profileImageUrl}" alt="">
                                 <span class="respose-student-name" >${userData.lastname}, ${userData.firstname}</span>
                             </div>
                             <div class="response-student-con-1">
