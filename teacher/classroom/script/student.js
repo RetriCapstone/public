@@ -86,11 +86,13 @@ async function getActiveStudents() {
             const userDoc = await getDoc(userDocRef);
             const userData = userDoc.data();
 
+            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png" ;
+
             const studentElement = document.createElement('div');
             studentElement.className = 'style-student-list';
             studentElement.innerHTML = `
                 <div style="display: flex; flex-direction: row; gap: 14px; align-items: center;">
-                    <img src="" alt="" class="student-image" id="profile-image-student">
+                    <img src="${profileImageUrl}" alt="" class="student-image" id="profile-image-student">
                     <p class="style-text" id="active-student-name">${userData.lastname}, ${userData.firstname}</p>
                 </div>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -104,6 +106,101 @@ async function getActiveStudents() {
         loadingIndicator.style.display = 'none';
     }
 }
+
+
+// func: fetch student join request
+async function getRequestStudents() {
+    if (!selectedClassroomId || !teacherId) {
+        console.error("Missing required identifiers");
+        return;
+    }
+
+    try {
+        loadingIndicator.style.display = 'block';
+
+        const requestCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request');
+        const requestSnapshot = await getDocs(requestCollectionRef);
+
+        const requestStudentsContainer = document.querySelector('.container-request');
+        requestStudentsContainer.innerHTML = '';
+
+        for (const requestDoc of requestSnapshot.docs) {
+            const studentId = requestDoc.id;
+            const userDocRef = doc(db, 'users', studentId);
+            const userDoc = await getDoc(userDocRef);
+            const userData = userDoc.data();
+            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png" ;
+
+            const requestElement = document.createElement('div');
+            requestElement.className = 'style-student-list';
+            requestElement.innerHTML = `
+                <div style="display: flex; flex-direction: row; gap: 14px; align-items: center;">
+                    <img src="${profileImageUrl}" alt="" class="student-image">
+                    <p class="style-text" id="request-student-name">${userData.lastname}, ${userData.firstname}</p>
+                </div>
+                <div style="gap: .8rem; display:flex; flex-direction:row;">
+                    <button class="style-btn-add-1" id="btn-accept-student-${studentId}">Accept</button>
+                    <button class="style-btn-del-1" id="btn-remove-student-${studentId}">Remove</button>
+                </div>
+            `;
+
+            requestStudentsContainer.appendChild(requestElement);
+
+            document.getElementById(`btn-accept-student-${studentId}`).addEventListener('click', () => acceptStudent(studentId));
+            document.getElementById(`btn-remove-student-${studentId}`).addEventListener('click', () => removeStudent(studentId));
+        }
+        loadingIndicator.style.display = 'none';
+    } catch (error) {
+        console.error("Error getting request students:", error);
+        loadingIndicator.style.display = 'none';
+    }
+}
+
+// func: accept student req
+async function acceptStudent(studentId) {
+    try {
+        // Define the path to the classroom document
+        const classRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classDoc = await getDoc(classRef);
+        const classroomData = classDoc.data();
+
+        const studentDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student', studentId);
+        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
+
+        // Move the student from 'request' to 'student'
+        await setDoc(studentDocRef, {});
+
+        // Delete the student from 'request'
+        await deleteDoc(requestDocRef);
+
+        // Add classroom info to the user's document
+        const classroomDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
+        await setDoc(classroomDocRef, { teacher: teacherId, name: classroomData.name, code: classroomData.code });
+
+        getRequestStudents();  // Refresh the request list
+        getActiveStudents();   // Refresh the active students list
+    } catch (error) {
+        console.error('Error accepting student:', error);
+        alert('Error accepting student. Please try again.');
+    }
+}
+
+// func: decline student req
+async function removeStudent(studentId) {
+    try {
+        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
+        
+        // Delete the student from 'request'
+        await deleteDoc(requestDocRef);
+        getRequestStudents();  // Refresh the request list
+    } catch (error) {
+        console.error('Error removing student:', error);
+        alert('Error removing student. Please try again.');
+    }
+}
+
 
 // Edit classroom
 async function editClassroom(event) {
@@ -130,7 +227,6 @@ async function editClassroom(event) {
         alert("An error occurred while updating the classroom. Please try again.");
     }
 }
-
 
 function editClassModal(modalId, btnId, closeClass, btnCancel) {
     const modal = document.getElementById(modalId);
@@ -183,97 +279,6 @@ async function deleteClassroom() {
             console.error("Error deleting classroom:", error);
             alert("An error occurred while deleting the classroom. Please try again.");
         }
-    }
-}
-
-
-
-async function getRequestStudents() {
-    if (!selectedClassroomId || !teacherId) {
-        console.error("Missing required identifiers");
-        return;
-    }
-
-    try {
-        loadingIndicator.style.display = 'block';
-
-        const requestCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request');
-        const requestSnapshot = await getDocs(requestCollectionRef);
-
-        const requestStudentsContainer = document.querySelector('.container-request');
-        requestStudentsContainer.innerHTML = '';
-
-        for (const requestDoc of requestSnapshot.docs) {
-            const studentId = requestDoc.id;
-            const userDocRef = doc(db, 'users', studentId);
-            const userDoc = await getDoc(userDocRef);
-            const userData = userDoc.data();
-
-            const requestElement = document.createElement('div');
-            requestElement.className = 'style-student-list';
-            requestElement.innerHTML = `
-                <div style="display: flex; flex-direction: row; gap: 14px; align-items: center;">
-                    <img src="" alt="" class="student-image">
-                    <p class="style-text" id="request-student-name">${userData.lastname}, ${userData.firstname}</p>
-                </div>
-                <div style="gap: .8rem; display:flex; flex-direction:row;">
-                    <button class="style-btn-add-1" id="btn-accept-student-${studentId}">Accept</button>
-                    <button class="style-btn-del-1" id="btn-remove-student-${studentId}">Remove</button>
-                </div>
-            `;
-
-            requestStudentsContainer.appendChild(requestElement);
-
-            document.getElementById(`btn-accept-student-${studentId}`).addEventListener('click', () => acceptStudent(studentId));
-            document.getElementById(`btn-remove-student-${studentId}`).addEventListener('click', () => removeStudent(studentId));
-        }
-        loadingIndicator.style.display = 'none';
-    } catch (error) {
-        console.error("Error getting request students:", error);
-        loadingIndicator.style.display = 'none';
-    }
-}
-
-async function acceptStudent(studentId) {
-    try {
-        // Define the path to the classroom document
-        const classRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
-
-        // Fetch the classroom document
-        const classDoc = await getDoc(classRef);
-        const classroomData = classDoc.data();
-
-        const studentDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student', studentId);
-        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
-
-        // Move the student from 'request' to 'student'
-        await setDoc(studentDocRef, {});
-
-        // Delete the student from 'request'
-        await deleteDoc(requestDocRef);
-
-        // Add classroom info to the user's document
-        const classroomDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
-        await setDoc(classroomDocRef, { teacher: teacherId, name: classroomData.name, code: classroomData.code });
-
-        getRequestStudents();  // Refresh the request list
-        getActiveStudents();   // Refresh the active students list
-    } catch (error) {
-        console.error('Error accepting student:', error);
-        alert('Error accepting student. Please try again.');
-    }
-}
-
-async function removeStudent(studentId) {
-    try {
-        const requestDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'request', studentId);
-        
-        // Delete the student from 'request'
-        await deleteDoc(requestDocRef);
-        getRequestStudents();  // Refresh the request list
-    } catch (error) {
-        console.error('Error removing student:', error);
-        alert('Error removing student. Please try again.');
     }
 }
 

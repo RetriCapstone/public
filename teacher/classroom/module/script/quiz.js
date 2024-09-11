@@ -294,7 +294,8 @@ async function saveQuestions() {
     // Save each question
     const savePromises = [];
     questionContainers.forEach((container, index) => {
-        const quizPoints = container.querySelector(`#question-point-${index + 1}`).value || 1;
+        let quizPoints = 1;
+        quizPoints = Number(container.querySelector(`#question-point-${index + 1}`).value);
         const questionType = container.querySelector(`#question-type-${index + 1}`).value;
         let questionData = {
             point: quizPoints,
@@ -444,8 +445,12 @@ async function fetchQuestionsAndDirection() {
                         console.error(`Option container #choice-option-${questionNumber}-${optionNumber} not found.`);
                     }
                 });
-
                 choiceSelect.value = questionData.answer || '';
+                if(choiceSelect.value === ''){
+                    choiceSelect.value = questionData.answer;
+                }else{
+                    choiceSelect.value = questionData.answer;
+                }
             } else if (questionType === 'paragraph') {
                 quizContainerIdentify.style.display = 'none';
                 quizContainerChoice.style.display = 'none';

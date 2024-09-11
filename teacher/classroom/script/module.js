@@ -360,8 +360,7 @@ class editModuleModal {
 
 }
 
-
-
+// func: create module
 async function createModule(event) {
     event.preventDefault();
 
@@ -381,7 +380,7 @@ async function createModule(event) {
         const existingModulesCount = moduleSnapshot.size;
         const newModuleId = moduleName + existingModulesCount;
 
-        let moduleNumber;
+        let moduleNumber = 1 ;
         if (position === 'end') {
             moduleNumber = existingModulesCount + 1;
         } else if (position === 'begin') {
@@ -395,7 +394,7 @@ async function createModule(event) {
             moduleNumber = selectedModuleNumber + 0.1;
         }
 
-        const moduleDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', newModuleId);
+        const moduleDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module'));
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
         alert('Module created successfully');
@@ -444,6 +443,7 @@ class Modal {
     }
 }
 
+// func: create module item - lect/quiz/act -
 class ModuleItemModal {
     constructor(modalId, moduleId, closeClass, cancelId) {
         this.modal = document.getElementById(modalId);
