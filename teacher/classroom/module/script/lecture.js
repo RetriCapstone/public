@@ -423,9 +423,11 @@ function addParagraph() {
 }
 
 
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
 // saving ------------------------------------- saving ---------------------------------------------------------------
 //func: save lecture created contents (header 1, header 2, text paragraph)
 async function saveLectureItems() {
+    saveloadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the 'item' collection within the lecture
         const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
@@ -471,9 +473,11 @@ async function saveLectureItems() {
             });
         }
 
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
         alert('Lecture items saved successfully.');
 
     } catch (error) {
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
         console.error('Error saving lecture items:', error);
         alert('An error occurred while saving the lecture items. Please try again.');
     }

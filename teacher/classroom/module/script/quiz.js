@@ -272,12 +272,17 @@ function addQuestion() {
 
 // -----------------------------------------saving---------------------------------------
 //func: save quiz questions
+
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
+
 async function saveQuestions() {
     const questionContainers = document.querySelectorAll('.quiz-question-container');
     const sectionDirection = document.querySelector('.quiz-direction-input').value;
 
+    saveloadingIndicator.style.display = 'block'; // Show loading indicator
     // Define section and questions path
-    const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+    try {
+        const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
     const questionsCollectionRef = collection(sectionDocRef, 'question');
 
     // Delete existing questions
@@ -326,8 +331,15 @@ async function saveQuestions() {
 
     await Promise.all(savePromises);
 
+    saveloadingIndicator.style.display = 'none'; // Show loading indicator
     alert('Questions and section direction saved successfully.');
     console.log('Questions and section direction saved successfully.');
+
+    } catch (error) {
+        console.error('Error updating quiz questions:', error);
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
+    }
+    
 }
 
 //func: save quiz settings

@@ -53,6 +53,14 @@
             </ul>
         </div>
         <div class="lect-body" >
+            
+            <div class="save-loading-indicator-bg">
+                        <div class="save-loading-indicator">
+                            <div class="spinner"></div>
+                            Saving
+                        </div>
+                </div>
+            
             <div class="lect-header-container" >
                 <div class="style-header">
                     <h3 class="lecture-name" id="lecture-name" ></h3>

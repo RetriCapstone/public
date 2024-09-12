@@ -64,6 +64,12 @@
         <div class="quiz-tool-container">
         </div>
         <div class="main_body">
+            <div class="save-loading-indicator-bg">
+                    <div class="save-loading-indicator">
+                        <div class="spinner"></div>
+                        Saving
+                    </div>
+            </div>
             <div class="con-1">
                     <div class="loading-indicator">
                         <div class="spinner"></div>
@@ -97,24 +103,18 @@
                 <!-- Responses view container -->
                 <div class="quiz-containers quiz-responses-container" >
                     <div class="style-container-1 response-style-con">
-                        <span class="respones-text-header" >0</span>
+                        <span class="respones-text-header" id="quiz-number-responses" >0</span>
                         <span class="respones-text-header" >responses</span>
                     </div>
-                    <div class="style-container-1 response-style-con response-student-list">
+                    <div class="style-container-1 response-style-con">
                         <div class="response-header-details" >
                             <span>Time</span>
                             <span>Score</span>
                         </div>
-                        <!-- <div class="response-students">
-                            <div class="response-student-con-1" >
-                                <img class="response-student-image"  src="" alt="">
-                                <span class="respose-student-name" >Sample student name</span>
-                            </div>
-                            <div class="response-student-con-1">
-                                <span class="response-student-time" >0</span>
-                                <span class="response-student-score" >0</span>
-                            </div>
-                        </div> -->
+
+                        <div class="response-student-list" >
+
+                        </div>
                         
                     </div>
                 </div>
@@ -141,6 +141,22 @@
                             <div class="settings-card-1" >
                                 <label class="switch">
                                 <input type="checkbox" id="quiz-random-checkbox" >
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Show Question Answer
+                                </span>
+                                <p class="settings-label-body" >
+                                    Correct answer will be visible after taking the quiz
+                                </p>
+                            </div>
+                            <div class="settings-card-1" >
+                                <label class="switch">
+                                <input type="checkbox" id="quiz-show-answer" >
                                 <span class="slider round"></span>
                                 </label>
                             </div>
