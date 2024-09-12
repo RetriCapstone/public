@@ -84,7 +84,7 @@
     font-size: .8rem;
     gap: 4px;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     padding: 4px;
     border-radius: 10px;
     cursor: pointer;

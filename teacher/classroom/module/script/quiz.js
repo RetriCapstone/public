@@ -92,7 +92,7 @@ function addOption(questionNumber) {
     `;
     choiceBody1.appendChild(optionContainer);
 
-    // Update the options in the select element
+    // // Update the options in the select element
     updateChoiceOptions(choiceSelect, choiceBody1);
 
     // Add event listener to update select options when input value changes
@@ -246,11 +246,11 @@ function addQuestion() {
         choiceBody1.appendChild(optionContainer);
 
         // Update the options in the select element
-        updateChoiceOptions(choiceSelect, choiceBody1);
+        // updateChoiceOptions(choiceSelect, choiceBody1);
 
         // Add event listener to update select options when input value changes
         optionContainer.querySelector('input').addEventListener('input', function () {
-            updateChoiceOptions(choiceSelect, choiceBody1);
+            // updateChoiceOptions(choiceSelect, choiceBody1);
         });
         
         // Add event listener to update options when select is focused
@@ -458,13 +458,9 @@ async function fetchQuestionsAndDirection() {
                     } else {
                         console.error(`Option container #choice-option-${questionNumber}-${optionNumber} not found.`);
                     }
+                    choiceSelect.value = questionData.answer || '';
                 });
                 choiceSelect.value = questionData.answer || '';
-                if(choiceSelect.value === ''){
-                    choiceSelect.value = questionData.answer;
-                }else{
-                    choiceSelect.value = questionData.answer;
-                }
             } else if (questionType === 'paragraph') {
                 quizContainerIdentify.style.display = 'none';
                 quizContainerChoice.style.display = 'none';
@@ -519,8 +515,18 @@ async function fetchQuizDetails() {
             const settingsStatusContainer = document.querySelector('.settings-datetime-con');
             if (quizData.status === 'set') {
                 settingsStatusContainer.style.display = 'flex';
-                document.querySelector('input[name="quiz-datetime-start"]').value = quizData.startDate ? new Date(quizData.startDate.seconds * 1000).toISOString().slice(0,16) : '';
-                document.querySelector('input[name="quiz-datetime-end"]').value = quizData.endDate ? new Date(quizData.endDate.seconds * 1000).toISOString().slice(0,16) : '';
+                // Correctly convert Firestore Timestamp to ISO string format
+                if (quizData.startDate && quizData.startDate.toDate) {
+                    document.querySelector('input[name="quiz-datetime-start"]').value = convertToLocalDateTime(quizData.startDate.toDate());
+                } else {
+                    document.querySelector('input[name="quiz-datetime-start"]').value = '';
+                }
+
+                if (quizData.endDate && quizData.endDate.toDate) {
+                    document.querySelector('input[name="quiz-datetime-end"]').value = convertToLocalDateTime(quizData.endDate.toDate());
+                } else {
+                    document.querySelector('input[name="quiz-datetime-end"]').value = '';
+                }
             } else {
                 settingsStatusContainer.style.display = 'none';
             }
@@ -533,6 +539,11 @@ async function fetchQuizDetails() {
     }
 }
 
+//func: convert fetched date time
+function convertToLocalDateTime(date) {
+    const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 16);
+}
 //func: navigation param
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
