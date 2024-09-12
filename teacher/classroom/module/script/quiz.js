@@ -346,6 +346,7 @@ async function saveQuestions() {
 async function saveQuizDetails() {
     const quizName = document.getElementById('quiz-settings-name-input').value.trim().toUpperCase();
     const randomizeQuestions = document.getElementById('quiz-random-checkbox').checked;
+    const showquestionAsnwer = document.getElementById('quiz-show-answer').checked;
     const durationHours = parseInt(document.getElementById('quiz-duration-hour').value) || 0;
     const durationMinutes = parseInt(document.getElementById('quiz-duration-minute').value) || 0;
     const durationSeconds = parseInt(document.getElementById('quiz-duration-second').value) || 0;
@@ -361,6 +362,7 @@ async function saveQuizDetails() {
         const quizData = {
             name: quizName,
             randomize: randomizeQuestions,
+            showAnswer: showquestionAsnwer,
             duration: {
                 hours: durationHours,
                 minutes: durationMinutes,
@@ -499,6 +501,7 @@ async function fetchQuizDetails() {
             document.getElementById('quiz-name').innerText = quizData.name || '';
             document.getElementById('quiz-settings-name-input').value = quizData.name || '';
             document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
+            document.getElementById('quiz-show-answer').checked = quizData.showAnswer || false;
 
             if (quizData.duration) {
                 document.getElementById('quiz-duration-hour').value = quizData.duration.hours || 0;
