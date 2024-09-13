@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+            <div class="save-loading-indicator-bg">
+                    <div class="save-loading-indicator">
+                        <div class="spinner"></div>
+                        Loading
+                    </div>
+            </div>
     <header>
         <div class="container-navigation">
             <a class="logo-container" href="index.php" >

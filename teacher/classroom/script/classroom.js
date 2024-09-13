@@ -65,7 +65,7 @@ async function getClassrooms() {
                 const className = classData.name;
                 const classCode = classData.code;
 
-                classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classroomDoc.id });
+                classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classId });
             });
         }
 

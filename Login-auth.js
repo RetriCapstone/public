@@ -15,10 +15,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
+
 const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    saveloadingIndicator.style.display = 'block'; // Show loading indicator
     const email = document.getElementById('input-email').value;
     const password = document.getElementById('input-password').value;
 
@@ -36,22 +38,25 @@ loginForm.addEventListener('submit', async (e) => {
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("loggedInUserEmail", email); // Store the logged-in user's email
                         window.location.href = "teacher/classroom/classroom.php";
+                        return; // Exit the function after successful login
                     }
                 });
+                
                 if (!userFound) {
-                    alert("Email, or password is invalid");
+                    alert("Email or password is invalid.");
                 }
             } else {
-                alert("Email, or password is invalid");
+                alert("Email or password is invalid.");
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
             alert("Error logging in. Please try again.");
+        } finally {
+            saveloadingIndicator.style.display = 'none'; // Hide loading indicator
         }
-    } else {
-        alert("Please enter both username and password.");
-    }
+    } 
 });
+
 
 const togglePassword = document.getElementById('togglePassword');
 const passwordField = document.getElementById('input-password');
