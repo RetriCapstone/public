@@ -19,14 +19,16 @@ const db = getFirestore(app);
 const saveloadingIndicator = document.querySelector('.save-loading-indicator-bg');
 const signUp = document.getElementById('signUpForm');
 
+let userFound = false;
+
 signUp.addEventListener('submit', async (e) => {
     e.preventDefault();
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
 
-    const signupFirstname = document.getElementById('input-firstname').value;
-    const signupLastname = document.getElementById('input-lastname').value;
-    const signupEmail = document.getElementById('input-email').value;
-    const signupCode = document.getElementById('input-code').value;
+    const signupFirstname = document.getElementById('input-firstname').value.trim();
+    const signupLastname = document.getElementById('input-lastname').value.trim();
+    const signupEmail = document.getElementById('input-email').value.trim();
+    const signupCode = document.getElementById('input-code').value.trim();
     const signupPassword = document.getElementById('input-password').value;
     const signupConfirmPass = document.getElementById('input-confirm-password').value;
 
@@ -55,7 +57,7 @@ signUp.addEventListener('submit', async (e) => {
         }
 
         if (!codeMatched) {
-            alert('Signup code is incorrect!');
+            alert('Invalid Instructor Code');
             saveloadingIndicator.style.display = 'none'; // Hide loading indicator
             return;
         }
@@ -72,7 +74,12 @@ signUp.addEventListener('submit', async (e) => {
         const teacherCollectionRef = collection(db, 'teacher');
         await addDoc(teacherCollectionRef, newTeacherData);
 
+
         alert('Signup successful!');
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("loggedInUserEmail", signupEmail); // Store the logged-in user's email
+        window.location.href = "teacher/classroom/classroom.php";
+
     } catch (error) {
         console.error('Error during signup:', error);
         alert('An error occurred during signup. Please try again.');
@@ -80,3 +87,24 @@ signUp.addEventListener('submit', async (e) => {
         saveloadingIndicator.style.display = 'none'; // Hide loading indicator
     }
 });
+
+
+
+const togglePassword = document.getElementById('togglePassword');
+const toggleConfirmPassword = document.getElementById('toggleConPassword');
+
+const passwordField = document.getElementById('input-password');
+const ConfirmPasswordField = document.getElementById('input-confirm-password');
+
+togglePass(togglePassword, passwordField)
+togglePass(toggleConfirmPassword, ConfirmPasswordField)
+
+function togglePass(icon, inputField) {
+    
+    icon.addEventListener('click', () => {
+        const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+        inputField.setAttribute('type', type);
+        icon.classList.toggle('bxs-show');
+        icon.classList.toggle('bxs-hide');
+    });
+}

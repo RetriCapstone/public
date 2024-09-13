@@ -48,7 +48,6 @@ nav{
     display: flex;
     margin: auto;
     max-width: 1600px;
-    padding: 0 16px;
     justify-content: space-between;
 }
 .container-navigation{
@@ -329,33 +328,88 @@ nav{
 }
 
 
-
-
-.container-info {
-    display: flex;
+.footer-container {
     width: 100%;
-    margin-top: 6%;
-    padding: 40px 20px;
-    background: transparent;
-    justify-content: flex-start;
-    border-top:1px solid #526683;
+    background-color: #226A80;
+    color: #fff;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.container-info-contents {
-    text-align: center;
-    padding: 20px;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    /* padding: 40px; */
 }
 
-.container-info-contents h2 {
-    font-size: 2.2rem;
+.footer-section {
+    flex: 1;
+    margin: 20px;
+}
+
+.footer-section h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
     font-weight: bold;
+}
+
+.footer-section p, .footer-section ul {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
     margin-bottom: 10px;
 }
 
-.container-info-contents p {
-    font-size: 1.5rem;
-    color: #555;
+.footer-section ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
 }
+
+.footer-section ul li a:hover {
+    color: #4887ff;
+}
+
+.social-icons a {
+    margin-right: 15px;
+}
+
+.social-icons a img {
+    width: 30px;
+    height: auto;
+    filter: brightness(0) invert(1); /* makes the icons white */
+    transition: filter 0.3s ease;
+}
+
+.social-icons a:hover img {
+    filter: brightness(0) invert(0.7);
+}
+
+.footer-bottom {
+    width: 100%;
+    background-color: #185569;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 1rem;
+    margin: 0;
+    color: #bbb;
+}
+
 
 
 

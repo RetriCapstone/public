@@ -21,8 +21,8 @@ const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
-    const email = document.getElementById('input-email').value;
-    const password = document.getElementById('input-password').value;
+    const email = document.getElementById('input-email').value.trim();
+    const password = document.getElementById('input-password').value.trim();
 
     if (email && password) {
         try {

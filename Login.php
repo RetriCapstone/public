@@ -40,7 +40,7 @@
 
                 <a href="#" class="forgot-password">Forgot password?</a>
                 <button type="submit">Login</button>
-                <p>Don't have an account? <a href="Signup.html">Signup</a></p>
+                <p>Don't have an account? <a href="Signup.php">Signup</a></p>
             </form>
         </div>
     </div>

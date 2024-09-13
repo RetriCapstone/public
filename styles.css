@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #e2eeff;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +21,7 @@ header{
     position: fixed;
     z-index: 5;
 }
+
 .logo-container {
     height: 40px;
     display: flex;
@@ -40,10 +41,19 @@ header{
 .login-box {
     background-color: white;
     border-radius: 16px;
-    padding: 3rem;
+    padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 400px; 
+}
+
+.signup-box {
+    background-color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 600px; 
 }
 
 .input-box {
@@ -68,22 +78,28 @@ h2 {
 }
 
 input[type="email"],
-input[type="text"],
-input[type="password"] {
+input[type="password"],  
+input[type="text"] {
     width: 100%;
-    padding: 15px;  
+    padding: 15px;
     margin: 15px 0;
-    border: 1px solid #aeaeae;
+    border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease;
 }
 
 input[type="email"]:focus,
-input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="text"]:focus {
     border-color: #007bff;
     outline: none;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 button {
@@ -155,47 +171,6 @@ p a:hover {
 .divider:after {
     right: 0;
 }
-
-.social-login {
-    width: 100%;
-    padding: 15px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.social-login img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.facebook {
-    background-color: #3b5998;
-    color: white;
-}
-
-.facebook:hover {
-    background-color: #334d84;
-    transform: translateY(-2px);
-}
-
-.google {
-    background-color: #db4437;
-    color: white;
-}
-
-.google:hover {
-    background-color: #c33d29;
-    transform: translateY(-2px);
-}
-
 
 
 .save-loading-indicator { 
