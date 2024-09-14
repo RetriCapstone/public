@@ -102,6 +102,15 @@
                 </div>
                 <!-- Responses view container -->
                 <div class="quiz-containers quiz-responses-container" >
+                    
+                    <!-- Modal for Editing Module  -->
+                    <div id="modal-edit-module" class="style-modal">
+                        <div class="style-modal-content edit-module-modal">
+                            <span class="close-modal close-module">&times;</span>
+                            
+                        </div>
+                    </div>
+
                     <div class="style-container-1 response-style-con">
                         <span class="respones-text-header" id="quiz-number-responses" >0</span>
                         <span class="respones-text-header" >responses</span>

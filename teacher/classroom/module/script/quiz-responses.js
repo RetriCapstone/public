@@ -77,6 +77,7 @@ async function fetchActiveStudents() {
                     <span class="respose-student-name">${userData.lastname}, ${userData.firstname}</span>
                 </div>
                 <div class="response-student-con-1">
+                    <i style="margin-right: 4rem; color: rgb(95 130 192);">click view answers</i>
                     <span class="response-student-time">-</span> 
                     <span class="response-student-score">${totalScore || "-"}</span>
                 </div>

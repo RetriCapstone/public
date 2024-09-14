@@ -70,6 +70,7 @@
                             <i class="fa-solid fa-plus"></i> Create Module
                         </button>
                     </div>
+                    <!-- Modal for Creating Module -->
                         <div id="modal-create-module" class="style-modal">
                             <div class="style-modal-content create-module-modal">
                                 <span class="close-modal">&times;</span>
