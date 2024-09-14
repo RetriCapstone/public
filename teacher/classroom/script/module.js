@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, getDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, getDoc, addDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -503,12 +503,14 @@ class ModuleItemModal {
         const itemSnapshot = await getDocs(itemCollectionRef);
         const existingItemsCount = itemSnapshot.size;
         const itemNumber = existingItemsCount + 1;
-        const moduleItemID = moduleItemName + itemNumber;
 
-        const itemDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType, moduleItemID);
+        const itemDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType));
 
         try {
-            await setDoc(itemDocRef, { number: itemNumber , status: 'close', name: moduleItemName });
+            // Use addDoc to automatically generate the document ID
+            const itemDocRef = await addDoc(itemCollectionRef, { number: itemNumber, status: 'close', name: moduleItemName });
+            const moduleItemID = itemDocRef.id; 
+
             moduleItemNameInput.value = '';  // Clear the input field
             alert('Created successfully.');
             this.closeModal();  // Close the modal
