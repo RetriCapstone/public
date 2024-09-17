@@ -138,8 +138,8 @@ function addQuestion() {
             <div class="quiz-identify-con" id="identify-con-${questionNumber}">
                 <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
                 <div class="identify-body-1">
-                    <input class="quiz-identify-answer" type="text" required autocomplete="off" placeholder="Answer" id="question-${questionNumber}-identify-answer">
-                    <input class="quiz-identify-answer" type="text" autocomplete="off" placeholder="Alternate Answer" id="question-${questionNumber}-identify-alternate">
+                    <input class="quiz-identify-answer" type="text" required autocomplete="off" placeholder="Correct Answer" id="question-${questionNumber}-identify-answer">
+                    <input class="quiz-identify-answer" type="text" autocomplete="off" placeholder="Correct Answer(Alternative)" id="question-${questionNumber}-identify-alternate">
                 </div>
                 <div class="identify-body-2">
                     <div class="identify-radio-con">

@@ -176,7 +176,7 @@
                                         
                                     <div class="style-container-1 quiz-details-question-container" >
                                         <div class="quiz-detail-content" >
-                                            <span>Question 1</span><span class="quiz-question-type" >Identification</span>
+                                            <span>Question 1</span><span class="quiz-question-type" >Multiple choices</span>
                                         </div>
                                         <div class="quiz-detail-content-between" >
                                             <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
