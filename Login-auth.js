@@ -21,6 +21,7 @@ const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
+
     const email = document.getElementById('input-email').value.trim();
     const password = document.getElementById('input-password').value.trim();
 
@@ -56,6 +57,17 @@ loginForm.addEventListener('submit', async (e) => {
         }
     } 
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 const togglePassword = document.getElementById('togglePassword');

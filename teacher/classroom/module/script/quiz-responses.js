@@ -61,8 +61,8 @@ async function fetchActiveStudents() {
                     questionDataList.push({ id: doc.id, ...questionData });
 
                     // Sum up the points from each question document
-                    if (questionData.point) {
-                        totalScore += questionData.point;
+                    if (questionData.score) {
+                        totalScore += questionData.score;
                     }
                 });
                 // Increment number of responses if the user has question documents
@@ -70,14 +70,15 @@ async function fetchActiveStudents() {
             }
 
             const studentElement = document.createElement('div');
-            studentElement.className = 'response-students';
+            studentElement.className = 'response-students view-quiz-details';
+            studentElement.setAttribute('data-student-id', studentId);
             studentElement.innerHTML = `
-                <div class="response-student-con-1">
+                <div class="response-student-con-1" " >
                     <img class="response-student-image" src="${profileImageUrl}" alt="">
                     <span class="respose-student-name">${userData.lastname}, ${userData.firstname}</span>
                 </div>
                 <div class="response-student-con-1">
-                    <i style="margin-right: 4rem; color: rgb(95 130 192);">click view answers</i>
+                    <i style="padding-right: 1.2rem; color: rgb(95 130 192);">click to see details</i>
                     <span class="response-student-time">-</span> 
                     <span class="response-student-score">${totalScore || "-"}</span>
                 </div>
@@ -85,12 +86,68 @@ async function fetchActiveStudents() {
             activeStudentsContainer.appendChild(studentElement);
         }
         displayNumberofResponses()
-        console.log(`Number of Responses: ${numberOfResponses}`);
+        
+        // edit module 
+        const editModuleButtons = document.querySelectorAll('.view-quiz-details');
+        editModuleButtons.forEach(button => {
+            button.removeEventListener('click', handleEditQuizClick);  // Remove previous listeners to avoid duplication
+            button.addEventListener('click', handleEditQuizClick);
+        });
+
 
     } catch (error) {
         console.error("Error getting active students:", error);
     }
 }
+
+function studentQuizData(){
+
+}
+// edit module onclick
+function handleEditQuizClick(event) {
+    const moduleId = event.currentTarget.getAttribute('data-student-id');
+    new editQuizAnswerModal(moduleId, "modal-edit-quiz", "close-quiz-detail-modal");
+}
+
+class editQuizAnswerModal {
+    constructor(moduleId, modalId, closeClass) {
+        this.moduleId = moduleId;
+        this.modal = document.getElementById(modalId);
+        this.span = document.getElementsByClassName(closeClass)[0];
+
+        if (this.span && this.modal) {
+            this.openModal = this.openModal.bind(this);
+            this.closeModal = this.closeModal.bind(this);
+            window.addEventListener('click', this.outsideClick);
+
+            this.span.addEventListener('click', this.closeModal);
+            this.modal.style.display = "block";  
+
+            
+
+
+        } else {
+            console.error(`Elements not found for modal: ${modalId}, ${closeClass}`);
+        }
+    }
+
+    openModal() {
+        this.modal.style.display = "block";
+    }
+
+    closeModal() {
+        this.modal.style.display = "none";
+    }
+
+    outsideClick(event) {
+        if (event.target === this.modal) {
+            this.modal.style.display = "none";
+        }
+    }
+
+
+}
+
 
 async function displayNumberofResponses() {
     document.getElementById('quiz-number-responses').innerText = numberOfResponses
