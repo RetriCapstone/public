@@ -118,10 +118,9 @@ class editQuizAnswerModal {
         if (this.span && this.modal) {
             this.openModal = this.openModal.bind(this);
             this.closeModal = this.closeModal.bind(this);
-            window.addEventListener('click', this.outsideClick);
-
             this.span.addEventListener('click', this.closeModal);
             this.modal.style.display = "block";  
+            window.addEventListener('click', this.outsideClick);
 
             
 

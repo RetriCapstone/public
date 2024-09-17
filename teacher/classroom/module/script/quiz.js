@@ -143,16 +143,8 @@ function addQuestion() {
                 </div>
                 <div class="identify-body-2">
                     <div class="identify-radio-con">
-                        <input type="radio" id="identify-exact-${questionNumber}" name="answer-case-${questionNumber}" value="exact" checked>
-                        <label for="identify-exact-${questionNumber}">Exact Case</label>
-                    </div>
-                    <div class="identify-radio-con">
-                        <input type="radio" id="identify-all-caps-${questionNumber}" name="answer-case-${questionNumber}" value="all-caps">
-                        <label for="identify-all-caps-${questionNumber}">All Caps</label>
-                    </div>
-                    <div class="identify-radio-con">
-                        <input type="radio" id="identify-small-caps-${questionNumber}" name="answer-case-${questionNumber}" value="small-caps">
-                        <label for="identify-small-caps-${questionNumber}">Small Caps</label>
+                        <input type="checkbox" id="identify-case-${questionNumber}" name="answer-case-${questionNumber}">
+                        <label for="identify-case-${questionNumber}">Case Sensitive</label>
                     </div>
                 </div>
                 <hr class="divider-solid">
@@ -311,7 +303,7 @@ async function saveQuestions() {
             questionData.question = container.querySelector(`#question-${index + 1}-identify-question`).value;
             questionData.answer = container.querySelector(`#question-${index + 1}-identify-answer`).value;
             questionData.alternate = container.querySelector(`#question-${index + 1}-identify-alternate`).value;
-            questionData.case = container.querySelector(`input[name="answer-case-${index + 1}"]:checked`).value;
+            questionData.case = container.querySelector(`#identify-case-${index + 1}`).checked;
         } 
         else if (questionType === 'choice') {
             questionData.question = container.querySelector(`#question-${index + 1}-choice-question`).value;
@@ -436,7 +428,7 @@ async function fetchQuestionsAndDirection() {
                 questionContainer.querySelector(`#question-${questionNumber}-identify-question`).value = questionData.question || '';
                 questionContainer.querySelector(`#question-${questionNumber}-identify-answer`).value = questionData.answer || '';
                 questionContainer.querySelector(`#question-${questionNumber}-identify-alternate`).value = questionData.alternate || '';
-                questionContainer.querySelector(`input[name="answer-case-${questionNumber}"][value="${questionData.case}"]`).checked = true;
+                questionContainer.querySelector(`#identify-case-${questionNumber}`).checked = questionData.case || false;
             } else if (questionType === 'choice') {
                 quizContainerIdentify.style.display = 'none';
                 quizContainerChoice.style.display = 'block';
