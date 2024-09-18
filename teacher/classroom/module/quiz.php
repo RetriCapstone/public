@@ -120,50 +120,49 @@
                                         <div class="quiz-detail-content" >
                                             <span>Question 1</span><span class="quiz-question-type" >Identification</span>
                                         </div>
-                                        <div class="quiz-detail-content-between" >
-                                            <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                            <div class="quiz-detail-content" >
-                                                <span>Score:</span>
-                                                <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                <span>/0</span>
-                                            </div>
-                                        </div>
-                                        <div class="quiz-detail-content-between" >
-                                            <div class="quiz-detail-content" >
-                                                <div class="quiz-question-answer" >
-                                                    <label for="">Correct Answer</label>
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
-                                                </div>
-                                                <div class="quiz-question-answer" >
-                                                    <label for="">Correct Answer (alternate)</label>
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
+                                        <!-- identification -->
+                                        <div class="quiz-detail-identify" >
+                                            <div class="quiz-detail-content-between" >
+                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                                                <div class="quiz-detail-content" >
+                                                    <span>Score:</span>
+                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                                                    <span>/0</span>
                                                 </div>
                                             </div>
-                                            <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                <label for="">Answer</label>
-                                                <span >
-                                                    User answer
-                                                </span>
+                                            <div class="quiz-detail-content-between" >
+                                                <div class="quiz-detail-content" >
+                                                    <div class="quiz-question-answer" >
+                                                        <label for="">Correct Answer</label>
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
+                                                    <div class="quiz-question-answer" >
+                                                        <label for="">Correct Answer (alternate)</label>
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="quiz-question-answer quiz-detail-user-answer" >
+                                                    <label for="">Answer</label>
+                                                    <span >
+                                                        User answer
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                        <div class="quiz-detail-content" >
-                                            <span>Question 1</span><span class="quiz-question-type" >Paragraph</span>
-                                        </div>
-                                        <div class="quiz-detail-content-between" >
-                                            <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                            <div class="quiz-detail-content" >
-                                                <span>Score:</span>
-                                                <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                <span>/0</span>
+                                        <!-- paragraph -->
+                                        <div class="quiz-detail-paragraph" style="display: none;" >
+                                            <div class="quiz-detail-content-between" >
+                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                                                <div class="quiz-detail-content" >
+                                                    <span>Score:</span>
+                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                                                    <span>/0</span>
+                                                </div>
                                             </div>
-                                        </div>
                                             <div class="quiz-detail-content" >
                                                 <div class="quiz-question-answer quiz-detail-question quiz-detail-user-answer" >
                                                     <label for="">Answer</label>
@@ -172,66 +171,49 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                    </div>
-                                        
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                        <div class="quiz-detail-content" >
-                                            <span>Question 1</span><span class="quiz-question-type" >Multiple choices</span>
                                         </div>
-                                        <div class="quiz-detail-content-between" >
-                                            <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                            <div class="quiz-detail-content" >
-                                                <span>Score:</span>
-                                                <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                <span>/0</span>
+                                        <!-- multiple choice -->
+                                        <div class="quiz-detail-choice" style="display: none;" >
+                                            <div class="quiz-detail-content-between" >
+                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                                                <div class="quiz-detail-content" >
+                                                    <span>Score:</span>
+                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                                                    <span>/0</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="quiz-detail-content-between" >
-                                            <div class="quiz-detail-content quiz-detail-options" >
-                                                <div class="quiz-question-answer" >
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
-                                                </div>
-                                                <div class="quiz-question-answer" >
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
-                                                </div>
-                                                <div class="quiz-question-answer" >
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
+                                            <div class="quiz-detail-content-between" >
+                                                <div class="quiz-detail-content quiz-detail-options" >
+                                                    <div class="quiz-question-answer" >
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
+                                                    <div class="quiz-question-answer" >
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
+                                                    <div class="quiz-question-answer" >
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
+                                                    <div class="quiz-question-answer quiz-detail-user-answer" >
+                                                        <span>
+                                                            Correct Answer
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                    <span>
-                                                        Correct Answer
+                                                    <label for="">Answer</label>
+                                                    <span >
+                                                        User answer
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                <label for="">Answer</label>
-                                                <span >
-                                                    User answer
-                                                </span>
-                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                    <span>sample</span>
-                                    </div>
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                    <span>sample</span>
-                                    </div>
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                    <span>sample</span>
-                                    </div>
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                    <span>sample</span>
-                                    </div>
-                                    <div class="style-container-1 quiz-details-question-container" >
-                                    <span>sample</span>
                                     </div>
                                 </div>
 

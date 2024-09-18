@@ -72,6 +72,8 @@ async function fetchActiveStudents() {
             const studentElement = document.createElement('div');
             studentElement.className = 'response-students view-quiz-details';
             studentElement.setAttribute('data-student-id', studentId);
+            studentElement.setAttribute('data-student-fname', userData.firstname);
+            studentElement.setAttribute('data-student-lname', userData.lastname);
             studentElement.innerHTML = `
                 <div class="response-student-con-1" " >
                     <img class="response-student-image" src="${profileImageUrl}" alt="">
@@ -100,18 +102,20 @@ async function fetchActiveStudents() {
     }
 }
 
-function studentQuizData(){
-
-}
 // edit module onclick
 function handleEditQuizClick(event) {
-    const moduleId = event.currentTarget.getAttribute('data-student-id');
-    new editQuizAnswerModal(moduleId, "modal-edit-quiz", "close-quiz-detail-modal");
+    const studentid = event.currentTarget.getAttribute('data-student-id');
+    const studentFname = event.currentTarget.getAttribute('data-student-fname');
+    const studentLname = event.currentTarget.getAttribute('data-student-lname');
+    new editQuizAnswerModal(studentid,studentFname, studentLname, "modal-edit-quiz", "close-quiz-detail-modal");
 }
 
 class editQuizAnswerModal {
-    constructor(moduleId, modalId, closeClass) {
-        this.moduleId = moduleId;
+    constructor(id, firstname, lastname ,modalId, closeClass) {
+        const studentid = id;
+        const studentFname = firstname;
+        const studentLname = lastname;
+
         this.modal = document.getElementById(modalId);
         this.span = document.getElementsByClassName(closeClass)[0];
 
@@ -122,13 +126,17 @@ class editQuizAnswerModal {
             this.modal.style.display = "block";  
             window.addEventListener('click', this.outsideClick);
 
-            
-
-
         } else {
             console.error(`Elements not found for modal: ${modalId}, ${closeClass}`);
         }
+
+            
+        const studentFullname = document.getElementById('quiz-student-fullname');
+        studentFullname.innerHTML = `${studentLname}, ${studentFname}`;
+        fetchQuizQuestionDetail(studentid);
+
     }
+
 
     openModal() {
         this.modal.style.display = "block";
@@ -144,6 +152,123 @@ class editQuizAnswerModal {
         }
     }
 
+}
+
+const quizDetailList = document.querySelector('.quiz-answer-list');
+let questionNumber = 0
+function addQuestion() {
+    questionNumber +=1
+    const questionDetailNumber = questionNumber;
+    const questionContainer = document.createElement('div');
+    questionContainer.classList.add('style-container-1', 'quiz-details-question-container');
+    questionContainer.id = `question-${questionDetailNumber}`;
+    questionContainer.innerHTML = `
+        <div class="quiz-detail-content" >
+            <span>Question ${questionDetailNumber}</span>
+        </div>
+
+        <!-- identification -->
+        <div class="quiz-detail-identify" >
+            <div class="quiz-detail-content-between" >
+                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <div class="quiz-detail-content" >
+                    <span>Score:</span>
+                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                    <span>/0</span>
+                </div>
+            </div>
+            <div class="quiz-detail-content-between" >
+                <div class="quiz-detail-content" >
+                    <div class="quiz-question-answer" >
+                        <label for="">Correct Answer</label>
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                    <div class="quiz-question-answer" >
+                        <label for="">Correct Answer (alternate)</label>
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                </div>
+                <div class="quiz-question-answer quiz-detail-user-answer" >
+                    <label for="">Answer</label>
+                    <span >
+                        User answer
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- paragraph -->
+        <div class="quiz-detail-paragraph" style="display: none;" >
+            <div class="quiz-detail-content-between" >
+                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <div class="quiz-detail-content" >
+                    <span>Score:</span>
+                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                    <span>/0</span>
+                </div>
+            </div>
+            <div class="quiz-detail-content" >
+                <div class="quiz-question-answer quiz-detail-question quiz-detail-user-answer" >
+                    <label for="">Answer</label>
+                    <span>
+                        Correct Answer
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- multiple choice -->
+        <div class="quiz-detail-choice" style="display: none;" >
+            <div class="quiz-detail-content-between" >
+                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <div class="quiz-detail-content" >
+                    <span>Score:</span>
+                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
+                    <span>/0</span>
+                </div>
+            </div>
+            <div class="quiz-detail-content-between" >
+                <div class="quiz-detail-content quiz-detail-options" >
+                    <div class="quiz-question-answer" >
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                    <div class="quiz-question-answer" >
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                    <div class="quiz-question-answer" >
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                    <div class="quiz-question-answer quiz-detail-user-answer" >
+                        <span>
+                            Correct Answer
+                        </span>
+                    </div>
+                </div>
+                <div class="quiz-question-answer quiz-detail-user-answer" >
+                    <label for="">Answer</label>
+                    <span >
+                        User answer
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    `;
+
+    quizDetailList.appendChild(questionContainer);
+}
+
+async function fetchQuizQuestionDetail(studentId) {
 
 }
 
