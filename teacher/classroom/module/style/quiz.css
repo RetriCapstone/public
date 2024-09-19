@@ -496,6 +496,16 @@
     padding: .8rem;
 }
 
+.quiz-answer-header{
+    padding-top: 2rem;
+    padding-left: .4rem;
+    padding-right: .4rem;
+    padding-bottom: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .quiz-answer-footer{
     display: flex;
     justify-content: flex-end;

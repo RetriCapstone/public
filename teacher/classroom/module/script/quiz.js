@@ -76,7 +76,7 @@ function updateChoiceOptions(selectElement, optionsContainer) {
     });
 }
 
-//func: add option (for fetching)
+// Function to add a new option and update the select element
 function addOption(questionNumber) {
     lastOptionNumber += 1;
     const optionNumber = lastOptionNumber;
@@ -92,20 +92,17 @@ function addOption(questionNumber) {
     `;
     choiceBody1.appendChild(optionContainer);
 
-    // // Update the options in the select element
-    updateChoiceOptions(choiceSelect, choiceBody1);
-
     // Add event listener to update select options when input value changes
     optionContainer.querySelector('input').addEventListener('input', function () {
         updateChoiceOptions(choiceSelect, choiceBody1);
     });
 
-    // Add event listener to update options when select is focused
+    // Update options whenever the select element is focused
     choiceSelect.addEventListener('focus', function () {
         updateChoiceOptions(choiceSelect, choiceBody1);
     });
 
-    // Add event listener to remove the option when delete icon is clicked
+    // Add event listener to remove the option when the delete icon is clicked
     optionContainer.querySelector('.delete-option').addEventListener('click', function () {
         optionContainer.remove();
         updateChoiceOptions(choiceSelect, choiceBody1);
@@ -122,6 +119,7 @@ function addQuestion() {
 
     questionContainer.innerHTML = `
         <div class="question-body-con" id="question-body-${questionNumber}">
+        
             <div class="question-header-con" id="question-header-con-${questionNumber}" >
                 <div class="question-point-container">
                     <input type="number" value="1" id="question-point-${questionNumber}">
@@ -381,7 +379,7 @@ async function fetchQuestionsAndDirection() {
     const loadingIndicator = document.querySelector('.loading-indicator');
     const directionContainer = document.querySelector('.quiz-direction-container');
     loadingIndicator.style.display = 'block'; // Show loading indicator
-    directionContainer.style.display = 'none'; // Show loading indicator
+    directionContainer.style.display = 'none'; // Hide direction container
 
     try {
         const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
@@ -400,11 +398,12 @@ async function fetchQuestionsAndDirection() {
             questionDataList.push({ id: doc.id, ...doc.data() });
         });
 
+        // Remove any existing questions from the DOM
         document.querySelectorAll('.quiz-question-container').forEach(container => container.remove());
 
         questionDataList.forEach((questionData, index) => {
-            addQuestion();
-            lastOptionNumber = 1;
+            addQuestion(); // Assuming addQuestion is a function that creates the question containers
+            lastOptionNumber = 1; // Reset option number for each question
             const questionNumber = index + 1;
             const questionContainer = document.querySelector(`#question-${questionNumber}`);
 
@@ -419,6 +418,7 @@ async function fetchQuestionsAndDirection() {
 
             questionContainer.querySelector(`#question-point-${questionNumber}`).value = questionData.point || 1;
             const questionType = questionData.type;
+
             if (questionType === 'identification') {
                 quizContainerIdentify.style.display = 'block';
                 quizContainerChoice.style.display = 'none';
@@ -429,6 +429,7 @@ async function fetchQuestionsAndDirection() {
                 questionContainer.querySelector(`#question-${questionNumber}-identify-answer`).value = questionData.answer || '';
                 questionContainer.querySelector(`#question-${questionNumber}-identify-alternate`).value = questionData.alternate || '';
                 questionContainer.querySelector(`#identify-case-${questionNumber}`).checked = questionData.case || false;
+
             } else if (questionType === 'choice') {
                 quizContainerIdentify.style.display = 'none';
                 quizContainerChoice.style.display = 'block';
@@ -439,9 +440,11 @@ async function fetchQuestionsAndDirection() {
 
                 const choiceBody1 = questionContainer.querySelector(`#choice-body-${questionNumber}`);
                 const choiceSelect = questionContainer.querySelector(`#question-${questionNumber}-choice-select-answer`);
+
+                // Add options dynamically from questionData
                 Object.keys(questionData.options).forEach((key, optionIndex) => {
                     if (optionIndex > 0) {
-                        addOption(questionNumber);
+                        addOption(questionNumber); // Add more options if available
                     }
                     const optionNumber = optionIndex + 1;
                     const optionContainer = choiceBody1.querySelector(`#choice-option-${questionNumber}-${optionNumber}`);
@@ -450,8 +453,10 @@ async function fetchQuestionsAndDirection() {
                     } else {
                         console.error(`Option container #choice-option-${questionNumber}-${optionNumber} not found.`);
                     }
-                    choiceSelect.value = questionData.answer || '';
                 });
+
+                // Update options in the select element and set the correct answer
+                updateChoiceOptions(choiceSelect, choiceBody1);
                 choiceSelect.value = questionData.answer || '';
             } else if (questionType === 'paragraph') {
                 quizContainerIdentify.style.display = 'none';
@@ -460,16 +465,15 @@ async function fetchQuestionsAndDirection() {
 
                 questionContainer.querySelector(`#question-type-${questionNumber}`).value = 'paragraph';
                 questionContainer.querySelector(`#question-${questionNumber}-paragraph-question`).value = questionData.question || '';
-                
             }
         });
 
         loadingIndicator.style.display = 'none'; // Hide loading indicator
-        directionContainer.style.display = 'block'; // Show loading indicator
+        directionContainer.style.display = 'block'; // Show direction container
     } catch (error) {
         console.error("Error fetching questions and direction:", error);
         loadingIndicator.style.display = 'none'; // Hide loading indicator
-        directionContainer.style.display = 'block'; // Show loading indicator
+        directionContainer.style.display = 'block'; // Show direction container
     }
 }
 

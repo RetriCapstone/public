@@ -26,6 +26,11 @@ const selectedQuizId = getQueryParam('ItemId');
 
 let numberOfResponses = 0;  // Initialize outside the loop
 
+let questionNumber = 0;
+let lastOptionNumber = 0;
+let studentTotalScore = 0; 
+
+const quizDetailList = document.querySelector('.quiz-answer-list');
 // Function: fetch active students
 async function fetchActiveStudents() {
     if (!selectedClassroomId || !teacherId) {
@@ -82,7 +87,7 @@ async function fetchActiveStudents() {
                 <div class="response-student-con-1">
                     <i style="padding-right: 1.2rem; color: rgb(95 130 192);">click to see details</i>
                     <span class="response-student-time">-</span> 
-                    <span class="response-student-score">${totalScore || "-"}</span>
+                    <span class="response-student-score">${totalScore || "0"}</span>
                 </div>
             `;
             activeStudentsContainer.appendChild(studentElement);
@@ -133,6 +138,10 @@ class editQuizAnswerModal {
             
         const studentFullname = document.getElementById('quiz-student-fullname');
         studentFullname.innerHTML = `${studentLname}, ${studentFname}`;
+        quizDetailList.innerHTML = '';
+        questionNumber =0;
+        lastOptionNumber = 0;
+        studentTotalScore = 0;
         fetchQuizQuestionDetail(studentid);
 
     }
@@ -154,110 +163,111 @@ class editQuizAnswerModal {
 
 }
 
-const quizDetailList = document.querySelector('.quiz-answer-list');
-let questionNumber = 0
+function addOption(questionNumber, optionText) {
+    lastOptionNumber += 1;
+    const optionNumber = lastOptionNumber;
+    const choiceBody = document.querySelector(`#question-${questionNumber}-choice-body-detail`);
+
+    if (!choiceBody) {
+        console.error(`Choice body for question #${questionNumber} not found.`);
+        return;
+    }
+
+    const optionContainer = document.createElement('div');
+    optionContainer.classList.add('quiz-question-answer');
+    optionContainer.id = `choice-option-${questionNumber}-${optionNumber}-detail`;
+    optionContainer.innerHTML = `
+        <span id="question-${questionNumber}-choice-option-${optionNumber}">
+        <i class="fa-regular fa-circle"></i>
+            ${optionText}
+        </span>
+    `;
+    choiceBody.appendChild(optionContainer);
+}
+
 function addQuestion() {
-    questionNumber +=1
+    questionNumber +=1;
     const questionDetailNumber = questionNumber;
     const questionContainer = document.createElement('div');
     questionContainer.classList.add('style-container-1', 'quiz-details-question-container');
-    questionContainer.id = `question-${questionDetailNumber}`;
+    questionContainer.id = `question-${questionDetailNumber}-detail`;
     questionContainer.innerHTML = `
         <div class="quiz-detail-content" >
             <span>Question ${questionDetailNumber}</span>
         </div>
 
         <!-- identification -->
-        <div class="quiz-detail-identify" >
+        <div class="quiz-detail-identify" id="identify-con-${questionDetailNumber}-detail" >
             <div class="quiz-detail-content-between" >
-                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <span class="quiz-question-answer quiz-detail-question" id="question-${questionDetailNumber}-identify-question">Sample Question</span>
                 <div class="quiz-detail-content" >
                     <span>Score:</span>
-                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                    <span>/0</span>
+                    <input class="quiz-detail-score-input" autocomplete="off" id="question-${questionDetailNumber}-identify-user-score">
+                    <span id="question-${questionDetailNumber}-identify-point" ></span>
                 </div>
             </div>
             <div class="quiz-detail-content-between" >
                 <div class="quiz-detail-content" >
                     <div class="quiz-question-answer" >
                         <label for="">Correct Answer</label>
-                        <span>
-                            Correct Answer
+                        <span id="question-${questionDetailNumber}-identify-answer">
+                            -
                         </span>
                     </div>
                     <div class="quiz-question-answer" >
                         <label for="">Correct Answer (alternate)</label>
-                        <span>
-                            Correct Answer
+                        <span id="question-${questionDetailNumber}-identify-alternate">
+                            -
                         </span>
                     </div>
                 </div>
                 <div class="quiz-question-answer quiz-detail-user-answer" >
                     <label for="">Answer</label>
-                    <span >
-                        User answer
+                    <span id="question-${questionDetailNumber}-identify-user-answer">
+                        -
                     </span>
                 </div>
             </div>
         </div>
 
         <!-- paragraph -->
-        <div class="quiz-detail-paragraph" style="display: none;" >
+        <div class="quiz-detail-paragraph" id="paragraph-con-${questionDetailNumber}-detail" >
             <div class="quiz-detail-content-between" >
-                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <span class="quiz-question-answer quiz-detail-question" id="question-${questionDetailNumber}-paragraph-question">Sample Question</span>
                 <div class="quiz-detail-content" >
                     <span>Score:</span>
-                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                    <span>/0</span>
+                    <input id="question-${questionDetailNumber}-paragraph-user-score" class="quiz-detail-score-input" autocomplete="off" >
+                    <span id="question-${questionDetailNumber}-paragraph-point" ></span>
                 </div>
             </div>
             <div class="quiz-detail-content" >
                 <div class="quiz-question-answer quiz-detail-question quiz-detail-user-answer" >
                     <label for="">Answer</label>
-                    <span>
-                        Correct Answer
+                    <span id="question-${questionDetailNumber}-paragraph-user-answer">
+                        -
                     </span>
                 </div>
             </div>
         </div>
 
         <!-- multiple choice -->
-        <div class="quiz-detail-choice" style="display: none;" >
+        <div class="quiz-detail-choice" id="choice-con-${questionDetailNumber}-detail" >
             <div class="quiz-detail-content-between" >
-                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
+                <span id="question-${questionDetailNumber}-choice-question" class="quiz-question-answer quiz-detail-question" >-</span>
                 <div class="quiz-detail-content" >
                     <span>Score:</span>
-                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                    <span>/0</span>
+                    <input id="question-${questionDetailNumber}-choice-user-score" class="quiz-detail-score-input" autocomplete="off" >
+                    <span id="question-${questionDetailNumber}-choice-point" ></span>
                 </div>
             </div>
             <div class="quiz-detail-content-between" >
-                <div class="quiz-detail-content quiz-detail-options" >
-                    <div class="quiz-question-answer" >
-                        <span>
-                            Correct Answer
-                        </span>
-                    </div>
-                    <div class="quiz-question-answer" >
-                        <span>
-                            Correct Answer
-                        </span>
-                    </div>
-                    <div class="quiz-question-answer" >
-                        <span>
-                            Correct Answer
-                        </span>
-                    </div>
-                    <div class="quiz-question-answer quiz-detail-user-answer" >
-                        <span>
-                            Correct Answer
-                        </span>
-                    </div>
+                <div id="question-${questionDetailNumber}-choice-body-detail" class="quiz-detail-content quiz-detail-options" >
+                    
                 </div>
                 <div class="quiz-question-answer quiz-detail-user-answer" >
                     <label for="">Answer</label>
-                    <span >
-                        User answer
+                    <span id="question-${questionDetailNumber}-choice-user-answer" >
+                        -
                     </span>
                 </div>
             </div>
@@ -269,7 +279,144 @@ function addQuestion() {
 }
 
 async function fetchQuizQuestionDetail(studentId) {
+    try {
+        const questionsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1', 'question');
+        
+        const questionsSnapshot = await getDocs(questionsCollectionRef);
+        const questionDataList = [];
 
+        questionsSnapshot.forEach((doc) => {
+            const questionData = doc.data();
+            questionDataList.push({ id: doc.id, ...questionData });
+
+        });
+
+        questionDataList.forEach((questionData, index) => {
+            addQuestion();
+            const questionNumber = index + 1;
+            const questionContainer = document.querySelector(`#question-${questionNumber}-detail`);
+
+            if (!questionContainer) {
+                console.error(`Question container #question-${questionNumber} not found.`);
+                return;
+            }
+
+            fetchStudentQuizDetail(studentId, questionData.id, questionNumber);
+
+            const quizContainerIdentify = questionContainer.querySelector(`#identify-con-${questionNumber}-detail`);
+            const quizContainerChoice = questionContainer.querySelector(`#choice-con-${questionNumber}-detail`);
+            const quizContainerParagraph = questionContainer.querySelector(`#paragraph-con-${questionNumber}-detail`);
+
+            // questionContainer.querySelector(`#question-point-${questionNumber}`).value = questionData.point || 1;
+
+            const questionType = questionData.type;
+            if (questionType === 'identification') {
+                quizContainerIdentify.style.display = 'block';
+                quizContainerChoice.style.display = 'none';
+                quizContainerParagraph.style.display = 'none';
+
+                questionContainer.querySelector(`#question-${questionNumber}-identify-question`).textContent = questionData.question || ``;
+                questionContainer.querySelector(`#question-${questionNumber}-identify-point`).innerHTML = `/ ${questionData.point}`;
+                questionContainer.querySelector(`#question-${questionNumber}-identify-answer`).textContent = questionData.answer || '';
+                questionContainer.querySelector(`#question-${questionNumber}-identify-alternate`).textContent = questionData.alternate || '';
+                
+            }  else if (questionType === 'choice') {
+                // Multiple choice question setup
+                quizContainerIdentify.style.display = 'none';
+                quizContainerChoice.style.display = 'block';
+                quizContainerParagraph.style.display = 'none';
+
+                questionContainer.querySelector(`#question-${questionNumber}-choice-question`).textContent = questionData.question || '';
+                questionContainer.querySelector(`#question-${questionNumber}-choice-point`).textContent = `/ ${questionData.point}`;
+
+                lastOptionNumber = 0; // Reset for each question
+                const options = questionData.options || {};
+
+                Object.keys(options).forEach((key, optionIndex) => {
+                    addOption(questionNumber, options[key]);
+                    const optionContainer = document.querySelector(`#choice-option-${questionNumber}-${optionIndex + 1}-detail`);
+                    
+                    if (optionContainer) {
+                        if (options[key] === questionData.answer) {
+                            optionContainer.classList.add('quiz-detail-user-answer');
+                        }
+                    } else {
+                        console.error(`Option container #choice-option-${questionNumber}-${optionIndex + 1}-detail not found.`);
+                    }
+                });
+            } else if (questionType === 'paragraph') {
+                quizContainerIdentify.style.display = 'none';
+                quizContainerChoice.style.display = 'none';
+                quizContainerParagraph.style.display = 'block';
+
+                questionContainer.querySelector(`#question-${questionNumber}-paragraph-question`).textContent = questionData.question || '';
+                questionContainer.querySelector(`#question-${questionNumber}-paragraph-point`).innerHTML = `/ ${questionData.point}`;
+                
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching quiz details:", error);
+    }
+}
+
+// Reset total score for each student
+async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
+    try {
+        // Get the document reference for the student's answer
+        const quizDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question', questionId);
+
+        // Fetch the student's quiz document
+        const quizDoc = await getDoc(quizDocRef);
+
+        // Check if the document exists
+        if (!quizDoc.exists()) {
+            console.error(`No quiz data found for student: ${studentId}, question: ${questionId}`);
+            return;
+        }
+
+        // Retrieve the student data
+        const studentData = quizDoc.data();
+        if (!studentData) {
+            console.error(`No data available for student: ${studentId}, question: ${questionId}`);
+            return;
+        }
+
+        // Get the question container for the current question
+        const questionContainer = document.querySelector(`#question-${questionNumber}-detail`);
+        if (!questionContainer) {
+            console.error(`Question container #question-${questionNumber}-detail not found.`);
+            return;
+        }
+
+        // Get input elements for each question type
+        const identifyScoreInput = questionContainer.querySelector(`#question-${questionNumber}-identify-user-score`);
+        const identifyAnswerSpan = questionContainer.querySelector(`#question-${questionNumber}-identify-user-answer`);
+        const choiceScoreInput = questionContainer.querySelector(`#question-${questionNumber}-choice-user-score`);
+        const choiceAnswerSpan = questionContainer.querySelector(`#question-${questionNumber}-choice-user-answer`);
+        const paragraphScoreInput = questionContainer.querySelector(`#question-${questionNumber}-paragraph-user-score`);
+        const paragraphAnswerSpan = questionContainer.querySelector(`#question-${questionNumber}-paragraph-user-answer`);
+
+        // Check the type of question and set the appropriate data
+        const questionType = studentData.type;
+        if (questionType === 'identification' && identifyScoreInput && identifyAnswerSpan) {
+            identifyScoreInput.value = studentData.score || 0;
+            identifyAnswerSpan.textContent = studentData.userAnswer || 'N/A';
+        } else if (questionType === 'choice' && choiceScoreInput && choiceAnswerSpan) {
+            choiceScoreInput.value = studentData.score || 0;
+            choiceAnswerSpan.textContent = studentData.userAnswer || 'N/A';
+        } else if (questionType === 'paragraph' && paragraphScoreInput && paragraphAnswerSpan) {
+            paragraphScoreInput.value = studentData.score || 0;
+            paragraphAnswerSpan.textContent = studentData.userAnswer || 'N/A';
+        } else {
+            console.error(`Question type "${questionType}" not recognized or missing required elements.`);
+        }
+        studentTotalScore += studentData.score
+
+        document.querySelector(`#quiz-student-total-score`).textContent = `Total Score: ${studentTotalScore || 0}`;
+    } catch (error) {
+        console.error("Error fetching student quiz detail:", error);
+    }
 }
 
 

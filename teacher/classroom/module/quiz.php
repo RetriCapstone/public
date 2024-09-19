@@ -112,15 +112,16 @@
                             <div class="quiz-answer-content" >
                                 <div class="quiz-answer-header" >
                                     <h3 id="quiz-student-fullname" >Student name</h3>
+                                    <span id="quiz-student-total-score" >Total score: </span>
                                 </div>
 
                                 <div class="quiz-answer-list">
 
-                                    <div class="style-container-1 quiz-details-question-container" >
+                                    <!-- <div class="style-container-1 quiz-details-question-container" >
                                         <div class="quiz-detail-content" >
                                             <span>Question 1</span><span class="quiz-question-type" >Identification</span>
                                         </div>
-                                        <!-- identification -->
+                                        
                                         <div class="quiz-detail-identify" >
                                             <div class="quiz-detail-content-between" >
                                                 <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
@@ -153,8 +154,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- paragraph -->
-                                        <div class="quiz-detail-paragraph" style="display: none;" >
+                                        
+                                        <div class="quiz-detail-paragraph" style="display: block;" >
                                             <div class="quiz-detail-content-between" >
                                                 <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
                                                 <div class="quiz-detail-content" >
@@ -172,8 +173,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- multiple choice -->
-                                        <div class="quiz-detail-choice" style="display: none;" >
+                                        
+                                        <div class="quiz-detail-choice" style="display: block;" >
                                             <div class="quiz-detail-content-between" >
                                                 <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
                                                 <div class="quiz-detail-content" >
@@ -214,11 +215,11 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="quiz-answer-footer" >
-                                    <span id="quiz-student-total-score" >Total score: </span>
+                                    <button id="btn-save-score-details" class="style-btn-add-1" >Save changes</button>
                                 </div>
                             </div>
 
