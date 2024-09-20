@@ -624,6 +624,27 @@ async function fetchLectureDetails() {
     }
 }
 
+//delete lecture
+async function deleteLecture() {
+    const confirmed = confirm('Are you sure you want to delete this lecture? This action cannot be undone.');
+
+    if (confirmed) {
+        try {
+            // Path to the selected module document
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
+            
+            // Delete the module document
+            await deleteDoc(moduleRef);
+
+            alert('lecture deleted successfully.');
+            navigateToPage('/teacher/classroom/module.php');
+
+        } catch (error) {
+            console.error('Error deleting lecture:', error);
+            alert('An error occurred while deleting the lecture. Please try again.');
+        }
+    }
+}
 
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
@@ -647,6 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#lect-add-btn-header-1').addEventListener('click', addHeader1);
     document.querySelector('#lect-add-btn-header-2').addEventListener('click', addHeader2);
     document.querySelector('#lect-add-btn-paragraph').addEventListener('click', addParagraph);
+    document.querySelector('#btn-delete-lecture').addEventListener('click', deleteLecture);
 
     const lectureButton = document.getElementById('lect-btn-nav-lecture');
     const lectureContainer = document.querySelector('.lecture-container');

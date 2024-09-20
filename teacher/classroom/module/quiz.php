@@ -65,10 +65,10 @@
         </div>
         <div class="main_body">
             <div class="save-loading-indicator-bg">
-                    <div class="save-loading-indicator">
-                        <div class="spinner"></div>
-                        Saving
-                    </div>
+                <div class="save-loading-indicator">
+                    <div class="spinner"></div>
+                    Saving
+                </div>
             </div>
             <div class="con-1">
                     <div class="loading-indicator">
@@ -107,7 +107,7 @@
                     <div id="modal-edit-quiz" class="style-modal-quiz">
                         <div class="style-modal-content-quiz edit-module-modal">
                             <span class="close-modal close-quiz-detail-modal">&times;</span>
-                            <!-- <div class="spinner loading-quiz-content"></div> -->
+                            <div class="spinner loading-quiz-content"></div>
 
                             <div class="quiz-answer-content" >
                                 <div class="quiz-answer-header" >
@@ -117,105 +117,6 @@
 
                                 <div class="quiz-answer-list">
 
-                                    <!-- <div class="style-container-1 quiz-details-question-container" >
-                                        <div class="quiz-detail-content" >
-                                            <span>Question 1</span><span class="quiz-question-type" >Identification</span>
-                                        </div>
-                                        
-                                        <div class="quiz-detail-identify" >
-                                            <div class="quiz-detail-content-between" >
-                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                                <div class="quiz-detail-content" >
-                                                    <span>Score:</span>
-                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                    <span>/0</span>
-                                                </div>
-                                            </div>
-                                            <div class="quiz-detail-content-between" >
-                                                <div class="quiz-detail-content" >
-                                                    <div class="quiz-question-answer" >
-                                                        <label for="">Correct Answer</label>
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                    <div class="quiz-question-answer" >
-                                                        <label for="">Correct Answer (alternate)</label>
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                    <label for="">Answer</label>
-                                                    <span >
-                                                        User answer
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="quiz-detail-paragraph" style="display: block;" >
-                                            <div class="quiz-detail-content-between" >
-                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                                <div class="quiz-detail-content" >
-                                                    <span>Score:</span>
-                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                    <span>/0</span>
-                                                </div>
-                                            </div>
-                                            <div class="quiz-detail-content" >
-                                                <div class="quiz-question-answer quiz-detail-question quiz-detail-user-answer" >
-                                                    <label for="">Answer</label>
-                                                    <span>
-                                                        Correct Answer
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="quiz-detail-choice" style="display: block;" >
-                                            <div class="quiz-detail-content-between" >
-                                                <span class="quiz-question-answer quiz-detail-question" >Sample Question</span>
-                                                <div class="quiz-detail-content" >
-                                                    <span>Score:</span>
-                                                    <input class="quiz-detail-score-input" autocomplete="off" value="1">
-                                                    <span>/0</span>
-                                                </div>
-                                            </div>
-                                            <div class="quiz-detail-content-between" >
-                                                <div class="quiz-detail-content quiz-detail-options" >
-                                                    <div class="quiz-question-answer" >
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                    <div class="quiz-question-answer" >
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                    <div class="quiz-question-answer" >
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                    <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                        <span>
-                                                            Correct Answer
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="quiz-question-answer quiz-detail-user-answer" >
-                                                    <label for="">Answer</label>
-                                                    <span >
-                                                        User answer
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div> -->
                                 </div>
 
                                 <div class="quiz-answer-footer" >
@@ -343,7 +244,7 @@
                             </div>
                         </div>
                         <div class="settings-card-bottom" >
-                            <button class="style-btn-del" >Delete quiz</button>
+                            <button class="style-btn-del" id="btn-delete-quiz" >Delete quiz</button>
                         </div>
                     </div>
                 </div>

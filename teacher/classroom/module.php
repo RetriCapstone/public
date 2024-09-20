@@ -38,6 +38,13 @@
                         <span>Help</span>
                     </a>
                 </li>
+                <a href="">
+                    <i class="fa-solid fa-gear"></i>
+                        <span>
+                            Settings
+                        </span>
+                    </a>
+                </li>
                 <li id="btnlogout" class="logout">
                     <a>
                         <i class="fa fa-sign-out"></i>
@@ -72,6 +79,12 @@
                     </div>
                     <!-- Modal for Creating Module -->
                         <div id="modal-create-module" class="style-modal">
+                            <div class="save-loading-indicator-bg create-module-loading">
+                                <div class="save-loading-indicator">
+                                    <div class="spinner"></div>
+                                    Please wait...
+                                </div>
+                            </div>
                             <div class="style-modal-content create-module-modal">
                                 <span class="close-modal">&times;</span>
                                 <h1>Create module</h1>
@@ -107,6 +120,12 @@
 
                     <!-- Modal for Creating Module Item -->
                     <div id="modal-create-module-item" class="style-modal">
+                            <div class="save-loading-indicator-bg create-module-item-loading">
+                                <div class="save-loading-indicator">
+                                    <div class="spinner"></div>
+                                    Please wait...
+                                </div>
+                            </div>
                         <div class="style-modal-content create-module-item-modal">
                             <span class="close-modal close-module-item">&times;</span>
                             <h2>Module item</h2>

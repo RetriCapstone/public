@@ -23,6 +23,7 @@ const teacherId = getQueryParam('tid');
 const selectedClassroomId = getQueryParam('Cid');
 const selectedModuleId = getQueryParam('Mid');
 const selectedQuizId = getQueryParam('ItemId');
+let selectedStudentid = '';
 
 let numberOfResponses = 0;  // Initialize outside the loop
 
@@ -30,6 +31,7 @@ let questionNumber = 0;
 let lastOptionNumber = 0;
 let studentTotalScore = 0; 
 
+const detailloadingIndicator= document.querySelector('.loading-quiz-content');
 const quizDetailList = document.querySelector('.quiz-answer-list');
 // Function: fetch active students
 async function fetchActiveStudents() {
@@ -121,6 +123,8 @@ class editQuizAnswerModal {
         const studentFname = firstname;
         const studentLname = lastname;
 
+        detailloadingIndicator.style.display = 'block';
+
         this.modal = document.getElementById(modalId);
         this.span = document.getElementsByClassName(closeClass)[0];
 
@@ -142,7 +146,8 @@ class editQuizAnswerModal {
         questionNumber =0;
         lastOptionNumber = 0;
         studentTotalScore = 0;
-        fetchQuizQuestionDetail(studentid);
+        selectedStudentid = studentid;
+        fetchQuizQuestionDetail(selectedStudentid);
 
     }
 
@@ -300,6 +305,8 @@ async function fetchQuizQuestionDetail(studentId) {
                 console.error(`Question container #question-${questionNumber} not found.`);
                 return;
             }
+            questionContainer.setAttribute('data-question-id', questionData.id);
+            questionContainer.setAttribute('data-question-type', questionData.type);
 
             fetchStudentQuizDetail(studentId, questionData.id, questionNumber);
 
@@ -354,8 +361,9 @@ async function fetchQuizQuestionDetail(studentId) {
                 
             }
         });
-
+        detailloadingIndicator.style.display = 'none';
     } catch (error) {
+        detailloadingIndicator.style.display = 'none';
         console.error("Error fetching quiz details:", error);
     }
 }
@@ -419,9 +427,61 @@ async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
     }
 }
 
+async function saveScoreChanges() {
+    try {
+        const totalQuestions = document.querySelectorAll("[id^=question-]").length; // Assuming the question containers are identified by "question-1", "question-2", etc.
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const questionContainer = document.querySelector(`#question-${i}-detail`);
+            if (!questionContainer) {
+                console.error(`Question container #question-${i}-detail not found.`);
+                continue;
+            }
+
+            // Get question ID and type (e.g., 'identification', 'choice', 'paragraph')
+            const questionId = questionContainer.getAttribute('data-question-id'); // Assuming the container has a data attribute with question ID
+            const questionType = questionContainer.getAttribute('data-question-type'); // Assuming the container has a data attribute for question type
+
+            // Get the new score from the input fields
+            let updatedScore = 0;
+            if (questionType === 'identification') {
+                updatedScore = questionContainer.querySelector(`#question-${i}-identify-user-score`).value || 0;
+            } else if (questionType === 'choice') {
+                updatedScore = questionContainer.querySelector(`#question-${i}-choice-user-score`).value || 0;
+            } else if (questionType === 'paragraph') {
+                updatedScore = questionContainer.querySelector(`#question-${i}-paragraph-user-score`).value || 0;
+            }
+
+            // Update the score in Firestore for the student
+            const quizDocRef = doc(db, 'users', selectedStudentid, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question', questionId);
+            
+            // Update the document with the new score
+            await updateDoc(quizDocRef, {
+                score: Number(updatedScore)
+            });
+
+            console.log(`Updated score for question ${i} (ID: ${questionId}): ${updatedScore}`);
+        }
+
+        // Optionally, show a confirmation message
+        alert("Updated successfully!");
+        quizDetailList.innerHTML = '';
+        questionNumber =0;
+        lastOptionNumber = 0;
+        studentTotalScore = 0;
+        fetchQuizQuestionDetail(selectedStudentid);
+
+    } catch (error) {
+        console.error("Error updating student quiz scores:", error);
+        alert("Failed to save scores. Please try again.");
+    }
+}
 
 async function displayNumberofResponses() {
-    document.getElementById('quiz-number-responses').innerText = numberOfResponses
+    document.getElementById('quiz-number-responses').innerText = numberOfResponses;
+    document.querySelector("#btn-save-score-details").addEventListener("click", async () => {
+        saveScoreChanges();
+    });
 }
 
 

@@ -164,7 +164,7 @@
                         </div>
 
                         <div class="settings-card-bottom">
-                            <button class="style-btn-del" >Delete lecture</button>
+                            <button class="style-btn-del" id="btn-delete-lecture" >Delete lecture</button>
                         </div>
 
                     </section>

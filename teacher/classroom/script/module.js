@@ -23,6 +23,9 @@ function getQueryParam(param) {
 const selectedClassroomId = getQueryParam('Cid');
 const teacherId = getQueryParam('tid');
 
+const moduleItemloadingIndicator= document.querySelector('.create-module-item-loading');
+const moduleloadingIndicator= document.querySelector('.create-module-loading');
+
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
     const itemQuery = query(itemCollectionRef, orderBy('number'));
@@ -247,8 +250,6 @@ function handleEditModuleClick(event) {
 }
 
 
-
-
 class editModuleModal {
     constructor(moduleId, moduleName, modalId, closeClass, cancelId) {
         this.moduleId = moduleId;
@@ -308,7 +309,6 @@ class editModuleModal {
 
     async editModule(event) {
         event.preventDefault();
-
         const moduleNameInput = document.getElementById('selected-module-name').value.trim().toUpperCase();
 
         if (!moduleNameInput) {
@@ -364,6 +364,8 @@ class editModuleModal {
 async function createModule(event) {
     event.preventDefault();
 
+    moduleloadingIndicator.style.display = 'block';
+
     const moduleNameInput = document.getElementById('module-name');
     const moduleName = moduleNameInput.value.trim().toUpperCase();
     const position = document.querySelector('input[name="position"]:checked').value;
@@ -398,10 +400,12 @@ async function createModule(event) {
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
         alert('Module created successfully');
+        moduleloadingIndicator.style.display = 'none'
         getModules();  // Refresh the module list
         moduleNameInput.value = '';  // Clear the input field
         document.getElementById('modal-create-module').style.display = 'none';  // Close the modal
     } catch (error) {
+        moduleloadingIndicator.style.display = 'none'
         console.error('Error creating module:', error);
         alert('Error creating module. Please try again.');
     }
@@ -490,6 +494,8 @@ class ModuleItemModal {
     async createModuleItem(event) {
         event.preventDefault();
 
+        moduleItemloadingIndicator.style.display = 'block';
+        
         const moduleItemNameInput = document.getElementById('module-item-name');
         const moduleItemName = moduleItemNameInput.value.trim().toUpperCase();
         const moduleItemType = document.getElementById('module-item-type').value;
@@ -514,7 +520,7 @@ class ModuleItemModal {
             moduleItemNameInput.value = '';  // Clear the input field
             alert('Created successfully.');
             this.closeModal();  // Close the modal
-            
+            moduleItemloadingIndicator.style.display = 'none';
             getModules();
             if (moduleItemType === "lecture") {
                 window.location.href = `module/lecture.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(this.moduleId)}&ItemId=${encodeURIComponent(moduleItemID)}`;
@@ -524,6 +530,7 @@ class ModuleItemModal {
                 window.location.href = `module/coding.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(this.moduleId)}&ItemId=${encodeURIComponent(moduleItemID)}`;
             }
         } catch (error) {
+            moduleItemloadingIndicator.style.display = 'none';
             console.error('Error creating module item:', error);
             alert('Error creating module item. Please try again.');
         }

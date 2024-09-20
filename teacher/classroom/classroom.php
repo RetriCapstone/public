@@ -42,6 +42,13 @@
                         </span>
                     </a>
                 </li>
+                <a href="">
+                    <i class="fa-solid fa-gear"></i>
+                        <span>
+                            Settings
+                        </span>
+                    </a>
+                </li>
                 <li id="btnlogout" class="logout">
                     <a >
                         <i class="fa fa-sign-out"></i>
@@ -54,12 +61,19 @@
         </nav>
         <div class="main_body">
             <div class="main_container">
+                
                 <div class="con-1">
                     <div class="style-header">
                         <h2>Classroom</h2>
                         <button id="btn-create-classroom" class="style-btn-create-1" ><i class="fa-solid fa-plus"></i>Create Class</button>
                         
                         <div id="modal-create-classroom" class="style-modal modal-classroom">
+                            <div class="save-loading-indicator-bg">
+                                <div class="save-loading-indicator">
+                                    <div class="spinner"></div>
+                                    Please wait...
+                                </div>
+                            </div>
                             <div class="create-classroom-modal">
                                 <span class="close-modal">&times;</span>
                                 <h1>Create Classsroom</h1>

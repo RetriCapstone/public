@@ -322,7 +322,7 @@ async function saveQuestions() {
     await Promise.all(savePromises);
 
     saveloadingIndicator.style.display = 'none'; // Show loading indicator
-    alert('Questions and section direction saved successfully.');
+    alert('Questions saved successfully.');
     console.log('Questions and section direction saved successfully.');
 
     } catch (error) {
@@ -535,6 +535,28 @@ async function fetchQuizDetails() {
     }
 }
 
+//delete quiz
+async function deleteQuiz() {
+    const confirmed = confirm('Are you sure you want to delete this quiz? This action cannot be undone.');
+
+    if (confirmed) {
+        try {
+            // Path to the selected module document
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId );
+            
+            // Delete the module document
+            await deleteDoc(moduleRef);
+
+            alert('lecture deleted successfully.');
+            navigateToPage('/teacher/classroom/module.php');
+
+        } catch (error) {
+            console.error('Error deleting lecture:', error);
+            alert('An error occurred while deleting the lecture. Please try again.');
+        }
+    }
+}
+
 //func: convert fetched date time
 function convertToLocalDateTime(date) {
     const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
@@ -556,6 +578,7 @@ function navigateToPage(page) {
 
 document.addEventListener('DOMContentLoaded', () => {
     
+
     document.querySelector('#student-link').addEventListener('click', () => {
         navigateToPage('/teacher/classroom/student.php');
     });
@@ -612,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveQuizDetails(); // Save quiz details
     });
 
+    document.querySelector('#btn-delete-quiz').addEventListener('click', deleteQuiz);
 
     // Fetch questions and direction on page load
     fetchQuestionsAndDirection();

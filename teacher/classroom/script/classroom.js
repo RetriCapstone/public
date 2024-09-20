@@ -94,6 +94,7 @@ async function getClassrooms() {
     }
 }
 
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
 // Create classroom
 async function createClassroom(event) {
     event.preventDefault();
@@ -101,6 +102,7 @@ async function createClassroom(event) {
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
+    saveloadingIndicator.style.display = 'block'; // Show loading indicator
     const className = document.getElementById("classname").value.trim().toUpperCase();
     const classCode = document.getElementById("classcode").value.trim();
 
@@ -118,11 +120,13 @@ async function createClassroom(event) {
 
             // Refresh the classroom list
             alert('Classroom created successfully');
+            saveloadingIndicator.style.display = 'none'; // Show loading indicator
             getClassrooms();
             // Close the modal
             document.getElementById("modal-create-classroom").style.display = "none";
-        }
+        } // Show loading indicator
     } catch (error) {
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
         console.error("Error creating classroom:", error);
     }
 }
