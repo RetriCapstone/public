@@ -39,7 +39,7 @@ async function fetchActiveStudents() {
         console.error("Missing required identifiers");
         return;
     }
-
+    numberOfResponses = 0;
     try {
         const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
         const studentSnapshot = await getDocs(studentCollectionRef);
@@ -469,6 +469,7 @@ async function saveScoreChanges() {
         questionNumber =0;
         lastOptionNumber = 0;
         studentTotalScore = 0;
+        fetchActiveStudents();
         fetchQuizQuestionDetail(selectedStudentid);
 
     } catch (error) {
