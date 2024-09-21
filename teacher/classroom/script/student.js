@@ -95,8 +95,21 @@ async function getActiveStudents() {
                     <img src="${profileImageUrl}" alt="" class="student-image" id="profile-image-student">
                     <p class="style-text" id="active-student-name">${userData.lastname}, ${userData.firstname}</p>
                 </div>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-ellipsis-vertical" id="btn-student-menu-${studentId}" style="font-size: 1.4rem; cursor: pointer;" >
+                    <div class="dropdown-menu" id="dropdown-menu-${studentId}" style="display: none;">
+                        <ul>
+                            <li id="student-remove-${studentId}" ">Remove Student</li>
+                        </ul>
+                    </div>
+                </i>
+
             `;
+
+            const btnStudentMenu = studentElement.querySelector(`#btn-student-menu-${studentId}`);
+            btnStudentMenu.addEventListener('click', () => toggleDropdown(studentId));
+
+            const btnRemoveStudent = studentElement.querySelector(`#student-remove-${studentId}`);
+            btnRemoveStudent.addEventListener('click', () => removeActiveStudent(studentId));
 
             activeStudentsContainer.appendChild(studentElement);
         }
@@ -295,6 +308,44 @@ function navigateToPage(page) {
     window.location.href = `${page}?${currentParams.toString()}`;
 }
 
+// Toggle dropdown visibility
+function toggleDropdown(studentId) {
+    const dropdownMenu = document.getElementById(`dropdown-menu-${studentId}`);
+    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+
+}
+
+// Remove active student from both teacher and user paths
+async function removeActiveStudent(studentId) {
+    const confirmation = confirm("Are you sure you want to delete this student?");
+    if (confirmation) {
+        try {
+
+            // Reference to remove the student from the teacher's classroom
+            const teacherStudentRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student', studentId);
+
+            // Reference to remove the classroom from the user's classrooms
+            const userClassroomRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId);
+
+            // Perform both delete operations in parallel
+            await Promise.all([
+                deleteDoc(teacherStudentRef),
+                deleteDoc(userClassroomRef)
+            ]);
+
+            // Remove the student's HTML element from the DOM after deletion
+            const studentElement = document.querySelector(`#btn-student-menu-${studentId}`).closest('.style-student-list');
+            studentElement.remove();
+
+            alert("Deleted successfully.");
+            loadingIndicator.style.display = 'none';
+
+        } catch (error) {
+            console.error("Error removing student:", error);
+            alert("An error occurred while deleting the student. Please try again.");
+        }
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded', (event) => {

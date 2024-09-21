@@ -63,13 +63,7 @@
             <div class="main_container">
                 <div class="con-1">
                     <div class="header-pos-2">
-                        <!-- <div class="header-pos-1" >
-                            <h3 id="classroom-name" ></h3>
-                        </div>
-                        <div class="style-display btn-edit-classroom" id="btn-edit-classroom" >
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            <span class="edit-class-tooltip" >Edit classroom</span>
-                        </div> -->
+                        
                     </div>
                     <hr class="divider-solid">
                     <div class="style-container">
