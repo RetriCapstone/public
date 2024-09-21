@@ -1,0 +1,67 @@
+.student-btn{
+    border-top-left-radius: 20px;
+}.req-btn{
+    border-top-right-radius: 20px;
+}
+.edit-icon-style{
+    padding: 4px;
+    border-radius: 2px;
+}
+.edit-icon-style:hover{
+    background-color: #161f47;
+    cursor: pointer;
+}
+.student-image{
+    height: 40px;
+    width: 40px;
+}
+
+.loading-indicator {
+    top: 40%;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+}
+
+
+.edit-module-btn{
+    display: flex;
+    height: -webkit-fill-available;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+.btn-edit-classroom{
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+  }
+
+.edit-classroom{
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+}
+  
+.btn-edit-classroom .edit-class-tooltip{
+    visibility: hidden;
+    width: 120px;
+    background-color: #1f2e63;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin: 4px;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+    
+.btn-edit-classroom:hover .edit-class-tooltip{
+    visibility: visible;
+}

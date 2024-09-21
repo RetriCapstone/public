@@ -1,0 +1,42 @@
+.input-style{
+    min-width: 400px;
+    width: 600px;
+    margin: 24px 0;
+}
+.input-style span{
+    color: rgb(92, 142, 204);
+    font-size: .8rem;
+    line-height: 1.5;
+}
+.style-checkbox{
+    display: flex;
+    gap: .8rem;
+    align-items: flex-end;
+}
+.style-checkbox input{
+    width: 1rem;
+    height: 1rem;
+}
+.style-checkbox input:not(:checked){
+    appearance: none;
+    border: 2px solid #1f2e63;
+      
+}
+.style-checkbox label{
+    font-size: .8rem;
+    
+}
+.style-btn-container{
+    display: flex;
+    justify-content: flex-end;
+}
+#form-change-password{
+    display: none;
+}
+
+.style-btn-blue{
+    margin-top: 12px;
+}
+.style-container-1{
+    margin: 1rem;
+}

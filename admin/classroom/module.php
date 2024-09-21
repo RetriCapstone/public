@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Modules</title>
-    <link rel="stylesheet" href="/teacher/style_dashboard.css">
-    <link rel="icon" href="/teacher/images/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/teacher/classroom/style/module.css">
+    <link rel="stylesheet" href="/admin/style_dashboard.css">
+    <link rel="icon" href="/admin/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/admin/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/admin/classroom/style/module.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
 </head>
 <body>
-    <script src="/teacher/dashboard.js" type="module"></script>
+    <script src="/admin/dashboard.js" type="module"></script>
     <script type="module" src="script/module.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/teacher/images/logo-no-background.png">
+                <img src="/admin/images/logo-no-background.png">
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/teacher/account/account.php">
+                    <a href="/admin/account/account.php">
                         <i class="fa-solid fa-user"></i>
                         <span>Account</span>
                     </a>
@@ -36,6 +36,14 @@
                     <a href="#">
                         <i class="fa-regular fa-circle-question"></i>
                         <span>Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>
+                            Settings
+                        </span>
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">

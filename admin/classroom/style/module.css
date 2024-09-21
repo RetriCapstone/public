@@ -1,0 +1,86 @@
+.create-module-modal{
+    height: 65%;
+}
+
+.edit-module{
+    flex-direction: row;
+    align-items: baseline;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.edit-module:hover{
+    background-color: #1f2e63;
+}
+
+.style-select{
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 200px;
+    color: white;
+    background-color: #0a1339;
+
+    
+    padding-top: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 8px;
+    flex-direction: column;
+    
+    border: 2px solid #1f2e63;
+}
+.form-create-module-item{
+    gap: 4px;
+}
+.style-label-modal{
+    font-size:medium;
+}
+.style-divider2{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin: 8px 0;
+    align-items: center;
+}
+.radio-label{
+    margin-right: 12px;
+}
+.module-pos-option{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.edit-module-btn{
+    display: flex;
+    height: -webkit-fill-available;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+
+.btn-edit-classroom{
+    position: relative;
+    display: inline-block;
+    margin: .6rem;
+  }
+
+.btn-edit-classroom .edit-class-tooltip{
+    visibility: hidden;
+    width: 120px;
+    background-color: #1f2e63;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin: 4px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+.btn-edit-classroom:hover .edit-class-tooltip{
+    visibility: visible;
+  }
