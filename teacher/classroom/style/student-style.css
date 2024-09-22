@@ -19,7 +19,8 @@ max-width: 1400px;
 .student-image{
     height: 40px;
     width: 40px;
-    border-radius: 50px;
+    border-radius: 40px;
+    border: 1px solid white;
 }
 
 .loading-indicator {
