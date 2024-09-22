@@ -141,7 +141,7 @@
                                     <select class="style-select" name="item-type" id="module-item-type">
                                         <option value="lecture">Lecture</option>
                                         <option value="quiz">Quiz</option>
-                                        <option value="activity">Coding Activity</option>
+                                        <!-- <option value="activity">Coding Activity</option> -->
                                     </select>
 
                                     <!-- <label class="style-label-modal" for="item-type">&nbsp;&nbsp;&nbsp;Position:&nbsp;</label>
