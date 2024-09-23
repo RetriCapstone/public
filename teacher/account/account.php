@@ -50,6 +50,14 @@
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>
+                            Settings
+                        </span>
+                    </a>
+                </li>
                 <li id="btnlogout" class="logout">
                     <a >
                         <i class="fa fa-sign-out"></i>

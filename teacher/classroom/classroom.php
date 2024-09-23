@@ -42,8 +42,9 @@
                         </span>
                     </a>
                 </li>
-                <a href="">
-                    <i class="fa-solid fa-gear"></i>
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings
                         </span>
