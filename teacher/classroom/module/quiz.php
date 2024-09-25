@@ -21,14 +21,6 @@
                 <img src="/teacher/images/logo-no-background.png">
             </div>
             <ul class="menu">
-                <li >
-                <a href="/teacher/account/account.php">
-                    <i class="fa-solid fa-user"></i>
-                        <span>
-                            Account
-                        </span>
-                    </a>
-                </li>
                 <li class="active">
                     <a href="/teacher/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -38,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                <a href="">
+                <a href="/teacher/classroom/help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
@@ -46,7 +38,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/teacher/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings

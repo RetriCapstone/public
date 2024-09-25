@@ -486,7 +486,7 @@ async function saveLectureItems() {
 //func: save lecture details (name and status)
 async function saveLectureDetails() {
     try {
-        const lectureName = document.getElementById('settings-lect-name-input').value.trim();
+        const lectureName = document.getElementById('settings-lect-name-input').value.trim().toUpperCase();
         const lectureStatus = document.getElementById('settings-select-status').value;
 
         if (!lectureName) {
@@ -502,6 +502,7 @@ async function saveLectureDetails() {
             name: lectureName,
             status: lectureStatus
         });
+        fetchLectureDetails();
 
     } catch (error) {
         console.error('Error saving lecture details:', error);
