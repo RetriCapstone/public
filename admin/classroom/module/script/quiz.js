@@ -272,7 +272,7 @@ async function saveQuestions() {
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
     // Define section and questions path
     try {
-        const sectionDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+        const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
     const questionsCollectionRef = collection(sectionDocRef, 'question');
 
     // Delete existing questions
@@ -322,7 +322,6 @@ async function saveQuestions() {
     await Promise.all(savePromises);
 
     saveloadingIndicator.style.display = 'none'; // Show loading indicator
-    alert('Questions saved successfully.');
     console.log('Questions and section direction saved successfully.');
 
     } catch (error) {
@@ -346,7 +345,7 @@ async function saveQuizDetails() {
 
     try {
         // Define the path to the quiz document
-        const quizDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
 
         // Prepare the data to be saved
         const quizData = {
@@ -382,7 +381,7 @@ async function fetchQuestionsAndDirection() {
     directionContainer.style.display = 'none'; // Hide direction container
 
     try {
-        const sectionDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+        const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
         const questionsCollectionRef = collection(sectionDocRef, 'question');
 
         const sectionDoc = await getDoc(sectionDocRef);
@@ -481,7 +480,7 @@ async function fetchQuestionsAndDirection() {
 async function fetchQuizDetails() {
     try {
         // Define the path to the quiz document
-        const quizDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
 
         // Fetch the quiz document
         const quizDoc = await getDoc(quizDocRef);
@@ -542,7 +541,7 @@ async function deleteQuiz() {
     if (confirmed) {
         try {
             // Path to the selected module document
-            const moduleRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId );
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId );
             
             // Delete the module document
             await deleteDoc(moduleRef);

@@ -41,7 +41,7 @@ async function getClassrooms() {
         const loadingIndicator = document.querySelector('.loading-indicator');
         loadingIndicator.style.display = 'block';  // Show loading indicator
 
-        const q = query(collection(db, "admin"), where("email", "==", loggedInUserEmail));
+        const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
@@ -56,7 +56,7 @@ async function getClassrooms() {
         const classrooms = [];
 
         for (const doc of querySnapshot.docs) {
-            const classroomCollection = collection(db, 'admin', doc.id, 'classroom');
+            const classroomCollection = collection(db, 'teacher', doc.id, 'classroom');
             const classroomSnapshot = await getDocs(classroomCollection);
 
             classroomSnapshot.forEach((classroomDoc) => {
@@ -107,7 +107,7 @@ async function createClassroom(event) {
     const classCode = document.getElementById("classcode").value.trim();
 
     try {
-        const q = query(collection(db, "admin"), where("email", "==", loggedInUserEmail));
+        const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
@@ -115,7 +115,7 @@ async function createClassroom(event) {
             const teacherId = teacherDoc.id;
 
             // Create a new document with a random ID in the "classroom" subcollection
-            const newClassroomRef = doc(collection(db, 'admin', teacherId, 'classroom'));
+            const newClassroomRef = doc(collection(db, 'teacher', teacherId, 'classroom'));
             await setDoc(newClassroomRef, { name: className, code: classCode });
 
             // Refresh the classroom list

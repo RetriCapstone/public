@@ -15,9 +15,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const adminFirstname = document.getElementById('teacher-firstname');
-const adminLastname = document.getElementById('teacher-lastname');
-const adminEmail = document.getElementById('teacher-email');
+const teacherFirstname = document.getElementById('teacher-firstname');
+const teacherLastname = document.getElementById('teacher-lastname');
+const teacherEmail = document.getElementById('teacher-email');
 const changePasswordCheckbox = document.getElementById('change-pass');
 const updateButton = document.getElementById('acc-btn-update');
 
@@ -33,22 +33,22 @@ async function fetchUserProfile() {
 
     try {
 
-        const q = query(collection(db, "admin"), where("email", "==", loggedInUserEmail));
+        const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
             let userFound = false;
             querySnapshot.forEach((doc) => {
                 userFound = true;
-                const adminData = doc.data();
-                const fieldFirstname = adminData.firstname;
-                const fieldLastname = adminData.lastname;
-                const fieldEmail = adminData.email;
-                const fieldPassword = adminData.password;
+                const teacherData = doc.data();
+                const fieldFirstname = teacherData.firstname;
+                const fieldLastname = teacherData.lastname;
+                const fieldEmail = teacherData.email;
+                const fieldPassword = teacherData.password;
                 
-                adminFirstname.value = fieldFirstname || '';
-                adminLastname.value = fieldLastname || '';
-                adminEmail.value = fieldEmail || '';
+                teacherFirstname.value = fieldFirstname || '';
+                teacherLastname.value = fieldLastname || '';
+                teacherEmail.value = fieldEmail || '';
 
             });
             if (!userFound) {
@@ -66,6 +66,24 @@ async function fetchUserProfile() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

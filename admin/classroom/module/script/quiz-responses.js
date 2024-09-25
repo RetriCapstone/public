@@ -41,7 +41,7 @@ async function fetchActiveStudents() {
     }
     numberOfResponses = 0;
     try {
-        const studentCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'student');
+        const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
         const studentSnapshot = await getDocs(studentCollectionRef);
 
         const activeStudentsContainer = document.querySelector('.response-student-list');
@@ -285,7 +285,7 @@ function addQuestion() {
 
 async function fetchQuizQuestionDetail(studentId) {
     try {
-        const questionsCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1', 'question');
+        const questionsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1', 'question');
         
         const questionsSnapshot = await getDocs(questionsCollectionRef);
         const questionDataList = [];

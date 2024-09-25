@@ -27,7 +27,7 @@ const moduleItemloadingIndicator= document.querySelector('.create-module-item-lo
 const moduleloadingIndicator= document.querySelector('.create-module-loading');
 
 async function getItems(moduleId, itemType) {
-    const itemCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
+    const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
     const itemQuery = query(itemCollectionRef, orderBy('number'));
     const itemSnapshot = await getDocs(itemQuery);
     const items = [];
@@ -50,7 +50,7 @@ async function getClassroomName() {
 
     try {
         // Define the path to the classroom document
-        const classroomRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId);
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
 
         // Fetch the classroom document
         const classroomDoc = await getDoc(classroomRef);
@@ -91,7 +91,7 @@ async function getModules() {
     try {
         const loadingIndicator = document.querySelector('.loading-indicator');
         loadingIndicator.style.display = 'block';  // Show loading indicator
-        const moduleCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module');
+        const moduleCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module');
         const moduleQuery = query(moduleCollectionRef, orderBy('number'));
         const moduleSnapshot = await getDocs(moduleQuery);
 
@@ -174,6 +174,15 @@ async function getModules() {
             item.addEventListener('click', (event) => {
                 const moduleId = item.getAttribute('data-module-id');
                 const itemId = item.getAttribute('data-item-id');
+
+                // // Store details in localStorage
+                // localStorage.setItem('selectedModuleId', moduleId);
+                // localStorage.setItem('selectedItemId', itemId);
+
+                // const url = `newPage.html?selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(itemId)}`;
+                // window.location.href = url;
+
+                // Allow the default link behavior to navigate
             });
         });
 
@@ -207,7 +216,7 @@ async function populateModuleSelect() {
     selectElement.innerHTML = ''; // Clear existing options
 
     try {
-        const moduleCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module');
+        const moduleCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module');
         const moduleQuery = query(moduleCollectionRef, orderBy('number'));
         const moduleSnapshot = await getDocs(moduleQuery);
 
@@ -309,7 +318,7 @@ class editModuleModal {
 
         try {
             // Path to the selected module document
-            const moduleRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
 
             // Update the module's name field
             await updateDoc(moduleRef, {
@@ -333,7 +342,7 @@ class editModuleModal {
         if (confirmed) {
             try {
                 // Path to the selected module document
-                const moduleRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
+                const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId);
 
                 // Delete the module document
                 await deleteDoc(moduleRef);
@@ -368,7 +377,7 @@ async function createModule(event) {
     }
 
     try {
-        const moduleCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module');
+        const moduleCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module');
         const moduleSnapshot = await getDocs(moduleCollectionRef);
         const existingModulesCount = moduleSnapshot.size;
         const newModuleId = moduleName + existingModulesCount;
@@ -387,7 +396,7 @@ async function createModule(event) {
             moduleNumber = selectedModuleNumber + 0.1;
         }
 
-        const moduleDocRef = doc(collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module'));
+        const moduleDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module'));
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
         alert('Module created successfully');
@@ -496,20 +505,19 @@ class ModuleItemModal {
             return;
         }
 
-        const itemCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType);
+        const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType);
         const itemSnapshot = await getDocs(itemCollectionRef);
         const existingItemsCount = itemSnapshot.size;
         const itemNumber = existingItemsCount + 1;
 
-        const itemDocRef = doc(collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType));
+        const itemDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', this.moduleId, moduleItemType));
 
         try {
             // Use addDoc to automatically generate the document ID
             const itemDocRef = await addDoc(itemCollectionRef, { number: itemNumber, status: 'close', name: moduleItemName });
             const moduleItemID = itemDocRef.id; 
 
-            moduleItemNameInput.value = '';  // Clear the input field
-            alert('Created successfully.');
+            moduleItemNameInput.value = ''; 
             this.closeModal();  // Close the modal
             moduleItemloadingIndicator.style.display = 'none';
             getModules();
@@ -541,13 +549,11 @@ async function editClassroom(event) {
         return;
     }
     try {
-            const classroomRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId);
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
             await updateDoc(classroomRef, { name: newclassName, code:newclassCode }); 
 
             getClassroomName();
             document.getElementById("modal-edit-classroom").style.display = "none";
-            alert("Classroom updated successfully.");
-            
         
     } catch (error) {
         console.error("Error updating classroom:", error);
@@ -578,7 +584,7 @@ async function deleteClassroom() {
     if (confirmation) {
         try {
             // Get the students collection reference
-            const studentCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'student');
+            const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
 
             // Fetch all student documents under the classroom
             const studentDocsSnapshot = await getDocs(studentCollectionRef);
@@ -593,8 +599,8 @@ async function deleteClassroom() {
             // Wait for all deletions to complete
             await Promise.all(deletePromises);
 
-            // Now, delete the classroom document from the admin's collection
-            const classroomRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId);
+            // Now, delete the classroom document from the teacher's collection
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
             await deleteDoc(classroomRef);
 
             alert("Classroom deleted successfully.");

@@ -430,7 +430,7 @@ async function saveLectureItems() {
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the 'item' collection within the lecture
-        const itemsCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
 
         // Fetch all existing items and delete them
         const existingItemsSnapshot = await getDocs(itemsCollectionRef);
@@ -473,8 +473,7 @@ async function saveLectureItems() {
             });
         }
 
-        saveloadingIndicator.style.display = 'none'; // Show loading indicator
-        alert('Lecture items saved successfully.');
+        saveloadingIndicator.style.display = 'none'; 
 
     } catch (error) {
         saveloadingIndicator.style.display = 'none'; // Show loading indicator
@@ -486,7 +485,7 @@ async function saveLectureItems() {
 //func: save lecture details (name and status)
 async function saveLectureDetails() {
     try {
-        const lectureName = document.getElementById('settings-lect-name-input').value.trim();
+        const lectureName = document.getElementById('settings-lect-name-input').value.trim().toUpperCase();
         const lectureStatus = document.getElementById('settings-select-status').value;
 
         if (!lectureName) {
@@ -495,13 +494,14 @@ async function saveLectureDetails() {
         }
 
         // Path to the selected lecture document
-        const lectureDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Update the lecture document with name and status
         await updateDoc(lectureDocRef, {
             name: lectureName,
             status: lectureStatus
         });
+        fetchLectureDetails();
 
     } catch (error) {
         console.error('Error saving lecture details:', error);
@@ -516,7 +516,7 @@ async function fetchLectureItems() {
     loadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the item collection within the lecture
-        const itemsCollectionRef = collection(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
         const itemsSnapshot = await getDocs(itemsCollectionRef);
 
         if (itemsSnapshot.empty) {
@@ -600,7 +600,7 @@ async function fetchLectureItems() {
 async function fetchLectureDetails() {
     try {
         // Define the path to the lecture document
-        const lectureDocRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Fetch the quiz document
         const lectureDoc = await getDoc(lectureDocRef);
@@ -631,7 +631,7 @@ async function deleteLecture() {
     if (confirmed) {
         try {
             // Path to the selected module document
-            const moduleRef = doc(db, 'admin', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
             
             // Delete the module document
             await deleteDoc(moduleRef);

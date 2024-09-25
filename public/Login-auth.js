@@ -38,12 +38,14 @@ loginForm.addEventListener('submit', async (e) => {
                         userFound = true;
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("loggedInUserEmail", email); 
-                        // if (userData.type === "admin") {
-                        //     window.location.href = "/admin/classroom/classroom.php";
-                        // } else {
-                        //     window.location.href = "/teacher/classroom/classroom.php";
-                        // }
-                        window.location.href = "/teacher/classroom/classroom.php";
+                        if (userData.type === "admin") {
+                            window.location.href = "/admin/classroom/classroom.php";
+                        } else if(userData.type === "instructor") {
+                            window.location.href = "/teacher/classroom/classroom.php";
+                        }
+                        else{
+                            alert("Email or password is invalid.");
+                        }
                         return; 
                     }
                 });

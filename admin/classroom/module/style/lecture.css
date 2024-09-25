@@ -14,6 +14,7 @@
     max-width: 1100px;
     width: 84%;
     overflow: auto;
+    scrollbar-width: none;
 }
 .lect-navbar{
     
@@ -159,11 +160,6 @@
 
 
 
-.delete-option{
-    margin: 4px;
-    padding: 6px 8px;
-    border-radius: 12px;
-}
 .delete-option{
     margin: 4px;
     padding: 6px 8px;

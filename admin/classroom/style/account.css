@@ -1,6 +1,10 @@
+.main_container{
+    flex-direction: column;
+    align-items: center;
+}
+
 .input-style{
-    min-width: 400px;
-    width: 600px;
+    width: 30rem;
     margin: 24px 0;
 }
 .input-style span{
@@ -38,5 +42,5 @@
     margin-top: 12px;
 }
 .style-container-1{
-    margin: 1rem;
+    margin: 2rem;
 }
