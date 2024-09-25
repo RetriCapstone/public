@@ -37,9 +37,14 @@ loginForm.addEventListener('submit', async (e) => {
                     if (userData.password === password) {
                         userFound = true;
                         localStorage.setItem("isLoggedIn", "true");
-                        localStorage.setItem("loggedInUserEmail", email); // Store the logged-in user's email
+                        localStorage.setItem("loggedInUserEmail", email); 
+                        // if (userData.type === "admin") {
+                        //     window.location.href = "/admin/classroom/classroom.php";
+                        // } else {
+                        //     window.location.href = "/teacher/classroom/classroom.php";
+                        // }
                         window.location.href = "/teacher/classroom/classroom.php";
-                        return; // Exit the function after successful login
+                        return; 
                     }
                 });
                 

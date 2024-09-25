@@ -143,7 +143,7 @@ function addCodeQuestion() {
             <div class="code-text-list-container" id="code-desc-list-question-${questionNumber}">
                 <div class="code-desc-con question-title" id="code-title-desc-question-${questionNumber}-item-${itemNumber}">
                     <div class="text-desc-body">
-                        <textarea class="code-text-field text-question" autocomplete="off" required placeholder="Question title" id="title-desc-input-question-${questionNumber}-item-${itemNumber}"></textarea>
+                        <textarea class="code-text-field text-question" autocomplete="off" required placeholder="Question title" id="title-desc-input-question-${questionNumber}"></textarea>
                     </div>
                 </div>
             </div>
@@ -231,6 +231,8 @@ function addCodeQuestion() {
 
     btnRunCode.addEventListener('click', () => {
         OutputEditor.value = '';
+        activeButton(btnOutput, btnCompiler, btnInput);
+        activeContainer(ideOutput, ideInput, ideCompiler);
         runCode(CodeEditor, InputEditor, OutputEditor)
 
     });
@@ -353,7 +355,7 @@ async function saveCodeActivityDetails() {
 
     try {
         // Define the path to the quiz document
-        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedActivityId);
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'activity', selectedActivityId);
 
         // Prepare the data to be saved
         const quizData = {
@@ -391,18 +393,14 @@ async function fetchCodingQuestion() {
 
         const questionsSnapshot = await getDocs(questionsCollectionRef);
 
-        // Clear the question list container
         codeQuestionContainer.innerHTML = '';
 
-        // Loop through fetched questions
         for (let doc of questionsSnapshot.docs) {
             const questionData = doc.data();
-            const questionNumber = doc.id.split('-')[1]; // Extract question number from ID (e.g., "question-1")
+            const questionNumber = doc.id.split('-')[1]; 
 
-            // Add a new question container for each fetched question
             addCodeQuestion();
 
-            // Ensure elements are available after the question is added
             setTimeout(() => {
                 // Set the point value
                 const pointInput = document.querySelector(`#code-point-input-question-${questionNumber}`);
@@ -423,15 +421,12 @@ async function fetchCodingQuestion() {
                 const descArray = questionData.desc || [];
                 descArray.forEach((descItem, index) => {
                     if (typeof descItem === 'string') {
-                        // Add a text description or title
                         if (index === 0) {
-                            // First item is the question title
-                            const titleInput = document.querySelector(`#title-desc-input-question-${questionNumber}-item-${index + 1}`);
+                            const titleInput = document.querySelector(`#title-desc-input-question-${questionNumber}`);
                             if (titleInput) {
                                 titleInput.value = descItem;
                             }
                         } else {
-                            // Add a text description
                             addTextDesc(questionNumber);
                             const itemNumber = lastDescItem; // Get the latest desc item number
                             const textDescInput = document.querySelector(`#text-desc-input-question-${questionNumber}-item-${itemNumber}`);
@@ -441,7 +436,6 @@ async function fetchCodingQuestion() {
                             auto_height(textDescInput);
                         }
                     } else if (descItem.divider === true) {
-                        // Add a line divider
                         addLineDesc(questionNumber);
                     }
                 });

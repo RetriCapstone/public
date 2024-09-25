@@ -15,8 +15,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <script type="module" src="script/coding-editor.js" ></script>
     <script type="module" src="script/coding.js" ></script>
+    <script type="module" src="script/coding-responses.js" ></script>
     <script src="/teacher/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="code-header-pos-1 style-header">
-                    <h3 id="act-name" >Coding Activity</h3>
+                    <h3 id="act-name" ></h3>
                     <button class="style-btn-add-1" id="code-save-btn">Save</button>
                 </div>
 
@@ -98,6 +98,31 @@
 
                 <div class="code-responses-con">
                     
+                    <!-- Modal for Editing quiz asnwer  -->
+                    <!-- <div id="modal-edit-quiz" class="style-modal-quiz">
+                        <div class="style-modal-content-quiz edit-module-modal">
+                            <span class="close-modal close-quiz-detail-modal">&times;</span>
+                            <div class="spinner loading-quiz-content"></div>
+
+                            <div class="quiz-answer-content" >
+                                <div class="quiz-answer-header" >
+                                    <h3 id="quiz-student-fullname" >Student name</h3>
+                                    <span id="quiz-student-total-score" >Total score: </span>
+                                </div>
+
+                                <div class="quiz-answer-list">
+
+                                </div>
+
+                                <div class="quiz-answer-footer" >
+                                    <button id="btn-save-score-details" class="style-btn-add-1" >Save changes</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div> -->
+
                     <div class="style-container-1 response-style-con">
                         <span class="respones-text-header" id="quiz-number-responses" >0</span>
                         <span class="respones-text-header" >responses</span>

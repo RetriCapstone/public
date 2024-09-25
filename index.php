@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Dojo - Learn Coding</title>
-    <link rel="stylesheet" href="styles_index.css">
+    <link rel="stylesheet" href="/public/styles_index.css">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="/teacher/images/logo-icon.png" type="image/x-icon">
@@ -20,8 +20,8 @@
                     </div>
                 </div>
                 <div class="header-btn-container" >
-                    <a id="btn-login" href="Login.php" class="login-button">Login</a>
-                    <a id="btn-signup" href="Signup.php" class="signup-button">Sign up</a>
+                    <a id="btn-login" href="/public/Login.php" class="login-button">Login</a>
+                    <a id="btn-signup" href="/public/Signup.php" class="signup-button">Sign up</a>
                 </div>
             </div>
         </nav>
@@ -32,7 +32,7 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ut nihil facere repudiandae beatae, fugiat consectetur aperiam, repellendus alias explicabo voluptate facilis voluptates temporibus quidem, debitis rerum qui ratione! Assumenda.</p>
                 </div>
                 <div class="image-container">
-                    <img src="image.png" alt="Image description">
+                    <img src="/public/image.png" alt="Image description">
                 </div>
             </div>
             </div>
@@ -81,6 +81,6 @@
             <p>&copy; 2024 Code Dojo. All Rights Reserved.</p>
         </div>
     </footer>
-    <script src="index.js"></script>
+    <script src="/public/index.js"></script>
 </body>
 </html>

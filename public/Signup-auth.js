@@ -32,15 +32,13 @@ signUp.addEventListener('submit', async (e) => {
     const signupPassword = document.getElementById('input-password').value;
     const signupConfirmPass = document.getElementById('input-confirm-password').value;
 
-    // Step 1: Check if passwords match
     if (signupPassword !== signupConfirmPass) {
         alert('Passwords do not match!');
-        saveloadingIndicator.style.display = 'none'; // Hide loading indicator
+        saveloadingIndicator.style.display = 'none'; 
         return;
     }
 
     try {
-        // Step 2: Check if the signup code matches
         const adminCollectionRef = collection(db, 'admin');
         const adminSnapshot = await getDocs(adminCollectionRef);
         let codeMatched = false;
@@ -58,26 +56,25 @@ signUp.addEventListener('submit', async (e) => {
 
         if (!codeMatched) {
             alert('Invalid Instructor Code');
-            saveloadingIndicator.style.display = 'none'; // Hide loading indicator
+            saveloadingIndicator.style.display = 'none'; 
             return;
         }
 
-        // Step 3: If all checks are successful, sign up the user
         const newTeacherData = {
             email: signupEmail,
             firstname: signupFirstname,
             lastname: signupLastname,
-            password: signupPassword // In a real application, consider hashing passwords for security
+            password: signupPassword ,
+            type: "instructor"
         };
 
-        // Save the new teacher account
         const teacherCollectionRef = collection(db, 'teacher');
         await addDoc(teacherCollectionRef, newTeacherData);
 
 
         alert('Signup successful!');
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("loggedInUserEmail", signupEmail); // Store the logged-in user's email
+        localStorage.setItem("loggedInUserEmail", signupEmail); 
         window.location.href = "/teacher/classroom/classroom.php";
 
     } catch (error) {
