@@ -473,8 +473,7 @@ async function saveLectureItems() {
             });
         }
 
-        saveloadingIndicator.style.display = 'none'; // Show loading indicator
-        alert('Lecture items saved successfully.');
+        saveloadingIndicator.style.display = 'none'; 
 
     } catch (error) {
         saveloadingIndicator.style.display = 'none'; // Show loading indicator

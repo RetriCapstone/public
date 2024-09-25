@@ -1,0 +1,7 @@
+{
+    "name": "Code Dojo",
+    "description": "A code compiler.",
+    "require": {
+        "php": "^7.4"
+    }
+}

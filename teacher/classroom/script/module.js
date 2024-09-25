@@ -517,8 +517,7 @@ class ModuleItemModal {
             const itemDocRef = await addDoc(itemCollectionRef, { number: itemNumber, status: 'close', name: moduleItemName });
             const moduleItemID = itemDocRef.id; 
 
-            moduleItemNameInput.value = '';  // Clear the input field
-            alert('Created successfully.');
+            moduleItemNameInput.value = ''; 
             this.closeModal();  // Close the modal
             moduleItemloadingIndicator.style.display = 'none';
             getModules();
@@ -555,8 +554,6 @@ async function editClassroom(event) {
 
             getClassroomName();
             document.getElementById("modal-edit-classroom").style.display = "none";
-            alert("Classroom updated successfully.");
-            
         
     } catch (error) {
         console.error("Error updating classroom:", error);

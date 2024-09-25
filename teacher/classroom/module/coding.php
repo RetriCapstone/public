@@ -16,6 +16,7 @@
 </head>
 <body>
     <script type="module" src="script/coding-editor.js" ></script>
+    <script type="module" src="script/coding.js" ></script>
     <script src="/teacher/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
@@ -59,13 +60,21 @@
         </nav>
         <div class="main_body">   
 
+            <div class="save-loading-indicator-bg">
+                <div class="save-loading-indicator">
+                    <div class="spinner"></div>
+                    Saving
+                </div>
+            </div>
+
             <div class="code-header-con">
-                <div class="code-question-add">
+                <div class="code-question-add" id="code-add-question" >
                     <span>Add question</span>
                 </div>
+
                 <div class="code-header-pos-1 style-header">
-                    <h3>Coding Activity</h3>
-                    <button class="style-btn-add-1" id="lect-save-btn">Save</button>
+                    <h3 id="act-name" >Coding Activity</h3>
+                    <button class="style-btn-add-1" id="code-save-btn">Save</button>
                 </div>
 
                 <div class="code-header-pos-2">
@@ -83,120 +92,136 @@
             <div class="code-body-con">
 
                 <div class="code-question-con">
-
                     <div class="code-question-list">
-                        
-                        <div class="code-question" id="code-question-1" >
-                            <div class="code-question-body">
-                                <div class="code-body-card-1" >
-                                    <div class="code-tool-con" >
-                                        <div class="btn-tool" >
-                                            <img src="/teacher/images/text-size-icon.png" alt="">
-                                        </div>
-                                        <div class="btn-tool" >
-                                            <img src="/teacher/images/line-seperate.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="code-text-list-container" >
+                    </div>
+                </div>
 
-                                        <div class="code-desc-con question-title" >
-                                            <div class="text-desc-body">
-                                                <textarea class="code-text-field text-question" autocomplete="off" placeholder="Question title" id=""></textarea>
-                                                <i class="fa-solid fa-xmark delete-option"  id=""></i>
-                                            </div>
-                                        </div>
-
-                                        <div class="code-desc-con question-desc" >
-                                            <div class="text-desc-body">
-                                                <textarea class="code-text-field text-desc" autocomplete="off" placeholder="Description" id=""></textarea>
-                                                <i class="fa-solid fa-xmark delete-option"  id=""></i>
-                                            </div>
-                                        </div>
-
-                                        <div class="code-div-con question-desc" >
-                                            <div class="text-divider" ></div>
-                                        </div>
-
-                                        <div class="code-desc-con question-desc" >
-                                            <div class="text-desc-body">
-                                                <textarea class="code-text-field text-desc" autocomplete="off" placeholder="Description" id=""></textarea>
-                                                <i class="fa-solid fa-xmark delete-option"  id=""></i>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="code-body-card-2">
-                                    <div class="code-editor-con">
-
-                                        <div class="code-editor-header compiler-header" >
-                                            <div style="display: flex; gap: .6rem; "  >
-                                                <div class="code-compiler-btn code-active-btn" id="btn-compiler-code" >Code</div>
-                                                <div class="code-input-btn " id="btn-input-code" >Input</div>
-                                                <div class="code-output-btn" id="btn-output-code" >Output</div>
-                                            </div>
-
-                                            <button class="btn-code-submit" id="btn-submit" >
-                                                <i class="fa-solid fa-play"></i> Run
-                                            </button>
-                                        </div>
-
-                                        <div class="editor-container compiler-editor" id="code-compiler-ide" >
-                                            <div class="line-numbers" id="lineNumbers"></div>
-                                            <textarea id="codeEditor" class="code-editor"  spellcheck="false" placeholder="<code>" ></textarea>
-                                        </div>
-
-                                        <div class="editor-container input-editor" id="code-input-ide" style="display: none;" >
-                                            <div class="line-numbers" id="lineNumbers"></div>
-                                            <textarea id="codeInput" class="code-editor" spellcheck="false" placeholder="<input>" ></textarea>
-                                        </div>
-
-                                        <div class="code-output-con output-editor" id="code-output-ide"  style="display: none;" >
-                                            <textarea id="codeOutput" class="code-output-editor" spellcheck="false" placeholder="<output>" ></textarea>
-                                        </div>
-
-                                    </div>
-                                    <div class="code-editor-con">
-
-                                        <div class="code-editor-header" >
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- <div class="code-body-card-3">
-                                        <div class="code-editor-header" >
-
-                                        </div>
-
-                                        <div class="code-output-con" >
-
-                                        </div>
-                                </div> -->
-                            </div>
-                            <div class="code-question-bottom">
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="code-question" id="code-question-1" >
-                            <div class="code-question-body">
-                                <div class="code-body-card-1" >
-
-                                </div>
-                                <div class="code-body-card-2" >
-
-                                </div>
-                            </div>
-                            <div class="code-question-bottom">
-                                
-                            </div>
+                <div class="code-responses-con">
+                    
+                    <div class="style-container-1 response-style-con">
+                        <span class="respones-text-header" id="quiz-number-responses" >0</span>
+                        <span class="respones-text-header" >responses</span>
+                    </div>
+                    <div class="style-container-1 response-style-con">
+                        <div class="response-header-details" >
+                            <span>Time</span>
+                            <span>Score</span>
                         </div>
 
+                        <div class="response-student-list" >
+
+                        </div>
+                        
                     </div>
 
                 </div>
-                <div class="code-responses-con"></div>
-                <div class="code-settings-con"></div>
+
+                <div class="code-settings-con">
+                    
+                    <div class="style-container-1 settings-container" >
+                        <p class="settings-text" >Settings</p>
+                        <hr class="divider-solid setting-divider">
+                        <div class="settings-card-col" >
+                            <span class="settings-label-title" >
+                                Quiz name
+                            </span>
+                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="Quiz name">
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Randomize Question
+                                </span>
+                                <p class="settings-label-body" >
+                                    Make the quiz questions in random
+                                </p>
+                            </div>
+                            <div class="settings-card-1" >
+                                <label class="switch">
+                                <input type="checkbox" id="quiz-random-checkbox" >
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Show Question Answer
+                                </span>
+                                <p class="settings-label-body" >
+                                    Correct answer will be visible after taking the quiz
+                                </p>
+                            </div>
+                            <div class="settings-card-1" >
+                                <label class="switch">
+                                <input type="checkbox" id="quiz-show-answer" >
+                                <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-card" >
+                            <div class="settings-card-1" >
+                                <span class="settings-label-title" >
+                                    Duration
+                                </span>
+                                <p class="settings-label-body" >
+                                    Set the duration time for taking this quiz
+                                </p>
+                            </div>
+                            <div class="settings-card-1 settings-time-con" >
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-hour" type="number" max="24" min="0" value="0" >
+                                    <span>hours</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-minute" type="number" max="59" min="0" value="0" >
+                                    <span>minutes</span>
+                                </div>
+                                <div class="settings-time-input-con" >
+                                    <input id="quiz-duration-second" type="number" max="59" min="0" value="0" >
+                                    <span>seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-card-col" >
+                            <div class="settings-card-2" >
+                                <div class="settings-card-1" >
+                                    <span class="settings-label-title" >
+                                        Quiz Publish Status
+                                    </span>
+                                </div>
+                                <div class="settings-card-1" >
+                                    <select class="style-select settings-select-status" >
+                                        <option value="close">Closed</option>
+                                        <option value="open">Open</option>
+                                        <option value="set">Set Date and Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="settings-datetime-con" >
+                                <div>
+                                    <span >Starting date:</span>
+                                    <input class="settings-datetime" type="datetime-local" name="quiz-datetime-start" id="">
+                                    <p class="settings-label-body" >
+                                        Set the date and time for the quiz to be open
+                                    </p>
+                                </div>
+                                <div>
+                                    <span >Due date:</span>
+                                    <input class="settings-datetime" type="datetime-local" name="quiz-datetime-end" id="">
+                                    <p class="settings-label-body" >
+                                        Set the date and time for the quiz to be closed
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-card-bottom" >
+                            <button class="style-btn-del" id="btn-delete-quiz" >Delete quiz</button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>

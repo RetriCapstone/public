@@ -322,7 +322,6 @@ async function saveQuestions() {
     await Promise.all(savePromises);
 
     saveloadingIndicator.style.display = 'none'; // Show loading indicator
-    alert('Questions saved successfully.');
     console.log('Questions and section direction saved successfully.');
 
     } catch (error) {
