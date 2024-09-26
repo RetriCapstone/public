@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => 'retri/code-dojo',
+        'name' => 'public-1/code-dojo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3875ee990d9ed52e37bfb280244f6bcdec6937ed',
+        'reference' => 'fc969842b26a761a12039198f59f2de7785d2ee6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'retri/code-dojo' => array(
+        'public-1/code-dojo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3875ee990d9ed52e37bfb280244f6bcdec6937ed',
+            'reference' => 'fc969842b26a761a12039198f59f2de7785d2ee6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
