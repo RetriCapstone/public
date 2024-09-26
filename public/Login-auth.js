@@ -39,9 +39,9 @@ loginForm.addEventListener('submit', async (e) => {
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("loggedInUserEmail", email); 
                         if (userData.type === "admin") {
-                            window.location.href = "/admin/classroom/classroom.php";
+                            window.location.href = "/public/admin/classroom/classroom.php";
                         } else if(userData.type === "instructor") {
-                            window.location.href = "/teacher/classroom/classroom.php";
+                            window.location.href = "/public/teacher/classroom/classroom.php";
                         }
                         else{
                             alert("Email or password is invalid.");

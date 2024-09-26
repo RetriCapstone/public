@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="/teacher/images/logo-icon.png" type="image/x-icon">
+    <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,8 +19,8 @@
             </div>
     <header>
         <div class="container-navigation">
-            <a class="logo-container" href="/index.php" >
-                <img src="/teacher/images/logo1.png" alt="landing-logo">
+            <a class="logo-container" href="/public/index.php" >
+                <img src="/public/teacher/images/logo1.png" alt="landing-logo">
             </a>
         </div>
     </header>
@@ -40,7 +40,7 @@
 
                 <a href="#" class="forgot-password">Forgot password?</a>
                 <button type="submit">Login</button>
-                <p>Don't have an account? <a href="Signup.php">Signup</a></p>
+                <p>Don't have an account? <a href="/public/Signup.php">Signup</a></p>
             </form>
         </div>
     </div>

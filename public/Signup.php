@@ -18,8 +18,8 @@
             </div>
     <header>
         <div class="container-navigation">
-            <a class="logo-container" href="/index.php" >
-                <img src="/teacher/images/logo1.png" alt="landing-logo">
+            <a class="logo-container" href="/public/index.php" >
+                <img src="/public/teacher/images/logo1.png" alt="landing-logo">
             </a>
         </div>
     </header>
@@ -51,7 +51,7 @@
                 </div>
 
                 <button type="submit">Sign Up</button>
-                <p>Already have an account? <a href="Login.php">Login</a></p>
+                <p>Already have an account? <a href="/public/Login.php">Login</a></p>
             </form>
         </div>
     </div>

@@ -3,7 +3,7 @@
         'name' => 'retri/code-dojo',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '82c6bf216510c16fc956fa5fb7d22cbce91fcea7',
+        'reference' => '3875ee990d9ed52e37bfb280244f6bcdec6937ed',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'retri/code-dojo' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '82c6bf216510c16fc956fa5fb7d22cbce91fcea7',
+            'reference' => '3875ee990d9ed52e37bfb280244f6bcdec6937ed',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

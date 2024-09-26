@@ -86,7 +86,7 @@ async function getActiveStudents() {
             const userDoc = await getDoc(userDocRef);
             const userData = userDoc.data();
 
-            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png" ;
+            const profileImageUrl = userData.profileImageUrl || "/public/teacher/images/default-user.png" ;
 
             const studentElement = document.createElement('div');
             studentElement.className = 'style-student-list';
@@ -142,7 +142,7 @@ async function getRequestStudents() {
             const userDocRef = doc(db, 'users', studentId);
             const userDoc = await getDoc(userDocRef);
             const userData = userDoc.data();
-            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png" ;
+            const profileImageUrl = userData.profileImageUrl || "/public/teacher/images/default-user.png" ;
 
             const requestElement = document.createElement('div');
             requestElement.className = 'style-student-list';

@@ -134,10 +134,10 @@ function addCodeQuestion() {
         <div class="code-body-card-1">
             <div class="code-tool-con">
                 <div class="btn-tool" id="btn-add-text-desc-question-${questionNumber}">
-                    <img src="/teacher/images/text-size-icon.png" alt="">
+                    <img src="/public/teacher/images/text-size-icon.png" alt="">
                 </div>
                 <div class="btn-tool" id="btn-add-divider-question-${questionNumber}">
-                    <img src="/teacher/images/line-seperate.png" alt="">
+                    <img src="/public/teacher/images/line-seperate.png" alt="">
                 </div>
             </div>
             <div class="code-text-list-container" id="code-desc-list-question-${questionNumber}">
@@ -519,7 +519,7 @@ async function deleteQuiz() {
             await deleteDoc(moduleRef);
 
             alert('lecture deleted successfully.');
-            navigateToPage('/teacher/classroom/module.php');
+            navigateToPage('/public/teacher/classroom/module.php');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);

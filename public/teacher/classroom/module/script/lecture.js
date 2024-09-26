@@ -637,7 +637,7 @@ async function deleteLecture() {
             await deleteDoc(moduleRef);
 
             alert('lecture deleted successfully.');
-            navigateToPage('/teacher/classroom/module.php');
+            navigateToPage('/public/teacher/classroom/module.php');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -692,10 +692,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/teacher/classroom/student.php');
+        navigateToPage('/public/teacher/classroom/student.php');
     });
     document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/teacher/classroom/module.php');
+        navigateToPage('/public/teacher/classroom/module.php');
     });
 
 });

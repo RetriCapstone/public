@@ -3,9 +3,9 @@ const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;  // Backend port
-
-app.use(cors());
+const port = process.env.PORT || 3001;
+const cors = require('cors');
+app.use(cors({ origin: '*' })); // Allow all origins for testing
 
 app.use(express.json());
 

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Challenge</title>
-    <link rel="stylesheet" href="/teacher/style_dashboard.css">
-    <link rel="icon" href="/teacher/images/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/teacher/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/teacher/classroom/module/style/coding.css">
-    <link rel="stylesheet" href="/teacher/classroom/module/style/coding-editor.css">
+    <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
+    <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/public/teacher/classroom/module/style/coding.css">
+    <link rel="stylesheet" href="/public/teacher/classroom/module/style/coding-editor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,15 +17,15 @@
 <body>
     <script type="module" src="script/coding.js" ></script>
     <script type="module" src="script/coding-responses.js" ></script>
-    <script src="/teacher/dashboard.js" type="module"></script>
+    <script src="/public/teacher/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/teacher/images/logo-no-background.png">
+                <img src="/public/teacher/images/logo-no-background.png">
             </div>
             <ul class="menu">
                 <li class="active">
-                    <a href="/teacher/classroom/classroom.php">
+                    <a href="/public/teacher/classroom/classroom.php">
                         <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/teacher/classroom/help.php">
+                    <a href="/public/teacher/classroom/help.php">
                         <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/teacher/classroom/settings.php">
+                    <a href="/public/teacher/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings

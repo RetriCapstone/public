@@ -75,7 +75,7 @@ signUp.addEventListener('submit', async (e) => {
         alert('Signup successful!');
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("loggedInUserEmail", signupEmail); 
-        window.location.href = "/teacher/classroom/classroom.php";
+        window.location.href = "/public/teacher/classroom/classroom.php";
 
     } catch (error) {
         console.error('Error during signup:', error);

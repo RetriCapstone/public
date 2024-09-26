@@ -54,7 +54,7 @@ async function fetchActiveStudents() {
             const userDocRef = doc(db, 'users', studentId);
             const userDoc = await getDoc(userDocRef);
             const userData = userDoc.data();
-            const profileImageUrl = userData.profileImageUrl || "/teacher/images/default-user.png";
+            const profileImageUrl = userData.profileImageUrl || "/public/teacher/images/default-user.png";
 
             // Fetch user score points
             const quizDocRef = collection(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question');
@@ -512,10 +512,10 @@ function navigateToPage(page) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchActiveStudents();
     document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/teacher/classroom/student.php');
+        navigateToPage('/public/teacher/classroom/student.php');
     });
     document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/teacher/classroom/module.php');
+        navigateToPage('/public/teacher/classroom/module.php');
     });
 
 });
