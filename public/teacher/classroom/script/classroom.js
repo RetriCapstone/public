@@ -119,7 +119,6 @@ async function createClassroom(event) {
             await setDoc(newClassroomRef, { name: className, code: classCode });
 
             // Refresh the classroom list
-            alert('Classroom created successfully');
             saveloadingIndicator.style.display = 'none'; // Show loading indicator
             getClassrooms();
             // Close the modal

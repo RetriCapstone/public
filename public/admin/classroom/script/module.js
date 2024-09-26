@@ -399,7 +399,6 @@ async function createModule(event) {
         const moduleDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module'));
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
-        alert('Module created successfully');
         moduleloadingIndicator.style.display = 'none'
         getModules();  // Refresh the module list
         moduleNameInput.value = '';  // Clear the input field

@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Modules</title>
-    <link rel="stylesheet" href="/admin/style_dashboard.css">
-    <link rel="icon" href="/admin/images/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/admin/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/admin/classroom/module/style/lecture.css">
+    <link rel="stylesheet" href="/public/admin/style_dashboard.css">
+    <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/public/admin/classroom/module/style/lecture.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,16 +16,16 @@
 </head>
 
 <body>
-    <script src="/admin/dashboard.js" type="module"></script>
+    <script src="/public/admin/dashboard.js" type="module"></script>
     <script type="module" src="script/lecture.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/admin/images/logo-no-background.png">
+                <img src="/public/admin/images/logo-no-background.png">
             </div>
             <ul class="menu">
                 <li class="active">
-                    <a href="/admin/classroom/classroom.php">
+                    <a href="/public/admin/classroom/classroom.php">
                         <i class="fa fa-chalkboard"></i>
                         <span>Classroom</span>
                     </a>
@@ -39,13 +39,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/classroom/help.php">
+                    <a href="/public/admin/classroom/help.php">
                         <i class="fa-regular fa-circle-question"></i>
                         <span>Help</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/classroom/settings.php">
+                    <a href="/public/admin/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings
