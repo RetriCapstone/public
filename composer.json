@@ -1,5 +1,5 @@
 {
-    "name": "public/code-dojo",
+    "name": "public-1/code-dojo",
     "description": "A code compiler.",
     "require": {
         "php": "^8.0 || ^7.4"
