@@ -400,7 +400,7 @@ async function createModule(event) {
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
         moduleloadingIndicator.style.display = 'none'
-        getModules();  // Refresh the module list
+        location.reload(0)
         moduleNameInput.value = '';  // Clear the input field
         document.getElementById('modal-create-module').style.display = 'none';  // Close the modal
     } catch (error) {
