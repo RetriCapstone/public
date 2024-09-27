@@ -21,7 +21,7 @@
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/public/admin/images/logo-no-background.png">
+                <img src="/public/admin/images/MCA Logo.png">
             </div>
             <ul class="menu">
                 <li class="active">

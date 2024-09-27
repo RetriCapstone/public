@@ -24,6 +24,8 @@ body{
 }
 .logo img{
     width: 80%;
+    background: #374173;
+    border-radius: 100%;
 }
 
 nav{
