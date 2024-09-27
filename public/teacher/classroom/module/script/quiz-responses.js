@@ -88,7 +88,7 @@ async function fetchActiveStudents() {
                 </div>
                 <div class="response-student-con-1">
                     <i style="padding-right: 1.2rem; color: rgb(95 130 192);">click to see details</i>
-                    <span class="response-student-time">-</span> 
+                    <!-- <span class="response-student-time">-</span> -->
                     <span class="response-student-score">${totalScore || "0"}</span>
                 </div>
             `;
@@ -371,33 +371,26 @@ async function fetchQuizQuestionDetail(studentId) {
 // Reset total score for each student
 async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
     try {
-        // Get the document reference for the student's answer
         const quizDocRef = doc(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question', questionId);
 
-        // Fetch the student's quiz document
         const quizDoc = await getDoc(quizDocRef);
 
-        // Check if the document exists
         if (!quizDoc.exists()) {
             console.error(`No quiz data found for student: ${studentId}, question: ${questionId}`);
             return;
         }
 
-        // Retrieve the student data
         const studentData = quizDoc.data();
         if (!studentData) {
             console.error(`No data available for student: ${studentId}, question: ${questionId}`);
             return;
         }
-
-        // Get the question container for the current question
         const questionContainer = document.querySelector(`#question-${questionNumber}-detail`);
         if (!questionContainer) {
             console.error(`Question container #question-${questionNumber}-detail not found.`);
             return;
         }
 
-        // Get input elements for each question type
         const identifyScoreInput = questionContainer.querySelector(`#question-${questionNumber}-identify-user-score`);
         const identifyAnswerSpan = questionContainer.querySelector(`#question-${questionNumber}-identify-user-answer`);
         const choiceScoreInput = questionContainer.querySelector(`#question-${questionNumber}-choice-user-score`);
@@ -438,11 +431,9 @@ async function saveScoreChanges() {
                 continue;
             }
 
-            // Get question ID and type (e.g., 'identification', 'choice', 'paragraph')
-            const questionId = questionContainer.getAttribute('data-question-id'); // Assuming the container has a data attribute with question ID
-            const questionType = questionContainer.getAttribute('data-question-type'); // Assuming the container has a data attribute for question type
+            const questionId = questionContainer.getAttribute('data-question-id'); 
+            const questionType = questionContainer.getAttribute('data-question-type'); 
 
-            // Get the new score from the input fields
             let updatedScore = 0;
             if (questionType === 'identification') {
                 updatedScore = questionContainer.querySelector(`#question-${i}-identify-user-score`).value || 0;
@@ -452,10 +443,8 @@ async function saveScoreChanges() {
                 updatedScore = questionContainer.querySelector(`#question-${i}-paragraph-user-score`).value || 0;
             }
 
-            // Update the score in Firestore for the student
             const quizDocRef = doc(db, 'users', selectedStudentid, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question', questionId);
             
-            // Update the document with the new score
             await updateDoc(quizDocRef, {
                 score: Number(updatedScore)
             });
@@ -463,7 +452,6 @@ async function saveScoreChanges() {
             console.log(`Updated score for question ${i} (ID: ${questionId}): ${updatedScore}`);
         }
 
-        // Optionally, show a confirmation message
         alert("Updated successfully!");
         quizDetailList.innerHTML = '';
         questionNumber =0;

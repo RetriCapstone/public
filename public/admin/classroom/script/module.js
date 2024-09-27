@@ -399,6 +399,7 @@ async function createModule(event) {
         const moduleDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module'));
 
         await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
+        await saveLog(`Create Module ${moduleName}` );
         moduleloadingIndicator.style.display = 'none'
         location.reload(0)
         moduleNameInput.value = '';  // Clear the input field
@@ -516,6 +517,8 @@ class ModuleItemModal {
             const itemDocRef = await addDoc(itemCollectionRef, { number: itemNumber, status: 'close', name: moduleItemName });
             const moduleItemID = itemDocRef.id; 
 
+            await saveLog(`Create ${moduleItemType} name: ${moduleItemName}` );
+            
             moduleItemNameInput.value = ''; 
             this.closeModal();  // Close the modal
             moduleItemloadingIndicator.style.display = 'none';
@@ -547,13 +550,31 @@ async function editClassroom(event) {
         alert("Please provide both classroom name and code.");
         return;
     }
-    try {
-            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
-            await updateDoc(classroomRef, { name: newclassName, code:newclassCode }); 
 
+    try {
+        // Reference to the classroom document
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the old classroom details before updating
+        const classroomSnapshot = await getDoc(classroomRef);
+        if (classroomSnapshot.exists()) {
+            const oldClassroomData = classroomSnapshot.data();
+            const oldclassName = oldClassroomData.name;
+            const oldclassCode = oldClassroomData.code;
+
+            // Update the classroom with new values
+            await updateDoc(classroomRef, { name: newclassName, code: newclassCode });
+
+            // Call saveLog to record the old and new classroom names
+            saveLog(`Edited classroom from ${oldclassName} (Code: ${oldclassCode}) to ${newclassName} (Code: ${newclassCode})`);
+
+            // Refresh the classroom list or view
             getClassroomName();
             document.getElementById("modal-edit-classroom").style.display = "none";
-        
+        } else {
+            console.error("Classroom not found");
+            alert("Classroom not found. Please try again.");
+        }
     } catch (error) {
         console.error("Error updating classroom:", error);
         alert("An error occurred while updating the classroom. Please try again.");
@@ -582,6 +603,19 @@ async function deleteClassroom() {
     const confirmation = confirm("Are you sure you want to delete this classroom?");
     if (confirmation) {
         try {
+            // Get the reference to the classroom document
+            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+            
+            // Fetch the classroom data before deletion
+            const classroomSnapshot = await getDoc(classroomRef);
+            if (!classroomSnapshot.exists()) {
+                alert("Classroom not found.");
+                return;
+            }
+
+            const classroomData = classroomSnapshot.data();
+            const classroomName = classroomData.name;
+
             // Get the students collection reference
             const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
 
@@ -599,8 +633,10 @@ async function deleteClassroom() {
             await Promise.all(deletePromises);
 
             // Now, delete the classroom document from the teacher's collection
-            const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
             await deleteDoc(classroomRef);
+
+            // Log the deletion action
+            saveLog(`Deleted classroom: ${classroomName} (ID: ${selectedClassroomId})`);
 
             alert("Classroom deleted successfully.");
 
@@ -626,6 +662,28 @@ function navigateToPage(page) {
 
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
+}
+
+// Save log function
+async function saveLog(action) {
+    try {
+        const currentDate = new Date();
+        const timestamp = currentDate.toLocaleString(); // Get the current date and time as a string
+
+        // Create the log entry
+        const logEntry = {
+            action: action,
+            timestamp: timestamp
+        };
+
+        // Save the log to the 'logs' collection
+        const logRef = doc(collection(db, 'teacher', teacherId, 'logs'));
+        await setDoc(logRef, logEntry);
+
+        console.log("Log saved:", logEntry);
+    } catch (error) {
+        console.error("Error saving log:", error);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

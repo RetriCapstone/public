@@ -134,7 +134,7 @@
                     </div>
                     <div class="style-container-1 response-style-con">
                         <div class="response-header-details" >
-                            <span>Time</span>
+                            <!-- <span>Time</span> -->
                             <span>Score</span>
                         </div>
 

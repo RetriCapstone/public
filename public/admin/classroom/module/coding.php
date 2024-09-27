@@ -108,7 +108,7 @@
                 <div class="code-responses-con">
 
                     <!-- Modal for Editing quiz asnwer  -->
-                    <!-- <div id="modal-edit-quiz" class="style-modal-quiz">
+                    <div id="modal-edit-quiz" class="style-modal-quiz">
                         <div class="style-modal-content-quiz edit-module-modal">
                             <span class="close-modal close-quiz-detail-modal">&times;</span>
                             <div class="spinner loading-quiz-content"></div>
@@ -130,7 +130,7 @@
 
 
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="style-container-1 response-style-con">
                         <span class="respones-text-header" id="quiz-number-responses">0</span>
@@ -138,7 +138,7 @@
                     </div>
                     <div class="style-container-1 response-style-con">
                         <div class="response-header-details">
-                            <span>Time</span>
+                            <!-- <span>Time</span> -->
                             <span>Score</span>
                         </div>
 

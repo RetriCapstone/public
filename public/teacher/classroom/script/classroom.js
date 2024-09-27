@@ -118,6 +118,7 @@ async function createClassroom(event) {
             const newClassroomRef = doc(collection(db, 'teacher', teacherId, 'classroom'));
             await setDoc(newClassroomRef, { name: className, code: classCode });
 
+            await saveLog(`Created a classroom (${className})`, teacherId);
             // Refresh the classroom list
             saveloadingIndicator.style.display = 'none'; // Show loading indicator
             getClassrooms();
@@ -129,6 +130,28 @@ async function createClassroom(event) {
         console.error("Error creating classroom:", error);
     }
 }
+// Save log function
+async function saveLog(action, teacherId) {
+    try {
+        const currentDate = new Date();
+        const timestamp = currentDate.toLocaleString(); // Get the current date and time as a string
+
+        // Create the log entry
+        const logEntry = {
+            action: action,
+            timestamp: timestamp
+        };
+
+        // Save the log to the 'logs' collection
+        const logRef = doc(collection(db, 'teacher', teacherId, 'logs'));
+        await setDoc(logRef, logEntry);
+
+        console.log("Log saved:", logEntry);
+    } catch (error) {
+        console.error("Error saving log:", error);
+    }
+}
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
