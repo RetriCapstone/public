@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings
