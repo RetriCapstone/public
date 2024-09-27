@@ -28,7 +28,6 @@ let selectedStudentid = '';
 let numberOfResponses = 0;  // Initialize outside the loop
 
 let questionNumber = 0;
-let lastOptionNumber = 0;
 let studentTotalScore = 0; 
 
 const detailloadingIndicator= document.querySelector('.loading-quiz-content');
@@ -235,7 +234,6 @@ async function fetchQuizQuestionDetail(studentId) {
 
             questionContainer.setAttribute('data-question-id', questionData.id);
 
-            // Fetch student's specific answer and details for this question
             fetchStudentQuizDetail(studentId, questionData.id, questionNumber);
 
             const paragraphContainer = questionContainer.querySelector(`#paragraph-con-${questionNumber}-detail`);
@@ -279,11 +277,11 @@ async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
         const paragraphAnswerSpan = questionContainer.querySelector(`#question-${questionNumber}-paragraph-user-answer`);
         const paragraphCodeSpan = questionContainer.querySelector(`#question-${questionNumber}-paragraph-user-code`);
 
+        studentTotalScore += studentData.score;
         paragraphScoreInput.value = studentData.score || 0;
         paragraphAnswerSpan.textContent = studentData.userOutput || studentData.userOutput || 'N/A';
         paragraphCodeSpan.textContent = studentData.userCode || studentData.userCode || 'N/A';
 
-        studentTotalScore += studentData.score;
         document.querySelector(`#quiz-student-total-score`).textContent = `Total Score: ${studentTotalScore || 0}`;
     } catch (error) {
         console.error("Error fetching student quiz detail:", error);
@@ -330,7 +328,6 @@ async function saveScoreChanges() {
         alert("Updated successfully!");
         quizDetailList.innerHTML = '';
         questionNumber =0;
-        lastOptionNumber = 0;
         studentTotalScore = 0;
         fetchActiveStudents();
         fetchQuizQuestionDetail(selectedStudentid);

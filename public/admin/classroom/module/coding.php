@@ -67,6 +67,12 @@
                 </li>
             </ul>
         </nav>
+        <div class="style-container-1 con-2">
+            <ul class="list-tab">
+                <li class="list-view list-active" id="module-link">Modules</li>
+                <li class="list-view" id="student-link">People</li>
+            </ul>
+        </div>
         <div class="main_body">
 
             <div class="save-loading-indicator-bg">
