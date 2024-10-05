@@ -18,8 +18,8 @@ app.post('/run', async (req, res) => {
     const { script, stdin } = req.body;
 
     const payload = {
-      clientId: "7f36670a7923c6bb02ed6d18ad233b7e",      
-      clientSecret: "f09735af4ad1ce0b0111e62f8adf5858ab4ab4e120c70d921204d395707b804", 
+      clientId: "1621897a45206594f49f5b03fd4d3a45",      
+      clientSecret: "cf6c7ab71a49582b79f09749e29a1af39ebea299a641a864cae3228f6418ab7a", 
       script: script,
       stdin: stdin,
       language: "python3",

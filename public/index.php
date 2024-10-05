@@ -16,7 +16,7 @@
             <div class="header-container">
                 <div class="container-navigation">
                     <div class="logo-container">
-                        <img src="/teacher/images/logo1.png" alt="landing-logo">
+                        <img src="/public/teacher/images/logo1.png" alt="landing-logo">
                     </div>
                 </div>
                 <div class="header-btn-container" >
