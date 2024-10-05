@@ -87,9 +87,9 @@ async function fetchActiveStudents() {
                     <span class="respose-student-name">${userData.lastname}, ${userData.firstname}</span>
                 </div>
                 <div class="response-student-con-1">
-                    <i style="padding-right: 1.2rem; color: rgb(95 130 192);">click to see details</i>
+                    <i style="padding-right: 1.8rem; color: rgb(95 130 192);">click to see details</i>
                     <!-- <span class="response-student-time">-</span> -->
-                    <span class="response-student-score">${totalScore || "0"}</span>
+                    <span class="response-student-score">${totalScore}</span>
                 </div>
             `;
             activeStudentsContainer.appendChild(studentElement);
