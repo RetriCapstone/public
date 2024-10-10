@@ -132,6 +132,7 @@ async function updateUserProfile() {
                     const teacherDocRef = doc.ref;
                     await updateDoc(teacherDocRef, updatedData);
                     alert("Profile updated successfully");
+                    localStorage.setItem("loggedInUserEmail", inputEmail); 
                 } else {
                     alert("No changes were made.");
                 }
