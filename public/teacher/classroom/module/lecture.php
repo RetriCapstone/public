@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Modules</title>
+    <title>Lecture</title>
     <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
     <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
@@ -84,10 +84,6 @@
                 <div class="lecture-container">
                     <section class="lect-con-list-section style-container-1" >
                         <div class="lect-list-container" >
-                            
-                            <div class="loading-indicator">
-                                <div class="spinner"></div>
-                            </div>
 <!-- 
                             <div class="lect-header-style lect-header-1-con">
                                 <div class="text-format-option-con">

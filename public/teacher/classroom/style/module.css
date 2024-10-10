@@ -55,7 +55,7 @@
     height: -webkit-fill-available;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 1rem 0;
+    margin-bottom: 1.4rem;
     gap: 1rem;
 }
 

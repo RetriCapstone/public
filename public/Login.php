@@ -19,7 +19,7 @@
             </div>
     <header>
         <div class="container-navigation">
-            <a class="logo-container" href="/public/index.php" >
+            <a class="logo-container" href="/index.php" >
                 <img src="/public/teacher/images/logo1.png" alt="landing-logo">
             </a>
         </div>

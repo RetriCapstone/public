@@ -130,20 +130,28 @@
                                     <label class="style-label-modal">&nbsp;Item Name:</label>
                                     <input type="text" style="text-transform: uppercase;" id="module-item-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
                                 </div>
-                                <div class="style-divider2">
-                                    <label class="style-label-modal" for="item-type">&nbsp;Select:&nbsp;</label>
-                                    <select class="style-select" name="item-type" id="module-item-type">
+                                <div class="style-divider2" style="flex-direction: column; align-items: flex-start; gap: 12px; " >
+                                    <span class="style-label-modal">Select type:&nbsp;</span>
+                                    <!-- <select class="style-select" name="item-type" id="module-item-type">
                                         <option value="lecture">Lecture</option>
                                         <option value="quiz">Quiz</option>
                                         <option value="activity">Coding Activity</option>
-                                    </select>
-
-                                    <!-- <label class="style-label-modal" for="item-type">&nbsp;&nbsp;&nbsp;Position:&nbsp;</label>
-                                    <select class="style-select" name="item-postition" id="module-item-position">
-                                        <option value="item-end">End of Lectures</option>
-                                        <option value="item-begin">Beginning of Lectures</option>
                                     </select> -->
+
+                                        <div style="display: flex; gap: .4rem; font-size: 1.2rem; " >
+                                            <input class="module-pos-option" type="radio" id="end" value="lecture" name="ftype" checked >
+                                            <label for="end"  class="radio-label" >Lecture</label> 
+                                        </div>
+                                        <div style="display: flex; gap: .4rem; font-size: 1.2rem; " >
+                                            <input class="module-pos-option" type="radio" id="begin" value="quiz" name="ftype"> 
+                                            <label for="begin" class="radio-label" >Quiz</label>
+                                        </div>
+                                        <div style="display: flex; gap: .4rem; font-size: 1.2rem; " >
+                                            <input class="module-pos-option" type="radio" id="after" value="activity" name="ftype"> 
+                                            <label for="after"  class="radio-label" >Coding activity</label>
+                                        </div>
                                 </div>
+                                
                                 <div class="create-class-btn">
                                     <input type="button" value="Cancel" class="style-btn-del" id="cancel-module-item-modal">
                                     <input type="submit" value="Create" class="style-btn-add-1">

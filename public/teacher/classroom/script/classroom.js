@@ -15,7 +15,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Modal management
 function setupModal(modalId, btnId, closeClass, btnCancel) {
     const modal = document.getElementById(modalId);
     const btn = document.getElementById(btnId);
@@ -32,26 +31,25 @@ function setupModal(modalId, btnId, closeClass, btnCancel) {
     };
 }
 
-// Fetch classrooms and render
 async function getClassrooms() {
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
     try {
         const loadingIndicator = document.querySelector('.loading-indicator');
-        loadingIndicator.style.display = 'block';  // Show loading indicator
+        loadingIndicator.style.display = 'block'; 
 
         const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
             console.log("No Classroom found");
-            loadingIndicator.style.display = 'none';  // Hide loading indicator if no classrooms
+            loadingIndicator.style.display = 'none'; 
             return;
         }
 
         const classListContainer = document.querySelector('.class-list-container');
-        classListContainer.innerHTML = ''; // Clear any existing classrooms
+        classListContainer.innerHTML = '';
 
         const classrooms = [];
 
@@ -87,10 +85,10 @@ async function getClassrooms() {
             classListContainer.appendChild(classCard);
         });
 
-        loadingIndicator.style.display = 'none';  // Hide loading indicator after all classrooms are loaded
+        loadingIndicator.style.display = 'none';  
     } catch (error) {
         console.error("Error getting classrooms:", error);
-        document.querySelector('.loading-indicator').style.display = 'none';  // Hide loading indicator in case of error
+        document.querySelector('.loading-indicator').style.display = 'none';  
     }
 }
 
@@ -102,47 +100,68 @@ async function createClassroom(event) {
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
-    saveloadingIndicator.style.display = 'block'; // Show loading indicator
+    saveloadingIndicator.style.display = 'block'; 
     const className = document.getElementById("classname").value.trim().toUpperCase();
     const classCode = document.getElementById("classcode").value.trim();
 
     try {
-        const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
-        const querySnapshot = await getDocs(q);
+        const teachersQuery = query(collection(db, "teacher"));
+        const teachersSnapshot = await getDocs(teachersQuery);
 
-        if (!querySnapshot.empty) {
-            const teacherDoc = querySnapshot.docs[0];
+        let classCodeExists = false;
+
+        for (const teacherDoc of teachersSnapshot.docs) {
             const teacherId = teacherDoc.id;
 
-            // Create a new document with a random ID in the "classroom" subcollection
-            const newClassroomRef = doc(collection(db, 'teacher', teacherId, 'classroom'));
+            const classCodeQuery = query(
+                collection(db, 'teacher', teacherId, 'classroom'),
+                where("code", "==", classCode)
+            );
+            const classCodeSnapshot = await getDocs(classCodeQuery);
+
+            if (!classCodeSnapshot.empty) {
+                classCodeExists = true;
+                break; 
+            }
+        }
+
+        if (classCodeExists) {
+            saveloadingIndicator.style.display = 'none'; 
+            alert("Invalid code. Please change the Classroom code.");
+            return;
+        }
+
+        const loggedInTeacherQuery = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
+        const loggedInTeacherSnapshot = await getDocs(loggedInTeacherQuery);
+
+        if (!loggedInTeacherSnapshot.empty) {
+            const loggedInTeacherDoc = loggedInTeacherSnapshot.docs[0];
+            const loggedInTeacherId = loggedInTeacherDoc.id;
+            const newClassroomRef = doc(collection(db, 'teacher', loggedInTeacherId, 'classroom'));
             await setDoc(newClassroomRef, { name: className, code: classCode });
 
-            await saveLog(`Created a classroom (${className})`, teacherId);
-            // Refresh the classroom list
-            saveloadingIndicator.style.display = 'none'; // Show loading indicator
+            await saveLog(`Created a classroom (${className})`, loggedInTeacherId);
+            saveloadingIndicator.style.display = 'none'; 
             getClassrooms();
-            // Close the modal
             document.getElementById("modal-create-classroom").style.display = "none";
-        } // Show loading indicator
+        }
     } catch (error) {
-        saveloadingIndicator.style.display = 'none'; // Show loading indicator
+        saveloadingIndicator.style.display = 'none'; 
         console.error("Error creating classroom:", error);
     }
 }
-// Save log function
+
+
+
 async function saveLog(action, teacherId) {
     try {
         const currentDate = new Date();
-        const timestamp = currentDate.toLocaleString(); // Get the current date and time as a string
-
-        // Create the log entry
+        const timestamp = currentDate.toLocaleString(); 
         const logEntry = {
             action: action,
             timestamp: timestamp
         };
 
-        // Save the log to the 'logs' collection
         const logRef = doc(collection(db, 'teacher', teacherId, 'logs'));
         await setDoc(logRef, logEntry);
 
@@ -158,6 +177,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal("modal-create-classroom", "btn-create-classroom", "close-modal", "cancel-modal");
     getClassrooms();
 
-    // Handle form submission
     document.getElementById("create-class-form").addEventListener("submit", createClassroom);
 });

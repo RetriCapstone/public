@@ -512,15 +512,12 @@ async function saveLectureDetails() {
 // fetching  -----------------------------------  fetching --------------------------------------------------------------------
 // fetch lecture contents
 async function fetchLectureItems() {
-    const loadingIndicator = document.querySelector('.loading-indicator');
-    loadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the item collection within the lecture
         const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
         const itemsSnapshot = await getDocs(itemsCollectionRef);
 
         if (itemsSnapshot.empty) {
-            loadingIndicator.style.display = 'none'; // Show loading indicator
             console.log('No lecture items found.');
             return;
         }
@@ -588,10 +585,8 @@ async function fetchLectureItems() {
 
             }
         });
-        loadingIndicator.style.display = 'none'; // Show loading indicator
 
     } catch (error) {
-        loadingIndicator.style.display = 'none'; // Show loading indicator
         console.error('Error fetching lecture items:', error);
     }
 }

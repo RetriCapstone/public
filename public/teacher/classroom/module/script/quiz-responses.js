@@ -74,6 +74,8 @@ async function fetchActiveStudents() {
                 });
                 // Increment number of responses if the user has question documents
                 numberOfResponses+=1;
+            }else{
+                totalScore = "-";
             }
 
             const studentElement = document.createElement('div');
@@ -94,7 +96,6 @@ async function fetchActiveStudents() {
             `;
             activeStudentsContainer.appendChild(studentElement);
         }
-        displayNumberofResponses()
         
         // edit module 
         const editModuleButtons = document.querySelectorAll('.view-quiz-details');
@@ -466,44 +467,17 @@ async function saveScoreChanges() {
     }
 }
 
-async function displayNumberofResponses() {
-    document.getElementById('quiz-number-responses').innerText = numberOfResponses;
-    document.querySelector("#btn-save-score-details").addEventListener("click", async () => {
-        saveScoreChanges();
-    });
-}
 
 
 
 
 
 
-
-
-
-
-
-//func: navigation param
-function navigateToPage(page) {
-    const currentParams = new URLSearchParams(window.location.search);
-    const selectedClassroomId = getQueryParam('Cid');
-    const teacherId = getQueryParam('tid');
-
-    // Add the parameters to the URL
-    currentParams.set('Cid', selectedClassroomId);
-    currentParams.set('tid', teacherId);
-
-    // Navigate to the desired page with the parameters
-    window.location.href = `${page}?${currentParams.toString()}`;
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchActiveStudents();
-    document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/public/teacher/classroom/student.php');
-    });
-    document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/public/teacher/classroom/module.php');
+    document.querySelector("#btn-save-score-details").addEventListener("click", async () => {
+        saveScoreChanges();
     });
 
 });

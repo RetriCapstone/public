@@ -238,7 +238,8 @@ async function populateModuleSelect() {
 
 // add module onclick
 function handleAddModuleClick(event) {
-    const moduleId = event.currentTarget.getAttribute('data-module-id');
+    const moduleId = "";
+    moduleId = event.currentTarget.getAttribute('data-module-id');
     new ModuleItemModal("modal-create-module-item", moduleId, "close-module-item", "cancel-module-item-modal");
 }
 
@@ -380,7 +381,6 @@ async function createModule(event) {
         const moduleCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module');
         const moduleSnapshot = await getDocs(moduleCollectionRef);
         const existingModulesCount = moduleSnapshot.size;
-        const newModuleId = moduleName + existingModulesCount;
 
         let moduleNumber = 1 ;
         if (position === 'end') {
@@ -498,7 +498,8 @@ class ModuleItemModal {
         
         const moduleItemNameInput = document.getElementById('module-item-name');
         const moduleItemName = moduleItemNameInput.value.trim().toUpperCase();
-        const moduleItemType = document.getElementById('module-item-type').value;
+        // const moduleItemType = document.getElementById('module-item-type').value;
+        const moduleItemType = document.querySelector('input[name="ftype"]:checked').value;
 
         if (!moduleItemName) {
             alert('Please enter a module item name.');

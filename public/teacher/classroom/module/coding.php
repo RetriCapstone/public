@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Challenge</title>
+    <title>Coding Activity</title>
     <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
     <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">

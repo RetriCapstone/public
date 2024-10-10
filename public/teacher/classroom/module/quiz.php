@@ -96,7 +96,7 @@
 
                     <!-- Quiz container of dirction/Description -->
                     <div class="style-container-1 quiz-direction-container" >
-                        <textarea rows="2" required autocomplete="off" class="quiz-direction-input auto-height-text-dir" placeholder="Direction/Description" ></textarea> 
+                        <textarea rows="2" required autocomplete="off" class="quiz-direction-input auto-height-text-dir" placeholder="Instruction" ></textarea> 
                     </div>
 
                 </div>
@@ -126,11 +126,6 @@
 
 
                         </div>
-                    </div>
-
-                    <div class="style-container-1 response-style-con">
-                        <span class="respones-text-header" id="quiz-number-responses" >0</span>
-                        <span class="respones-text-header" >responses</span>
                     </div>
                     <div class="style-container-1 response-style-con">
                         <div class="response-header-details" >
