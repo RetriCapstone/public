@@ -58,12 +58,12 @@
                 </li>
             </ul>
         </nav>
-        <div class="style-container-1 con-2">
+        <!-- <div class="style-container-1 con-2">
             <ul class="list-tab">
                 <li class="list-view list-active" id="module-link">Modules</li>
                 <li class="list-view" id="student-link">People</li>
             </ul>
-        </div>
+        </div> -->
         <div class="main_body">   
 
             <div class="save-loading-indicator-bg">
@@ -129,10 +129,10 @@
                         </div>
                     </div>
 
-                    <div class="style-container-1 response-style-con">
+                    <!-- <div class="style-container-1 response-style-con">
                         <span class="respones-text-header" id="quiz-number-responses" >0</span>
                         <span class="respones-text-header" >responses</span>
-                    </div>
+                    </div> -->
                     <div class="style-container-1 response-style-con">
                         <div class="response-header-details" >
                             <!-- <span>Time</span> -->

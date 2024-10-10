@@ -74,6 +74,8 @@ async function fetchActiveStudents() {
                 });
                 // Increment number of responses if the user has question documents
                 numberOfResponses+=1;
+            }else{
+                totalScore = "-";
             }
 
             const studentElement = document.createElement('div');
@@ -94,7 +96,7 @@ async function fetchActiveStudents() {
             `;
             activeStudentsContainer.appendChild(studentElement);
         }
-        displayNumberofResponses()
+        // displayNumberofResponses()
         
         // edit module 
         const editModuleButtons = document.querySelectorAll('.view-quiz-details');
@@ -366,11 +368,11 @@ function navigateToPage(page) {
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchActiveStudents();
-    document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/public/teacher/classroom/student.php');
-    });
-    document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/public/teacher/classroom/module.php');
-    });
+    // document.querySelector('#student-link').addEventListener('click', () => {
+    //     navigateToPage('/public/teacher/classroom/student.php');
+    // });
+    // document.querySelector('#module-link').addEventListener('click', () => {
+    //     navigateToPage('/public/teacher/classroom/module.php');
+    // });
 
 });

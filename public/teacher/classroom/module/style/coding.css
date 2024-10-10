@@ -87,6 +87,7 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
     gap: .8rem;
+    transition: 2s ease-in-out;
 }
 
 .code-question-add{
@@ -98,6 +99,7 @@
     padding: 8px 12px;
     background-color: #142987;
     box-shadow: 0px 0px 0 2px #0410228b;
+    cursor: pointer;
 }
 .code-question-body,
 .code-question-bottom{

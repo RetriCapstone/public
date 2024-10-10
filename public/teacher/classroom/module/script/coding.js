@@ -237,6 +237,11 @@ function addCodeQuestion() {
 
     });
 
+    // Add event listener for the delete question button
+    codequestionContainer.querySelector(`#code-delete-button-question-${questionNumber}`).addEventListener('click', function () {
+        codequestionContainer.remove();
+    });
+
 }
 
 async function runCode(codeField, inputField, outputField) {
@@ -250,7 +255,8 @@ async function runCode(codeField, inputField, outputField) {
     };
 
     try {
-        const response = await fetch('https://mca-codedojo.online/run', {
+        const response = await fetch('http://localhost:3001/run', {
+        // const response = await fetch('http://www.mca-codedojo.online/run', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

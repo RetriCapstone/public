@@ -132,7 +132,7 @@ async function getModules() {
 
             const activitiesHTML = activities.map(activity => `
                 <div class="module-item">
-                    <a href="module/coding.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(moduleId)}&ItemId=${encodeURIComponent(activity.id)}" data-module-id="${moduleId}" data-item-id="${activity.id}">
+                    <a href="module/coding.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(moduleId)}&ItemId=${encodeURIComponent(activity.id)}" data-module-id="${moduleId}" data-item-id="${activity.id}" target="_blank" >
                         <p class="style-text" id="activity-name"><i class="fa-regular fa-file-code"></i>&nbsp;&nbsp;${activity.name}</p>
                     </a>
                 </div>
