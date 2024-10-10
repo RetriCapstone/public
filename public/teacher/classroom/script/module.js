@@ -238,8 +238,7 @@ async function populateModuleSelect() {
 
 // add module onclick
 function handleAddModuleClick(event) {
-    const moduleId = "";
-    moduleId = event.currentTarget.getAttribute('data-module-id');
+    const moduleId = event.currentTarget.getAttribute('data-module-id');
     new ModuleItemModal("modal-create-module-item", moduleId, "close-module-item", "cancel-module-item-modal");
 }
 
