@@ -1,15 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
-// const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001; // Use the environment variable for PORT
 
-const port = 3001;
-
-app.use(cors());
-// const cors = require('cors');
-// app.use(cors({ origin: '*' })); // Allow all origins for testing
+app.use(cors({ origin: 'https://mca-codedojo.online' }));
 
 app.use(express.json());
 
@@ -18,8 +15,8 @@ app.post('/run', async (req, res) => {
     const { script, stdin } = req.body;
 
     const payload = {
-      clientId: "1621897a45206594f49f5b03fd4d3a45",      
-      clientSecret: "cf6c7ab71a49582b79f09749e29a1af39ebea299a641a864cae3228f6418ab7a", 
+      clientId: process.env.JDOODLE_CLIENT_ID || "1621897a45206594f49f5b03fd4d3a45", 
+      clientSecret: process.env.JDOODLE_CLIENT_SECRET || "cf6c7ab71a49582b79f09749e29a1af39ebea299a641a864cae3228f6418ab7a",
       script: script,
       stdin: stdin,
       language: "python3",
@@ -39,5 +36,5 @@ app.post('/run', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Backend server running at http://localhost:${port}`);
+  console.log(`Backend server running`);
 });

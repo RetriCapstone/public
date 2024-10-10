@@ -250,7 +250,7 @@ async function runCode(codeField, inputField, outputField) {
     };
 
     try {
-        const response = await fetch('http://localhost:3001/run', {
+        const response = await fetch('https://mca-codedojo.online/run', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -259,8 +259,9 @@ async function runCode(codeField, inputField, outputField) {
         });
 
         const result = await response.json();
+        console.log(result); // Check the API response
         if (response.ok) {
-            outputContainer.value = result.output;
+            outputContainer.value = result.output || 'No output available';
         } else {
             outputContainer.value = `Error: ${result.error}`;
         }
