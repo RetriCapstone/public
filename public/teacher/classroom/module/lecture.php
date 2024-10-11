@@ -132,10 +132,10 @@
                         <div class="lect-tool-container " >
                             <span >Text Fields</span>
                             <button class="lect-tool-style lect-add-header-1" id="lect-add-btn-header-1" >
-                                Add Header 1
+                                Add Title
                             </button>
                             <button class="lect-tool-style lect-add-header-2" id="lect-add-btn-header-2" >
-                                Add Header 2
+                                Add Subtitle
                             </button>
                             <button class="lect-tool-style lect-add-paragraph" id="lect-add-btn-paragraph" >
                                 Add Paragraph

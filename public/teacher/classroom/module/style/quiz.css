@@ -420,9 +420,7 @@
     text-align: center;
 }
 .response-students{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    
     padding: 8px;
     border-radius: 5px;
 }

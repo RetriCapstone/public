@@ -1,0 +1,16 @@
+.code-header-pos-2 {
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.quiz-answer-content{
+    padding: 2rem;
+    height: fit-content;
+}
+.quiz-details-question-container {
+
+    max-width: 62rem;
+}
+.logs-container{
+    max-width: 42rem;
+    min-width: 42rem;
+}

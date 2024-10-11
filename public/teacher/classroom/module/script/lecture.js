@@ -126,7 +126,7 @@ function addHeader1() {
 
     header1Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Title" required id="lect-header-1-text-${lectureNumber}" >
                                     <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
@@ -230,7 +230,7 @@ function addHeader2() {
 
     header2Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Header 2" required id="lect-header-2-text-${lectureNumber}" >
+                                    <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Subtitle" required id="lect-header-2-text-${lectureNumber}" >
                                     <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">

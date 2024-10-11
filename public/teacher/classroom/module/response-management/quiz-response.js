@@ -23,154 +23,17 @@ const teacherId = getQueryParam('tid');
 const selectedClassroomId = getQueryParam('Cid');
 const selectedModuleId = getQueryParam('Mid');
 const selectedQuizId = getQueryParam('ItemId');
-let selectedStudentid = '';
+const selectedStudentid = getQueryParam('Sid');
 
-let numberOfResponses = 0;  // Initialize outside the loop
 
 let questionNumber = 0;
 let lastOptionNumber = 0;
 let studentTotalScore = 0; 
+let quizTotalScore = 0; 
 
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
 const detailloadingIndicator= document.querySelector('.loading-quiz-content');
 const quizDetailList = document.querySelector('.quiz-answer-list');
-// Function: fetch active students
-async function fetchActiveStudents() {
-    if (!selectedClassroomId || !teacherId) {
-        console.error("Missing required identifiers");
-        return;
-    }
-    numberOfResponses = 0;
-    try {
-        const studentCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'student');
-        const studentSnapshot = await getDocs(studentCollectionRef);
-
-        const activeStudentsContainer = document.querySelector('.response-student-list');
-        activeStudentsContainer.innerHTML = '';  // Clear previous content
-
-
-        for (const studentDoc of studentSnapshot.docs) {
-            let totalScore = 0;  // Reset total score for each student
-            const studentId = studentDoc.id;
-            const userDocRef = doc(db, 'users', studentId);
-            const userDoc = await getDoc(userDocRef);
-            const userData = userDoc.data();
-            const profileImageUrl = userData.profileImageUrl || "/public/teacher/images/default-user.png";
-
-            // Fetch user score points
-            const quizDocRef = collection(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question');
-            const quizDocSnapshot = await getDocs(quizDocRef);
-
-            if (!quizDocSnapshot.empty) {  // Check if the 'question' collection has documents
-                const questionDataList = [];
-
-                quizDocSnapshot.forEach((doc) => {
-                    const questionData = doc.data();
-                    questionDataList.push({ id: doc.id, ...questionData });
-
-                    // Sum up the points from each question document
-                    if (questionData.score) {
-                        totalScore += questionData.score;
-                    }
-                });
-                // Increment number of responses if the user has question documents
-                numberOfResponses+=1;
-            }else{
-                totalScore = "-";
-            }
-
-            const studentElement = document.createElement('div');
-            studentElement.className = 'response-students view-quiz-details';
-            studentElement.setAttribute('data-student-id', studentId);
-            studentElement.setAttribute('data-student-fname', userData.firstname);
-            studentElement.setAttribute('data-student-lname', userData.lastname);
-            studentElement.innerHTML = `
-            <a href="/public/teacher/classroom/module/quiz/response.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(selectedModuleId)}&ItemId=${encodeURIComponent(selectedQuizId)}&Sid=${encodeURIComponent(studentId)}" target="_blank" style="text-decoration: none; color: white; display: flex; flex-direction: row; justify-content: space-between;" >
-
-                <div class="response-student-con-1" " >
-                    <img class="response-student-image" src="${profileImageUrl}" alt="">
-                    <span class="respose-student-name">${userData.lastname}, ${userData.firstname}</span>
-                </div>
-                <div class="response-student-con-1">
-                    <i style="padding-right: 1.8rem; color: rgb(95 130 192);">click to see details</i>
-                    <!-- <span class="response-student-time">-</span> -->
-                    <span class="response-student-score">${totalScore}</span>
-                </div>
-            </a>
-            `;
-            activeStudentsContainer.appendChild(studentElement);
-        }
-        
-        // edit module 
-        // const editModuleButtons = document.querySelectorAll('.view-quiz-details');
-        // editModuleButtons.forEach(button => {
-        //     button.removeEventListener('click', handleEditQuizClick);  // Remove previous listeners to avoid duplication
-        //     button.addEventListener('click', handleEditQuizClick);
-        // });
-
-
-    } catch (error) {
-        console.error("Error getting active students:", error);
-    }
-}
-
-// edit module onclick
-function handleEditQuizClick(event) {
-    const studentid = event.currentTarget.getAttribute('data-student-id');
-    const studentFname = event.currentTarget.getAttribute('data-student-fname');
-    const studentLname = event.currentTarget.getAttribute('data-student-lname');
-    new editQuizAnswerModal(studentid,studentFname, studentLname, "modal-edit-quiz", "close-quiz-detail-modal");
-}
-
-class editQuizAnswerModal {
-    constructor(id, firstname, lastname ,modalId, closeClass) {
-        const studentid = id;
-        const studentFname = firstname;
-        const studentLname = lastname;
-
-        detailloadingIndicator.style.display = 'block';
-
-        this.modal = document.getElementById(modalId);
-        this.span = document.getElementsByClassName(closeClass)[0];
-
-        if (this.span && this.modal) {
-            this.openModal = this.openModal.bind(this);
-            this.closeModal = this.closeModal.bind(this);
-            this.span.addEventListener('click', this.closeModal);
-            this.modal.style.display = "block";  
-            window.addEventListener('click', this.outsideClick);
-
-        } else {
-            console.error(`Elements not found for modal: ${modalId}, ${closeClass}`);
-        }
-
-            
-        const studentFullname = document.getElementById('quiz-student-fullname');
-        studentFullname.innerHTML = `${studentLname}, ${studentFname}`;
-        quizDetailList.innerHTML = '';
-        questionNumber =0;
-        lastOptionNumber = 0;
-        studentTotalScore = 0;
-        selectedStudentid = studentid;
-        fetchQuizQuestionDetail(selectedStudentid);
-
-    }
-
-
-    openModal() {
-        this.modal.style.display = "block";
-    }
-
-    closeModal() {
-        this.modal.style.display = "none";
-    }
-
-    outsideClick(event) {
-        if (event.target === this.modal) {
-            this.modal.style.display = "none";
-        }
-    }
-
-}
 
 function addOption(questionNumber, optionText) {
     lastOptionNumber += 1;
@@ -289,7 +152,7 @@ function addQuestion() {
 
 async function fetchQuizQuestionDetail(studentId) {
     try {
-        const questionsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1', 'question');
+        const questionsCollectionRef = collection(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question');
         
         const questionsSnapshot = await getDocs(questionsCollectionRef);
         const questionDataList = [];
@@ -372,6 +235,19 @@ async function fetchQuizQuestionDetail(studentId) {
     }
 }
 
+async function studentfullname() {
+    try {
+        const userDocRef = doc(db, 'users', selectedStudentid);
+        const userDoc = await getDoc(userDocRef);
+        const userData = userDoc.data();
+        
+        const studentFullname = document.getElementById('quiz-student-fullname');
+        studentFullname.innerHTML = `Name: ${userData.lastname}, ${userData.firstname}`;
+    } catch (error) {
+        
+    }
+}
+
 // Reset total score for each student
 async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
     try {
@@ -417,14 +293,16 @@ async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
             console.error(`Question type "${questionType}" not recognized or missing required elements.`);
         }
         studentTotalScore += studentData.score
+        quizTotalScore += studentData.point
 
-        document.querySelector(`#quiz-student-total-score`).textContent = `Total Score: ${studentTotalScore || 0}`;
+        document.querySelector(`#quiz-student-total-score`).textContent = `Total Score: ${studentTotalScore || 0}/${quizTotalScore || 0}`;
     } catch (error) {
         console.error("Error fetching student quiz detail:", error);
     }
 }
 
 async function saveScoreChanges() {
+    saveloadingIndicator.style.display = 'block';
     try {
         const totalQuestions = document.querySelectorAll("[id^=question-]").length; // Assuming the question containers are identified by "question-1", "question-2", etc.
 
@@ -456,31 +334,52 @@ async function saveScoreChanges() {
             console.log(`Updated score for question ${i} (ID: ${questionId}): ${updatedScore}`);
         }
 
-        alert("Updated successfully!");
+        saveloadingIndicator.style.display = 'none';
         quizDetailList.innerHTML = '';
         questionNumber =0;
         lastOptionNumber = 0;
         studentTotalScore = 0;
+        quizTotalScore = 0;
         fetchActiveStudents();
         fetchQuizQuestionDetail(selectedStudentid);
 
     } catch (error) {
+        
+    saveloadingIndicator.style.display = 'none';
         console.error("Error updating student quiz scores:", error);
         alert("Failed to save scores. Please try again.");
     }
 }
 
 
+//func: navigation param
+function navigateToPage(page) {
+    const currentParams = new URLSearchParams(window.location.search);
+    const selectedClassroomId = getQueryParam('Cid');
+    const teacherId = getQueryParam('tid');
+    const studentId = getQueryParam('Sid');
 
+    // Add the parameters to the URL
+    currentParams.set('Cid', selectedClassroomId);
+    currentParams.set('tid', teacherId);
+    currentParams.set('Sid', studentId);
 
-
+    // Navigate to the desired page with the parameters
+    window.location.href = `${page}?${currentParams.toString()}`;
+}
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchActiveStudents();
+    fetchQuizQuestionDetail(selectedStudentid);
+    studentfullname();
+    
     document.querySelector("#btn-save-score-details").addEventListener("click", async () => {
         saveScoreChanges();
     });
-
+    
+    document.querySelector('#logs-link').addEventListener('click', () => {
+        navigateToPage('/public/teacher/classroom/module/quiz/logs.php');
+    });
 });
+

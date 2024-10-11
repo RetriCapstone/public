@@ -658,6 +658,7 @@ function navigateToPage(page) {
     currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
 
+    // currentParams.delete(paramToRemove);
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
