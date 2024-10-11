@@ -16,7 +16,7 @@
 <body>
     <!-- <script src="/public/teacher/dashboard.js" type="module"></script> -->
     <!-- <script type="module" src="script/quiz.js"></script> -->
-    <script type="module" src="/public/teacher/classroom/module/response-management/quiz-logs.js"></script>
+    <script type="module" src="/public/teacher/classroom/module/response-management/coding-logs.js"></script>
     <div class="container">
         <nav>
             <div class="logo">

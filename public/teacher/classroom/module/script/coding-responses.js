@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection,deleteDoc,getDoc, getDocs, doc, setDoc,updateDoc  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection,deleteDoc,getDoc, getDocs, doc, setDoc, updateDoc  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDYAThg1ostKvmq6d0eFQaGaKywsjs-rEA",
@@ -84,6 +84,7 @@ async function fetchActiveStudents() {
             studentElement.setAttribute('data-student-fname', userData.firstname);
             studentElement.setAttribute('data-student-lname', userData.lastname);
             studentElement.innerHTML = `
+            <a href="/public/teacher/classroom/module/quiz/response.php?Cid=${encodeURIComponent(selectedClassroomId)}&tid=${encodeURIComponent(teacherId)}&Mid=${encodeURIComponent(selectedModuleId)}&ItemId=${encodeURIComponent(selectedQuizId)}&Sid=${encodeURIComponent(studentId)}" target="_blank" style="text-decoration: none; color: white; display: flex; flex-direction: row; justify-content: space-between;" >
                 <div class="response-student-con-1" " >
                     <img class="response-student-image" src="${profileImageUrl}" alt="">
                     <span class="respose-student-name">${userData.lastname}, ${userData.firstname}</span>
@@ -93,17 +94,18 @@ async function fetchActiveStudents() {
                     <!-- <span class="response-student-time">-</span> --> 
                     <span class="response-student-score">${totalScore || "-"}</span>
                 </div>
+            </a>
             `;
             activeStudentsContainer.appendChild(studentElement);
         }
         // displayNumberofResponses()
         
         // edit module 
-        const editModuleButtons = document.querySelectorAll('.view-quiz-details');
-        editModuleButtons.forEach(button => {
-            button.removeEventListener('click', handleEditQuizClick);  // Remove previous listeners to avoid duplication
-            button.addEventListener('click', handleEditQuizClick);
-        });
+        // const editModuleButtons = document.querySelectorAll('.view-quiz-details');
+        // editModuleButtons.forEach(button => {
+        //     button.removeEventListener('click', handleEditQuizClick);  // Remove previous listeners to avoid duplication
+        //     button.addEventListener('click', handleEditQuizClick);
+        // });
 
 
     } catch (error) {
@@ -298,7 +300,7 @@ async function saveScoreChanges() {
             const questionContainer = document.querySelector(`#question-${i}-detail`);
             if (!questionContainer) {
                 console.error(`Question container #question-${i}-detail not found.`);
-                continue;
+                break;
             }
 
             // Get question ID and type (e.g., 'identification', 'choice', 'paragraph')

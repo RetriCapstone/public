@@ -35,6 +35,27 @@ const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg')
 const detailloadingIndicator= document.querySelector('.loading-quiz-content');
 const quizDetailList = document.querySelector('.quiz-answer-list');
 
+
+//func: fecth quiz settings
+async function fetchQuizDetails() {
+    try {
+        // Define the path to the quiz document
+        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+
+        // Fetch the quiz document
+        const quizDoc = await getDoc(quizDocRef);
+
+        if (quizDoc.exists()) {
+            const quizData = quizDoc.data();
+
+            // Populate the quiz settings
+            document.getElementById('quiz-name').innerText = quizData.name || '';
+        }
+    }catch (error) {
+        console.error('Error fetching quiz details:', error);
+    }
+}
+
 function addOption(questionNumber, optionText) {
     lastOptionNumber += 1;
     const optionNumber = lastOptionNumber;
@@ -151,6 +172,7 @@ function addQuestion() {
 }
 
 async function fetchQuizQuestionDetail(studentId) {
+    quizDetailList.innerHTML = '';
     try {
         const questionsCollectionRef = collection(db, 'users', studentId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'question');
         
@@ -304,13 +326,13 @@ async function fetchStudentQuizDetail(studentId, questionId, questionNumber) {
 async function saveScoreChanges() {
     saveloadingIndicator.style.display = 'block';
     try {
-        const totalQuestions = document.querySelectorAll("[id^=question-]").length; // Assuming the question containers are identified by "question-1", "question-2", etc.
+        const totalQuestions = document.querySelectorAll("[id^=question-]").length; 
 
         for (let i = 1; i <= totalQuestions; i++) {
             const questionContainer = document.querySelector(`#question-${i}-detail`);
             if (!questionContainer) {
                 console.error(`Question container #question-${i}-detail not found.`);
-                continue;
+                break;
             }
 
             const questionId = questionContainer.getAttribute('data-question-id'); 
@@ -335,12 +357,10 @@ async function saveScoreChanges() {
         }
 
         saveloadingIndicator.style.display = 'none';
-        quizDetailList.innerHTML = '';
         questionNumber =0;
         lastOptionNumber = 0;
         studentTotalScore = 0;
         quizTotalScore = 0;
-        fetchActiveStudents();
         fetchQuizQuestionDetail(selectedStudentid);
 
     } catch (error) {
@@ -355,13 +375,17 @@ async function saveScoreChanges() {
 //func: navigation param
 function navigateToPage(page) {
     const currentParams = new URLSearchParams(window.location.search);
-    const selectedClassroomId = getQueryParam('Cid');
     const teacherId = getQueryParam('tid');
+    const selectedClassroomId = getQueryParam('Cid');
+    const moduleId = getQueryParam('Mid');
+    const quizId = getQueryParam('ItemId');
     const studentId = getQueryParam('Sid');
 
     // Add the parameters to the URL
-    currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
+    currentParams.set('Cid', selectedClassroomId);
+    currentParams.set('Mid', moduleId);
+    currentParams.set('ItemId', quizId);
     currentParams.set('Sid', studentId);
 
     // Navigate to the desired page with the parameters
@@ -372,6 +396,7 @@ function navigateToPage(page) {
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchQuizQuestionDetail(selectedStudentid);
+    fetchQuizDetails();
     studentfullname();
     
     document.querySelector("#btn-save-score-details").addEventListener("click", async () => {

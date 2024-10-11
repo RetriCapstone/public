@@ -649,7 +649,8 @@ async function deleteClassroom() {
 }
 
 
-function navigateToPage(page) {
+
+function navigateToPage(page, module, item, student) {
     const currentParams = new URLSearchParams(window.location.search);
     const selectedClassroomId = getQueryParam('Cid');
     const teacherId = getQueryParam('tid');
@@ -658,10 +659,14 @@ function navigateToPage(page) {
     currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
 
-    // currentParams.delete(paramToRemove);
+    currentParams.delete(module);
+    currentParams.delete(item);
+    currentParams.delete(student);
+    
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
+
 
 // Save log function
 async function saveLog(action) {
@@ -699,9 +704,9 @@ document.addEventListener('DOMContentLoaded', () => {
     createModuleForm.addEventListener('submit', createModule);
 
     document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('student.php');
+        navigateToPage('student.php', 'Mid', 'ItemId', 'Sid');
     });
     document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('module.php');
+        navigateToPage('module.php', 'Mid', 'ItemId', 'Sid');
     });
 });

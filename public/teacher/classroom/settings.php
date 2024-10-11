@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="style-container-1 settings-logs">
-                    <span class="log-text" >System Log</span>
+                    <span class="log-text" >System Logs</span>
                     <div class="logs-container" >
 
                     </div>

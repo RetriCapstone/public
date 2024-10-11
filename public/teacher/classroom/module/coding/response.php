@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs</title>
+    <title>response</title>
     <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
     <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
@@ -16,23 +16,23 @@
 <body>
     <!-- <script src="/public/teacher/dashboard.js" type="module"></script> -->
     <!-- <script type="module" src="script/quiz.js"></script> -->
-    <script type="module" src="/public/teacher/classroom/module/response-management/quiz-logs.js"></script>
+    <script type="module" src="/public/teacher/classroom/module/response-management/coding-response.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
                 <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
-                <li>
-                    <a id="response-link">
+                <li class="active">
+                    <a>
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Question
                         </span>
                     </a>
                 </li>
-                <li class="active">
-                    <a >
+                <li>
+                    <a id="logs-link">
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <span>
                             Logs
@@ -52,18 +52,20 @@
             <div class="code-header-con">
                 <div class="code-header-pos-1 style-header">
                     <h3 id="quiz-name" ></h3>
+                    <button class="style-btn-add-1" id="btn-save-score-details">Save changes</button>
                 </div>
                 <div class="code-header-pos-2"> 
                     <h3 id="quiz-student-fullname"></h3>
+                    <span id="quiz-student-total-score">Total score: </span>
                 </div>
             </div>
-            <div class="style-container-1" >
-                <h2>Activity logs</h2>
-                <div class="quiz-answer-content"  >
-                    <div class="spinner loading-quiz-content"></div>
-                    <div class="quiz-answer-list logs-container">
-                    </div>
+
+            <div class="quiz-answer-content">
+                <div class="spinner loading-quiz-content"></div>
+                <div class="quiz-answer-list">
+
                 </div>
+
             </div>
 
         </div>
