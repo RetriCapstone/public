@@ -170,6 +170,10 @@
                                 <div class="style-divider">
                                     <label class="style-label-modal">&nbsp;Module Name:</label>
                                     <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
+                                    <div style="margin-top: .6rem; margin-left: .2rem; " >
+                                        <input type="checkbox" id="selected-module-visible" value="visibility">
+                                        <label for="selected-module-visible">&nbsp;Visibility</label>
+                                    </div>
                                 </div>
                                 <div class="edit-module-btn">
                                     <div>

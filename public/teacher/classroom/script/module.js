@@ -23,8 +23,8 @@ function getQueryParam(param) {
 const selectedClassroomId = getQueryParam('Cid');
 const teacherId = getQueryParam('tid');
 
-const moduleItemloadingIndicator= document.querySelector('.create-module-item-loading');
-const moduleloadingIndicator= document.querySelector('.create-module-loading');
+const moduleItemloadingIndicator = document.querySelector('.create-module-item-loading');
+const moduleloadingIndicator = document.querySelector('.create-module-loading');
 
 async function getItems(moduleId, itemType) {
     const itemCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', moduleId, itemType);
@@ -81,7 +81,6 @@ async function getClassroomName() {
     }
 }
 
-
 async function getModules() {
     if (!selectedClassroomId || !teacherId) {
         console.error("Missing required identifiers");
@@ -108,6 +107,8 @@ async function getModules() {
             const moduleData = moduleDoc.data();
             const moduleName = moduleData.name;
             const moduleId = moduleDoc.id;
+            const moduleVisible = moduleData.visible;  // Fetch the 'visible' field
+
             const [lectures, quizzes, activities] = await Promise.all([
                 getItems(moduleId, 'lecture'),
                 getItems(moduleId, 'quiz'),
@@ -138,15 +139,24 @@ async function getModules() {
                 </div>
             `).join('');
 
+            // Determine which eye icon to show based on the module's visibility
+            const visibilityIconHTML = moduleVisible
+                ? '<i id="module-visible" class="fa-regular fa-eye"></i>'
+                : '<i id="module-not-visible" class="fa-regular fa-eye-slash"></i>';
+
             return `
                 <div class="style-card-2">
                     <div class="style-header">
                         <div class="style-display">
-                            <p class="style-text"><i class="fa-solid fa-book-bookmark"></i>&nbsp;Module</p>
+                            <div style="display:flex; align-items:center;" ><i class="fa-solid fa-book-bookmark"></i>&nbsp;&nbsp;
                             <h4 class="style-text"  id="module-name">${moduleName}</h4>
                         </div>
-                        <div class="style-display edit-module" data-module-id="${moduleId}" data-module-name="${moduleName}">
-                            <i class="fa-regular fa-pen-to-square"></i><span>EDIT</span>
+                        </div>
+                        <div style="display:flex; align-items:center;">
+                            ${visibilityIconHTML} 
+                            <div class="style-display edit-module" data-module-visible="${moduleVisible}" data-module-id="${moduleId}" data-module-name="${moduleName}">
+                                <i class="fa-regular fa-pen-to-square"></i><span>EDIT</span>
+                            </div>
                         </div>
                     </div>
                     <div class="module-list-content">
@@ -174,14 +184,6 @@ async function getModules() {
             item.addEventListener('click', (event) => {
                 const moduleId = item.getAttribute('data-module-id');
                 const itemId = item.getAttribute('data-item-id');
-
-                // // Store details in localStorage
-                // localStorage.setItem('selectedModuleId', moduleId);
-                // localStorage.setItem('selectedItemId', itemId);
-
-                // const url = `newPage.html?selectedModuleId=${encodeURIComponent(moduleId)}&selectedItemId=${encodeURIComponent(itemId)}`;
-                // window.location.href = url;
-
                 // Allow the default link behavior to navigate
             });
         });
@@ -193,17 +195,12 @@ async function getModules() {
             button.addEventListener('click', handleAddModuleClick);
         });
 
-        
         // edit module 
         const editModuleButtons = document.querySelectorAll('.edit-module');
         editModuleButtons.forEach(button => {
             button.removeEventListener('click', handleEditModuleClick);  // Remove previous listeners to avoid duplication
             button.addEventListener('click', handleEditModuleClick);
         });
-
-
-
-
 
     } catch (error) {
         console.error("Error getting modules:", error);
@@ -246,14 +243,16 @@ function handleAddModuleClick(event) {
 function handleEditModuleClick(event) {
     const moduleId = event.currentTarget.getAttribute('data-module-id');
     const moduleName = event.currentTarget.getAttribute('data-module-name');
-    new editModuleModal(moduleId, moduleName, "modal-edit-module", "close-module", "cancel-edit-module-modal");
+    const moduleVisibility = event.currentTarget.getAttribute('data-module-visible');
+    new editModuleModal(moduleId, moduleName, moduleVisibility, "modal-edit-module", "close-module", "cancel-edit-module-modal");
 }
 
 
 class editModuleModal {
-    constructor(moduleId, moduleName, modalId, closeClass, cancelId) {
+    constructor(moduleId, moduleName, moduleVisible, modalId, closeClass, cancelId) {
         this.moduleId = moduleId;
         this.moduleName = moduleName;
+        const selectedModuleVisible = moduleVisible === 'true'; 
         this.modal = document.getElementById(modalId);
         this.span = document.getElementsByClassName(closeClass)[0];
         this.cancelBtn = document.getElementById(cancelId);
@@ -281,6 +280,14 @@ class editModuleModal {
             } else {
                 console.error('Module name input field not found');
             }
+
+            const moduleVisibility = document.getElementById('selected-module-visible');
+            if (moduleVisibility) {
+                moduleVisibility.checked = selectedModuleVisible; 
+            } else {
+                console.error('Module visibility input field not found');
+            }
+
 
         } else {
             console.error(`Elements not found for modal: ${modalId}, ${closeClass}`);
@@ -310,6 +317,7 @@ class editModuleModal {
     async editModule(event) {
         event.preventDefault();
         const moduleNameInput = document.getElementById('selected-module-name').value.trim().toUpperCase();
+        const moduleVisibility = document.getElementById('selected-module-visible').checked;
 
         if (!moduleNameInput) {
             alert('Please enter a module name.');
@@ -322,10 +330,10 @@ class editModuleModal {
 
             // Update the module's name field
             await updateDoc(moduleRef, {
-                name: moduleNameInput
+                name: moduleNameInput,
+                visible:moduleVisibility
             });
-
-            alert('Module name updated successfully.');
+            
             location.reload();
             this.closeModal();  // Close the modal after successful update
 
@@ -381,7 +389,7 @@ async function createModule(event) {
         const moduleSnapshot = await getDocs(moduleCollectionRef);
         const existingModulesCount = moduleSnapshot.size;
 
-        let moduleNumber = 1 ;
+        let moduleNumber = 1;
         if (position === 'end') {
             moduleNumber = existingModulesCount + 1;
         } else if (position === 'begin') {
@@ -397,8 +405,8 @@ async function createModule(event) {
 
         const moduleDocRef = doc(collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module'));
 
-        await setDoc(moduleDocRef, { number: moduleNumber, name:moduleName });
-        await saveLog(`Create Module ${moduleName}` );
+        await setDoc(moduleDocRef, { number: moduleNumber, name: moduleName, visible:false });
+        await saveLog(`Create Module ${moduleName}`);
         moduleloadingIndicator.style.display = 'none'
         getModules();  // Refresh the module list
         moduleNameInput.value = '';  // Clear the input field
@@ -494,7 +502,7 @@ class ModuleItemModal {
         event.preventDefault();
 
         moduleItemloadingIndicator.style.display = 'block';
-        
+
         const moduleItemNameInput = document.getElementById('module-item-name');
         const moduleItemName = moduleItemNameInput.value.trim().toUpperCase();
         // const moduleItemType = document.getElementById('module-item-type').value;
@@ -515,11 +523,11 @@ class ModuleItemModal {
         try {
             // Use addDoc to automatically generate the document ID
             const itemDocRef = await addDoc(itemCollectionRef, { number: itemNumber, status: 'close', name: moduleItemName });
-            const moduleItemID = itemDocRef.id; 
+            const moduleItemID = itemDocRef.id;
 
-            await saveLog(`Create ${moduleItemType} name: ${moduleItemName}` );
+            await saveLog(`Create ${moduleItemType} name: ${moduleItemName}`);
 
-            moduleItemNameInput.value = ''; 
+            moduleItemNameInput.value = '';
             this.closeModal();  // Close the modal
             moduleItemloadingIndicator.style.display = 'none';
             getModules();
@@ -602,7 +610,7 @@ async function deleteClassroom() {
         try {
             // Get the reference to the classroom document
             const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
-            
+
             // Fetch the classroom data before deletion
             const classroomSnapshot = await getDoc(classroomRef);
             if (!classroomSnapshot.exists()) {
@@ -662,7 +670,7 @@ function navigateToPage(page, module, item, student) {
     currentParams.delete(module);
     currentParams.delete(item);
     currentParams.delete(student);
-    
+
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
