@@ -1,15 +1,18 @@
 
 .logs-container {
-    padding: 10px;
+    margin: 1rem 0;
     max-width: 42rem;
     min-width: 42rem;
     border-radius: 4px;
-    border: 1px solid #1f2e63; /* Light border */
+    max-height: 40rem;
+    min-height: 40rem;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .log-entry {
     padding: 10px;
-    border-bottom: 1px solid #eee; /* Divider between logs */
+    border-bottom: 1px solid #3465ad; /* Divider between logs */
 }
 
 .log-entry:last-child {
@@ -18,9 +21,13 @@
 
 .timestamp {
     font-size: 0.8em; /* Smaller font for timestamp */
-    color: #888; /* Gray color for timestamp */
+    color: #3498db;
 }
 
 .log-message {
-    font-weight: bold; /* Bold for log message */
+    font-size: 1rem;
+}
+
+.log-text{
+    font-size: 1.4rem;
 }

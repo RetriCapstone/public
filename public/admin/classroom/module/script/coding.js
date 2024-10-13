@@ -237,6 +237,11 @@ function addCodeQuestion() {
 
     });
 
+    // Add event listener for the delete question button
+    codequestionContainer.querySelector(`#code-delete-button-question-${questionNumber}`).addEventListener('click', function () {
+        codequestionContainer.remove();
+    });
+
 }
 
 async function runCode(codeField, inputField, outputField) {
@@ -251,6 +256,7 @@ async function runCode(codeField, inputField, outputField) {
 
     try {
         const response = await fetch('http://localhost:3001/run', {
+        // const response = await fetch('http://www.mca-codedojo.online/run', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -259,8 +265,9 @@ async function runCode(codeField, inputField, outputField) {
         });
 
         const result = await response.json();
+        console.log(result); // Check the API response
         if (response.ok) {
-            outputContainer.value = result.output;
+            outputContainer.value = result.output || 'No output available';
         } else {
             outputContainer.value = `Error: ${result.error}`;
         }
@@ -519,7 +526,7 @@ async function deleteQuiz() {
             await deleteDoc(moduleRef);
 
             alert('lecture deleted successfully.');
-            navigateToPage('/public/admin/classroom/module.php');
+            navigateToPage('/public/admin/classroom/module.php', 'Mid', 'ItemId', 'Sid');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -534,7 +541,8 @@ function convertToLocalDateTime(date) {
     return local.toISOString().slice(0, 16);
 }
 //func: navigation param
-function navigateToPage(page) {
+
+function navigateToPage(page, module, item, student) {
     const currentParams = new URLSearchParams(window.location.search);
     const selectedClassroomId = getQueryParam('Cid');
     const teacherId = getQueryParam('tid');
@@ -543,9 +551,14 @@ function navigateToPage(page) {
     currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
 
+    currentParams.delete(module);
+    currentParams.delete(item);
+    currentParams.delete(student);
+    
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // nav bar function

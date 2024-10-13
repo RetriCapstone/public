@@ -21,29 +21,21 @@
             </div>
             <ul class="menu">
                 <li>
-                <a href="/public/admin/classroom/classroom.php">
+                <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <i class="fa-solid fa-users-between-lines"></i>
-                        <span>
-                            Accounts
-                        </span>
-                    </a>
-                </li>
-                <li>
+                <!-- <li>
                 <a href="help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li class="active">
                     <a href="">
                         <i class="fa-solid fa-gear"></i>
@@ -117,7 +109,8 @@
                     </div>
                 </div>
 
-                <div class="style-container-1">
+                <div class="style-container-1 settings-logs">
+                    <span class="log-text" >System Logs</span>
                     <div class="logs-container" >
 
                     </div>

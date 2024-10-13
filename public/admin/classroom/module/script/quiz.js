@@ -547,7 +547,7 @@ async function deleteQuiz() {
             await deleteDoc(moduleRef);
 
             alert('lecture deleted successfully.');
-            navigateToPage('/public/admin/classroom/module.php');
+            navigateToPage('/public/admin/classroom/module.php', 'Mid', 'ItemId', 'Sid');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -562,7 +562,8 @@ function convertToLocalDateTime(date) {
     return local.toISOString().slice(0, 16);
 }
 //func: navigation param
-function navigateToPage(page) {
+
+function navigateToPage(page, module, item, student) {
     const currentParams = new URLSearchParams(window.location.search);
     const selectedClassroomId = getQueryParam('Cid');
     const teacherId = getQueryParam('tid');
@@ -571,18 +572,23 @@ function navigateToPage(page) {
     currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
 
+    currentParams.delete(module);
+    currentParams.delete(item);
+    currentParams.delete(student);
+    
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     
 
     document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/public/admin/classroom/student.php');
+        navigateToPage('/public/admin/classroom/student.php', 'Mid', 'ItemId', 'Sid');
     });
     document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/public/admin/classroom/module.php');
+        navigateToPage('/public/admin/classroom/module.php', 'Mid', 'ItemId', 'Sid');
     });
 
     auto_height(document.querySelector('.auto-height-text-dir'));

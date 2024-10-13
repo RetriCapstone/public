@@ -84,3 +84,10 @@
     padding: 8px 12px;
     border-radius: 5px;
 }
+.teacher-output{
+    width: 80%;
+}
+
+.code-output{
+    min-height: 200px;
+}

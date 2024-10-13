@@ -412,7 +412,7 @@
     display: flex;
     align-items: baseline;
     justify-content: flex-end;
-    padding: 0 1rem ;
+    padding: 0 1.2rem ;
     gap: 1.4rem;
 }
 .response-header-details span{
@@ -420,9 +420,7 @@
     text-align: center;
 }
 .response-students{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    
     padding: 8px;
     border-radius: 5px;
 }

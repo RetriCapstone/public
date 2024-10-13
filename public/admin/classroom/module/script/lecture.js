@@ -126,7 +126,7 @@ function addHeader1() {
 
     header1Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Header 1" required id="lect-header-1-text-${lectureNumber}" >
+                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Title" required id="lect-header-1-text-${lectureNumber}" >
                                     <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
@@ -230,7 +230,7 @@ function addHeader2() {
 
     header2Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Header 2" required id="lect-header-2-text-${lectureNumber}" >
+                                    <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Subtitle" required id="lect-header-2-text-${lectureNumber}" >
                                     <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
@@ -512,15 +512,12 @@ async function saveLectureDetails() {
 // fetching  -----------------------------------  fetching --------------------------------------------------------------------
 // fetch lecture contents
 async function fetchLectureItems() {
-    const loadingIndicator = document.querySelector('.loading-indicator');
-    loadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the item collection within the lecture
         const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
         const itemsSnapshot = await getDocs(itemsCollectionRef);
 
         if (itemsSnapshot.empty) {
-            loadingIndicator.style.display = 'none'; // Show loading indicator
             console.log('No lecture items found.');
             return;
         }
@@ -588,10 +585,8 @@ async function fetchLectureItems() {
 
             }
         });
-        loadingIndicator.style.display = 'none'; // Show loading indicator
 
     } catch (error) {
-        loadingIndicator.style.display = 'none'; // Show loading indicator
         console.error('Error fetching lecture items:', error);
     }
 }
@@ -637,7 +632,7 @@ async function deleteLecture() {
             await deleteDoc(moduleRef);
 
             alert('lecture deleted successfully.');
-            navigateToPage('/public/admin/classroom/module.php');
+            navigateToPage('/public/admin/classroom/module.php', 'Mid', 'ItemId', 'Sid');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -646,7 +641,7 @@ async function deleteLecture() {
     }
 }
 
-function navigateToPage(page) {
+function navigateToPage(page, module, item, student) {
     const currentParams = new URLSearchParams(window.location.search);
     const selectedClassroomId = getQueryParam('Cid');
     const teacherId = getQueryParam('tid');
@@ -655,6 +650,10 @@ function navigateToPage(page) {
     currentParams.set('Cid', selectedClassroomId);
     currentParams.set('tid', teacherId);
 
+    currentParams.delete(module);
+    currentParams.delete(item);
+    currentParams.delete(student);
+    
     // Navigate to the desired page with the parameters
     window.location.href = `${page}?${currentParams.toString()}`;
 }
@@ -692,10 +691,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     document.querySelector('#student-link').addEventListener('click', () => {
-        navigateToPage('/public/admin/classroom/student.php');
+        navigateToPage('/public/admin/classroom/student.php', 'Mid', 'ItemId', 'Sid');
     });
     document.querySelector('#module-link').addEventListener('click', () => {
-        navigateToPage('/public/admin/classroom/module.php');
+        navigateToPage('/public/admin/classroom/module.php','Mid', 'ItemId', 'Sid');
     });
 
 });
