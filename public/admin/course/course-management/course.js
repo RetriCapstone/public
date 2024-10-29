@@ -15,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
 function setupModal(modalId, btnId, closeClass, btnCancel) {
     const modal = document.getElementById(modalId);
     const btn = document.getElementById(btnId);
@@ -31,20 +32,21 @@ function setupModal(modalId, btnId, closeClass, btnCancel) {
     };
 }
 
+
 async function getClassrooms() {
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
     try {
         const loadingIndicator = document.querySelector('.loading-indicator');
-        loadingIndicator.style.display = 'block';
+        loadingIndicator.style.display = 'block'; 
 
         const q = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
             console.log("No Classroom found");
-            loadingIndicator.style.display = 'none';
+            loadingIndicator.style.display = 'none'; 
             return;
         }
 
@@ -54,16 +56,15 @@ async function getClassrooms() {
         const classrooms = [];
 
         for (const doc of querySnapshot.docs) {
-            const classroomCollection = collection(db, 'teacher', doc.id, 'classroom');
+            const classroomCollection = collection(db, 'course');
             const classroomSnapshot = await getDocs(classroomCollection);
 
             classroomSnapshot.forEach((classroomDoc) => {
                 const classId = classroomDoc.id;
                 const classData = classroomDoc.data();
                 const className = classData.name;
-                const classCode = classData.code;
 
-                classrooms.push({ docId: doc.id, className, classCode, classroomDocId: classId });
+                classrooms.push({ docId: doc.id, className, classroomDocId: classId });
             });
         }
 
@@ -72,38 +73,34 @@ async function getClassrooms() {
             classCard.className = 'style-card-1';
             classCard.innerHTML = `
                 <div class="style-display">
-                    <h3 class="class-name">Classroom: ${classroom.className}</h3>
-                    <span class="class-code">Code: ${classroom.classCode}</span>
+                    <h3 class="class-name">Course: ${classroom.className}</h3>
                 </div>
             `;
-
             classCard.addEventListener('click', () => {
-                const url = `module.php?Cid=${encodeURIComponent(classroom.classroomDocId)}&tid=${encodeURIComponent(classroom.docId)}`;
+                const url = `course-modules.php?Cid=${encodeURIComponent(classroom.classroomDocId)}&tid=${encodeURIComponent(classroom.docId)}`;
                 window.location.href = url;
             });
 
             classListContainer.appendChild(classCard);
         });
 
-        loadingIndicator.style.display = 'none';
+        loadingIndicator.style.display = 'none';  
     } catch (error) {
         console.error("Error getting classrooms:", error);
-        document.querySelector('.loading-indicator').style.display = 'none';
+        document.querySelector('.loading-indicator').style.display = 'none';  
     }
 }
 
-const saveloadingIndicator = document.querySelector('.save-loading-indicator-bg');
+const saveloadingIndicator= document.querySelector('.save-loading-indicator-bg');
 // Create classroom
-async function createClassroom(event) {
+async function createCourse(event) {
     event.preventDefault();
 
     const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
     if (!loggedInUserEmail) return;
 
-    saveloadingIndicator.style.display = 'block';
+    saveloadingIndicator.style.display = 'block'; 
     const className = document.getElementById("classname").value.trim().toUpperCase();
-    const classCode = document.getElementById("classcode").value.trim();
-    const selectElement = document.getElementById('class-course');
 
     try {
         const teachersQuery = query(collection(db, "teacher"));
@@ -115,76 +112,49 @@ async function createClassroom(event) {
             const teacherId = teacherDoc.id;
 
             const classCodeQuery = query(
-                collection(db, 'teacher', teacherId, 'classroom'),
-                where("code", "==", classCode)
+                collection(db, 'course'),
+                where("name", "==", className)
             );
             const classCodeSnapshot = await getDocs(classCodeQuery);
 
             if (!classCodeSnapshot.empty) {
                 classCodeExists = true;
-                break;
+                break; 
             }
         }
 
         if (classCodeExists) {
-            saveloadingIndicator.style.display = 'none';
-            alert("Invalid code. Please change the Classroom code.");
+            saveloadingIndicator.style.display = 'none'; 
+            alert("Invalid course. Please change the Course name.");
             return;
         }
+
         const loggedInTeacherQuery = query(collection(db, "teacher"), where("email", "==", loggedInUserEmail));
         const loggedInTeacherSnapshot = await getDocs(loggedInTeacherQuery);
-        
+
         if (!loggedInTeacherSnapshot.empty) {
             const loggedInTeacherDoc = loggedInTeacherSnapshot.docs[0];
             const loggedInTeacherId = loggedInTeacherDoc.id;
-            const classCourse = selectElement.value;
-            
-            const newClassroomRef = doc(collection(db, 'teacher', loggedInTeacherId, 'classroom'));
-            
-            await setDoc(newClassroomRef, { name: className, code: classCode, course: classCourse });
-            
-            const newClassId = newClassroomRef.id; 
-        
-            await saveLog(`Created a classroom (${className})`, loggedInTeacherId);
-            saveloadingIndicator.style.display = 'none';
+            const newClassroomRef = doc(collection(db, 'course'));
+            await setDoc(newClassroomRef, { name: className, developer: loggedInTeacherId });
+
+            await saveLog(`Created a course (${className})`, loggedInTeacherId);
+            saveloadingIndicator.style.display = 'none'; 
             getClassrooms();
             document.getElementById("modal-create-classroom").style.display = "none";
-            
-            const url = `module.php?Cid=${encodeURIComponent(newClassId)}&tid=${encodeURIComponent(loggedInTeacherId)}`;
-            window.location.href = url;
         }
-        
     } catch (error) {
-        saveloadingIndicator.style.display = 'none';
+        saveloadingIndicator.style.display = 'none'; 
         console.error("Error creating classroom:", error);
     }
 }
 
 
-async function populateSelectCourse() {
-    const selectElement = document.getElementById('class-course');
-    selectElement.innerHTML = '';
-
-    const classroomCollection = collection(db, 'course');
-    const classroomSnapshot = await getDocs(classroomCollection);
-
-    classroomSnapshot.forEach((classroomDoc) => {
-        const option = document.createElement('option');
-        const moduleData = classroomDoc.data();
-        const moduleName = moduleData.name;
-        option.value = classroomDoc.id;
-        option.text = moduleName;
-        selectElement.appendChild(option);
-
-    });
-
-}
-
 
 async function saveLog(action, teacherId) {
     try {
         const currentDate = new Date();
-        const timestamp = currentDate.toLocaleString();
+        const timestamp = currentDate.toLocaleString(); 
         const logEntry = {
             action: action,
             timestamp: timestamp
@@ -200,10 +170,9 @@ async function saveLog(action, teacherId) {
 }
 
 
-
 document.addEventListener('DOMContentLoaded', () => {
     setupModal("modal-create-classroom", "btn-create-classroom", "close-modal", "cancel-modal");
     getClassrooms();
-    populateSelectCourse();
-    document.getElementById("create-class-form").addEventListener("submit", createClassroom);
+
+    document.getElementById("create-course-form").addEventListener("submit", createCourse);  
 });

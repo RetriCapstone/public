@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Activity</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="/public/admin/style_dashboard.css">
     <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/public/admin/classroom/module/style/coding.css">
-    <link rel="stylesheet" href="/public/admin/classroom/module/style/coding-editor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/public/admin/classroom/module/style/quiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <script type="module" src="script/coding.js" ></script>
-    <script type="module" src="script/coding-responses.js" ></script>
     <script src="/public/admin/dashboard.js" type="module"></script>
+    <script type="module" src="script/quiz.js"></script>
+    <script type="module" src="script/quiz-responses.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -26,15 +23,15 @@
             <ul class="menu">
                 <li class="active">
                     <a href="/public/admin/classroom/classroom.php">
-                        <i class="fa fa-chalkboard"></i>
+                    <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
                 <!-- <li>
-                    <a href="/public/admin/classroom/help.php">
-                        <i class="fa-regular fa-circle-question"></i>
+                <a href="/public/teacher/classroom/help.php">
+                    <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
                         </span>
@@ -49,7 +46,7 @@
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">
-                    <a>
+                    <a >
                         <i class="fa fa-sign-out"></i>
                         <span>
                             Logout
@@ -58,51 +55,53 @@
                 </li>
             </ul>
         </nav>
-        <!-- <div class="style-container-1 con-2">
+        <div class="style-container-1 con-2">
             <ul class="list-tab">
                 <li class="list-view list-active" id="module-link">Modules</li>
                 <li class="list-view" id="student-link">People</li>
             </ul>
-        </div> -->
-        <div class="main_body">   
-
+        </div>
+        <div class="quiz-tool-container">
+        </div>
+        <div class="main_body">
             <div class="save-loading-indicator-bg">
                 <div class="save-loading-indicator">
                     <div class="spinner"></div>
                     Saving
                 </div>
             </div>
-
-            <div class="code-header-con">
-                <div class="code-question-add" id="code-add-question" >
-                    <span>Add question</span>
-                </div>
-
-                <div class="code-header-pos-1 style-header">
-                    <h3 id="act-name" ></h3>
-                    <button class="style-btn-add-1" id="code-save-btn">Save</button>
-                </div>
-
-                <div class="code-header-pos-2">
-                    <div id="code-question-btn" class="code-btn-nav btn-question code-active-nav">
-                        <span class="btn-nav-text">Questions</span>
+            <div class="con-1">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
                     </div>
-                    <div id="code-response-btn" class="code-btn-nav btn-response">
-                        <span class="btn-nav-text">Responses</span>
+                <div class="quiz-fixed-header">
+                    <div class="style-header">
+                        <h3 id="quiz-name" ></h3>
+                        <button class="style-btn-add-1" id="quiz-save-btn" >Save</button>
                     </div>
-                    <div id="code-settings-btn" class="code-btn-nav btn-settings">
-                        <span class="btn-nav-text">Settings</span>
+                    <div class="quiz-navbar" >
+                        <div id="quiz-question-btn" class="quiz-btn-nav btn-question quiz-active-nav" >
+                            <span class="btn-nav-text" >Questions</span>
+                        </div>
+                        <div id="quiz-response-btn" class="quiz-btn-nav btn-response" >
+                            <span class="btn-nav-text" >Responses</span>
+                        </div>
+                        <div id="quiz-settings-btn" class="quiz-btn-nav btn-settings" >
+                            <span class="btn-nav-text" >Settings</span>
+                        </div>
                     </div>
+                    <hr class="divider-solid">
                 </div>
-            </div>
-            <div class="code-body-con">
+                <div class="quiz-containers quiz-questions-container" >
 
-                <div class="code-question-con">
-                    <div class="code-question-list">
+                    <!-- Quiz container of dirction/Description -->
+                    <div class="style-container-1 quiz-direction-container" >
+                        <textarea rows="2" required autocomplete="off" class="quiz-direction-input auto-height-text-dir" placeholder="Instruction" ></textarea> 
                     </div>
-                </div>
 
-                <div class="code-responses-con">
+                </div>
+                <!-- Responses view container -->
+                <div class="quiz-containers quiz-responses-container" >
                     
                     <!-- Modal for Editing quiz asnwer  -->
                     <div id="modal-edit-quiz" class="style-modal-quiz">
@@ -113,7 +112,7 @@
                             <div class="quiz-answer-content" >
                                 <div class="quiz-answer-header" >
                                     <h3 id="quiz-student-fullname" >Student name</h3>
-                                    <!-- <span id="quiz-student-total-score" >Total score: </span> -->
+                                    <span id="quiz-student-total-score" >Total score: </span>
                                 </div>
 
                                 <div class="quiz-answer-list">
@@ -128,11 +127,6 @@
 
                         </div>
                     </div>
-
-                    <!-- <div class="style-container-1 response-style-con">
-                        <span class="respones-text-header" id="quiz-number-responses" >0</span>
-                        <span class="respones-text-header" >responses</span>
-                    </div> -->
                     <div class="style-container-1 response-style-con">
                         <div class="response-header-details" >
                             <!-- <span>Time</span> -->
@@ -144,19 +138,17 @@
                         </div>
                         
                     </div>
-
                 </div>
-
-                <div class="code-settings-con">
-                    
+                <!-- Settings view container -->
+                <div class="quiz-containers quiz-settings-container" >
                     <div class="style-container-1 settings-container" >
                         <p class="settings-text" >Settings</p>
                         <hr class="divider-solid setting-divider">
                         <div class="settings-card-col" >
                             <span class="settings-label-title" >
-                                Activity name
+                                Quiz name
                             </span>
-                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="activity name">
+                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="Quiz name">
                         </div>
                         <div class="settings-card" >
                             <div class="settings-card-1" >
@@ -164,7 +156,7 @@
                                     Randomize Question
                                 </span>
                                 <p class="settings-label-body" >
-                                    Make the activity questions in random
+                                    Make the quiz questions in random
                                 </p>
                             </div>
                             <div class="settings-card-1" >
@@ -174,7 +166,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="settings-card" style="display: none;" >
+                        <div class="settings-card" >
                             <div class="settings-card-1" >
                                 <span class="settings-label-title" >
                                     Show Question Answer
@@ -250,12 +242,19 @@
                             <button class="style-btn-del" id="btn-delete-quiz" >Delete quiz</button>
                         </div>
                     </div>
-
                 </div>
-
+                    
+            </div>
+        </div>
+        <div class="quiz-tool-container quiz-item-container">
+            <div class="quiz-question-tool-container style-container-1" >
+                <div class="quiz-question-tool-item add-question-btn" >
+                    <span class="quiz-add-icon add-icon" >+</span>
+                    <span>Add Question</span> 
+                </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>
+

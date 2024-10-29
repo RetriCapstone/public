@@ -16,7 +16,7 @@
 </head>
 <body>
     <script type="module" src="script/coding.js" ></script>
-    <script type="module" src="script/coding-responses.js" ></script>
+    <!-- <script type="module" src="script/coding-responses.sjs" ></script> -->
     <script src="/public/admin/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
@@ -24,22 +24,38 @@
                 <img src="/public/admin/images/MCA Logo.png">
             </div>
             <ul class="menu">
-                <li class="active">
+                <li>
+                    <a href="/public/admin/classroom/settings.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li>
+                <li class="">
                     <a href="/public/admin/classroom/classroom.php">
-                        <i class="fa fa-chalkboard"></i>
+                    <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="/public/admin/classroom/help.php">
-                        <i class="fa-regular fa-circle-question"></i>
+                <li class="active">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
                         <span>
-                            Help
+                            Courses
                         </span>
                     </a>
-                </li> -->
+                </li>
+                <li>
+                    <a href="/public/admin/classroom/help.php">
+                    <i class="fa-regular fa-circle-question"></i>
+                        <span>
+                            Feedback Center
+                        </span>
+                    </a>
+                </li>
                 <li>
                     <a href="/public/admin/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
@@ -49,7 +65,7 @@
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">
-                    <a>
+                    <a >
                         <i class="fa fa-sign-out"></i>
                         <span>
                             Logout
@@ -87,9 +103,9 @@
                     <div id="code-question-btn" class="code-btn-nav btn-question code-active-nav">
                         <span class="btn-nav-text">Questions</span>
                     </div>
-                    <div id="code-response-btn" class="code-btn-nav btn-response">
+                    <!-- <div id="code-response-btn" class="code-btn-nav btn-response">
                         <span class="btn-nav-text">Responses</span>
-                    </div>
+                    </div> -->
                     <div id="code-settings-btn" class="code-btn-nav btn-settings">
                         <span class="btn-nav-text">Settings</span>
                     </div>

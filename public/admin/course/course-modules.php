@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Modules</title>
+    <title>Course Modules</title>
     <link rel="stylesheet" href="/public/admin/style_dashboard.css">
     <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
@@ -13,7 +13,7 @@
 </head>
 <body>
     <script src="/public/admin/dashboard.js" type="module"></script>
-    <script type="module" src="script/module.js"></script>
+    <script type="module" src="course-management/course-modules.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
@@ -21,23 +21,23 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="settings.php">
+                    <a href="/public/admin/classroom/settings.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts
                         </span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="classroom.php">
+                <li class="">
+                    <a href="/public/admin/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="/public/admin/course/course.php">
+                <li class="active">
+                    <a href="course.php">
                     <i class="fa-solid fa-book"></i>
                         <span>
                             Courses
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="help.php">
+                    <a href="/public/admin/classroom/help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Feedback Center
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="settings.php">
+                    <a href="/public/admin/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings
@@ -70,12 +70,6 @@
                 </li>
             </ul>
         </nav>
-        <div class="style-container-1 con-2">
-            <ul class="list-tab">
-                <li class="list-view list-active" id="module-link" >Modules</li>
-                <li class="list-view" id="student-link" >People</li>
-            </ul>
-        </div>
         <div class="main_body">
             <div class="main_container">
                 <div class="con-1">
@@ -89,11 +83,11 @@
                         </div> -->
                     </div>
                     <hr class="divider-solid">
-                    <!-- <div class="btn-header--style">
+                    <div class="btn-header--style">
                         <button id="btn-create-module" class="style-btn-create-1">
                             <i class="fa-solid fa-plus"></i> Create Module
                         </button>
-                    </div> -->
+                    </div>
                     <!-- Modal for Creating Module -->
                         <div id="modal-create-module" class="style-modal">
                             <div class="save-loading-indicator-bg create-module-loading">
@@ -191,8 +185,7 @@
                             <form action="" id="edit-module-form" class="form-create-module form-create-module-item">
                                 <div class="style-divider">
                                     <label class="style-label-modal">&nbsp;Module Name:</label>
-                                    <!-- <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" > -->
-                                    <p id="selected-module-name" style="padding: .4rem; background: #1f2e63; border-radius: 2px;" ></p>
+                                    <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
                                     <div style="margin-top: .6rem; margin-left: .2rem; " >
                                         <input type="checkbox" id="selected-module-visible" value="visibility">
                                         <label for="selected-module-visible">&nbsp;Visibility</label>
@@ -200,7 +193,7 @@
                                 </div>
                                 <div class="edit-module-btn">
                                     <div>
-                                        <input type="button" value="Delete Module" class="style-btn-del" id="delete-module" style="display: none;" >
+                                        <input type="button" value="Delete Module" class="style-btn-del" id="delete-module">
                                     </div>
                                     <div style="display: flex; gap: .8rem;" >
                                         <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-module-modal">
@@ -215,20 +208,14 @@
                     <div id="modal-edit-classroom" class="style-modal">
                         <div class="style-modal-content edit-classroom-modal">
                             <span class="close-modal close-edit-classroom">&times;</span>
-                            <h2 >Edit Classroom</h2>
+                            <h2 >Edit Course</h2>
                             <hr class="divider-solid"> 
                             <form action="" id="edit-classroom-form" class="form-create-module ">
                                 
                                     <div class="style-divider" >
-                                        <label>&nbsp;Classroom name:</label>
-                                        <input type="text" style="text-transform:uppercase" id="edit-classroom-name" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
-                                    </div>
-
-                                    <div class="style-divider" >
-                                        <label>&nbsp;Classroom code:</label>
-                                        <input type="text"  id="edit-classroom-code" class="input-style input-create-class" placeholder="Class code" required autocomplete="off">
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT - RANDOM NUMBER</p>
+                                        <label>&nbsp;Course name:</label>
+                                        <input type="text" style="text-transform:uppercase" id="edit-classroom-name" class="input-style input-create-class" placeholder="Course name" required autocomplete="off" >
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: COURSE/SUBJECT NAME </p>
                                     </div>
 
                                 <div class="edit-module-btn">

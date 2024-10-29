@@ -430,7 +430,7 @@ async function saveLectureItems() {
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the 'item' collection within the lecture
-        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
 
         // Fetch all existing items and delete them
         const existingItemsSnapshot = await getDocs(itemsCollectionRef);
@@ -442,7 +442,7 @@ async function saveLectureItems() {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const lectureNumber = i ;
+            const lectureNumber = i+1 ;
 
             // Safely retrieve the input/textarea element
             const inputOrTextarea = item.querySelector('input, textarea');
@@ -495,13 +495,15 @@ async function saveLectureDetails() {
         }
 
         // Path to the selected lecture document
-        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const lectureDocRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Update the lecture document with name and status
         await updateDoc(lectureDocRef, {
             name: lectureName,
             status: lectureStatus
         });
+        
+        saveLog(`Course: Update the lecture: ${lectureName}`);
         fetchLectureDetails();
 
     } catch (error) {
@@ -515,7 +517,7 @@ async function saveLectureDetails() {
 async function fetchLectureItems() {
     try {
         // Path to the item collection within the lecture
-        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
         const itemsSnapshot = await getDocs(itemsCollectionRef);
 
         if (itemsSnapshot.empty) {
@@ -596,7 +598,7 @@ async function fetchLectureItems() {
 async function fetchLectureDetails() {
     try {
         // Define the path to the lecture document
-        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const lectureDocRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Fetch the quiz document
         const lectureDoc = await getDoc(lectureDocRef);
@@ -627,13 +629,18 @@ async function deleteLecture() {
     if (confirmed) {
         try {
             // Path to the selected module document
-            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
+            const moduleRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
             
+            const classroomSnapshot = await getDoc(moduleRef);
+
+            const classroomData = classroomSnapshot.data();
+            const classroomName = classroomData.name;
             // Delete the module document
             await deleteDoc(moduleRef);
 
-            alert('lecture deleted successfully.');
-            navigateToPage('/public/admin/classroom/module.php', 'Mid', 'ItemId', 'Sid');
+            saveLog(`Course: Deleted lecture: ${classroomName} (ID: ${selectedLectureId})`);
+            // alert('lecture deleted successfully.');
+            navigateToPage('/public/admin/course/course-module.php', 'Mid', 'ItemId', 'Sid');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -659,6 +666,28 @@ function navigateToPage(page, module, item, student) {
     window.location.href = `${page}?${currentParams.toString()}`;
 }
 
+
+// Save log function
+async function saveLog(action) {
+    try {
+        const currentDate = new Date();
+        const timestamp = currentDate.toLocaleString(); // Get the current date and time as a string
+
+        // Create the log entry
+        const logEntry = {
+            action: action,
+            timestamp: timestamp
+        };
+
+        // Save the log to the 'logs' collection
+        const logRef = doc(collection(db, 'teacher', teacherId, 'logs'));
+        await setDoc(logRef, logEntry);
+
+        console.log("Log saved:", logEntry);
+    } catch (error) {
+        console.error("Error saving log:", error);
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {

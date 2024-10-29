@@ -1,0 +1,41 @@
+.code-header-pos-2 {
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.quiz-answer-content{
+    padding: 1.4rem;
+    height: fit-content;
+    min-width: 42rem;
+}
+.quiz-details-question-container {
+
+    max-width: 62rem;
+}
+.logs-container{
+    display: flex;
+    gap: .8rem;
+    align-content: center;
+    flex-direction: column;
+}
+.style-container-1{
+    margin-top: 1.4rem;
+    border-radius: 10px;
+}
+
+.log-entry {
+padding: 10px;
+border-bottom: 1px solid #3465ad; /* Divider between logs */
+}
+
+.log-entry:last-child {
+border-bottom: none; /* Remove last border */
+}
+
+.timestamp {
+font-size: 0.8em; /* Smaller font for timestamp */
+color: #3498db;
+}
+
+.log-message {
+font-size: 1rem;
+}

@@ -64,6 +64,7 @@ nav{
 }
 .menu a span{
     overflow: hidden;
+    text-align: center;
 }
 .menu a i{
     font-size: 1.2rem;
