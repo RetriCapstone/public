@@ -1,0 +1,55 @@
+.div-flex-column{
+    display: flex;
+    flex-direction: column;
+    margin: .6rem;
+    width: 55%;
+    gap: .4rem;
+}
+.main_body{
+    display: flex;
+    justify-content: center;
+}
+.main_container{
+    
+    justify-content: flex-start;
+}
+.style-container-1{
+    width: 34rem;
+    margin: 2rem;
+}
+.div-flex-column a{
+    cursor: pointer;
+    color: #3498db;
+    font-weight: 400;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+.div-flex-column span{
+    font-size: 15px;
+}
+
+.div-flex-column a:hover{
+    text-decoration: underline;
+}
+.textarea-style{
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    padding: 8px;
+    color: white;
+    border-radius: 4px;
+    background-color: #0a1339;
+    font-size: 1rem;
+    resize: none;
+    border: 1px solid #1f2e63;
+
+}
+.textarea-style:focus{
+    border: 1px solid #1637de;
+
+}
+.report-modal{
+    width: 40%;
+    height: 58%;
+
+}

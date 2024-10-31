@@ -4,56 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture</title>
-    <link rel="stylesheet" href="/public/admin/style_dashboard.css">
-    <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/public/admin/classroom/module/style/lecture.css">
+    <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
+    <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/public/teacher/classroom/module/style/lecture.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
 </head>
 <body>
-    <script src="/public/admin/dashboard.js" type="module"></script>
-    <script type="module" src="script/lecture.js"></script>
+    <script src="/public/teacher/dashboard.js" type="module"></script>
+    <script type="module" src="script/course-lecture.js"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/public/admin/images/MCA Logo.png">
+                <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
-                <li>
+                <!-- <li>
                     <a href="/public/admin/classroom/accounts.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts
                         </span>
                     </a>
-                </li>
-                <li class="">
-                    <a href="/public/admin/classroom/classroom.php">
+                </li> -->
+                <li class="active">
+                    <a href="/public/teacher/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
-                <li class="active">
+                <!-- <li class="">
                     <a href="/public/admin/course/course.php">
                     <i class="fa-solid fa-book"></i>
                         <span>
                             Courses
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="/public/admin/classroom/help.php">
+                    <a href="/public/teacher/classroom/help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
-                            Feedback Center
+                            Help
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="/public/admin/classroom/settings.php">
+                    <a href="/public/teacher/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings
@@ -70,7 +70,13 @@
                 </li>
             </ul>
         </nav>
-        <div class="lect-body" style="width: 100%;" >
+        <div class="style-container-1 con-2">
+            <ul class="list-tab">
+                <li class="list-view list-active" id="module-link">Modules</li>
+                <li class="list-view" id="student-link">People</li>
+            </ul>
+        </div>
+        <div class="lect-body" >
             
             <div class="save-loading-indicator-bg">
                         <div class="save-loading-indicator">
@@ -96,9 +102,12 @@
                 <hr class="divider-solid" >
 
             </div>
+            <div style="width: 84%; max-width: 1100px; text-align: center; padding: .2rem; background: #223478;">
+                <p>Only the admin can edit the content of this lecture</p>
+            </div>
             <div class="lect-body-container" >
-                <div class="lecture-container">
-                    <section class="lect-con-list-section style-container-1" >
+                <div class="lecture-container" style="justify-content: center;" >
+                    <section class="lect-con-list-section style-container-1" style="margin: 12px; min-height: 42rem; width: 94%;" >
                         <div class="lect-list-container" >
 <!-- 
                             <div class="lect-header-style lect-header-1-con">
@@ -144,7 +153,7 @@
                             
                         </div>
                     </section>
-                    <section class="lect-con-tool-section" >
+                    <!-- <section class="lect-con-tool-section" >
                         <div class="lect-tool-container " >
                             <span >Text Fields</span>
                             <button class="lect-tool-style lect-add-header-1" id="lect-add-btn-header-1" >
@@ -157,16 +166,16 @@
                                 Add Paragraph
                             </b>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
                 <div class="settings-container">
-                    <section class="style-container-1 settings-body-con" >
+                    <section class="style-container-1 settings-body-con" style="margin: 12px;" >
                         <span class="settings-text" >Settings</span>
                         <hr class="settings-divider" >
 
                         <div class="settings-card-out-col">
                             <span class="settings-label-title" >Lecture name</span>
-                            <input type="text" id="settings-lect-name-input" >
+                            <p type="text" id="settings-lect-name-input" style="background-color: #173469; font-size: 1rem; padding: 8px; text-transform: uppercase;" ></p>
                         </div>
 
                         <div class="settings-card-out-row">
@@ -177,9 +186,9 @@
                             </select>
                         </div>
 
-                        <div class="settings-card-bottom">
+                        <!-- <div class="settings-card-bottom">
                             <button class="style-btn-del" id="btn-delete-lecture" >Delete lecture</button>
-                        </div>
+                        </div> -->
 
                     </section>
                 </div>

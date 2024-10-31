@@ -631,7 +631,7 @@ async function deleteClassroom() {
 
             // Close the modal after deletion and redirect
             document.getElementById("modal-edit-classroom").style.display = "none";
-            window.location.href = "classroom.php";
+            window.location.href = "/public/admin/course/course.php ";
 
         } catch (error) {
             console.error("Error deleting classroom:", error);

@@ -403,7 +403,7 @@
 .response-student-list{
     display: flex;
     flex-direction: column;
-    height: 620px;
+    min-height: 31rem;
     overflow: auto;
     padding: 14px;
     gap: 12px;

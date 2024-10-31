@@ -20,16 +20,32 @@
                 <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
+                <!-- <li>
+                    <a href="accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li> -->
                 <li>
-                <a href="classroom.php">
+                    <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
+                <!-- <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
+                        <span>
+                            Courses
+                        </span>
+                    </a>
+                </li> -->
                 <li>
-                <a href="help.php">
+                    <a href="help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
@@ -37,7 +53,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="">
+                    <a href="settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings

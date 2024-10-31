@@ -21,7 +21,7 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/public/admin/classroom/settings.php">
+                    <a href="/public/admin/classroom/accounts.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts
@@ -220,7 +220,7 @@
 
                                 <div class="edit-module-btn">
                                     <div>
-                                        <input type="button" value="Delete classroom" class="style-btn-del" id="delete-classroom">
+                                        <input type="button" value="Delete course" class="style-btn-del" id="delete-classroom">
                                     </div>
                                     <div style="display: flex; gap: .8rem;" >
                                         <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-class-modal">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Modules</title>
+    <title>Class Modules</title>
     <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
     <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
@@ -20,16 +20,36 @@
                 <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
+                <!-- <li>
+                    <a href="accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li> -->
                 <li class="active">
                     <a href="classroom.php">
-                        <i class="fa fa-chalkboard"></i>
-                        <span>Classroom</span>
+                    <i class="fa fa-chalkboard"></i>
+                        <span>
+                            Classroom
+                        </span>
                     </a>
                 </li>
+                <!-- <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
+                        <span>
+                            Courses
+                        </span>
+                    </a>
+                </li> -->
                 <li>
                     <a href="help.php">
-                        <i class="fa-regular fa-circle-question"></i>
-                        <span>Help</span>
+                    <i class="fa-regular fa-circle-question"></i>
+                        <span>
+                            Help
+                        </span>
                     </a>
                 </li>
                 <li>
@@ -41,9 +61,11 @@
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">
-                    <a>
+                    <a >
                         <i class="fa fa-sign-out"></i>
-                        <span>Logout</span>
+                        <span>
+                            Logout
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -67,11 +89,11 @@
                         </div> -->
                     </div>
                     <hr class="divider-solid">
-                    <div class="btn-header--style">
+                    <!-- <div class="btn-header--style">
                         <button id="btn-create-module" class="style-btn-create-1">
                             <i class="fa-solid fa-plus"></i> Create Module
                         </button>
-                    </div>
+                    </div> -->
                     <!-- Modal for Creating Module -->
                         <div id="modal-create-module" class="style-modal">
                             <div class="save-loading-indicator-bg create-module-loading">
@@ -169,7 +191,8 @@
                             <form action="" id="edit-module-form" class="form-create-module form-create-module-item">
                                 <div class="style-divider">
                                     <label class="style-label-modal">&nbsp;Module Name:</label>
-                                    <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" >
+                                    <!-- <input type="text" style="text-transform: uppercase;" id="selected-module-name" class="input-style input-create-class" placeholder="Input Name" required autocomplete="off" > -->
+                                    <p id="selected-module-name" style="padding: .4rem; background: #1f2e63; border-radius: 2px;" ></p>
                                     <div style="margin-top: .6rem; margin-left: .2rem; " >
                                         <input type="checkbox" id="selected-module-visible" value="visibility">
                                         <label for="selected-module-visible">&nbsp;Visibility</label>
@@ -177,7 +200,7 @@
                                 </div>
                                 <div class="edit-module-btn">
                                     <div>
-                                        <input type="button" value="Delete Module" class="style-btn-del" id="delete-module">
+                                        <input type="button" value="Delete Module" class="style-btn-del" id="delete-module" style="display: none;" >
                                     </div>
                                     <div style="display: flex; gap: .8rem;" >
                                         <input type="button" value="Cancel" class="style-btn-del" id="cancel-edit-module-modal">

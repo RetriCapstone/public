@@ -126,8 +126,8 @@ function addHeader1() {
 
     header1Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-1-input" data-content-type="header-1" type="text" autocomplete="off" placeholder="Title" required id="lect-header-1-text-${lectureNumber}" >
-                                    <i class="fa-solid fa-xmark delete-option"  id="delete-item-container-${lectureNumber}"></i>
+                                    <input class="lect-header-1-input" data-content-type="header-1" style="width:100%;" readonly type="text" autocomplete="off" placeholder="Title" required id="lect-header-1-text-${lectureNumber}" >
+                                    <i class="fa-solid fa-xmark delete-option" style="display:none;" id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
                                     <div class="text-format-card format-option" >
@@ -193,10 +193,10 @@ function addHeader1() {
             document.removeEventListener('click', clickOutsideHandler);
         }
     };
-    header1Container.addEventListener('focusin', function () {
-        focusInHandler();
-        document.addEventListener('click', clickOutsideHandler);
-    });
+    // header1Container.addEventListener('focusin', function () {
+    //     focusInHandler();
+    //     document.addEventListener('click', clickOutsideHandler);
+    // });
 
     // Attach event listeners to formatting buttons
     btnBoldFormat.addEventListener('click', function () {
@@ -230,8 +230,8 @@ function addHeader2() {
 
     header2Container.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <input class="lect-header-2-input" data-content-type="header-2" type="text" autocomplete="off" placeholder="Subtitle" required id="lect-header-2-text-${lectureNumber}" >
-                                    <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
+                                    <input class="lect-header-2-input" data-content-type="header-2" style="width:100%;" readonly type="text" autocomplete="off" placeholder="Subtitle" required id="lect-header-2-text-${lectureNumber}" >
+                                    <i class="fa-solid fa-xmark delete-option" style="display:none;" id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
                                     <div class="text-format-card format-option" >
@@ -294,10 +294,10 @@ function addHeader2() {
             document.removeEventListener('click', clickOutsideHandler);
         }
     };
-    header2Container.addEventListener('focusin', function () {
-        focusInHandler();
-        document.addEventListener('click', clickOutsideHandler);
-    });
+    // header2Container.addEventListener('focusin', function () {
+    //     focusInHandler();
+    //     document.addEventListener('click', clickOutsideHandler);
+    // });
 
     // Attach event listeners to formatting buttons
     btnBoldFormat.addEventListener('click', function () {
@@ -330,8 +330,8 @@ function addParagraph() {
     paragraphContainer.id = `lecture-item-${lectureNumber}`;
     paragraphContainer.innerHTML = `
                                 <div class="text-format-option-con">
-                                    <textarea rows="3" required data-content-type="paragraph" class="lect-paragraph-input auto-height-text" placeholder="type here..." id="lect-paragraph-text-${lectureNumber}"></textarea>
-                                    <i class="fa-solid fa-xmark delete-option" id="delete-item-container-${lectureNumber}"></i>
+                                    <textarea rows="3" required data-content-type="paragraph" style="width:100%;" readonly class="lect-paragraph-input auto-height-text" placeholder="type here..." id="lect-paragraph-text-${lectureNumber}"></textarea>
+                                    <i class="fa-solid fa-xmark delete-option" style="display:none;" id="delete-item-container-${lectureNumber}"></i>
                                 </div>
                                 <div class="text-format-option-con text-format-card-container">
                                     <div class="text-format-card format-option" >
@@ -397,10 +397,10 @@ function addParagraph() {
             document.removeEventListener('click', clickOutsideHandler);
         }
     };
-    paragraphContainer.addEventListener('focusin', function () {
-        focusInHandler();
-        document.addEventListener('click', clickOutsideHandler);
-    });
+    // paragraphContainer.addEventListener('focusin', function () {
+    //     focusInHandler();
+    //     document.addEventListener('click', clickOutsideHandler);
+    // });
 
     // Attach event listeners to formatting buttons
     btnBoldFormat.addEventListener('click', function () {
@@ -430,7 +430,7 @@ async function saveLectureItems() {
     saveloadingIndicator.style.display = 'block'; // Show loading indicator
     try {
         // Path to the 'item' collection within the lecture
-        const itemsCollectionRef = collection(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
 
         // Fetch all existing items and delete them
         const existingItemsSnapshot = await getDocs(itemsCollectionRef);
@@ -442,7 +442,7 @@ async function saveLectureItems() {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const lectureNumber = i+1 ;
+            const lectureNumber = i ;
 
             // Safely retrieve the input/textarea element
             const inputOrTextarea = item.querySelector('input, textarea');
@@ -485,28 +485,21 @@ async function saveLectureItems() {
 
 //func: save lecture details (name and status)
 async function saveLectureDetails() {
+    saveloadingIndicator.style.display = 'block';
     try {
-        const lectureName = document.getElementById('settings-lect-name-input').value.trim().toUpperCase();
         const lectureStatus = document.getElementById('settings-select-status').value;
 
-        if (!lectureName) {
-            alert('Lecture name is required.');
-            return;
-        }
-
         // Path to the selected lecture document
-        const lectureDocRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const lectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
 
         // Update the lecture document with name and status
-        await updateDoc(lectureDocRef, {
-            name: lectureName,
+        await setDoc(lectureDocRef, {
             status: lectureStatus
         });
-        
-        saveLog(`Course: Update the lecture: ${lectureName}`);
-        fetchLectureDetails();
+        saveloadingIndicator.style.display = 'none'; 
 
     } catch (error) {
+        saveloadingIndicator.style.display = 'none'; 
         console.error('Error saving lecture details:', error);
         alert('An error occurred while saving the lecture details. Please try again.');
     }
@@ -516,8 +509,15 @@ async function saveLectureDetails() {
 // fetch lecture contents
 async function fetchLectureItems() {
     try {
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+        const classroomData = classroomDoc.data();
+        const classroomCourse = classroomData.course;
+
         // Path to the item collection within the lecture
-        const itemsCollectionRef = collection(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
+        const itemsCollectionRef = collection(db, 'course', classroomCourse, 'module', selectedModuleId, 'lecture', selectedLectureId, 'item');
         const itemsSnapshot = await getDocs(itemsCollectionRef);
 
         if (itemsSnapshot.empty) {
@@ -597,24 +597,33 @@ async function fetchLectureItems() {
 //fetch lecture details
 async function fetchLectureDetails() {
     try {
-        // Define the path to the lecture document
-        const lectureDocRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
 
-        // Fetch the quiz document
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+        const classroomData = classroomDoc.data();
+        const classroomCourse = classroomData.course;
+
+        const lectureDocRef = doc(db, 'course', classroomCourse, 'module', selectedModuleId, 'lecture', selectedLectureId);
         const lectureDoc = await getDoc(lectureDocRef);
+        const classlectureDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId);
+        const classlectureDoc = await getDoc(classlectureDocRef);
+        
+        const lectureData = lectureDoc.data();
+        document.getElementById('lecture-name').innerText = lectureData.name || '';
+        document.getElementById('settings-lect-name-input').innerText = lectureData.name || '';
 
-        if (lectureDoc.exists()) {
-            const lectureData = lectureDoc.data();
-
-            // Populate the quiz settings
-            document.getElementById('lecture-name').innerText = lectureData.name || '';
-            document.getElementById('settings-lect-name-input').value = lectureData.name || '';
-
+        if (classlectureDoc.exists()) {
+            const lectureData = classlectureDoc.data();
             const statusSelect = document.querySelector('#settings-select-status');
             statusSelect.value = lectureData.status || 'close';
             
+        } else if(lectureDoc.exists()){
+            const lectureData = lectureDoc.data();
+            const statusSelect = document.querySelector('#settings-select-status');
+            statusSelect.value = lectureData.status || 'close';
         } else {
-            console.log('No lecture details found.');
+            console.log('No lect details found.');
         }
 
     } catch (error) {
@@ -629,18 +638,13 @@ async function deleteLecture() {
     if (confirmed) {
         try {
             // Path to the selected module document
-            const moduleRef = doc(db, 'course', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
+            const moduleRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'lecture', selectedLectureId );
             
-            const classroomSnapshot = await getDoc(moduleRef);
-
-            const classroomData = classroomSnapshot.data();
-            const classroomName = classroomData.name;
             // Delete the module document
             await deleteDoc(moduleRef);
 
-            saveLog(`Course: Deleted lecture: ${classroomName} (ID: ${selectedLectureId})`);
-            // alert('lecture deleted successfully.');
-            navigateToPage('/public/admin/course/course-module.php', 'Mid', 'ItemId', 'Sid');
+            alert('lecture deleted successfully.');
+            navigateToPage('/public/teacher/classroom/module.php', 'Mid', 'ItemId', 'Sid');
 
         } catch (error) {
             console.error('Error deleting lecture:', error);
@@ -667,37 +671,15 @@ function navigateToPage(page, module, item, student) {
 }
 
 
-// Save log function
-async function saveLog(action) {
-    try {
-        const currentDate = new Date();
-        const timestamp = currentDate.toLocaleString(); // Get the current date and time as a string
-
-        // Create the log entry
-        const logEntry = {
-            action: action,
-            timestamp: timestamp
-        };
-
-        // Save the log to the 'logs' collection
-        const logRef = doc(collection(db, 'teacher', teacherId, 'logs'));
-        await setDoc(logRef, logEntry);
-
-        console.log("Log saved:", logEntry);
-    } catch (error) {
-        console.error("Error saving log:", error);
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchLectureDetails();
     fetchLectureItems();
 
-    document.querySelector('#lect-add-btn-header-1').addEventListener('click', addHeader1);
-    document.querySelector('#lect-add-btn-header-2').addEventListener('click', addHeader2);
-    document.querySelector('#lect-add-btn-paragraph').addEventListener('click', addParagraph);
-    document.querySelector('#btn-delete-lecture').addEventListener('click', deleteLecture);
+    // document.querySelector('#lect-add-btn-header-1').addEventListener('click', addHeader1);
+    // document.querySelector('#lect-add-btn-header-2').addEventListener('click', addHeader2);
+    // document.querySelector('#lect-add-btn-paragraph').addEventListener('click', addParagraph);
+    // document.querySelector('#btn-delete-lecture').addEventListener('click', deleteLecture);
 
     const lectureButton = document.getElementById('lect-btn-nav-lecture');
     const lectureContainer = document.querySelector('.lecture-container');
@@ -715,8 +697,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listener for the save button
     document.getElementById('lect-save-btn').addEventListener('click', () => {
-        saveLectureItems(); // Save questions
+        // saveLectureItems(); // Save questions
         saveLectureDetails(); // Save quiz details
+    });
+
+
+    document.querySelector('#student-link').addEventListener('click', () => {
+        navigateToPage('/public/teacher/classroom/student.php', 'Mid', 'ItemId', 'Sid');
+    });
+    document.querySelector('#module-link').addEventListener('click', () => {
+        navigateToPage('/public/teacher/classroom/module.php','Mid', 'ItemId', 'Sid');
     });
 
 });

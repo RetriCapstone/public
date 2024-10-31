@@ -18,6 +18,14 @@
                 <img src="/public/teacher/images/MCA Logo.png" >
             </div>
             <ul class="menu">
+                <!-- <li>
+                    <a href="accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li> -->
                 <li class="active">
                     <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -26,8 +34,16 @@
                         </span>
                     </a>
                 </li>
+                <!-- <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
+                        <span>
+                            Courses
+                        </span>
+                    </a>
+                </li> -->
                 <li>
-                <a href="help.php">
+                    <a href="help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
@@ -75,13 +91,20 @@
                                     <div class="style-divider" >
                                         <label>&nbsp;Classroom name:</label>
                                         <input type="text" style="text-transform:uppercase" id="classname" class="input-style input-create-class" placeholder="Class name" required autocomplete="off" >
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT NAME - SECTION</p>
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: COURSE NAME - YEAR - SECTION</p>
                                     </div>
 
                                     <div class="style-divider" >
                                         <label>&nbsp;Classroom code:</label>
                                         <input type="text" id="classcode" class="input-style input-create-class" placeholder="Class code" required autocomplete="off">
-                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: SUBJECT - RANDOM NUMBER</p>
+                                        <p class="hint-style" >&nbsp;<i class="fa-solid fa-circle-exclamation icon-style"></i> RECOMMEND: COURSE - RANDOM NUMBER</p>
+                                    </div>
+                                    
+                                    <div class="style-divider" >
+                                        <label>&nbsp;Course/Subject:</label>
+                                        <select required class="style-select" id="class-course">
+
+                                        </select>
                                     </div>
                                     
                                     <div class="create-class-btn" >

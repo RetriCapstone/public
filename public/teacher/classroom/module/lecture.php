@@ -20,16 +20,36 @@
                 <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
+                <!-- <li>
+                    <a href="/public/admin/classroom/accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li> -->
                 <li class="active">
                     <a href="/public/teacher/classroom/classroom.php">
-                        <i class="fa fa-chalkboard"></i>
-                        <span>Classroom</span>
+                    <i class="fa fa-chalkboard"></i>
+                        <span>
+                            Classroom
+                        </span>
                     </a>
                 </li>
+                <!-- <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
+                        <span>
+                            Courses
+                        </span>
+                    </a>
+                </li> -->
                 <li>
                     <a href="/public/teacher/classroom/help.php">
-                        <i class="fa-regular fa-circle-question"></i>
-                        <span>Help</span>
+                    <i class="fa-regular fa-circle-question"></i>
+                        <span>
+                            Help
+                        </span>
                     </a>
                 </li>
                 <li>
@@ -41,9 +61,11 @@
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">
-                    <a>
+                    <a >
                         <i class="fa fa-sign-out"></i>
-                        <span>Logout</span>
+                        <span>
+                            Logout
+                        </span>
                     </a>
                 </li>
             </ul>

@@ -21,7 +21,7 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="settings.php">
+                    <a href="accounts.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts

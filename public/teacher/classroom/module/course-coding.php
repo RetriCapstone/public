@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Activity</title>
-    <link rel="stylesheet" href="/public/admin/style_dashboard.css">
-    <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
-    <link rel="stylesheet" href="/public/admin/classroom/module/style/coding.css">
-    <link rel="stylesheet" href="/public/admin/classroom/module/style/coding-editor.css">
+    <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
+    <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/public/teacher/classroom/module/style/coding.css">
+    <link rel="stylesheet" href="/public/teacher/classroom/module/style/coding-editor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,47 +18,47 @@
 <body>
     <script type="module" src="script/course-coding.js"></script>
     <script type="module" src="script/coding-responses.js"></script>
-    <script src="/public/admin/dashboard.js" type="module"></script>
+    <script src="/public/teacher/dashboard.js" type="module"></script>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/public/admin/images/MCA Logo.png">
+                <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
-                <li>
+                <!-- <li>
                     <a href="/public/admin/classroom/accounts.php">
                         <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li class="active">
-                    <a href="/public/admin/classroom/classroom.php">
+                    <a href="/public/teacher/classroom/classroom.php">
                         <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
-                <li class="">
+                <!-- <li class="">
                     <a href="/public/admin/course/course.php">
                         <i class="fa-solid fa-book"></i>
                         <span>
                             Courses
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="/public/admin/classroom/help.php">
+                    <a href="/public/teacher/classroom/help.php">
                         <i class="fa-regular fa-circle-question"></i>
                         <span>
-                            Feedback Center
+                            Help
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="/public/admin/classroom/settings.php">
+                    <a href="/public/teacher/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
                         <span>
                             Settings

@@ -27,7 +27,6 @@ const selectedQuizId = getQueryParam('ItemId');
 let lastQuestionNumber = 0;
 let lastOptionNumber = 1;
 
-
 async function activeButton(activeBtn, notActiveBtn1, notActiveBtn2) {
     activeBtn.classList.add('quiz-active-nav');
     notActiveBtn1.classList.remove('quiz-active-nav');
@@ -122,10 +121,10 @@ function addQuestion() {
         
             <div class="question-header-con" id="question-header-con-${questionNumber}" >
                 <div class="question-point-container">
-                    <input type="number" value="1" id="question-point-${questionNumber}">
+                    <input type="number" readonly value="1" id="question-point-${questionNumber}">
                     <span>points</span>
                 </div>
-                <select class="style-select question-type-select" name="question-type" id="question-type-${questionNumber}">
+                <select class="style-select question-type-select" disabled name="question-type" id="question-type-${questionNumber}">
                     <option value="identification">Identification</option>
                     <option value="choice">Multiple choice</option>
                     <option value="paragraph">Paragraph</option>
@@ -134,14 +133,14 @@ function addQuestion() {
             </div>
             
             <div class="quiz-identify-con" id="identify-con-${questionNumber}">
-                <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
+                <textarea rows="2" required readonly class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-identify-question"></textarea>
                 <div class="identify-body-1">
-                    <input class="quiz-identify-answer" type="text" required autocomplete="off" placeholder="Correct Answer" id="question-${questionNumber}-identify-answer">
-                    <input class="quiz-identify-answer" type="text" autocomplete="off" placeholder="Correct Answer(Alternative)" id="question-${questionNumber}-identify-alternate">
+                    <input class="quiz-identify-answer" readonly type="text" required autocomplete="off" placeholder="Correct Answer" id="question-${questionNumber}-identify-answer">
+                    <input class="quiz-identify-answer" readonly type="text" autocomplete="off" placeholder="Correct Answer(Alternative)" id="question-${questionNumber}-identify-alternate">
                 </div>
                 <div class="identify-body-2">
                     <div class="identify-radio-con">
-                        <input type="checkbox" id="identify-case-${questionNumber}" name="answer-case-${questionNumber}">
+                        <input type="checkbox" disabled id="identify-case-${questionNumber}" name="answer-case-${questionNumber}">
                         <label for="identify-case-${questionNumber}">Case Sensitive</label>
                     </div>
                 </div>
@@ -149,21 +148,21 @@ function addQuestion() {
             </div>
 
             <div class="quiz-choice-con" id="choice-con-${questionNumber}">
-                <textarea rows="2" class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-choice-question"></textarea>
+                <textarea rows="2" readonly class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-choice-question"></textarea>
                 <div class="choice-body-1" id="choice-body-${questionNumber}">
                     <div class="choice-option-con" id="choice-option-${questionNumber}-1">
                         <i class="fa-regular fa-circle"></i>
-                        <input type="text" required class="quiz-option-answer" autocomplete="off" placeholder="Option" id="question-${questionNumber}-choice-option-1">
+                        <input type="text" readonly required class="quiz-option-answer" autocomplete="off" placeholder="Option" id="question-${questionNumber}-choice-option-1">
                         <i class="fa-solid fa-xmark delete-option" id="delete-option-${questionNumber}-1"></i>
                     </div>
                 </div>
                 <div class="choice-body-2">
-                    <div class="choice-add-btn" id="add-option-${questionNumber}">
+                    <div style="display:none;" class="choice-add-btn" id="add-option-${questionNumber}">
                         <i class="fa-regular fa-circle"></i><span>&nbsp;Add option</span>
                     </div>
                     <div class="choice-answer-select">
                         <span>Answer:</span>
-                        <select class="style-select" id="question-${questionNumber}-choice-select-answer">
+                        <select class="style-select" disabled id="question-${questionNumber}-choice-select-answer">
                             <option disabled selected>Select an answer</option>
                         </select>
                     </div>
@@ -172,7 +171,7 @@ function addQuestion() {
             </div>
 
             <div class="quiz-paragraph-con" id="paragraph-con-${questionNumber}">
-                <textarea rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-paragraph-question"></textarea>
+                <textarea readonly rows="2" required class="quiz-question-input auto-height-text-question" placeholder="Question" id="question-${questionNumber}-paragraph-question"></textarea>
 
                 <div class="paragraph-body-1">
                     <div class="paragraph-text-card">
@@ -182,7 +181,7 @@ function addQuestion() {
 
                 <hr class="divider-solid">
             </div>
-            <div class="delete-question-con" id="question-delete-button-${questionNumber}">
+            <div style="display:none;" class="delete-question-con" id="question-delete-button-${questionNumber}">
                 <i class="fa-regular fa-trash-can"></i><span>Delete</span>
             </div>
         </div>
@@ -333,6 +332,7 @@ async function saveQuestions() {
 
 //func: save quiz settings
 async function saveQuizDetails() {
+    saveloadingIndicator.style.display = 'block'; // Show loading indicator
     const quizName = document.getElementById('quiz-settings-name-input').value.trim().toUpperCase();
     const randomizeQuestions = document.getElementById('quiz-random-checkbox').checked;
     const showquestionAsnwer = document.getElementById('quiz-show-answer').checked;
@@ -349,7 +349,6 @@ async function saveQuizDetails() {
 
         // Prepare the data to be saved
         const quizData = {
-            name: quizName,
             randomize: randomizeQuestions,
             showAnswer: showquestionAsnwer,
             duration: {
@@ -363,10 +362,12 @@ async function saveQuizDetails() {
         };
 
         // Save the quiz details to Firestore using updateDoc to avoid affecting other fields
-        await updateDoc(quizDocRef, quizData);
-        fetchQuizDetails();
+        await setDoc(quizDocRef, quizData);
+        // fetchQuizDetails();
         console.log('Quiz details updated successfully.');
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
     } catch (error) {
+        saveloadingIndicator.style.display = 'none'; // Show loading indicator
         console.error('Error updating quiz details:', error);
     }
 }
@@ -381,7 +382,14 @@ async function fetchQuestionsAndDirection() {
     directionContainer.style.display = 'none'; // Hide direction container
 
     try {
-        const sectionDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+        const classroomData = classroomDoc.data();
+        const classroomCourse = classroomData.course;
+        
+        const sectionDocRef = doc(db, 'course', classroomCourse, 'module', selectedModuleId, 'quiz', selectedQuizId, 'section', 'section-1');
         const questionsCollectionRef = collection(sectionDocRef, 'question');
 
         const sectionDoc = await getDoc(sectionDocRef);
@@ -479,18 +487,63 @@ async function fetchQuestionsAndDirection() {
 //func: fecth quiz settings
 async function fetchQuizDetails() {
     try {
-        // Define the path to the quiz document
-        const quizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
-
-        // Fetch the quiz document
+        const classroomRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId);
+        
+        // Fetch the classroom document
+        const classroomDoc = await getDoc(classroomRef);
+        const classroomData = classroomDoc.data();
+        const classroomCourse = classroomData.course;
+        
+        const quizDocRef = doc(db, 'course', classroomCourse, 'module', selectedModuleId, 'quiz', selectedQuizId);
         const quizDoc = await getDoc(quizDocRef);
 
-        if (quizDoc.exists()) {
+        const classquizDocRef = doc(db, 'teacher', teacherId, 'classroom', selectedClassroomId, 'module', selectedModuleId, 'quiz', selectedQuizId);
+        const classquizDoc = await getDoc(classquizDocRef);
+
+        const quizData = quizDoc.data();
+        document.getElementById('quiz-name').innerText = quizData.name || '';
+        document.getElementById('quiz-settings-name-input').value = quizData.name || '';
+        
+        if (classquizDoc.exists()) {
+            const quizData = classquizDoc.data();
+
+            document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
+            document.getElementById('quiz-show-answer').checked = quizData.showAnswer || false;
+
+            if (quizData.duration) {
+                document.getElementById('quiz-duration-hour').value = quizData.duration.hours || 0;
+                document.getElementById('quiz-duration-minute').value = quizData.duration.minutes || 0;
+                document.getElementById('quiz-duration-second').value = quizData.duration.seconds || 0;
+            } else {
+                document.getElementById('quiz-duration-hour').value = 0;
+                document.getElementById('quiz-duration-minute').value = 0;
+                document.getElementById('quiz-duration-second').value = 0;
+            }
+
+            const statusSelect = document.querySelector('.settings-select-status');
+            statusSelect.value = quizData.status || 'close';
+
+            const settingsStatusContainer = document.querySelector('.settings-datetime-con');
+            if (quizData.status === 'set') {
+                settingsStatusContainer.style.display = 'flex';
+                // Correctly convert Firestore Timestamp to ISO string format
+                if (quizData.startDate && quizData.startDate.toDate) {
+                    document.querySelector('input[name="quiz-datetime-start"]').value = convertToLocalDateTime(quizData.startDate.toDate());
+                } else {
+                    document.querySelector('input[name="quiz-datetime-start"]').value = '';
+                }
+
+                if (quizData.endDate && quizData.endDate.toDate) {
+                    document.querySelector('input[name="quiz-datetime-end"]').value = convertToLocalDateTime(quizData.endDate.toDate());
+                } else {
+                    document.querySelector('input[name="quiz-datetime-end"]').value = '';
+                }
+            } else {
+                settingsStatusContainer.style.display = 'none';
+            }
+        }else if (quizDoc.exists()) {
             const quizData = quizDoc.data();
 
-            // Populate the quiz settings
-            document.getElementById('quiz-name').innerText = quizData.name || '';
-            document.getElementById('quiz-settings-name-input').value = quizData.name || '';
             document.getElementById('quiz-random-checkbox').checked = quizData.randomize || false;
             document.getElementById('quiz-show-answer').checked = quizData.showAnswer || false;
 
@@ -636,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listener for the save button
     document.getElementById('quiz-save-btn').addEventListener('click', () => {
-        saveQuestions(); // Save questions
+        // saveQuestions(); // Save questions
         saveQuizDetails(); // Save quiz details
     });
 

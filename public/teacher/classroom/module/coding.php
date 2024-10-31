@@ -24,17 +24,33 @@
                 <img src="/public/teacher/images/MCA Logo.png">
             </div>
             <ul class="menu">
+                <!-- <li>
+                    <a href="/public/admin/classroom/accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li> -->
                 <li class="active">
                     <a href="/public/teacher/classroom/classroom.php">
-                        <i class="fa fa-chalkboard"></i>
+                    <i class="fa fa-chalkboard"></i>
                         <span>
                             Classroom
                         </span>
                     </a>
                 </li>
+                <!-- <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
+                        <span>
+                            Courses
+                        </span>
+                    </a>
+                </li> -->
                 <li>
                     <a href="/public/teacher/classroom/help.php">
-                        <i class="fa-regular fa-circle-question"></i>
+                    <i class="fa-regular fa-circle-question"></i>
                         <span>
                             Help
                         </span>
@@ -49,7 +65,7 @@
                     </a>
                 </li>
                 <li id="btnlogout" class="logout">
-                    <a>
+                    <a >
                         <i class="fa fa-sign-out"></i>
                         <span>
                             Logout
@@ -154,9 +170,9 @@
                         <hr class="divider-solid setting-divider">
                         <div class="settings-card-col" >
                             <span class="settings-label-title" >
-                                Quiz name
+                                Activity name
                             </span>
-                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="Quiz name">
+                            <input class="quiz-identify-answer settings-quiz-name-input" id="quiz-settings-name-input" type="text" required autocomplete="off" placeholder="activity name">
                         </div>
                         <div class="settings-card" >
                             <div class="settings-card-1" >
@@ -164,7 +180,7 @@
                                     Randomize Question
                                 </span>
                                 <p class="settings-label-body" >
-                                    Make the quiz questions in random
+                                    Make the activity questions in random
                                 </p>
                             </div>
                             <div class="settings-card-1" >
@@ -174,7 +190,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="settings-card" >
+                        <div class="settings-card" style="display: none;" >
                             <div class="settings-card-1" >
                                 <span class="settings-label-title" >
                                     Show Question Answer

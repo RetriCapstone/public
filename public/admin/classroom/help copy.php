@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
-    <link rel="stylesheet" href="/public/teacher/style_dashboard.css">
-    <link rel="stylesheet" href="/public/teacher/classroom/style/classroom_style.css">
+    <link rel="stylesheet" href="/public/admin/style_dashboard.css">
+    <link rel="stylesheet" href="/public/admin/classroom/style/classroom_style.css">
     <!-- <link rel="stylesheet" href="/public/teacher/classroom/style/account.css"> -->
-    <link rel="stylesheet" href="/public/teacher/classroom/style/help.css">
-    <link rel="icon" href="/public/teacher/images/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/admin/classroom/style/help.css">
+    <link rel="icon" href="/public/admin/images/logo-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,17 +20,17 @@
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="/public/teacher/images/MCA Logo.png">
+                <img src="/public/admin/images/MCA Logo.png">
             </div>
             <ul class="menu">
-                <!-- <li>
+                <li>
                     <a href="accounts.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts
                         </span>
                     </a>
-                </li> -->
+                </li>
                 <li>
                     <a href="classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -39,19 +39,19 @@
                         </span>
                     </a>
                 </li>
-                <!-- <li class="">
+                <li class="">
                     <a href="/public/admin/course/course.php">
                     <i class="fa-solid fa-book"></i>
                         <span>
                             Courses
                         </span>
                     </a>
-                </li> -->
+                </li>
                 <li class="active">
-                    <a href="">
+                    <a href="help.php">
                     <i class="fa-regular fa-circle-question"></i>
                         <span>
-                            Help
+                            Feedback Center
                         </span>
                     </a>
                 </li>

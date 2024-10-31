@@ -40,7 +40,7 @@
 .hint-style{
   font-size: small;
   font-weight: 550;
-  color: #284781;
+  color: #4b6bb3;
 }
 
 
@@ -153,7 +153,7 @@
   border: 2px solid #1f2e63;
   border-radius: 10px;
   width: 60%;
-  height: 72%;
+  height: fit-content;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
@@ -164,7 +164,7 @@
   flex-direction: column;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
-  margin: 1rem 0; 
+  margin-top: 1rem; 
   gap: 8px;
 }
 .input-create-class{
@@ -185,7 +185,6 @@
   align-items: flex-end;
   margin: 1rem 0;
   gap: 1rem;
-  cursor: pointer;
 }
 .style-divider{
   display: flex;

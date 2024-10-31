@@ -21,6 +21,14 @@
                 <img src="/public/admin/images/MCA Logo.png">
             </div>
             <ul class="menu">
+                <li>
+                    <a href="/public/admin/classroom/accounts.php">
+                    <i class="fa-solid fa-users"></i>
+                        <span>
+                            Acounts
+                        </span>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="/public/admin/classroom/classroom.php">
                     <i class="fa fa-chalkboard"></i>
@@ -29,14 +37,22 @@
                         </span>
                     </a>
                 </li>
-                <!-- <li>
-                <a href="/public/teacher/classroom/help.php">
-                    <i class="fa-regular fa-circle-question"></i>
+                <li class="">
+                    <a href="/public/admin/course/course.php">
+                    <i class="fa-solid fa-book"></i>
                         <span>
-                            Help
+                            Courses
                         </span>
                     </a>
-                </li> -->
+                </li>
+                <li>
+                    <a href="/public/admin/classroom/help.php">
+                    <i class="fa-regular fa-circle-question"></i>
+                        <span>
+                            Feedback Center
+                        </span>
+                    </a>
+                </li>
                 <li>
                     <a href="/public/admin/classroom/settings.php">
                         <i class="fa-solid fa-gear"></i>
@@ -166,7 +182,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="settings-card" >
+                        <div class="settings-card"  style="display: none;" >
                             <div class="settings-card-1" >
                                 <span class="settings-label-title" >
                                     Show Question Answer

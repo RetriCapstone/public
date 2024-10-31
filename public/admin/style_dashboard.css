@@ -48,6 +48,7 @@ nav{
 }
 .active{
     background: #1f2e63;
+    text-align: center;
 }
 .menu li:hover{
     background: #0a112d;

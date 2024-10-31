@@ -25,7 +25,7 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/public/admin/classroom/settings.php">
+                    <a href="/public/admin/classroom/accounts.php">
                     <i class="fa-solid fa-users"></i>
                         <span>
                             Acounts

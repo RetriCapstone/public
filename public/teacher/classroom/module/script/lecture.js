@@ -469,7 +469,8 @@ async function saveLectureItems() {
                 bold: isBold,
                 italic: isItalic,
                 underline: isUnderline,
-                alignment: alignment
+                alignment: alignment,
+                number: lectureNumber
             });
         }
 
